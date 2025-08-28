@@ -24,7 +24,8 @@ defaultContentLanguageInSubdir = false
     enabled = true
     title = "Zakk"
     subtitle = """
-📍 Melbourne 🐨 | ❄️ UTC +10 (AEST)
+📍 Melbourne 🇦🇺
+❄️ UTC +10 (AEST) 🐨
 ❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
 🐹 Guinea pigs 🥔
 🎮 Gaming · 🐧 Linux · 💹 Finance
@@ -39,10 +40,22 @@ defaultContentLanguageInSubdir = false
       name = "📚 Blog"
       url = "/posts/"
 
-# 只保留你的 IG 做為社交按鈕
+# 社交按鈕：包含你給的所有（你的 IG、GitHub、X、Email）
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/Zakkaus"
+
 [[params.socialIcons]]
   name = "instagram"
   url = "https://www.instagram.com/zakk.au/"
+
+[[params.socialIcons]]
+  name = "x"
+  url = "https://x.com/zakkauu"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:admin@zakk.au"
 
 [languages]
   [languages.en]
@@ -50,19 +63,20 @@ defaultContentLanguageInSubdir = false
     languageCode = "en"
     weight = 1
     title = "Zakk's Blog"
-    contentDir = "content"  # 英文在根 content/
+    contentDir = "content"
 
   [languages.zh-hant]
     languageName = "漢語"
     languageCode = "zh-Hant"
     weight = 2
     title = "Zakk 的部落格"
-    contentDir = "content/zh-hant"  # 繁中在 content/zh-hant/
+    contentDir = "content/zh-hant"
     [languages.zh-hant.params.profileMode]
       enabled = true
       title = "Zakk"
       subtitle = """
-📍 墨爾本 🐨 | ❄️ UTC +10 (AEST)
+📍 墨爾本 🇦🇺
+❄️ UTC +10 (AEST) 🐨
 ❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
 🐹 天竺鼠 🥔
 🎮 遊戲 · 🐧 Linux · 💹 金融
