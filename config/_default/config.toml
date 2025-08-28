@@ -3,6 +3,7 @@ title = "Zakk's Blog"
 theme = "PaperMod"
 canonifyURLs = true
 
+# English 為預設語言，放在根路徑
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
@@ -20,7 +21,6 @@ defaultContentLanguageInSubdir = false
   ShowCodeCopyButtons = true
   mainSections = ["posts"]
 
-  # 首頁卡片（只顯示一行）
   [params.profileMode]
     enabled = true
     title = "Zakk"
@@ -35,11 +35,23 @@ defaultContentLanguageInSubdir = false
       name = "📚 Blog"
       url = "/posts/"
 
-# 社交圖標（IG 仍保留，首頁不再顯示其它文案）
-[[params.socialIcons]]; name = "github";    url = "https://github.com/Zakkaus"
-[[params.socialIcons]]; name = "instagram"; url = "https://www.instagram.com/abyss_74.50/"
-[[params.socialIcons]]; name = "x";         url = "https://x.com/zakkauu"
-[[params.socialIcons]]; name = "email";     url = "mailto:admin@zakk.au"
+# --- 社交圖標（每個項目都要單獨一段） ---
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/Zakkaus"
+
+[[params.socialIcons]]
+  name = "instagram"
+  url = "https://www.instagram.com/abyss_74.50/"
+
+[[params.socialIcons]]
+  name = "x"
+  url = "https://x.com/zakkauu"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:admin@zakk.au"
+# ---------------------------------------
 
 [languages]
   [languages.en]
