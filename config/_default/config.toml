@@ -3,7 +3,6 @@ title = "Zakk's Blog"
 theme = "PaperMod"
 canonifyURLs = true
 
-# English 為預設語言，放在根路徑
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
@@ -24,7 +23,12 @@ defaultContentLanguageInSubdir = false
   [params.profileMode]
     enabled = true
     title = "Zakk"
-    subtitle = "🐹 Guinea pigs 🥔"
+    subtitle = """
+📍 Melbourne 🐨 | ❄️ UTC +10 (AEST)
+❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
+🐹 Guinea pigs 🥔
+🎮 Gaming · 🐧 Linux · 💹 Finance
+"""
     imageUrl = "https://avatars.githubusercontent.com/u/221879664?v=4"
     imageWidth = 168
     imageHeight = 168
@@ -35,23 +39,19 @@ defaultContentLanguageInSubdir = false
       name = "📚 Blog"
       url = "/posts/"
 
-# --- 社交圖標（每個項目都要單獨一段） ---
+# 社交
 [[params.socialIcons]]
   name = "github"
   url = "https://github.com/Zakkaus"
-
 [[params.socialIcons]]
   name = "instagram"
   url = "https://www.instagram.com/abyss_74.50/"
-
 [[params.socialIcons]]
   name = "x"
   url = "https://x.com/zakkauu"
-
 [[params.socialIcons]]
   name = "email"
   url = "mailto:admin@zakk.au"
-# ---------------------------------------
 
 [languages]
   [languages.en]
@@ -68,7 +68,12 @@ defaultContentLanguageInSubdir = false
     [languages.zh-hant.params.profileMode]
       enabled = true
       title = "Zakk"
-      subtitle = "🐹 天竺鼠 🥔"
+      subtitle = """
+📍 墨爾本 🐨 | ❄️ UTC +10 (AEST)
+❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
+🐹 天竺鼠 🥔
+🎮 遊戲 · 🐧 Linux · 💹 金融
+"""
       imageUrl = "https://avatars.githubusercontent.com/u/221879664?v=4"
       imageWidth = 168
       imageHeight = 168
