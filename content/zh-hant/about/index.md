@@ -18,12 +18,12 @@ draft: false
 - CPU：AMD Ryzen 9 7950X3D (16核/32緒)  
 - 顯示卡：NVIDIA GeForce RTX 4080 SUPER  
 - 記憶體：64 GB DDR5 6400 MHz  
-- 網路：固定公网 IP (Aussie Telecom, 1000/50 Mbps)  
-- 路由器：BE9300 Tri-Band Wi-Fi 7  
-- 系統：Windows 11 Pro 64-bit + Gentoo Linux + KDE  
+- 網路：固定公網 IP（Aussie Telecom，1000/50 Mbps）  
+- 路由器：BE9300 三頻 Wi-Fi 7  
+- 系統：Windows 11 Pro 64-bit + Gentoo Linux（KDE）
 
 **筆電**  
-- Apple MacBook Air M2 (16GB / 512GB)  
+- Apple MacBook Air M2（16GB / 512GB）  
 - ASUS ROG Zephyrus G16 Air  
 
 **手機**  
