@@ -1,12 +1,11 @@
 ---
-title: "About"
+title: "About Me"
 draft: false
 ---
 
-Hi, I'm **Zakk**, based in **Melbourne**.  
-I keep **🐹 guinea pigs**, one of them is named **Hash Brown**.  
-I enjoy **gaming**, **Linux**, and **finance**.  
-Currently studying **Business**.
+Hi, I'm **Zakk**, based in **Melbourne** 🇦🇺.  
+I keep **two guinea pigs 🐹** — one named **Potato** 🥔 and the other called **Hash Brown**.  
+I enjoy **gaming 🎮**, I'm into **Linux 🐧** and **finance 💹**, and I love spending time with my pets.
 
 ---
 
@@ -35,7 +34,7 @@ Currently studying **Business**.
 ---
 
 ### 📬 Contact
-- Instagram: [@zakk.au](https://www.instagram.com/zakk.au/)
-- Email: [admin@zakk.au](mailto:admin@zakk.au)
-- GitHub: [Zakkaus](https://github.com/Zakkaus)
-- X: [@zakkauu](https://x.com/zakkauu)
+- 📧 Email: [admin@zakk.au](mailto:admin@zakk.au)
+- 🐙 GitHub: [Zakkaus](https://github.com/Zakkaus)
+- 𝕏 X: [@zakkauu](https://x.com/zakkauu)
+- 📸 Instagram: [@zakk.au](https://www.instagram.com/zakk.au/)
