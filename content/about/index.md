@@ -4,7 +4,7 @@ draft: false
 ---
 
 Hi, I'm **Zakk**, based in **Melbourne**.  
-I keep a guinea pig named **Hash Brown** 🐹.  
+I keep **🐹 guinea pigs**, one of them is named **Hash Brown**.  
 I enjoy **gaming**, **Linux**, and **finance**.  
 Currently studying **Business**.
 
@@ -35,7 +35,7 @@ Currently studying **Business**.
 ---
 
 ### 📬 Contact
-- Email: [admin@zakk.au](mailto:admin@zakk.au)  
-- GitHub: [Zakkaus](https://github.com/Zakkaus)  
-- Instagram: [@abyss_74.50](https://www.instagram.com/abyss_74.50/)  
+- Instagram: [@zakk.au](https://www.instagram.com/zakk.au/)
+- Email: [admin@zakk.au](mailto:admin@zakk.au)
+- GitHub: [Zakkaus](https://github.com/Zakkaus)
 - X: [@zakkauu](https://x.com/zakkauu)

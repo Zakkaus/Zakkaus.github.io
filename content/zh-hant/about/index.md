@@ -4,7 +4,7 @@ draft: false
 ---
 
 嗨，我是 **Zakk**，住在 **墨爾本**。  
-我養了一隻叫 **薯餅** 的天竺鼠 🐹。  
+我養了幾隻天竺鼠 🐹，其中一隻叫 **薯餅**。  
 平常喜歡 **遊戲**、**Linux** 與 **金融**。  
 目前就讀 **商業（Business）**。
 
@@ -35,7 +35,7 @@ draft: false
 ---
 
 ### 📬 聯繫方式
-- Email：[admin@zakk.au](mailto:admin@zakk.au)  
-- GitHub：[Zakkaus](https://github.com/Zakkaus)  
-- Instagram：[@abyss_74.50](https://www.instagram.com/abyss_74.50/)  
+- Instagram：[@zakk.au](https://www.instagram.com/zakk.au/)
+- Email：[admin@zakk.au](mailto:admin@zakk.au)
+- GitHub：[Zakkaus](https://github.com/Zakkaus)
 - X：[@zakkauu](https://x.com/zakkauu)
