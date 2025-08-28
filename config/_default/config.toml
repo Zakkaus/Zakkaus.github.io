@@ -45,6 +45,9 @@ defaultContentLanguageInSubdir = false
   url = "https://github.com/Zakkaus"
 [[params.socialIcons]]
   name = "instagram"
+  url = "https://www.instagram.com/zakk.au/"
+[[params.socialIcons]]
+  name = "instagram"
   url = "https://www.instagram.com/abyss_74.50/"
 [[params.socialIcons]]
   name = "x"
