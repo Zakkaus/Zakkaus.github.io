@@ -16,10 +16,10 @@ I enjoy **gaming 🎮**, I'm into **Linux 🐧** and **finance 💹**, and I lov
 - ASUS ROG STRIX X670E-A GAMING WIFI
 - AMD Ryzen 9 7950X3D (16C/32T)
 - NVIDIA GeForce RTX 4080 SUPER
-- 64 GB DDR5 6000 MHz
+- 64 GB DDR5 6400 MHz
 - Aussie Telecom static public IP (1000/50 Mbps)
 - BE9300 Tri-Band Wi-Fi 7
-- Windows 11 Pro 64-bit + Linux (VMware)
+- Windows 11 Pro 64-bit + Gentoo Linux (KDE)
 
 **Laptops**
 - Apple MacBook Air M2 (16GB / 512GB)
