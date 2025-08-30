@@ -23,7 +23,7 @@ defaultContentLanguageInSubdir = false
   [params.profileMode]
     enabled = true
     title = "Zakk"
-    subtitle = "<span>📍 Australia 🇦🇺</span><br/>🕓 UTC +10 (AEST) ❄️<br/>❤️ <a href=\"https://www.instagram.com/abyss_74.50/\" target=\"_blank\" rel=\"noopener\">@abyss_74.50</a> ✨<br/>🐹 Guinea pigs 🥔<br/>🎮 Gaming · 🐧 Linux · 💹 Finance<br/>🩷💛🩵"
+    subtitle = "<span>📍 Australia 🇦🇺</span><br/>🕓 UTC +10 (AEST) ❄️<br/>❤️ <a href=\"https://www.instagram.com/abyss_74.50/\" target=\"_blank\" rel=\"noopener\" style=\"background:#fff0f6;color:#e1306c;font-weight:700;padding:2px 6px;border-radius:6px;text-decoration:none;\">@abyss_74.50</a> ✨<br/>🐹 Guinea pigs 🥔<br/>🎮 Gaming · 🐧 Linux · 💹 Finance<br/>🩷💛🩵"
     imageUrl = "https://avatars.githubusercontent.com/u/221879664?v=4"
     imageWidth = 168
     imageHeight = 168
@@ -65,7 +65,7 @@ defaultContentLanguageInSubdir = false
     [languages.zh-hant.params.profileMode]
       enabled = true
       title = "Zakk"
-      subtitle = "<span>📍 澳大利亞 🇦🇺</span><br/>🕓 UTC +10 (AEST) ❄️<br/>❤️ <a href=\"https://www.instagram.com/abyss_74.50/\" target=\"_blank\" rel=\"noopener\">@abyss_74.50</a> ✨<br/>🐹 天竺鼠 🥔<br/>🎮 遊戲 · 🐧 Linux · 💹 金融<br/>🩷💛🩵"
+      subtitle = "<span>📍 澳大利亞 🇦🇺</span><br/>🕓 UTC +10 (AEST) ❄️<br/>❤️ <a href=\"https://www.instagram.com/abyss_74.50/\" target=\"_blank\" rel=\"noopener\" style=\"background:#fff0f6;color:#e1306c;font-weight:700;padding:2px 6px;border-radius:6px;text-decoration:none;\">@abyss_74.50</a> ✨<br/>🐹 天竺鼠 🥔<br/>🎮 遊戲 · 🐧 Linux · 💹 金融<br/>🩷💛🩵"
       imageUrl = "https://avatars.githubusercontent.com/u/221879664?v=4"
       imageWidth = 168
       imageHeight = 168
