@@ -1,7 +1,7 @@
 ---
 slug: gentoo-install
 title: "Gentoo Installation Guide (Beginner)"
-date: 2025-09-02
+date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
 categories: ["Linux Notes"]
 draft: false
