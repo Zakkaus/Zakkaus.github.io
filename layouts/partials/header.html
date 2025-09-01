@@ -4,7 +4,7 @@
 {{- $about := printf "%sabout/" $home -}}
 {{- $rel := .RelPermalink -}}
 {{- $switch := cond $isZH (replace $rel "/zh-hant/" "/" 1) (printf "/zh-hant%s" $rel) -}}
-<header class="site-header">
+<header class="site-header" data-build-hash="hdr-v3">
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="{{ $home }}">{{ .Site.Title }}</a>
@@ -40,55 +40,55 @@
   </div>
 </header>
 
+<!-- 早期清理（防止舊殘碼在首屏可見） -->
 <script>
 (function(){
-  // 防重入
+  const PATS=[/nowDark\s*\?\s*'light':'dark'/,/toggleTheme/,/apply\(target\)/,/const\s+target\s*=\s*nowDark/];
+  const bad=[];
+  // 只掃描 body 直接子文字節點與 header 後第一層兄弟
+  [...document.body.childNodes].forEach(n=>{
+    if(n.nodeType===3){
+      const txt=n.textContent.trim();
+      if(txt && PATS.some(p=>p.test(txt))) bad.push(n);
+    }
+    if(n.tagName==='HEADER'){
+      let m=n.nextSibling;
+      let steps=0;
+      while(m && steps<6){
+        if(m.nodeType===3){
+          const t=m.textContent.trim();
+          if(t && PATS.some(p=>p.test(t))) bad.push(m);
+        }
+        m=m.nextSibling;steps++;
+      }
+    }
+  });
+  bad.forEach(n=>n.parentNode&&n.parentNode.removeChild(n));
+})();
+</script>
+
+<!-- 主題切換腳本（唯一） -->
+<script>
+(function(){
   if (window.__THEME_TOGGLE_INIT) return;
   window.__THEME_TOGGLE_INIT = true;
+  const root=document.documentElement, body=document.body;
+  const isZH=(root.lang||'').toLowerCase().startsWith('zh');
+  const KEY='site-theme', btn=document.getElementById('themeToggle');
+  function sysPref(){return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function nextLabel(next){return isZH?(next==='dark'?'🌓 黑暗':'🌞 明亮'):(next==='dark'?'🌓 Dark':'🌞 Light');}
+  function updateLabel(cur){ if(!btn)return; const nxt=cur==='dark'?'light':'dark'; btn.textContent=nextLabel(nxt); }
+  function apply(mode){ const dark=mode==='dark'; root.classList.toggle('dark',dark); body.classList.toggle('dark',dark); updateLabel(mode); }
+  function toggle(){ const target=root.classList.contains('dark')?'light':'dark'; apply(target); localStorage.setItem(KEY,target); }
+  apply(localStorage.getItem(KEY)||sysPref());
+  btn&&btn.addEventListener('click',toggle);
+  addEventListener('resize',()=>{ if(innerWidth>900){ const m=document.getElementById('mobileMenu'); m&&m.classList.remove('open'); }});
+})();
+</script>
 
-  const root = document.documentElement;
-  const body = document.body;
-  const isZH = (root.lang || '').toLowerCase().startsWith('zh');
-  const KEY = 'site-theme';
-  const btn = document.getElementById('themeToggle');
-
-  function systemPref(){
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  // 產生顯示「要切換去」的模式文字
-  function nextLabel(nextMode){
-    if (isZH) return nextMode === 'dark' ? '🌓 黑暗' : '🌞 明亮';
-    return nextMode === 'dark' ? '🌓 Dark' : '🌞 Light';
-  }
-
-  function updateButton(currentMode){
-    if(!btn) return;
-    const next = currentMode === 'dark' ? 'light' : 'dark';
-    btn.textContent = nextLabel(next);
-  }
-
-  function apply(mode){
-    const dark = mode === 'dark';
-    root.classList.toggle('dark', dark);
-    body.classList.toggle('dark', dark);
-    updateButton(mode);
-  }
-
-  function toggle(){
-    const target = root.classList.contains('dark') ? 'light' : 'dark';
-    apply(target);
-    localStorage.setItem(KEY, target);
-  }
-
-  // 初始化
-  apply(localStorage.getItem(KEY) || systemPref());
-
-  if(btn) btn.addEventListener('click', toggle);
-
-  // 視窗放大時自動收起手機菜單
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900){
+<!-- 次級補掃描：延遲 0/120ms/500ms 三次清理 -->
+<script src="/js/stray-cleanup.js?v=3" defer></script>
+<!-- END header partial -->
       const m = document.getElementById('mobileMenu');
       if (m) m.classList.remove('open');
     }
