@@ -11,12 +11,14 @@
 /* toggle (hamburger) hidden on desktop */
 .custom-topbuttons .cb-toggle{
   display:none;
-  background: rgba(255,255,255,0.96);
-  border: 0;
+  background: var(--hb-bg);
+  color: var(--hb-text);
+  border: 1px solid var(--hb-border);
   padding:6px 8px;
   border-radius:6px;
   font-size:16px;
-  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: var(--hb-shadow);
+  transition: background .25s, color .25s, transform .2s;
 }
 
 /* menu style (desktop inline) */
@@ -28,20 +30,25 @@
 .custom-topbuttons .cb-menu .cb-btn{
   display:inline-block;
   padding:6px 10px;
-  background: rgba(255,255,255,0.96);
-  color:#111;
+  background: var(--hb-bg);
+  color: var(--hb-text);
   text-decoration:none;
   border-radius:6px;
-  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: var(--hb-shadow);
+  border: 1px solid var(--hb-border);
+  transition: background .25s, color .25s, transform .2s;
   font-weight:600;
   font-size:14px;
 }
 .custom-topbuttons .cb-menu .cb-btn.active{
-  background:#e1306c;
+  background: var(--hb-active);
   color:#fff;
+  border-color: var(--hb-active);
 }
-.custom-topbuttons .cb-menu .cb-btn:hover{
-  transform: translateY(-1px);
+.custom-topbuttons .cb-menu .cb-btn:hover,
+.custom-topbuttons .cb-toggle:hover{
+  transform: translateY(var(--hb-hover-shift));
+  filter: brightness(1.05);
 }
 
 /* mobile: show toggle, collapse menu */
@@ -53,10 +60,11 @@
     top:44px;
     right:0;
     flex-direction:column;
-    background:rgba(255,255,255,0.98);
+    background: var(--hb-bg);
     padding:8px;
     border-radius:8px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    border: 1px solid var(--hb-border);
     min-width:160px;
   }
   .custom-topbuttons .cb-menu.open{ display:flex; }
@@ -87,4 +95,30 @@
 @media (max-width:900px){
   .custom-topbuttons.fallback-fixed{ top:10px; right:10px; }
 }
+
+/* color variables for light/dark mode */
+:root{
+  --hb-bg: rgba(255,255,255,0.96);
+  --hb-text: #111;
+  --hb-active: #e1306c;
+  --hb-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --hb-hover-shift: -1px;
+  --hb-border: rgba(0,0,0,0.07);
+}
+body.dark{
+  --hb-bg: rgba(40,40,40,0.92);
+  --hb-text: #eee;
+  --hb-active: #e1306c;
+  --hb-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  --hb-border: rgba(255,255,255,0.12);
+}
+
+/* 可選：focus 可見性（鍵盤導覽） */
+.custom-topbuttons .cb-btn:focus-visible,
+.custom-topbuttons .cb-toggle:focus-visible{
+  outline:2px solid var(--hb-active);
+  outline-offset:2px;
+  border-color: var(--hb-active);
+}
+
 /* 多語頂部按鈕樣式已載入（JS 會根據 lang 動態插入）。 */
