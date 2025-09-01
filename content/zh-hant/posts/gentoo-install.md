@@ -667,7 +667,7 @@ reboot
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-</div> <!-- 單一結束標記，移除多餘重複 -->
+</div> <!-- 保留這一個 -->
 <!-- 檔尾清理：移除重複殘留行 -->
 </div>
 </div>

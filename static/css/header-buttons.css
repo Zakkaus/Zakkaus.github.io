@@ -3,8 +3,8 @@
   display:flex;
   align-items:center;
   gap:8px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  pointer-events:auto; /* 還原互動，僅刪除搜尋相關 */
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  pointer-events:auto;
   z-index:9999;
 }
 
@@ -13,12 +13,14 @@
   display:none;
   background: var(--hb-bg);
   color: var(--hb-text);
-  border: 1px solid var(--hb-border);
+  border:1px solid var(--hb-border);
   padding:6px 8px;
   border-radius:6px;
   font-size:16px;
   box-shadow: var(--hb-shadow);
   transition: background .25s, color .25s, transform .2s;
+  font-weight:600;
+  cursor:pointer;
 }
 
 /* menu style (desktop inline) */
@@ -35,10 +37,12 @@
   text-decoration:none;
   border-radius:6px;
   box-shadow: var(--hb-shadow);
-  border: 1px solid var(--hb-border);
+  border:1px solid var(--hb-border);
   transition: background .25s, color .25s, transform .2s;
   font-weight:600;
   font-size:14px;
+  line-height:1.1;
+  cursor:pointer;
 }
 .custom-topbuttons .cb-menu .cb-btn.active{
   background: var(--hb-active);
@@ -47,13 +51,13 @@
 }
 .custom-topbuttons .cb-menu .cb-btn:hover,
 .custom-topbuttons .cb-toggle:hover{
-  transform: translateY(var(--hb-hover-shift));
-  filter: brightness(1.05);
+  transform:translateY(-1px);
+  filter:brightness(1.05);
 }
 
 /* mobile: show toggle, collapse menu */
 @media (max-width:900px){
-  .custom-topbuttons .cb-toggle{ display:inline-block; }
+  .custom-topbuttons .cb-toggle{display:inline-block;}
   .custom-topbuttons .cb-menu{
     display:none;
     position:absolute;
@@ -61,56 +65,46 @@
     right:0;
     flex-direction:column;
     background: var(--hb-bg);
-    padding:8px;
-    border-radius:8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    border: 1px solid var(--hb-border);
+    padding:10px 10px 12px;
+    border-radius:10px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    border:1px solid var(--hb-border);
     min-width:160px;
+    gap:4px;
   }
-  .custom-topbuttons .cb-menu.open{ display:flex; }
-  .custom-topbuttons .cb-menu .cb-btn{ display:block; padding:10px 12px; white-space:nowrap; }
+  .custom-topbuttons .cb-menu.open{display:flex;}
+  .custom-topbuttons .cb-menu .cb-btn{
+    display:block;
+    padding:10px 12px;
+    width:100%;
+    text-align:left;
+    white-space:nowrap;
+  }
 }
 
 /* small screens: slightly smaller buttons */
 @media (max-width:420px){
-  .custom-topbuttons .cb-menu .cb-btn{ font-size:13px; padding:8px 10px; }
-}
-
-/* ensure not to visually block other header elements */
-.custom-topbuttons{ pointer-events: auto; }
-
-/* footer helper (if you keep custom footer) - non-interactive */
-.custom-footer-copyright,
-.custom-footer-powered{
-  pointer-events: none;
-  color:#888;
-  font-size:12px;
-}
-.custom-topbuttons.fallback-fixed{
-  position:fixed;
-  top:12px;
-  right:12px;
-  z-index:9999;
-}
-@media (max-width:900px){
-  .custom-topbuttons.fallback-fixed{ top:10px; right:10px; }
+  .custom-topbuttons .cb-menu .cb-btn{
+    font-size:13px;
+    padding:8px 10px;
+  }
 }
 
 /* color variables for light/dark mode */
 :root{
   --hb-bg: rgba(255,255,255,0.96);
-  --hb-text: #111;
-  --hb-active: #e1306c;
-  --hb-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  --hb-hover-shift: -1px;
-  --hb-border: rgba(0,0,0,0.07);
+  --hb-text:#111;
+  --hb-active:#e1306c;
+  --hb-shadow:0 1px 3px rgba(0,0,0,0.08);
+  --hb-hover-shift:-1px;
+  --hb-border:rgba(0,0,0,0.07);
 }
 body.dark{
   --hb-bg: rgba(40,40,40,0.92);
-  --hb-text: #eee;
-  --hb-active: #e1306c;
-  --hb-shadow: 0 1px 4px rgba(0,0,0,0.6);
-  --hb-border: rgba(255,255,255,0.12);
+  --hb-text:#eee;
+  --hb-active:#e1306c;
+  --hb-shadow:0 1px 4px rgba(0,0,0,0.6);
+  --hb-border:rgba(255,255,255,0.12);
 }
 
 /* 可選：focus 可見性（鍵盤導覽） */
@@ -118,21 +112,30 @@ body.dark{
 .custom-topbuttons .cb-toggle:focus-visible{
   outline:2px solid var(--hb-active);
   outline-offset:2px;
-  border-color: var(--hb-active);
+  border-color:var(--hb-active);
 }
 
-/* 多語頂部按鈕樣式已載入（JS 會根據 lang 動態插入）。 */
+/* 固定備援 */
+.custom-topbuttons.fallback-fixed{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:9999;
+}
+@media (max-width:900px){
+  .custom-topbuttons.fallback-fixed{top:10px;right:10px;}
+}
 
-/* 停用搜尋：強制隱藏（若 header 仍插入節點也不顯示） */
+/* 移除舊搜尋相關的強制隱藏，避免誤刪整列（若仍存在可安全刪） */
+/*
 .cb-searchwrap,
-.cb-search-results{
-  display:none !important;
-  pointer-events:none !important;
-  visibility:hidden !important;
-  width:0 !important;
-  height:0 !important;
-  overflow:hidden !important;
-}
+.cb-search-results{display:none!important;}
+*/
 
-/* 若之前有附加搜尋結果高亮/面板樣式，可刪或保留不影響；這裡統一停用 */
-.cb-search-results mark{ /* 保留或刪除皆可 */ }
+/* 保留 footer helper */
+.custom-footer-copyright,
+.custom-footer-powered{
+  pointer-events:none;
+  color:#888;
+  font-size:12px;
+}

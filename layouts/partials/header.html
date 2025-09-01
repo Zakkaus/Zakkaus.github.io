@@ -1,6 +1,8 @@
 <div class="custom-topbuttons">
-  <!-- ...existing code (三個原有按鈕，例如 語言切換 / 主題切換 / 其它) ... -->
-- <div class="cb-searchwrap">
--   <input type="search" class="cb-search-input" placeholder="Search..." aria-label="Search">
-- </div>
+  <button class="cb-toggle" aria-label="Menu" onclick="document.querySelector('.custom-topbuttons .cb-menu').classList.toggle('open')">☰</button>
+  <div class="cb-menu">
+    <a class="cb-btn" href="/">Home</a>
+    <a class="cb-btn" href="/zh-hant/">中文</a>
+    <button class="cb-btn" type="button" onclick="document.documentElement.classList.toggle('dark')">Theme</button>
+  </div>
 </div>
