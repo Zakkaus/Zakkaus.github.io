@@ -1,30 +1,35 @@
 (function(){
-  if (window.__TOP_BTNS_INIT__) return; window.__TOP_BTNS_INIT__ = true;
+  if (window.__HB_INIT__) return; window.__HB_INIT__ = true;
+
   const LABELS = {
-    en:   { home:"Home", posts:"Posts", about:"About", search:"Search" },
-    "zh-hant": { home:"首頁", posts:"文章", about:"關於我", search:"搜尋" }
+    en: {home:"Home", posts:"Posts", about:"About", search:"Search"},
+    "zh-hant": {home:"首頁", posts:"文章", about:"關於我", search:"搜尋"}
   };
-  function langKey(){
-    const raw = (document.documentElement.lang || "").toLowerCase();
-    if (raw.startsWith("zh")) return "zh-hant";
+
+  function detectLang(){
+    if (location.pathname.startsWith("/zh-hant/")) return "zh-hant";
+    const htmlLang = (document.documentElement.lang || "").toLowerCase();
+    if (htmlLang.startsWith("zh")) return "zh-hant";
     return "en";
   }
-  function prefix(){
-    return langKey()==="zh-hant" ? "/zh-hant" : "";
+  function prefix(lang){
+    return lang === "zh-hant" ? "/zh-hant" : "";
   }
+
   function ensureCSS(){
-    if(document.querySelector('link[href*="header-buttons.css"]')) return;
-    const l=document.createElement('link');
-    l.rel="stylesheet"; l.href="/css/header-buttons.css";
+    if (document.querySelector('link[href*="header-buttons.css"]')) return;
+    const l = document.createElement('link');
+    l.rel = "stylesheet";
+    l.href = "/css/header-buttons.css";
     document.head.appendChild(l);
   }
-  function buildContainer(){
-    const lk = langKey();
-    const L = LABELS[lk] || LABELS.en;
-    const p = prefix();
-    const c = document.createElement('div');
-    c.className = "custom-topbuttons";
-    c.innerHTML = `
+
+  function build(lang){
+    const L = LABELS[lang] || LABELS.en;
+    const p = prefix(lang);
+    const wrap = document.createElement("div");
+    wrap.className = "custom-topbuttons";
+    wrap.innerHTML = `
       <button class="cb-toggle" aria-label="Toggle menu">☰</button>
       <nav class="cb-menu" aria-hidden="true">
         <a href="${p || '/'}" class="cb-btn" data-name="home">🏠 ${L.home}</a>
@@ -32,23 +37,25 @@
         <a href="${p}/about/" class="cb-btn" data-name="about">👤 ${L.about}</a>
         <a href="${p}/search/" class="cb-btn" data-name="search">🔍 ${L.search}</a>
       </nav>`;
-    return c;
+    return wrap;
   }
-  function highlightActive(container){
-    const path = location.pathname.endsWith('/')? location.pathname : location.pathname + '/';
+
+  function highlight(container){
+    const current = location.pathname.endsWith('/') ? location.pathname : location.pathname + '/';
     container.querySelectorAll('a.cb-btn').forEach(a=>{
       try{
-        const href = new URL(a.href, location.origin).pathname;
-        const norm = href.endsWith('/')? href : href + '/';
-        if (norm === path) a.classList.add('active');
+        const u = new URL(a.href, location.origin).pathname;
+        const norm = u.endsWith('/') ? u : u + '/';
+        if (norm === current) a.classList.add('active');
       }catch(e){}
-      a.addEventListener('click', ()=> {
+      a.addEventListener('click', ()=>{
         container.querySelectorAll('a.cb-btn').forEach(x=>x.classList.remove('active'));
         a.classList.add('active');
       });
     });
   }
-  function addBehavior(container){
+
+  function addMobile(container){
     const toggle = container.querySelector('.cb-toggle');
     const menu = container.querySelector('.cb-menu');
     toggle.addEventListener('click', e=>{
@@ -65,44 +72,37 @@
       }
     });
   }
+
   function mount(){
-    if(document.querySelector('.custom-topbuttons')) return;
+    if (document.querySelector('.custom-topbuttons')) return;
     ensureCSS();
-    const c = buildContainer();
-    // Try insert inside existing header of PaperMod
+    const lang = detectLang();
+    const el = build(lang);
     const header = document.querySelector('header.header, header.site-header, header');
-    if(header){
-      if(getComputedStyle(header).position==='static') header.style.position='relative';
-      c.style.position="absolute";
-      // 若 header 內有語言切換器，往下偏移
+    if (header){
+      if (getComputedStyle(header).position === 'static') header.style.position = 'relative';
+      el.style.position = 'absolute';
+      // 盡量避開語言切換器
       const langSwitch = header.querySelector('.lang, .language, .i18n, .language-switcher, [data-language]');
-      c.style.top = langSwitch ? '56px':'12px';
-      c.style.right = '12px';
-      c.style.zIndex = '9999';
-      header.appendChild(c);
+      el.style.top = langSwitch ? '56px' : '12px';
+      el.style.right = '12px';
+      header.appendChild(el);
     } else {
-      c.classList.add('fallback-fixed');
-      document.body.appendChild(c);
+      el.classList.add('fallback-fixed');
+      document.body.appendChild(el);
     }
-    highlightActive(c);
-    addBehavior(c);
+    highlight(el);
+    addMobile(el);
   }
+
   function init(){
-    // 確保主題 DOM 大致載入後
-    if(document.readyState === 'complete' || document.readyState === 'interactive'){
-      mount();
-    } else {
+    if (document.readyState === 'loading'){
       document.addEventListener('DOMContentLoaded', mount);
-    }
-  }
-  init();
-})();
-      document.addEventListener('DOMContentLoaded', init);
     } else {
-      init();
+      mount();
     }
-  } catch (err) {
-    // never break site
-    console.error('header-buttons error', err);
   }
+
+  try { init(); } catch(e){ console.error("header-buttons init error", e); }
+})();
 })();
