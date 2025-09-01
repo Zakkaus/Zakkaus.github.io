@@ -127,6 +127,18 @@ body.dark .gentoo-article pre *::selection{
 body.dark .gentoo-article pre::-webkit-scrollbar-thumb{
   background:#4a4f56;
 }
+
+/* Anchor offset so heading is visible below sticky header */
+.gentoo-article h1,
+.gentoo-article h2,
+.gentoo-article h3,
+.gentoo-article h4,
+article h1,
+article h2,
+article h3,
+article h4 {
+  scroll-margin-top: 90px;
+}
 </style>
 
 <div class="gentoo-toc">
