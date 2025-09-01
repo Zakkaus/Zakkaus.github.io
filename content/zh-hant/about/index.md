@@ -4,7 +4,6 @@ slug: "about"
 toc: false
 ---
 <style>
-/* 與英文版一致的美化樣式（可共用） */
 .about-highlight{
   --about-accent: var(--hb-active,#e1306c);
   max-width:820px;
@@ -14,46 +13,54 @@ toc: false
   position:relative;
 }
 .about-highlight p{margin:0 0 1.05rem;font-size:.96rem;}
+
+/* 標題樣式（改成類似 gentoo 文章 h2 風格） */
 .about-highlight h3{
-  margin:2.2rem 0 .9rem;
-  padding:0 0 .4rem;
-  background:none;
-  border:none;
-  font-size:1.06rem;
+  margin:2.3rem 0 1.05rem;
+  padding:.55rem .9rem .55rem 1rem;
+  border-left:6px solid var(--about-accent);
+  background:linear-gradient(90deg,rgba(225,48,108,.08),rgba(0,0,0,0));
+  border-radius:8px;
+  font-size:1.08rem;
   font-weight:700;
+  line-height:1.28;
   position:relative;
-  line-height:1.25;
+  box-shadow:0 2px 4px -2px rgba(225,48,108,.35);
 }
-.about-highlight h3::before{
-  content:"";
-  position:absolute;
-  left:0;bottom:0;
-  height:3px;width:56px;
-  background:linear-gradient(90deg,var(--about-accent,#e1306c),transparent);
-  border-radius:3px;
-  opacity:.85;
-}
-body.dark .about-highlight h3::before{opacity:.95;}
-.about-highlight h3 + ul{
-  background:transparent;
-  border:none;
-  padding:.1rem 0 0 .2rem;
-  margin:0 0 .5rem;
-  border-radius:0;
-}
-.about-highlight h3 + ul li{
-  border:none;
-  padding:.35rem 0 .35rem 1rem;
-}
-.about-highlight h3 + ul li::before{
-  width:6px;height:6px;
-  top:1em;
-  box-shadow:none;
-  background:var(--about-accent,#e1306c);
-  opacity:.7;
+body.dark .about-highlight h3{
+  background:linear-gradient(90deg,rgba(225,48,108,.18),rgba(0,0,0,0));
+  box-shadow:0 2px 6px -2px rgba(225,48,108,.55);
 }
 
-/* 聯絡方式連結膠囊高亮 */
+/* 小點點（保留） */
+.about-highlight h3 + ul{
+  list-style:none;
+  margin:-.2rem 0 .4rem;
+  padding:0 0 0 .25rem;
+}
+.about-highlight h3 + ul li{
+  position:relative;
+  padding:.38rem 0 .38rem 1.05rem;
+  font-size:.9rem;
+}
+.about-highlight h3 + ul li::before{
+  content:"";
+  position:absolute;
+  left:.15rem;
+  top:1em;
+  width:7px;
+  height:7px;
+  background:var(--about-accent);
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(225,48,108,.25),0 0 6px rgba(225,48,108,.55);
+  opacity:.85;
+}
+body.dark .about-highlight h3 + ul li::before{
+  box-shadow:0 0 0 5px rgba(225,48,108,.35),0 0 7px rgba(225,48,108,.7);
+  opacity:.95;
+}
+
+/* 聯絡方式膠囊連結（保留上一版） */
 .about-highlight h3 + ul li a[href]{
   display:inline-block;
   background:rgba(225,48,108,.10);
@@ -74,26 +81,21 @@ body.dark .about-highlight h3::before{opacity:.95;}
   transform:translateY(-2px);
   box-shadow:0 6px 18px -6px rgba(225,48,108,.45);
 }
-body.dark .about-highlight h3 + ul li a[href]{
-  background:rgba(225,48,108,.22);
-  box-shadow:0 0 0 0 rgba(225,48,108,.5);
-}
+body.dark .about-highlight h3 + ul li a[href]{background:rgba(225,48,108,.22);}
 body.dark .about-highlight h3 + ul li a[href]:hover{
   background:var(--about-accent,#e1306c);
   box-shadow:0 8px 22px -8px rgba(225,48,108,.55);
 }
 
-@media(max-width:900px){.about-highlight::before{display:none;}}
 @media(max-width:640px){
-  .about-highlight h3{padding:.5rem .75rem .5rem 2.4rem;font-size:.98rem;border-radius:12px;}
-  .about-highlight h3 + ul{padding:.75rem .9rem .9rem 1rem;border-radius:12px;}
-  .about-highlight h3 + ul li{font-size:.86rem;padding:.42rem 0 .42rem .95rem;}
+  .about-highlight h3{font-size:1rem;padding:.5rem .75rem .5rem .9rem;border-radius:6px;}
+  .about-highlight h3 + ul li{font-size:.86rem;padding:.4rem 0 .4rem .95rem;}
+  .about-highlight h3 + ul li::before{width:6px;height:6px;}
 }
+
 @media (prefers-reduced-motion:reduce){
-  .about-highlight a::after,
-  .about-highlight a,
   .about-highlight h3,
-  .about-highlight h3 + ul li{transition:none;}
+  .about-highlight h3 + ul li a[href]{transition:none;transform:none;}
 }
 </style>
 
@@ -129,8 +131,6 @@ body.dark .about-highlight h3 + ul li a[href]:hover{
 - Email：[admin@zakk.au](mailto:admin@zakk.au)
 
 </div>
-- 作業系統：Windows 11 Pro 64-bit + **Gentoo Linux（KDE Plasma）**
-
 ### 💼 筆電
 - Apple MacBook Air M2（16GB / 512GB）  
 - ASUS ROG Zephyrus G16 Air  
