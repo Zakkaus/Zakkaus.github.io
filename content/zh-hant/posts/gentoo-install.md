@@ -1,4 +1,5 @@
 ---
+slug: gentoo-install
 title: "Gentoo 安裝指南（新手）"
 date: 2025-09-02
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
