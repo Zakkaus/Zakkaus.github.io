@@ -1,110 +1,102 @@
 ---
-title: "Gentoo Installation Guide"
+title: "Gentoo Installation Guide (Beginner v9)"
 date: 2025-09-01
-tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel"]
+tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
 categories: ["Linux Notes"]
 draft: false
 toc: true
 ---
 
-# 📑 Table of Contents
-- [💻 My Hardware](#-my-hardware)
+# 📚 Table of Contents
+- [💻 My Hardware (Example)](#-my-hardware-example)
 - [0. Download & Create Installation Media](#0-download--create-installation-media)
 - [1. Boot & Network](#1-boot--network)
 - [2. Partitioning](#2-partitioning)
 - [3. Filesystems & Mounting](#3-filesystems--mounting)
-- [4. Stage3 & chroot](#4-stage3--chroot)
-- [5. Portage & Mirrors](#5-portage--mirrors)
-- [6. Profile & Locale](#6-profile--locale)
-- [6.x Localization](#6x-localization)
-- [7. Kernel Choices](#7-kernel-choices)
-- [8. fstab & UUID](#8-fstab--uuid)
-- [9. Bootloader](#9-bootloader)
-- [10. Network Services](#10-network-services)
-- [11. Display Server Choice (Wayland / X11)](#11-display-server-choice-wayland--x11)
-- [12. GPU Drivers & Microcode](#12-gpu-drivers--microcode)
+- [4. Download Stage3 & chroot](#4-download-stage3--chroot)
+- [5. Portage & Mirrors (with full makeconf)](#5-portage--mirrors-with-full-makeconf)
+- [6. Profile Selection (Desktop / Server)](#6-profile-selection-desktop--server)
+- [6.x Localization (Language & Timezone)](#6x-localization-language--timezone)
+- [7. Kernel Selection & Compilation (Full Commands)](#7-kernel-selection--compilation-full-commands)
+- [8. Generate fstab (ext4 / Btrfs Examples)](#8-generate-fstab-ext4--btrfs-examples)
+- [9. Install Bootloader (with os-prober)](#9-install-bootloader-with-os-prober)
+- [10. Enable Networking (OpenRC / systemd)](#10-enable-networking-openrc--systemd)
+- [11. Wayland / X11 Choice & USE](#11-wayland--x11-choice--use)
+- [12. GPU Drivers & CPU Microcode](#12-gpu-drivers--cpu-microcode)
 - [13. Desktop Environments (Optional)](#13-desktop-environments-optional)
 - [14. Users & sudo](#14-users--sudo)
-- [15. SSHD (Optional)](#15-sshd-optional)
-- [16. USE flags & Licenses](#16-use-flags--licenses)
+- [15. SSH (Optional)](#15-ssh-optional)
+- [16. USE flags & Licenses (Beginner Solutions)](#16-use-flags--licenses-beginner-solutions)
 - [17. Reboot](#17-reboot)
 - [💡 FAQ](#-faq)
-- [📚 References](#-references)
+- [📎 References](#-references)
 
 ---
 
-# 💻 My Hardware
-- **CPU**: AMD Ryzen 9 7950X3D (16C/32T)
-- **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI
-- **RAM**: 64GB DDR5 6400MHz
-- **GPU**: NVIDIA GeForce RTX 4080 SUPER + AMD Radeon iGPU
-- **Storage**: NVMe SSD
-- **Monitor**: Samsung Odyssey G9 49" 5120×1440
-- **Network**: Aussie Broadband 1000/50Mbps, Wi-Fi 7 Router BE9300 (static public IP)
-- **Dual boot**: Windows 11 + Gentoo
+# 💻 My Hardware (Example)
+- **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
+- **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI  
+- **RAM**: 64GB DDR5  
+- **GPU**: NVIDIA RTX 4080 SUPER + AMD iGPU  
+- **Storage**: NVMe SSD  
+- **Dual boot**: Windows 11 + Gentoo  
+
+> Example only. Steps apply broadly to x86_64 hardware.
 
 ---
 
-# 0. Download & Create Installation Media
+## 0. Download & Create Installation Media
 
-## 0.1 Download ISO
-Official download page:  
-[Gentoo Downloads](https://www.gentoo.org/downloads/mirrors/)  
+**Official mirror list**: <https://www.gentoo.org/downloads/mirrors/>
 
-💡 Tip: Choose a mirror close to your location (e.g., AARNET in Australia).  
-
-Example:
+- **China**: Must use domestic mirrors (USTC, TUNA, Aliyun).  
+- **Taiwan**: Example: **NCHC**  
 ```bash
-wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
+wget https://free.nchc.org.tw/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-## 0.2 Create Bootable USB
+### Create Bootable USB
 
-### Linux (dd method)
+**Linux (dd)**:  
 ```bash
 sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
-⚠️ Replace `sdX` with your USB device.
+Replace `sdX` with your USB device (e.g., `/dev/sdb`).
 
-### Windows (Rufus)
-Download Rufus: [Rufus official website](https://rufus.ie/)  
-
-Steps:  
-1. Open Rufus.  
-2. Select your USB device and Gentoo ISO.  
-3. Choose **dd mode** (not ISO mode).  
-4. Click "Start".  
+**Windows (Rufus)**: <https://rufus.ie/>  
+1. Select USB & ISO  
+2. Choose **dd mode**  
+3. Start  
 
 ---
 
-# 1. Boot & Network
+## 1. Boot & Network
 
-## 1.1 Check UEFI
+### 1.1 Check UEFI or BIOS
 ```bash
 ls /sys/firmware/efi
 ```
-- Exists → UEFI  
-- Not exists → Legacy BIOS  
+Exists = **UEFI**; otherwise Legacy BIOS.
 
-## 1.2 Wired
+### 1.2 Wired (Live environment)
 ```bash
 ip a
 dhcpcd eno1
 ping -c 3 gentoo.org
 ```
 
-## 1.3 Wi-Fi
+### 1.3 Wi‑Fi (two options)
 
-### Using wpa_supplicant
+**wpa_supplicant**:  
 ```bash
 iw dev
-wpa_passphrase "SSID" "PASSWORD" > /etc/wpa_supplicant/wpa_supplicant.conf
+wpa_passphrase "SSID" "PASSWORD" | tee /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 dhcpcd wlp9s0
 ping -c 3 gentoo.org
 ```
 
-### Using iwd (recommended for beginners)
+**iwd (simpler, recommended)**:  
 ```bash
 emerge net-wireless/iwd
 systemctl enable iwd
@@ -118,47 +110,46 @@ iwctl
 
 ---
 
-# 2. Partitioning
+## 2. Partitioning
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 cfdisk /dev/nvme0n1
 ```
 
-Suggested layout:  
-| Size | Filesystem | Mount |
-|---|---|---|
-| 512M | FAT32 | /efi |
-| 1G   | ext4  | /boot |
-| 100G | ext4/XFS/Btrfs | / |
-| Rest | ext4/XFS/Btrfs | /home |
+**Suggested Layout** (UEFI):  
+| Size | FS | Mount | Purpose |
+|---|---|---|---|
+| 512M | FAT32 | /efi | UEFI ESP |
+| 1G | ext4 | /boot | Kernel/initramfs |
+| 100G+ | ext4/XFS/Btrfs | / | Root |
+| Rest | ext4/XFS/Btrfs | /home | User data |
 
 ---
 
-# 3. Filesystems & Mounting
+## 3. Filesystems & Mounting
 
-## 3.1 Format examples
-
-ext4:
+### 3.1 Format
+**ext4**:  
 ```bash
 mkfs.ext4 -L root /dev/nvme0n1p3
 mkfs.ext4 -L home /dev/nvme0n1p4
 ```
 
-XFS:
+**XFS**:  
 ```bash
 mkfs.xfs -L root /dev/nvme0n1p3
 mkfs.xfs -L home /dev/nvme0n1p4
 ```
 
-Btrfs:
+**Btrfs**:  
 ```bash
 mkfs.btrfs -L rootfs /dev/nvme0n1p3
-mkfs.btrfs -L home /dev/nvme0n1p4
+mkfs.btrfs -L home   /dev/nvme0n1p4
 ```
 
-## 3.2 Mount examples
+### 3.2 Mount
 
-ext4 / XFS:
+**ext4 / XFS**:  
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 mkdir -p /mnt/gentoo/{boot,home,efi}
@@ -167,39 +158,45 @@ mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
-Btrfs with subvolumes:
+**Btrfs with subvolumes**:  
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 btrfs subvolume create /mnt/gentoo/@
 btrfs subvolume create /mnt/gentoo/@home
 umount /mnt/gentoo
 
-mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
+mount -o compress=zstd,subvol=@    /dev/nvme0n1p3 /mnt/gentoo
 mkdir -p /mnt/gentoo/{boot,home,efi}
-mount -o subvol=@home /dev/nvme0n1p3 /mnt/gentoo/home
+mount -o subvol=@home              /dev/nvme0n1p3 /mnt/gentoo/home
 mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
 ---
 
-# 4. Stage3 & chroot
+## 4. Download Stage3 & chroot
 
-Download Stage3:
+> **Which Stage3?**  
+> - Use **standard Stage3 (glibc)**, with **OpenRC** or **systemd**.  
+> - “Desktop” Stage3 exists but is not required. Better to pick standard Stage3 + correct Profile later.
+
+### 4.1 Download & Extract
 ```bash
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-Mount system dirs (OpenRC):
+### 4.2 Mount system dirs
+
+**OpenRC**:  
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 ```
 
-Mount system dirs (systemd):
+**systemd**:  
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -207,7 +204,7 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 mount --rbind /run /mnt/gentoo/run && mount --make-rslave /mnt/gentoo/run
 ```
 
-Enter chroot:
+### 4.3 Enter chroot
 ```bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
@@ -216,87 +213,125 @@ export PS1="(chroot) $PS1"
 
 ---
 
-# 5. Portage & Mirrors
+## 5. Portage & Mirrors (with full make.conf)
 
-## 5.1 Example make.conf
+### 5.1 Sync Portage
+```bash
+emerge-webrsync
+emerge --sync
+```
+
+### 5.2 Choose Mirrors
+**Interactive**:  
+```bash
+emerge --ask app-portage/mirrorselect
+mirrorselect -i -o >> /etc/portage/make.conf
+```
+**Manual (keep only one)**:  
+```bash
+echo 'GENTOO_MIRRORS="https://free.nchc.org.tw/gentoo/"' >> /etc/portage/make.conf
+```
+
+### 5.3 Full `/etc/portage/make.conf` Example
 ```conf
-# /etc/portage/make.conf
-
-# Compiler flags
 COMMON_FLAGS="-march=native -O2 -pipe"
 MAKEOPTS="-j32"
-
-# Portage default options
 EMERGE_DEFAULT_OPTS="--ask --verbose --with-bdeps=y --complete-graph=y"
-
-# Mirror (⚠️ keep only one)
-GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
-
-# Audio & graphics support
-USE="X wayland pipewire vulkan egl"
-
-# GPU drivers (adjust for your hardware)
-VIDEO_CARDS="nvidia amdgpu radeonsi intel i965 iris nouveau"
-
-# CPU microcode
+GENTOO_MIRRORS="https://free.nchc.org.tw/gentoo/"
+USE="wayland egl pipewire vulkan"
+# USE="X xwayland egl pipewire vulkan"
+VIDEO_CARDS="nvidia"
+# VIDEO_CARDS="amdgpu radeonsi"
+# VIDEO_CARDS="intel i965 iris"
+# VIDEO_CARDS="nouveau"
 ACCEPT_LICENSE="*"
 ```
 
 ---
 
-# 6. Profile & Locale
-
+## 6. Profile Selection (Desktop / Server)
 ```bash
 eselect profile list
+```
+
+Examples:  
+- KDE + systemd → `desktop/plasma/systemd`  
+- GNOME + systemd → `desktop/gnome/systemd`  
+- Desktop + OpenRC → `desktop` or `plasma/openrc`  
+- Server → `default/linux/amd64/23.0`  
+
+```bash
 eselect profile set <id>
 emerge -avuDN @world
 ```
 
-## 6.1 Timezone
-```bash
-ls /usr/share/zoneinfo
-echo "Australia/Melbourne" > /etc/timezone
-emerge --config sys-libs/timezone-data
-```
+---
 
-Full list:  
-[List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+## 6.x Localization (Language & Timezone)
 
-## 6.2 Locale
+**Locales**:  
 ```conf
-# /etc/locale.gen
 en_US.UTF-8 UTF-8
+en_AU.UTF-8 UTF-8
 ```
 ```bash
 locale-gen
 eselect locale set en_US.utf8
 ```
 
+**Timezone**:  
+```bash
+ls /usr/share/zoneinfo
+echo "Australia/Melbourne" > /etc/timezone
+emerge --config sys-libs/timezone-data
+```
+[List of timezones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+**Fonts/Input (optional)**:  
+```bash
+emerge media-fonts/noto-cjk
+emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
+```
+
 ---
 
-# 6.x Localization
-- Fonts: `emerge media-fonts/noto-cjk`  
-- Input method: `emerge app-i18n/fcitx5 app-i18n/fcitx5-rime`  
+## 7. Kernel Selection & Compilation (Full Commands)
 
----
-
-# 7. Kernel Choices
-
-## 7.1 gentoo-kernel-bin
+**Prebuilt**:  
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
 
-## 7.2 gentoo-sources (manual)
-In `make menuconfig`:  
-- Must enable → ext4, enable Btrfs if using it  
-- Recommended → NVMe, GPU, USB, etc.  
+**Manual**:  
+```bash
+emerge sys-kernel/gentoo-sources
+cd /usr/src/linux
+make menuconfig
+make -j"$(nproc)"
+make modules_install
+make install
+```
+
+**Initramfs**:  
+```bash
+# Dracut
+emerge sys-kernel/dracut
+dracut --kver "$(ls /lib/modules | sort -V | tail -1)"
+
+# Genkernel
+emerge sys-kernel/genkernel
+genkernel initramfs
+```
 
 ---
 
-# 8. fstab & UUID
+## 8. Generate fstab (ext4 / Btrfs Examples)
+```bash
+blkid
+lsblk -f
+```
 
-ext4 example:
+**ext4**:  
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
 UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
@@ -304,7 +339,7 @@ UUID=<UUID-ROOT> /      ext4  noatime            0 1
 UUID=<UUID-HOME> /home  ext4  noatime            0 2
 ```
 
-Btrfs example:
+**Btrfs**:  
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat   noatime,umask=0077 0 2
 UUID=<UUID-ROOT> /      btrfs  noatime,compress=zstd,subvol=@     0 1
@@ -313,38 +348,27 @@ UUID=<UUID-ROOT> /home  btrfs  noatime,compress=zstd,subvol=@home 0 2
 
 ---
 
-# 9. Bootloader
-
-Install GRUB:
+## 9. Install Bootloader (with os-prober)
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-Enable os-prober:
-```bash
 emerge --ask sys-boot/os-prober
 echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-Btrfs tools:
-```bash
 emerge --ask sys-fs/btrfs-progs
 ```
 
 ---
 
-# 10. Network Services
+## 10. Enable Networking (OpenRC / systemd)
 
-systemd:
+**systemd**:  
 ```bash
 emerge net-misc/networkmanager
 systemctl enable NetworkManager
 ```
 
-OpenRC:
+**OpenRC**:  
 ```bash
 emerge net-misc/dhcpcd
 rc-update add dhcpcd default
@@ -352,8 +376,7 @@ rc-update add dhcpcd default
 
 ---
 
-# 11. Display Server Choice (Wayland / X11)
-
+## 11. Wayland / X11 Choice & USE
 ```conf
 USE="wayland egl pipewire vulkan"
 # or
@@ -362,9 +385,9 @@ USE="X xwayland egl pipewire vulkan"
 
 ---
 
-# 12. GPU Drivers & Microcode
+## 12. GPU Drivers & CPU Microcode
 
-## NVIDIA proprietary driver
+**NVIDIA Proprietary**:  
 ```conf
 VIDEO_CARDS="nvidia"
 ```
@@ -372,7 +395,7 @@ VIDEO_CARDS="nvidia"
 emerge x11-drivers/nvidia-drivers
 ```
 
-## NVIDIA open-source driver (nouveau)
+**Nouveau**:  
 ```conf
 VIDEO_CARDS="nouveau"
 ```
@@ -380,9 +403,7 @@ VIDEO_CARDS="nouveau"
 emerge x11-base/xorg-drivers
 ```
 
-💡 Suggestion: RTX 4000 → `nvidia-drivers`; older cards → `nouveau`.  
-
-## AMD
+**AMD**:  
 ```conf
 VIDEO_CARDS="amdgpu radeonsi"
 ```
@@ -390,7 +411,7 @@ VIDEO_CARDS="amdgpu radeonsi"
 emerge mesa vulkan-loader
 ```
 
-## Intel
+**Intel**:  
 ```conf
 VIDEO_CARDS="intel i965 iris"
 ```
@@ -398,21 +419,23 @@ VIDEO_CARDS="intel i965 iris"
 emerge mesa vulkan-loader
 ```
 
-## CPU Microcode
-Intel: `emerge sys-firmware/intel-microcode`  
-AMD: `emerge sys-firmware/amd-ucode`  
+**CPU Microcode**:  
+```bash
+emerge sys-firmware/intel-microcode
+emerge sys-firmware/amd-ucode
+```
 
 ---
 
-# 13. Desktop Environments (Optional)
+## 13. Desktop Environments (Optional)
 
-KDE Plasma:
+**KDE Plasma**:  
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
 
-GNOME:
+**GNOME**:  
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
@@ -420,7 +443,7 @@ systemctl enable gdm
 
 ---
 
-# 14. Users & sudo
+## 14. Users & sudo
 ```bash
 passwd
 useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
@@ -431,7 +454,7 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 ---
 
-# 15. SSHD (Optional)
+## 15. SSH (Optional)
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -439,22 +462,17 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-# 16. USE flags & Licenses
+## 16. USE flags & Licenses (Beginner Solutions)
 
-## USE flags
 ```bash
 emerge -pv firefox
 echo "media-video/ffmpeg X wayland" >> /etc/portage/package.use/ffmpeg
-```
-
-## License
-```bash
 echo "www-client/google-chrome google-chrome" >> /etc/portage/package.license
 ```
 
 ---
 
-# 17. Reboot
+## 17. Reboot
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -464,15 +482,18 @@ reboot
 ---
 
 # 💡 FAQ
-- **USE conflict**: run `emerge -pv package` → edit `/etc/portage/package.use`.  
-- **License block**: add to `/etc/portage/package.license`.  
-- **NVIDIA**: new cards → proprietary driver; old cards → nouveau.  
-- **Wi-Fi**: iwd recommended, simpler than wpa_supplicant.  
+- **Slow downloads**: use nearest mirror. China → domestic.  
+- **Wi-Fi WPA3 unstable**: try WPA2.  
+- **Wayland or X11**: AMD/Intel → Wayland; compatibility → X11.  
+- **NVIDIA**: new cards proprietary; old → nouveau.  
+- **USE conflicts**: `emerge -pv` → adjust `package.use`.  
+- **License block**: add to `package.license`.  
+- **Btrfs/LUKS**: initramfs recommended.  
 
 ---
 
-# 📚 References
-- [Gentoo Handbook](https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation)  
-- [Bitbili Tutorial](https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html)  
-- [Rufus official website](https://rufus.ie/)  
-- [tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+# 📎 References
+- Gentoo Handbook: <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
+- Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus: <https://rufus.ie/>  
+- Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
