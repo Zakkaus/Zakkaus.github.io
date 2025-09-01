@@ -139,9 +139,83 @@ body.dark .about-page .about-contacts a{
   margin:.2rem 0 0 !important;
 }
 
+/* === Unified equipment & contacts list styling (mirrors zh-hant) === */
+.about-page{
+  --about-list-font:.9rem;
+  --about-list-gap:.42rem;
+  --about-bullet-size:6px;
+  --about-link-pill:0;
+}
+.about-page h3 + ul,
+.about-page .about-contacts{
+  list-style:none!important;
+  margin:.35rem 0 .3rem!important;
+  padding:0!important;
+  display:block!important;
+}
+.about-page h3 + ul li,
+.about-page .about-contacts li{
+  position:relative;
+  padding:var(--about-list-gap) 0 var(--about-list-gap) 1.1rem!important;
+  margin:0!important;
+  font-size:var(--about-list-font);
+  line-height:1.45;
+}
+.about-page h3 + ul li::before,
+.about-page .about-contacts li::before{
+  content:"";
+  position:absolute;
+  left:0;top:.95rem;
+  width:var(--about-bullet-size);height:var(--about-bullet-size);
+  background:var(--about-accent);
+  border-radius:50%;
+  opacity:.55;
+}
+body.dark .about-page h3 + ul li::before,
+body.dark .about-page .about-contacts li::before{opacity:.75;}
+.about-page .about-contacts a,
+.about-page h3 + ul li a{
+  color:var(--about-accent);
+  font-weight:600;
+  text-decoration:none;
+  padding:.05rem .1rem;
+  border-radius:4px;
+  transition:color .18s,background-color .18s;
+}
+.about-page .about-contacts a:hover,
+.about-page h3 + ul li a:hover{text-decoration:underline;}
+/* Optional pill mode (enable via inline style: style="--about-link-pill:1") */
+.about-page[style*="--about-link-pill:1"] .about-contacts a,
+.about-page[style*="--about-link-pill:1"] h3 + ul li a{
+  padding:.38rem .65rem;
+  background:rgba(225,48,108,.12);
+  border-radius:8px;
+  font-size:.68rem;
+  letter-spacing:.4px;
+  line-height:1;
+  text-decoration:none;
+}
+body.dark .about-page[style*="--about-link-pill:1"] .about-contacts a,
+body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
+  background:rgba(225,48,108,.28);
+  color:#ff8fb7;
+}
+.about-page[style*="--about-link-pill:1"] .about-contacts a:hover,
+.about-page[style*="--about-link-pill:1"] h3 + ul li a:hover{
+  background:var(--about-accent);
+  color:#fff;
+}
 @media (max-width:640px){
   .about-page .about-hero{font-size:1.07rem;padding:.9rem 1rem 1rem;border-radius:16px;}
   .about-page h3{font-size:.95rem;margin:2rem 0 .65rem;}
+  .about-page h3 + ul li,
+  .about-page .about-contacts li{
+    padding:.38rem 0 .38rem 1rem!important;
+  }
+  .about-page h3 + ul li::before,
+  .about-page .about-contacts li::before{
+    top:.85rem;
+  }
 }
 @media (prefers-reduced-motion:reduce){
   .about-page .about-hero *{transition:none!important;}
