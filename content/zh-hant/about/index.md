@@ -44,80 +44,64 @@ body.dark .about-page .about-hero strong{
   color:#ff8fb7!important;
 }
 
-/* === Hero 改版（精簡現代卡片） === */
+/* === Hero 再次精簡：扁平、融入版面 === */
 .about-page .about-hero{
-  font-size:1.14rem;
-  line-height:1.72;
-  margin:0 0 2.1rem;
-  padding:1.1rem 1.35rem 1.2rem 1.35rem;
-  background:#ffffff;
-  border:1px solid #e6e7ea;
-  border-radius:18px;
+  background:#f9fafb !important;
+  border:1px solid #e5e6e9 !important;
+  border-radius:14px !important;
+  box-shadow:none !important;
+  padding:1.05rem 1.2rem 1.15rem !important;
+  font-size:1.08rem !important;
+  line-height:1.7 !important;
   position:relative;
-  box-shadow:0 2px 4px -2px rgba(0,0,0,.06),0 8px 28px -12px rgba(0,0,0,.06);
-  overflow:hidden;
+  margin:0 0 2rem !important;
 }
 body.dark .about-page .about-hero{
-  background:#1f2022;
-  border:1px solid #35373a;
-  box-shadow:0 2px 6px -2px rgba(0,0,0,.55),0 10px 34px -16px rgba(0,0,0,.55);
+  background:#1f2021 !important;
+  border:1px solid #34363a !important;
 }
 
-/* 細色條（取代原粗左條） */
-.about-page .about-hero::before{
-  content:"";
-  position:absolute;
-  left:0;top:0;bottom:0;
-  width:4px;
-  background:linear-gradient(to bottom,var(--about-accent),rgba(225,48,108,.25));
-  border-radius:4px 0 0 4px;
-  opacity:.9;
-}
-body.dark .about-page .about-hero::before{
-  background:linear-gradient(to bottom,var(--about-accent),rgba(225,48,108,.35));
-}
-
-/* 角落柔光層 */
+/* 移除舊裝飾 */
+.about-page .about-hero::before,
 .about-page .about-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+  content:none !important;
+}
+
+/* 強調詞：改用半透明底線 + 主色文字（不再膠囊） */
+.about-page .about-hero strong{
   background:
-    radial-gradient(circle at 85% 18%,rgba(225,48,108,.18),transparent 55%),
-    radial-gradient(circle at 12% 82%,rgba(225,48,108,.12),transparent 60%);
-  mix-blend-mode:overlay;
-  opacity:.75;
+    linear-gradient(to top,rgba(225,48,108,.32),rgba(225,48,108,0) 65%) !important;
+  color:var(--about-accent) !important;
+  padding:0 .2rem 0 .2rem !important;
+  margin:0 .15rem 0 0 !important;
+  border-radius:4px !important;
+  font-weight:600;
+  line-height:1.25;
+  display:inline-block;
+  letter-spacing:.25px;
 }
-body.dark .about-page .about-hero::after{
-  opacity:.55;
-  mix-blend-mode:normal;
+body.dark .about-page .about-hero strong{
+  background:linear-gradient(to top,rgba(225,48,108,.45),rgba(225,48,108,0) 65%) !important;
+  color:#ff8fb7 !important;
 }
 
-/* 內文段落間距（保持） */
-.about-page .about-hero p{margin:.65rem 0;}
-.about-page .about-hero p:first-child{margin-top:0;}
-.about-page .about-hero p:last-child{margin-bottom:0;}
+/* Hero 段落間距微調 */
+.about-page .about-hero p{margin:.55rem 0 !important;}
+.about-page .about-hero p:first-child{margin-top:0 !important;}
+.about-page .about-hero p:last-child{margin-bottom:.2rem !important;}
 
-/* 標題去除底線與底部橫線 */
+/* 標題：更細緻左線，去除多餘 padding */
 .about-page h3{
-  margin:2.1rem 0 .7rem;
-  font-size: 1.02rem;
-  line-height: 1.28;
-  font-weight: 600;
-  padding: 0 .2rem .15rem .85rem;
-  position: relative;
-  border-bottom:none!important;
+  padding:0 0 .3rem .75rem !important;
+  margin:2.15rem 0 .75rem !important;
+  font-size:.98rem !important;
+  line-height:1.25;
+  font-weight:600;
 }
-.about-page h3::after{content:none!important;}
-/* 左側色條保持 */
-.about-page h3::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: .55rem;
-  width: 3px;
-  background: var(--about-accent);
-  border-radius: 2px;
+.about-page h3::before{
+  width:2px !important;
+  background:var(--about-accent) !important;
+  bottom:.3rem !important;
 }
 
 /* 列表 */
@@ -254,6 +238,7 @@ body.dark .about-page .about-contacts a{
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>墨爾本</strong> 生活。</p>
     <p>我養了 <strong>🐹 天竺鼠</strong>（名字是 <strong>馬鈴薯</strong> 和 <strong>薯餅</strong> 🥔），喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>。</p>
     <p>目前就讀 <strong>Business</strong>。</p>
+    <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
 ### 💻 桌機
