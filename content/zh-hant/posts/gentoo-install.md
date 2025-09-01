@@ -52,13 +52,22 @@ body.dark .gentoo-article hr{background:linear-gradient(90deg,rgba(255,255,255,.
 .gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
 .gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
 body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
+
+/* Anchor 滾動補償：避免錨點標題被 sticky header 蓋住 */
+.gentoo-article h1,
+.gentoo-article h2,
+.gentoo-article h3,
+.gentoo-article h4 {
+  scroll-margin-top: 90px; /* 視你的 header 高度可調整 (例如 70~110) */
+}
 </style>
 
 <div class="gentoo-toc">
 <details open>
   <summary>📚 目錄</summary>
   <ol>
-    <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
+-    <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
++    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
     <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
     <li><a href="#2-磁碟分割lsblk-與-cfdisk">2. 磁碟分割（lsblk 與 cfdisk）</a></li>
@@ -86,7 +95,7 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 
 <div class="gentoo-article">
 
-# 💻 我的電腦配置（示例） {#my-hardware-zh}
+# 我的電腦配置（示例） {#my-hardware-zh}
 - **CPU**：AMD Ryzen 9 7950X3D（16C/32T）  
 - **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI  
 - **RAM**：64GB DDR5  
