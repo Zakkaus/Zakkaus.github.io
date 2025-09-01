@@ -1,0 +1,3 @@
+[params]
+  ShowToc = true     # 右側顯示目錄
+  TocOpen = true     # 預設展開

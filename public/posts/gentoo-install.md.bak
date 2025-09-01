@@ -7,8 +7,33 @@ draft: false
 toc: true
 ---
 
+# 📚 Table of Contents
+- [💻 My Hardware (Example)](#-my-hardware-example)
+- [0. Download & Create Installation Media](#0-download--create-installation-media)
+- [1. Boot & Network](#1-boot--network)
+- [2. Partitioning (lsblk and cfdisk)](#2-partitioning-lsblk-and-cfdisk)
+- [3. Filesystem Formatting & Mounting (ext4 / XFS / Btrfs)](#3-filesystem-formatting--mounting-ext4--xfs--btrfs)
+- [4. Download Stage3, Mount System Directories & chroot](#4-download-stage3-mount-system-directories--chroot)
+- [5. Portage & Mirrors (with full make.conf example)](#5-portage--mirrors-with-full-makeconf-example)
+- [6. USE flags & Licenses (Beginner Solutions)](#6-use-flags--licenses-beginner-solutions)
+- [7. Profile Selection (Desktop / Server)](#7-profile-selection-desktop--server)
+- [8. Localization (Language & Timezone)](#8-localization-language--timezone)
+- [9. Kernel Selection & Compilation (Full Commands)](#9-kernel-selection--compilation-full-commands)
+- [10. Generate fstab (ext4 / Btrfs examples)](#10-generate-fstab-ext4--btrfs-examples)
+- [11. Install Bootloader GRUB (with os-prober)](#11-install-bootloader-grub-with-os-prober)
+- [12. Enable Networking (OpenRC / systemd)](#12-enable-networking-openrc--systemd)
+- [13. Wayland / X11 Choice & USE](#13-wayland--x11-choice--use)
+- [14. GPU Drivers & CPU Microcode](#14-gpu-drivers--cpu-microcode)
+- [15. Desktop Environments (Optional)](#15-desktop-environments-optional)
+- [16. Users & sudo](#16-users--sudo)
+- [17. SSH (Optional)](#17-ssh-optional)
+- [18. Reboot](#18-reboot)
+- [💡 FAQ](#-faq)
+- [📎 References](#-references)
 
-## 💻 My Hardware (Example)
+---
+
+# 💻 My Hardware (Example)
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
 - **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI  
 - **RAM**: 64GB DDR5  

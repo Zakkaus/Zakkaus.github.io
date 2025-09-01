@@ -7,8 +7,33 @@ draft: false
 toc: true
 ---
 
+# 📚 目錄
+- [💻 我的電腦配置（示例）](#-我的電腦配置示例)
+- [0. 下載與製作安裝媒體](#0-下載與製作安裝媒體)
+- [1. 開機與網路](#1-開機與網路)
+- [2. 磁碟分割（lsblk 與 cfdisk）](#2-磁碟分割lsblk-與-cfdisk)
+- [3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）](#3-檔案系統格式化與掛載ext4--xfs--btrfs)
+- [4. 下載 Stage3、掛載系統目錄與 chroot](#4-下載-stage3掛載系統目錄與-chroot)
+- [5. Portage 與鏡像源（含 makeconf 完整示例）](#5-portage-與鏡像源含-makeconf-完整示例)
+- [6. USE flags 與 License（新手解法）](#6-use-flags-與-license新手解法)
+- [7. 選擇 Profile（桌面／伺服器）](#7-選擇-profile桌面伺服器)
+- [8. 本地化 Localization（語言與時區）](#8-本地化-localization語言與時區)
+- [9. 內核選擇與編譯（完整指令）](#9-內核選擇與編譯完整指令)
+- [10. 產生 fstab（含 Btrfs / ext4 範例）](#10-產生-fstab含-btrfs--ext4-範例)
+- [11. 安裝開機器 GRUB（含 os-prober）](#11-安裝開機器-grub含-os-prober)
+- [12. 啟用網路服務（OpenRC / systemd）](#12-啟用網路服務openrc--systemd)
+- [13. Wayland / X11 選擇與 USE](#13-wayland--x11-選擇與-use)
+- [14. 顯示卡與 CPU 微碼](#14-顯示卡與-cpu-微碼)
+- [15. 桌面環境（可選）](#15-桌面環境可選)
+- [16. 使用者與 sudo](#16-使用者與-sudo)
+- [17. SSH（可選）](#17-ssh可選)
+- [18. 重開機](#18-重開機)
+- [💡 常見問題 FAQ](#-常見問題-faq)
+- [📎 參考](#-參考)
 
-## 💻 我的電腦配置（示例）
+---
+
+# 💻 我的電腦配置（示例）
 - **CPU**：AMD Ryzen 9 7950X3D（16C/32T）  
 - **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI  
 - **RAM**：64GB DDR5  

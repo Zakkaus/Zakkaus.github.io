@@ -1,30 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux Notes on Zakk's Blog</title><link>https://zakk.au/categories/linux-notes/</link><description>Recent content in Linux Notes on Zakk's Blog</description><generator>Hugo -- 0.149.0</generator><language>en</language><lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://zakk.au/categories/linux-notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Gentoo Installation Guide (Beginner)</title><link>https://zakk.au/posts/gentoo-install/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/gentoo-install/</guid><description>&lt;h1 id="-table-of-contents"&gt;📚 Table of Contents&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#-my-hardware-example"&gt;💻 My Hardware (Example)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#0-download--create-installation-media"&gt;0. Download &amp;amp; Create Installation Media&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#1-boot--network"&gt;1. Boot &amp;amp; Network&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#2-partitioning-lsblk-and-cfdisk"&gt;2. Partitioning (lsblk and cfdisk)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#3-filesystem-formatting--mounting-ext4--xfs--btrfs"&gt;3. Filesystem Formatting &amp;amp; Mounting (ext4 / XFS / Btrfs)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#4-download-stage3-mount-system-directories--chroot"&gt;4. Download Stage3, Mount System Directories &amp;amp; chroot&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#5-portage--mirrors-with-full-makeconf-example"&gt;5. Portage &amp;amp; Mirrors (with full make.conf example)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#6-use-flags--licenses-beginner-solutions"&gt;6. USE flags &amp;amp; Licenses (Beginner Solutions)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#7-profile-selection-desktop--server"&gt;7. Profile Selection (Desktop / Server)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#8-localization-language--timezone"&gt;8. Localization (Language &amp;amp; Timezone)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#9-kernel-selection--compilation-full-commands"&gt;9. Kernel Selection &amp;amp; Compilation (Full Commands)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#10-generate-fstab-ext4--btrfs-examples"&gt;10. Generate fstab (ext4 / Btrfs examples)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#11-install-bootloader-grub-with-os-prober"&gt;11. Install Bootloader GRUB (with os-prober)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#12-enable-networking-openrc--systemd"&gt;12. Enable Networking (OpenRC / systemd)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#13-wayland--x11-choice--use"&gt;13. Wayland / X11 Choice &amp;amp; USE&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#14-gpu-drivers--cpu-microcode"&gt;14. GPU Drivers &amp;amp; CPU Microcode&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#15-desktop-environments-optional"&gt;15. Desktop Environments (Optional)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#16-users--sudo"&gt;16. Users &amp;amp; sudo&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#17-ssh-optional"&gt;17. SSH (Optional)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#18-reboot"&gt;18. Reboot&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#-faq"&gt;💡 FAQ&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#-references"&gt;📎 References&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id="-my-hardware-example"&gt;💻 My Hardware (Example)&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Linux Notes on Zakk's Blog</title><link>https://zakk.au/categories/linux-notes/</link><description>Recent content in Linux Notes on Zakk's Blog</description><generator>Hugo -- 0.149.0</generator><language>en</language><lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://zakk.au/categories/linux-notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Gentoo Installation Guide (Beginner)</title><link>https://zakk.au/posts/gentoo-install/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/gentoo-install/</guid><description>&lt;h2 id="-my-hardware-example"&gt;💻 My Hardware (Example)&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;: AMD Ryzen 9 7950X3D (16C/32T)&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Motherboard&lt;/strong&gt;: ASUS ROG STRIX X670E-A GAMING WIFI&lt;/li&gt;
@@ -34,4 +8,14 @@
 &lt;li&gt;&lt;strong&gt;Dual boot&lt;/strong&gt;: Windows 11 + Gentoo&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Example only. Steps apply to most x86_64 hardware.&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;Example only. Steps apply to most x86_64 hardware.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="0-download--create-installation-media"&gt;0. Download &amp;amp; Create Installation Media&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Official mirror list&lt;/strong&gt;: &lt;a href="https://www.gentoo.org/downloads/mirrors/"&gt;https://www.gentoo.org/downloads/mirrors/&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use a mirror close to your region (e.g., Taiwan NCHC, AARNET Australia, Kernel.org global).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="01-download-iso-example-nchc-taiwan"&gt;0.1 Download ISO (example: NCHC Taiwan)&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;wget https://free.nchc.org.tw/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="02-create-usb-install-disk"&gt;0.2 Create USB Install Disk&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Linux (dd)&lt;/strong&gt;:&lt;/p&gt;</description></item></channel></rss>
