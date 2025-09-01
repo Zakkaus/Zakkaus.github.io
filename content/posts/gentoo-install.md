@@ -6,6 +6,7 @@ tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs"
 categories: ["Linux Notes"]
 draft: false
 toc: true
+description: "Step-by-step Gentoo install: partitioning, Stage3, Portage, USE flags, kernel build, desktop environments, FAQ."
 ---
 
 <style>

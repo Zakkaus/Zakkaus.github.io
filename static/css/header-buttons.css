@@ -317,3 +317,99 @@ body.dark .clean-footer,
 body.dark footer.clean-footer {
   border-top: none !important;
 }
+
+/* posts 區段列表自訂樣式 */
+.post-section-list {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.2rem 1.1rem 2.5rem;
+}
+.post-section-list .post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+}
+.post-section-list .post-item-title {
+  margin: 0 0 .4rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+.post-section-list .post-item-title a {
+  text-decoration: none;
+  color: var(--hb-text,#222);
+}
+body.dark .post-section-list .post-item-title a {
+  color: var(--hb-text,#eee);
+}
+.post-section-list .post-item-title a:hover {
+  color: var(--hb-active,#e1306c);
+}
+.post-section-list .post-item-meta {
+  font-size: .72rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  opacity: .65;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin-bottom: .55rem;
+}
+.post-section-list .post-tags .tag {
+  background: rgba(225,48,108,.08);
+  padding: .15rem .45rem;
+  border-radius: 4px;
+  font-size: .65rem;
+  line-height: 1;
+}
+body.dark .post-section-list .post-tags .tag {
+  background: rgba(225,48,108,.18);
+}
+.post-section-list .post-item-desc {
+  margin: 0 0 .65rem;
+  font-size: .85rem;
+  line-height: 1.5;
+  color: #555;
+}
+body.dark .post-section-list .post-item-desc {
+  color: #bbb;
+}
+.post-section-list .post-readmore {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-decoration: none;
+  color: var(--hb-active,#e1306c);
+  border-bottom: 1px solid transparent;
+}
+.post-section-list .post-readmore:hover {
+  border-color: var(--hb-active,#e1306c);
+}
+
+/* 移除連結右側灰色線 (可能由主題 ::after 或邊框產生) */
+.post-section-list a,
+.gentoo-article a,
+.article a,
+.content a {
+  border-right: none !important;
+  box-shadow: none !important;
+  position: relative;
+}
+.post-section-list a::after,
+.gentoo-article a::after,
+.article a::after,
+.content a::after {
+  content: none !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 確保全站一般內容連結無意外細線 */
+a {
+  border-right: none !important;
+}
+a:visited {
+  border-right: none !important;
+}
