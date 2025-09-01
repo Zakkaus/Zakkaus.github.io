@@ -217,16 +217,25 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
   color:#fff;
 }
 
-/* === Simplify section headings: keep only left red line === */
+/* === Section heading effect: left red bar + bottom accent line === */
 .about-page h3{
-  background:none !important;
-  border-radius:0 !important;
-}
-.about-page h3::after{
-  content:none !important;
+  background:none!important;
+  border-radius:0!important;
+  position:relative;
 }
 .about-page h3::before{
-  width:3px !important;
+  width:3px!important;
+}
+.about-page h3::after{
+  content:"";
+  position:absolute;
+  left:.75rem;
+  bottom:-2px;
+  width:64px;
+  height:2px;
+  background:var(--about-accent);
+  border-radius:2px;
+  opacity:.82;
 }
 
 @media (max-width:640px){

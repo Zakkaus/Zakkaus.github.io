@@ -366,17 +366,25 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
   }
 }
 
-/* === 標題特效精簡：只留左側紅線 === */
+/* === 標題特效：左側紅線 + 底部粉色短線 === */
 .about-page h3{
-  background:none !important;
-  border-radius:0 !important;
+  background:none!important;
+  border-radius:0!important;
+  position:relative;
+}
+.about-page h3::before{
+  width:3px!important; /* 保持左側實心紅線 */
 }
 .about-page h3::after{
-  content:none !important;
-}
-/* 可加粗左線一點（可選） */
-.about-page h3::before{
-  width:3px !important;
+  content:"";
+  position:absolute;
+  left:.75rem;
+  bottom:-2px;
+  width:64px;
+  height:2px;
+  background:var(--about-accent);
+  border-radius:2px;
+  opacity:.82;
 }
 </style>
 
