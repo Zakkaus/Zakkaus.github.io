@@ -28,7 +28,7 @@
             {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
           </a>
           <button class="cb-btn" id="themeToggle" type="button">
-            {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
+            {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
           </button>
         </div>
       </div>
@@ -50,7 +50,7 @@
           {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
         </a>
         <button class="cb-btn" type="button" onclick="document.getElementById('themeToggle').click()">
-          {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
+          {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
         </button>
       </div>
     </div>
@@ -62,15 +62,42 @@
   const btn = document.getElementById('themeToggle');
   if(!btn) return;
   const root = document.documentElement;
+  const body = document.body;
   const KEY = 'site-theme';
-  function apply(mode){
-    if(mode==='dark') root.classList.add('dark'); else root.classList.remove('dark');
+  const isZH = (root.lang || '').toLowerCase().startsWith('zh');
+  function systemPref(){
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light';
   }
-  apply(localStorage.getItem(KEY));
+  function apply(mode){
+    if(mode==='dark'){
+      root.classList.add('dark');
+      body.classList.add('dark');   // 確保 body.dark 樣式生效
+      updateLabel('dark');
+    }else{
+      root.classList.remove('dark');
+      body.classList.remove('dark');
+      updateLabel('light');
+    }
+  }
+  function updateLabel(current){
+    // current 代表目前狀態；按鈕顯示「將要切換到」的模式
+    const next = current === 'dark' ? 'light':'dark';
+    if(isZH){
+      btn.textContent = next === 'dark' ? '深色模式' : '淺色模式';
+    }else{
+      btn.textContent = next === 'dark' ? 'Dark Mode' : 'Light Mode';
+    }
+  }
+  let saved = localStorage.getItem(KEY) || systemPref();
+  apply(saved);
+
   btn.addEventListener('click', ()=>{
-    const dark = root.classList.toggle('dark');
-    localStorage.setItem(KEY, dark ? 'dark' : 'light');
+    const nowDark = root.classList.contains('dark');
+    const target = nowDark ? 'light':'dark';
+    apply(target);
+    localStorage.setItem(KEY, target);
   });
+
   window.addEventListener('resize', ()=> {
     if(window.innerWidth > 900){
       const m = document.getElementById('mobileMenu');
