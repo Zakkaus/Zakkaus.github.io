@@ -47,17 +47,17 @@ toc: true
 # 0. Download & Create Installation Media
 
 ## 0.1 Download ISO
-Official mirrors:  
+Official download page:  
 [Gentoo Downloads](https://www.gentoo.org/downloads/mirrors/)  
 
-💡 Tip: Choose a mirror close to your location. For Australia, try **AARNET** or **Swinburne**.
+💡 Tip: Choose a mirror close to you, e.g. in Australia use **AARNET** or **Swinburne**.
 
 Using `wget`:
 ```bash
 wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-## 0.2 Create bootable USB
+## 0.2 Create Bootable USB
 
 ### Linux (dd method)
 ```bash
@@ -70,8 +70,8 @@ Download Rufus: [Rufus official website](https://rufus.ie/)
 
 Steps:  
 1. Open Rufus.  
-2. Select your USB device and Gentoo ISO.  
-3. Choose **dd mode** (not ISO mode).  
+2. Select USB device and Gentoo ISO.  
+3. Select **dd mode** (not ISO mode).  
 4. Click "Start".  
 
 ---
@@ -83,7 +83,7 @@ Steps:
 ls /sys/firmware/efi
 ```
 - Exists → UEFI  
-- Not exists → Legacy BIOS
+- Not exists → Legacy BIOS  
 
 💡 Tip: Prefer UEFI for modern hardware.
 
@@ -144,9 +144,9 @@ mkfs.btrfs -L home /dev/nvme0n1p4
 ```
 
 💡 Tips:  
-- ext4 → Default and safest.  
-- XFS → Best for large files.  
-- Btrfs → Advanced features like snapshots, but needs extra care.  
+- **ext4** → Stable and simple, recommended for beginners.  
+- **XFS** → Great for large files.  
+- **Btrfs** → Supports snapshots and subvolumes, but requires `btrfs-progs`.  
 
 ---
 
@@ -163,11 +163,11 @@ emerge-webrsync
 emerge --sync
 ```
 
-💡 If sync fails, use `wget` to manually fetch snapshot.  
+💡 If sync fails, use `wget` to fetch snapshot manually.  
 
 ## 5.1 OpenRC vs systemd
-- **OpenRC**: Default in Gentoo, simple, fast boot.  
-- **systemd**: Better integration with GNOME/KDE, more common in modern distros.  
+- **OpenRC**: Default in Gentoo, simple and lightweight.  
+- **systemd**: Better integration with GNOME/KDE and modern software.  
 
 ---
 
@@ -187,7 +187,7 @@ echo "Australia/Melbourne" > /etc/timezone
 emerge --config sys-libs/timezone-data
 ```
 
-💡 You can pick your region. See full list here:  
+💡 Full timezone list:  
 [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
 Examples:  
@@ -211,7 +211,7 @@ eselect locale set en_US.utf8
 # 6.x Localization
 
 - Keep `en_US.UTF-8` as default.  
-- Add extra locales if needed (`en_AU.UTF-8`, `fr_FR.UTF-8`).  
+- Add others if needed (`en_AU.UTF-8`, `fr_FR.UTF-8`).  
 - Fonts for Asian languages:  
   ```bash
   emerge media-fonts/noto-cjk
@@ -222,7 +222,7 @@ eselect locale set en_US.utf8
 # 7. Kernel Choices
 
 ## 7.1 gentoo-kernel-bin
-Recommended for beginners:
+Easiest option, recommended for beginners:
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
@@ -237,9 +237,9 @@ make modules_install
 make install
 ```
 
-💡 Tips:  
-- ext4 → usually enabled by default in kernel.  
-- Btrfs → must be enabled in kernel if you use it.  
+💡 Notes:  
+- **ext4** → Usually enabled by default.  
+- **Btrfs** → Must enable manually in kernel.  
 
 ---
 
@@ -311,11 +311,11 @@ reboot
 ---
 
 # 💡 FAQ
-- ISO doesn’t boot → ensure you used dd mode (Linux `dd` or Rufus dd mode).  
-- WPA3 may fail → use WPA2.  
-- Filesystem choice: ext4 (safe), XFS (large files), Btrfs (snapshots).  
+- ISO doesn’t boot → Use dd or Rufus (dd mode).  
+- WPA3 may fail → Use WPA2.  
+- Filesystem choice: ext4 (stable), XFS (large files), Btrfs (snapshots).  
 - os-prober disabled by default, enable if dual-booting.  
-- Install btrfs-progs only if you use Btrfs.  
+- Install btrfs-progs if using Btrfs.  
 
 ---
 
