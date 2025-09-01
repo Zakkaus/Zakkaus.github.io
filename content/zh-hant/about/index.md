@@ -2,6 +2,8 @@
 title: "關於我"
 slug: "about"
 toc: false
+date: 2025-09-01
+lastmod: 2025-09-01
 ---
 <style>
 /* About 統一樣式（中英文共用） */
@@ -77,12 +79,69 @@ body.dark .about-block h3 + ul li a[href]:hover{background:var(--about-accent,#e
 @media (prefers-reduced-motion:reduce){
   .about-block h3 + ul li a[href]{transition:none;transform:none;}
 }
+
+/* 新增：開頭介紹強調區 */
+.about-intro{
+  margin:0 0 1.9rem;
+  padding:1rem 1.15rem 1.05rem 1.15rem;
+  border:1px solid rgba(225,48,108,.35);
+  border-left:6px solid var(--about-accent,#e1306c);
+  background:linear-gradient(135deg,rgba(225,48,108,.08),rgba(225,48,108,.00) 70%);
+  border-radius:14px;
+  font-size:.95rem;
+  line-height:1.62;
+  position:relative;
+}
+body.dark .about-intro{
+  background:linear-gradient(135deg,rgba(225,48,108,.18),rgba(225,48,108,.02) 70%);
+  border-color:rgba(225,48,108,.55);
+}
+.about-intro p{margin:.35rem 0;}
+.about-intro strong{
+  font-weight:700;
+  color:var(--about-accent,#e1306c);
+}
+.about-intro mark{
+  background:rgba(225,48,108,.18);
+  color:#c31852;
+  padding:.15rem .35rem .2rem;
+  border-radius:6px;
+  font-weight:600;
+}
+body.dark .about-intro mark{
+  background:rgba(225,48,108,.32);
+  color:#ff8ab4;
+}
+.about-intro .intro-line + .intro-line{
+  margin-top:.55rem;
+  position:relative;
+}
+.about-intro .intro-line + .intro-line::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:-.4rem;
+  width:54px;
+  height:2px;
+  background:linear-gradient(90deg,var(--about-accent,#e1306c),transparent);
+  border-radius:2px;
+  opacity:.55;
+}
+@media (max-width:640px){
+  .about-intro{padding:.85rem .9rem .9rem .9rem;font-size:.93rem;border-radius:12px;}
+  .about-intro mark{padding:.12rem .32rem .16rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  .about-intro{transition:none;}
+}
 </style>
 
 <div class="about-block">
-嗨，我是 **Zakk**，在 **墨爾本**生活。  
-我養了 **🐹 天竺鼠**（名字是 **馬鈴薯** 和 **薯餅** 🥔），喜歡 **遊戲**、**Linux** 與 **金融**。  
-目前就讀 **Business**。
+<div class="about-intro">
+  <p class="intro-line">嗨，我是 <strong>Zakk</strong>，在 <mark>墨爾本</mark> 生活。</p>
+  <p class="intro-line">我養了 <strong>🐹 天竺鼠</strong>（名字是 <mark>馬鈴薯</mark> 和 <mark>薯餅</mark> 🥔），喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>。</p>
+  <p class="intro-line">目前就讀 <mark>Business</mark>。</p>
+</div>
 
 ### 💻 桌機
 - 主機板：ASUS ROG STRIX X670E-A GAMING WIFI  
