@@ -67,6 +67,7 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
   <summary>📚 目錄</summary>
   <ol>
 -    <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
+-    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
 +    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
     <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
