@@ -44,26 +44,60 @@ body.dark .about-page .about-hero strong{
   color:#ff8fb7!important;
 }
 
-/* 個人簡介容器微調字級 (更突出) */
+/* === Hero 改版（精簡現代卡片） === */
 .about-page .about-hero{
   font-size:1.14rem;
   line-height:1.72;
-  background: var(--about-bg-light);
-  border: 1px solid var(--about-border-light);
-  border-left: 6px solid var(--about-accent);
-  border-radius: 16px;
-  padding: 1.05rem 1.25rem 1.15rem;
-  margin: 0 0 2.1rem;
-  position: relative;
+  margin:0 0 2.1rem;
+  padding:1.1rem 1.35rem 1.2rem 1.35rem;
+  background:#ffffff;
+  border:1px solid #e6e7ea;
+  border-radius:18px;
+  position:relative;
+  box-shadow:0 2px 4px -2px rgba(0,0,0,.06),0 8px 28px -12px rgba(0,0,0,.06);
+  overflow:hidden;
 }
-body.dark .about-page .about-hero {
-  background: var(--about-bg-dark);
-  border: 1px solid var(--about-border-dark);
-  border-left-color: var(--about-accent);
+body.dark .about-page .about-hero{
+  background:#1f2022;
+  border:1px solid #35373a;
+  box-shadow:0 2px 6px -2px rgba(0,0,0,.55),0 10px 34px -16px rgba(0,0,0,.55);
 }
-.about-page .about-hero p { margin: .65rem 0; }
-.about-page .about-hero p:first-child { margin-top: 0; }
-.about-page .about-hero p:last-child { margin-bottom: 0; }
+
+/* 細色條（取代原粗左條） */
+.about-page .about-hero::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:4px;
+  background:linear-gradient(to bottom,var(--about-accent),rgba(225,48,108,.25));
+  border-radius:4px 0 0 4px;
+  opacity:.9;
+}
+body.dark .about-page .about-hero::before{
+  background:linear-gradient(to bottom,var(--about-accent),rgba(225,48,108,.35));
+}
+
+/* 角落柔光層 */
+.about-page .about-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 85% 18%,rgba(225,48,108,.18),transparent 55%),
+    radial-gradient(circle at 12% 82%,rgba(225,48,108,.12),transparent 60%);
+  mix-blend-mode:overlay;
+  opacity:.75;
+}
+body.dark .about-page .about-hero::after{
+  opacity:.55;
+  mix-blend-mode:normal;
+}
+
+/* 內文段落間距（保持） */
+.about-page .about-hero p{margin:.65rem 0;}
+.about-page .about-hero p:first-child{margin-top:0;}
+.about-page .about-hero p:last-child{margin-bottom:0;}
 
 /* 標題去除底線與底部橫線 */
 .about-page h3{
