@@ -40,3 +40,5 @@ I enjoy **gaming 🎮**, I'm into **Linux 🐧** and **finance 💹**, and I lov
 - 🐙 GitHub: [Zakkaus](https://github.com/Zakkaus)
 - 𝕏: [@zakkauu](https://x.com/zakkauu)
 - 📸 Instagram: [@zakk.au](https://www.instagram.com/zakk.au/)
+---
+---

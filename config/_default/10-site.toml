@@ -1,0 +1,11 @@
+baseURL = "https://zakk.au/"
+title = "Zakk's Blog"
+languageCode = "en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+# PaperMod 常用參數
+[params]
+  ShowToc = true
+  TocOpen = true
+  # 如果你不想要右上角 RSS，可在後面加 ShowRss = false
