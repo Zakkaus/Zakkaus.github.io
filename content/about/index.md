@@ -257,10 +257,9 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
 
 <div class="about-page">
   <div class="about-hero">
-    <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong>.</p>
+    <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
     <p>I keep <strong>🐹 guinea pigs</strong> (their names are <strong>Hash&nbsp;Brown🥔</strong> and <strong>Potato Cake</strong><small style="opacity:.6;margin-left:.35rem;">name idea from <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></small>); I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>Finance</strong>, and share them on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
-    <p>I study <strong>Business</strong> in <strong>Melbourne</strong>.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
   </div>
 
