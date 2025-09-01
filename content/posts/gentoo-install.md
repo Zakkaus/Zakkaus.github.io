@@ -1,5 +1,5 @@
 ---
-title: "Gentoo Installation Guide (Beginner-Friendly v4, Melbourne Edition)"
+title: "Gentoo Installation Guide"
 date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel"]
 categories: ["Linux Notes"]
@@ -11,7 +11,7 @@ toc: true
 - [💻 My Hardware](#-my-hardware)
 - [0. Boot & Network](#0-boot--network)
 - [1. Partitioning](#1-partitioning)
-- [2. Filesystems & Subvolumes](#2-filesystems--subvolumes)
+- [2. Filesystems](#2-filesystems)
 - [3. Stage3 & chroot](#3-stage3--chroot)
 - [4. Portage & Mirrors](#4-portage--mirrors)
 - [5. Profile & Locale](#5-profile--locale)
@@ -49,10 +49,10 @@ toc: true
 ```bash
 ls /sys/firmware/efi
 ```
-- If this directory exists → You are in **UEFI mode**  
-- If not → Legacy BIOS mode
+- If this directory exists → **UEFI mode**  
+- If not → Legacy BIOS
 
-💡 Tip: Use UEFI if possible. It's the standard for modern systems.
+💡 Tip: Always use UEFI for modern systems.
 
 ## 0.2 Wired
 ```bash
@@ -93,43 +93,61 @@ Suggested layout:
 |---|---|---|
 | 512M | FAT32 | /efi |
 | 1G   | ext4  | /boot |
-| 100G | Btrfs | / |
-| Rest | Btrfs | /home |
+| 100G | ext4/XFS/Btrfs | / |
+| Rest | ext4/XFS/Btrfs | /home |
+
+💡 Tip:  
+- **ext4** → Default, stable and widely used.  
+- **XFS** → Good for large files, not ideal for /boot.  
+- **Btrfs** → Supports snapshots, subvolumes, compression.  
 
 ---
 
-# 2. Filesystems & Subvolumes
+# 2. Filesystems
 
-## 2.1 Format
+## 2.1 Format examples
+
+### ext4
 ```bash
-mkfs.fat -F32 /dev/nvme0n1p1
-mkfs.ext4 -L boot /dev/nvme0n1p2
+mkfs.ext4 -L root /dev/nvme0n1p3
+mkfs.ext4 -L home /dev/nvme0n1p4
+```
+
+### XFS
+```bash
+mkfs.xfs -L root /dev/nvme0n1p3
+mkfs.xfs -L home /dev/nvme0n1p4
+```
+
+### Btrfs
+```bash
 mkfs.btrfs -L rootfs /dev/nvme0n1p3
 mkfs.btrfs -L home /dev/nvme0n1p4
 ```
 
-## 2.2 Install tools
-```bash
-emerge --ask sys-fs/btrfs-progs
-```
+💡 Tip: If using **Btrfs**, you can later create subvolumes for `/`, `/home`, `/var/log`, `/var/tmp`.  
+If using **ext4/XFS**, just mount directly.
 
-## 2.3 Create subvolumes
+## 2.2 Mount
+Example for Btrfs with subvolumes:
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 btrfs subvolume create /mnt/gentoo/@
 btrfs subvolume create /mnt/gentoo/@home
-btrfs subvolume create /mnt/gentoo/@log
-btrfs subvolume create /mnt/gentoo/@tmp
 umount /mnt/gentoo
+
+mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/{boot,home,efi}
+mount -o subvol=@home /dev/nvme0n1p3 /mnt/gentoo/home
+mount /dev/nvme0n1p2 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
-## 2.4 Mount
+For ext4/XFS:
 ```bash
-mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
-mkdir -p /mnt/gentoo/{boot,home,var/log,var/tmp,efi}
-mount -o subvol=@home /dev/nvme0n1p3 /mnt/gentoo/home
-mount -o subvol=@log  /dev/nvme0n1p3 /mnt/gentoo/var/log
-mount -o subvol=@tmp  /dev/nvme0n1p3 /mnt/gentoo/var/tmp
+mount /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/{boot,home,efi}
+mount /dev/nvme0n1p4 /mnt/gentoo/home
 mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
@@ -185,7 +203,7 @@ emerge --ask app-portage/mirrorselect
 mirrorselect -i -o >> /etc/portage/make.conf
 ```
 
-💡 Tip: Choose a mirror close to your location (e.g., Australia → AARNET, Swinburne).
+💡 Tip: Choose a mirror near you (Australia → AARNET, Swinburne).
 
 ## 4.2 make.conf example
 ```bash
@@ -209,38 +227,35 @@ eselect profile set <id>
 emerge -avuDN @world
 ```
 
-Set timezone (Australia/Melbourne as example):
+Set timezone (example Melbourne):
 ```bash
-ls /usr/share/zoneinfo   # explore available zones
-ls /usr/share/zoneinfo/Australia   # list Australian zones
+ls /usr/share/zoneinfo
+ls /usr/share/zoneinfo/Australia
 echo "Australia/Melbourne" > /etc/timezone
 emerge --config sys-libs/timezone-data
 ```
 
-Set locales:
+Locales:
 ```conf
 # /etc/locale.gen
 en_US.UTF-8 UTF-8
 ```
-Generate and set:
 ```bash
 locale-gen
 eselect locale set en_US.utf8
 ```
 
-💡 Tip: You can add other locales (e.g. `en_AU.UTF-8`) if you want, but keep `en_US` as default for software compatibility.
-
 ---
 
 # 5.x Localization
 
-- **System language**: Keep `en_US.UTF-8` as default.  
-- **Other languages**: Add more lines to `/etc/locale.gen` if needed.  
-- **Fonts**: If you need Asian scripts, install Google Noto fonts:  
+- Keep `en_US.UTF-8` for system messages.  
+- Add extra locales if needed (`en_AU.UTF-8`, `fr_FR.UTF-8`, etc).  
+- Fonts:  
   ```bash
   emerge media-fonts/noto-cjk
   ```
-- **Input methods**: For multilingual input, install fcitx5:  
+- Input methods (optional):  
   ```bash
   emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
   ```
@@ -275,11 +290,11 @@ Edit `/etc/fstab`:
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
 UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
-UUID=<UUID-ROOT> /      btrfs noatime,compress=zstd,subvol=@      0 0
-UUID=<UUID-ROOT> /home  btrfs noatime,subvol=@home                0 0
-UUID=<UUID-ROOT> /var/log btrfs noatime,subvol=@log               0 0
-UUID=<UUID-ROOT> /var/tmp btrfs noatime,subvol=@tmp               0 0
+UUID=<UUID-ROOT> /      ext4  noatime            0 1
+UUID=<UUID-HOME> /home  ext4  noatime            0 2
 ```
+
+💡 Tip: Replace with xfs/btrfs options if you use them. For Btrfs, add compression and subvolumes.
 
 ---
 
@@ -295,6 +310,11 @@ Enable os-prober:
 emerge --ask sys-boot/os-prober
 echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+💡 Tip: If you use Btrfs, install tools here too:
+```bash
+emerge --ask sys-fs/btrfs-progs
 ```
 
 ---
@@ -315,10 +335,10 @@ rc-update add dhcpcd default
 
 # 10. Display Server Choice (Wayland / X11)
 
-- **Wayland**: Modern, good for KDE Plasma and GNOME on AMD/Intel GPUs.  
-- **X11**: Better compatibility for older software, games, or remote desktop.  
+- **Wayland**: Modern, recommended for KDE/ GNOME on AMD/Intel GPUs.  
+- **X11**: Better compatibility for older software and some games.  
 
-Edit `/etc/portage/make.conf`:
+Set in `/etc/portage/make.conf`:
 ```conf
 # Wayland
 USE="wayland egl pipewire vulkan"
@@ -381,7 +401,7 @@ emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
 ```
 
-💡 Tip: If you only want a server, you can skip this step entirely.
+💡 Tip: Skip this if you only want a server.
 
 ---
 
@@ -416,11 +436,11 @@ reboot
 ---
 
 # 💡 FAQ
-- WPA3 may fail → Use WPA2 for installation  
-- MAKEOPTS must match your CPU cores (e.g. -j32 for 16C/32T)  
-- Btrfs recommended with zstd compression & subvolumes  
-- os-prober is disabled by default, enable manually  
-- Keep `en_US.UTF-8` for system messages, add extra locales as needed  
+- WPA3 may fail → Use WPA2  
+- MAKEOPTS must match CPU threads (e.g. -j32 for 16C/32T)  
+- Filesystem choice: ext4 (safe), XFS (large files), Btrfs (snapshots)  
+- os-prober is disabled by default, enable if dual-booting  
+- Install btrfs-progs only if using Btrfs
 
 ---
 
