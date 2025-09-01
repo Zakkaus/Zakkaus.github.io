@@ -1,5 +1,5 @@
 ---
-title: "Gentoo 安裝完整筆記（繁體中文，新手友善）— OpenRC / systemd、KDE / GNOME、SSH、Btrfs 子卷、os-prober"
+title: "Gentoo 安裝筆記"
 date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI"]
 categories: ["Linux筆記"]
@@ -7,8 +7,23 @@ draft: false
 toc: true
 ---
 
-> Powered by Hugo & PaperMod  
-> 本文一步步帶你從 LiveCD 到桌面，所有指令可直接複製使用。每節末尾附 **💡 對於**（常見問題 / 提示）。
+# 📑 目錄
+- [💻 我的電腦配置](#-我的電腦配置)
+- [0. 開機與網路](#0-開機與網路)
+- [1. 磁碟分割](#1-磁碟分割)
+- [2. 檔案系統與子卷](#2-檔案系統與子卷)
+- [3. Stage3 與 chroot](#3-stage3-與-chroot)
+- [4. Portage 與 make.conf](#4-portage-與-makeconf)
+- [5. Profile 與語言](#5-profile-與語言)
+- [6. 內核](#6-內核)
+- [7. fstab 與 UUID](#7-fstab-與-uuid)
+- [8. Bootloader](#8-bootloader)
+- [9. 網路服務](#9-網路服務)
+- [10. 桌面環境](#10-桌面環境)
+- [11. 使用者與 sudo](#11-使用者與-sudo)
+- [12. SSHD（可選）](#12-sshd可選)
+- [13. 重開機](#13-重開機)
+- [💡 常見問題](#-常見問題)
 
 ---
 
@@ -22,6 +37,8 @@ toc: true
 - **網路**：Aussie Broadband 1000/50Mbps，Wi-Fi 7 Router BE9300（家用公網 IP）
 - **雙系統**：Windows 11 ＋ Gentoo
 - **輔助機**：MacBook Air M2（16GB / 512GB）
+
+> ⚠️ **提示**：以下指令中的 `zakk` 是你的使用者名稱，請自行更改成你的名字。
 
 ---
 
@@ -42,16 +59,6 @@ ping -c 3 gentoo.org
 ## 0.3 Wi-Fi
 ```bash
 iw dev
-```
-**iwctl**
-```bash
-iwctl
-station wlp9s0 scan
-station wlp9s0 get-networks
-station wlp9s0 connect "SSID"
-```
-**wpa_supplicant**
-```bash
 wpa_passphrase "SSID" "PASSWORD" > /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 dhcpcd wlp9s0
@@ -60,9 +67,8 @@ dhcpcd wlp9s0
 ## 0.4 LiveCD 開啟 SSH（可選）
 ```bash
 passwd
-nano /etc/ssh/sshd_config
-PermitRootLogin yes
-PasswordAuthentication yes
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 /etc/init.d/sshd start   # OpenRC
 systemctl start sshd     # systemd
 ssh root@<LiveCD IP>
@@ -132,13 +138,7 @@ tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
 ## 3.2 掛載系統目錄
-OpenRC:
-```bash
-mount -t proc /proc /mnt/gentoo/proc
-mount --rbind /sys /mnt/gentoo/sys
-mount --rbind /dev /mnt/gentoo/dev
-```
-systemd:
+systemd 推薦：
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -155,24 +155,35 @@ export PS1="(chroot) $PS1"
 
 ---
 
-# 4. Portage 設定
+# 4. Portage 與 make.conf
+
+同步 Portage：
 ```bash
 emerge-webrsync
 emerge --sync
 ```
 
-`/etc/portage/make.conf` 範例：
+編輯 `/etc/portage/make.conf`：
+```bash
+nano /etc/portage/make.conf
+```
+推薦內容：
 ```conf
+# 編譯選項
 COMMON_FLAGS="-march=native -O2 -pipe"
 MAKEOPTS="-j32"
+
+# Portage 與套件源
 GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
 ACCEPT_LICENSE="*"
+
+# 全域 USE 標誌
+USE="wayland pipewire egl vulkan"
 ```
 
-快速設定：
+快速設定 license：
 ```bash
 echo "*/* @FREE" >> /etc/portage/package.license
-echo 'USE="wayland pipewire egl vulkan"' >> /etc/portage/make.conf
 ```
 
 ---
@@ -184,13 +195,12 @@ eselect profile set <編號>
 emerge -avuDN @world
 ```
 
-時區與語言：
+設定時區與語言：
 ```bash
 echo "Asia/Taipei" > /etc/timezone
 emerge --config sys-libs/timezone-data
-nano /etc/locale.gen
-en_US.UTF-8 UTF-8
-zh_TW.UTF-8 UTF-8
+echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+echo 'zh_TW.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 eselect locale set zh_TW.utf8
 ```
@@ -198,11 +208,11 @@ eselect locale set zh_TW.utf8
 ---
 
 # 6. 內核
-二進制：
+快速：
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
-手動編譯：
+自編譯：
 ```bash
 emerge sys-kernel/gentoo-sources
 cd /usr/src/linux
@@ -220,6 +230,7 @@ make install
 blkid
 lsblk -f
 ```
+
 編輯 `/etc/fstab`：
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
@@ -241,11 +252,10 @@ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## 8.1 啟用 os-prober
+啟用 os-prober：
 ```bash
 emerge --ask sys-boot/os-prober
-nano /etc/default/grub
-GRUB_DISABLE_OS_PROBER=false
+echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
@@ -266,15 +276,22 @@ rc-update add dhcpcd default
 ---
 
 # 10. 桌面環境
-KDE Plasma：
+
+## KDE Plasma
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
-GNOME：
+
+## GNOME
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
+```
+
+## 中文字型
+```bash
+emerge media-fonts/noto-cjk
 ```
 
 ---
@@ -290,7 +307,7 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 ---
 
-# 12. （可選）安裝 SSHD
+# 12. SSHD（可選）
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -308,7 +325,8 @@ reboot
 ---
 
 # 💡 常見問題
-- WPA3 無法連線 → 改為 WPA2-only  
-- MAKEOPTS 請用數字，例如 `-j32`  
-- Btrfs 建議壓縮 zstd、子卷拆分  
-- os-prober 預設關閉需手動啟用
+- WPA3 無法 → 請改 WPA2  
+- MAKEOPTS 請用數字，例如 -j32  
+- 建議 Btrfs 壓縮 zstd、子卷拆分  
+- os-prober 預設關閉需手動啟用  
+- 中文桌面請安裝 noto-cjk 字型

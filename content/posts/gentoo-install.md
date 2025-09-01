@@ -1,5 +1,5 @@
 ---
-title: "Gentoo Installation Notes (English, Beginner-Friendly) — OpenRC / systemd, KDE / GNOME, SSH, Btrfs Subvolumes, os-prober"
+title: "Gentoo Installation Notes"
 date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI"]
 categories: ["Linux Notes"]
@@ -7,8 +7,23 @@ draft: false
 toc: true
 ---
 
-> Powered by Hugo & PaperMod  
-> Step-by-step guide from LiveCD to desktop. All commands are copy-paste ready. Each section ends with **💡 Notes**.
+# 📑 Table of Contents
+- [💻 My Hardware](#-my-hardware)
+- [0. Boot & Network](#0-boot--network)
+- [1. Partitioning](#1-partitioning)
+- [2. Filesystems & Subvolumes](#2-filesystems--subvolumes)
+- [3. Stage3 & chroot](#3-stage3--chroot)
+- [4. Portage & make.conf](#4-portage--makeconf)
+- [5. Profile & Locale](#5-profile--locale)
+- [6. Kernel](#6-kernel)
+- [7. fstab & UUID](#7-fstab--uuid)
+- [8. Bootloader](#8-bootloader)
+- [9. Networking Services](#9-networking-services)
+- [10. Desktop Environments](#10-desktop-environments)
+- [11. User & sudo](#11-user--sudo)
+- [12. SSHD (optional)](#12-sshd-optional)
+- [13. Reboot](#13-reboot)
+- [💡 FAQ](#-faq)
 
 ---
 
@@ -21,11 +36,12 @@ toc: true
 - **Monitor**: Samsung Odyssey G9 49" 5120×1440
 - **Network**: Aussie Broadband 1000/50Mbps, Wi-Fi 7 Router BE9300, static public IP
 - **Dual boot**: Windows 11 + Gentoo
-- **Helper**: MacBook Air M2 (16GB / 512GB)
+
+> ⚠️ **Note**: Replace `zakk` in commands with your own username.
 
 ---
 
-# 0. Boot & Networking
+# 0. Boot & Network
 
 ## 0.1 Check UEFI
 ```bash
@@ -42,16 +58,6 @@ ping -c 3 gentoo.org
 ## 0.3 Wi-Fi
 ```bash
 iw dev
-```
-**iwctl**
-```bash
-iwctl
-station wlp9s0 scan
-station wlp9s0 get-networks
-station wlp9s0 connect "SSID"
-```
-**wpa_supplicant**
-```bash
 wpa_passphrase "SSID" "PASSWORD" > /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 dhcpcd wlp9s0
@@ -60,9 +66,8 @@ dhcpcd wlp9s0
 ## 0.4 Enable SSH on LiveCD (optional)
 ```bash
 passwd
-nano /etc/ssh/sshd_config
-PermitRootLogin yes
-PasswordAuthentication yes
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 /etc/init.d/sshd start   # OpenRC
 systemctl start sshd     # systemd
 ssh root@<LiveCD IP>
@@ -76,10 +81,10 @@ lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 cfdisk /dev/nvme0n1
 ```
 
-Suggested:
-- 512M /efi (FAT32)
-- 1G /boot (ext4)
-- 100G / (Btrfs)
+Suggested:  
+- 512M /efi (FAT32)  
+- 1G /boot (ext4)  
+- 100G / (Btrfs)  
 - Rest /home (Btrfs)
 
 ---
@@ -131,14 +136,7 @@ links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-## 3.2 Mount system dirs
-OpenRC:
-```bash
-mount -t proc /proc /mnt/gentoo/proc
-mount --rbind /sys /mnt/gentoo/sys
-mount --rbind /dev /mnt/gentoo/dev
-```
-systemd:
+## 3.2 Mount system dirs (systemd recommended)
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -155,24 +153,35 @@ export PS1="(chroot) $PS1"
 
 ---
 
-# 4. Portage Setup
+# 4. Portage & make.conf
+
+Sync Portage:
 ```bash
 emerge-webrsync
 emerge --sync
 ```
 
-`/etc/portage/make.conf` example:
+Edit `/etc/portage/make.conf`:
+```bash
+nano /etc/portage/make.conf
+```
+Recommended content:
 ```conf
+# Compiler options
 COMMON_FLAGS="-march=native -O2 -pipe"
 MAKEOPTS="-j32"
+
+# Mirrors & licenses
 GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
 ACCEPT_LICENSE="*"
+
+# Global USE flags
+USE="wayland pipewire egl vulkan"
 ```
 
-Quick config:
+License quick setup:
 ```bash
 echo "*/* @FREE" >> /etc/portage/package.license
-echo 'USE="wayland pipewire egl vulkan"' >> /etc/portage/make.conf
 ```
 
 ---
@@ -188,8 +197,7 @@ Timezone & locales:
 ```bash
 echo "Australia/Melbourne" > /etc/timezone
 emerge --config sys-libs/timezone-data
-nano /etc/locale.gen
-en_US.UTF-8 UTF-8
+echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
 locale-gen
 eselect locale set en_US.utf8
 ```
@@ -214,13 +222,13 @@ make install
 ---
 
 # 7. fstab & UUID
-Check UUIDs:
+Get UUIDs:
 ```bash
 blkid
 lsblk -f
 ```
 
-Example `/etc/fstab`:
+Edit `/etc/fstab`:
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
 UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
@@ -239,17 +247,16 @@ grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## 8.1 Enable os-prober
+Enable os-prober:
 ```bash
 emerge --ask sys-boot/os-prober
-nano /etc/default/grub
-GRUB_DISABLE_OS_PROBER=false
+echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ---
 
-# 9. Networking
+# 9. Networking Services
 systemd:
 ```bash
 emerge net-misc/networkmanager
@@ -263,13 +270,15 @@ rc-update add dhcpcd default
 
 ---
 
-# 10. Desktop
-KDE Plasma:
+# 10. Desktop Environments
+
+## KDE Plasma
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
-GNOME:
+
+## GNOME
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
@@ -288,7 +297,7 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 ---
 
-# 12. (Optional) SSHD
+# 12. SSHD (optional)
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -306,7 +315,7 @@ reboot
 ---
 
 # 💡 FAQ
-- WPA3 may fail → use WPA2-only during install  
-- MAKEOPTS must be a number (e.g. -j32)  
-- Btrfs: enable zstd compression, split subvolumes  
-- os-prober is disabled by default, must be enabled
+- WPA3 may fail → use WPA2-only  
+- MAKEOPTS should be numeric, e.g. -j32  
+- Recommended: Btrfs with zstd compression, subvolume separation  
+- os-prober is disabled by default, must be enabled manually  
