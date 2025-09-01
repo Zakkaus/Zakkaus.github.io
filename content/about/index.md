@@ -25,11 +25,14 @@ body.dark .about-page h3{border-bottom:1px solid #3a3d42;}
 body.dark .about-page h3+ul li:before{opacity:.75;}
 .about-page a[href^="http"],.about-page a[href^="mailto:"]{color:var(--about-accent);font-weight:600;text-decoration:none;transition:color .18s;}
 .about-page a:hover{text-decoration:underline;}
-.about-page .about-contacts{list-style:none;margin:.55rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.55rem .65rem;}
-.about-page .about-contacts li{margin:0;padding:0;}
-.about-page .about-contacts a{background:rgba(225,48,108,.12);padding:.48rem .85rem .5rem;font-size:.7rem;letter-spacing:.45px;line-height:1;border-radius:9px;font-weight:600;text-decoration:none;color:var(--about-accent);transition:background .22s,color .22s;}
-body.dark .about-page .about-contacts a{background:rgba(225,48,108,.30);color:#ff8fb7;}
-.about-page .about-contacts a:hover{background:var(--about-accent);color:#fff;}
+.about-page .about-contacts{display:block!important;flex-wrap:nowrap!important;gap:0!important;margin:.25rem 0 0!important;padding:0!important;list-style:none;}
+.about-page .about-contacts li{display:block!important;position:relative;margin:0 0 .45rem!important;padding:.42rem 0 .42rem 1.15rem!important;background:transparent!important;}
+.about-page .about-contacts li:last-child{margin-bottom:0!important;}
+.about-page .about-contacts li::before{content:"";position:absolute;left:0;top:.95rem;width:6px;height:6px;background:var(--about-accent);border-radius:50%;opacity:.55;}
+body.dark .about-page .about-contacts li::before{opacity:.75;}
+.about-page .about-contacts a{background:rgba(225,48,108,.14)!important;padding:.28rem .55rem .32rem!important;border-radius:6px!important;font-size:.72rem!important;letter-spacing:.3px;display:inline-block;text-decoration:none;color:var(--about-accent);transition:background .2s,color .2s;}
+body.dark .about-page .about-contacts a{background:rgba(225,48,108,.30)!important;color:#ff8fb7!important;}
+.about-page .about-contacts a:hover{background:var(--about-accent)!important;color:#fff!important;}
 @media (max-width:640px){
   .about-page{font-size:.97rem;}
   .about-page .about-hero{font-size:1.05rem;padding:.85rem 1rem .95rem;}
