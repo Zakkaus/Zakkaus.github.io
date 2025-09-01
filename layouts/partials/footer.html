@@ -1,52 +1,52 @@
 <footer class="site-footer" role="contentinfo">
   <div class="site-footer-inner">
     <p class="site-foot-text">
-      © {{ now.Format "2006" }} <a class="sf-link" href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/{{ else }}/{{ end }}">{{ .Site.Title }}</a>
-      · Powered by <a class="sf-link" href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> &amp;
-      <a class="sf-link" href="https://github.com/adityatelange/hugo-PaperMod" target="_blank" rel="noopener">PaperMod</a>
+      © {{ now.Format "2006" }} {{ .Site.Title }} · Powered by <a href="https://gohugo.io" class="sf-link" target="_blank" rel="noopener">Hugo</a> &amp;
+      <a href="https://github.com/adityatelange/hugo-PaperMod" class="sf-link" target="_blank" rel="noopener">PaperMod</a>
     </p>
   </div>
 </footer>
 <script>
 (function(){
-  // 去重：若主題仍輸出另一個 footer，移除後面重複文本
-  const txts=[...document.querySelectorAll('.site-foot-text')];
+  // 去重（若主題本身產生第二個 footer）
+  const texts=[...document.querySelectorAll('.site-foot-text')];
   const seen=new Set();
-  txts.forEach(p=>{
+  texts.forEach(p=>{
     const t=p.textContent.replace(/\s+/g,' ').trim();
     if(seen.has(t)) p.closest('footer')?.remove(); else seen.add(t);
   });
+
+  // 清理尾端外露殘碼（被截斷的舊 script 內容）
+  const PATTERNS=[
+    /custom-topbuttons-css/,
+    /搜尋/,
+    /document\.createElement\('link'\)/,
+    /var\s+container\s*=\s*document\.createElement/,
+    /nowDark\s*\?\s*'light':'dark'/,
+    /m\.classList\.remove\('open'\)/,
+    /const\s+target\s*=\s*nowDark/
+  ];
+  function sweepFooter(){
+    let removed=0;
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+    const trash=[];
+    while(walker.nextNode()){
+      const n=walker.currentNode;
+      const txt=n.textContent;
+      if(!txt) continue;
+      const s=txt.trim();
+      if(!s) continue;
+      if(s.length<800 && PATTERNS.some(p=>p.test(s))){
+        trash.push(n);
+      }
+    }
+    trash.forEach(n=>{ n.parentNode && n.parentNode.removeChild(n); removed++; });
+    if(removed) console.warn('[footer-clean] removed stray tail fragments:', removed);
+  }
+  // 多輪（處理延後注入）
+  [0,150,400,1000].forEach(t=>setTimeout(sweepFooter,t));
 })();
 </script>
-  // 載入 CSS（來自 /static/css/header-buttons.css）
-  if(!document.getElementById('custom-topbuttons-css')){
-    var l = document.createElement('link');
-    l.id = 'custom-topbuttons-css';
-    l.rel = 'stylesheet';
-    l.href = '{{ "css/header-buttons.css" | relURL }}';
-    document.head.appendChild(l);
-  }
-
-  // 建立按鈕容器
-  if(!document.querySelector('.custom-topbuttons')){
-    var container = document.createElement('div');
-    container.className = 'custom-topbuttons';
-    container.innerHTML = ''
-      + '<a href="{{ "/" | relURL }}" class="cb-btn" data-name="home">首頁</a>'
-      + '<a href="{{ "/posts/" | relURL }}" class="cb-btn" data-name="posts">文章</a>'
-      + '<a href="{{ "/about/" | relURL }}" class="cb-btn" data-name="about">關於我</a>'
-      + '<a href="{{ "/search/" | relURL }}" class="cb-btn" data-name="search">🔍 搜尋</a>';
-    document.body.appendChild(container);
-
-    // 標示當前頁面
-    var path = location.pathname;
-    if(!path.endsWith('/')) path += '/';
-    var els = container.querySelectorAll('a.cb-btn');
-    els.forEach(function(a){
-      if(a.getAttribute('href') === path) a.classList.add('active');
-      a.addEventListener('click', function(){
-        els.forEach(function(x){ x.classList.remove('active'); });
-        a.classList.add('active');
       });
     });
   }

@@ -33,3 +33,9 @@
 前端已加：
 - header 內多輪 sweep + MutationObserver 清理
 - footer 去重
+
+新增關鍵字排查：
+grep -R "custom-topbuttons-css" ./layouts ./themes
+grep -R "document.createElement('link')" ./layouts ./themes
+grep -R "搜尋" ./layouts ./themes
+若仍出現，表示仍有舊 partial 或已編譯的 theme 版本殘留截斷 script。
