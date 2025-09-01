@@ -161,7 +161,7 @@ body.dark .gentoo-article pre::-webkit-scrollbar-thumb{
 
 <div class="gentoo-article">
 
-# 💻 My Hardware (Example)
+# 💻 My Hardware (Example) {#my-hardware-example}
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
 - **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI  
 - **RAM**: 64GB DDR5  
@@ -173,7 +173,7 @@ body.dark .gentoo-article pre::-webkit-scrollbar-thumb{
 
 ---
 
-## 0. Download & Create Installation Media
+## 0. Download & Create Installation Media {#0-download-create-installation-media}
 
 **Official mirror list**: <https://www.gentoo.org/downloads/mirrors/>
 
@@ -199,7 +199,7 @@ Replace `sdX` with your USB device.
 
 ---
 
-## 1. Boot & Network
+## 1. Boot & Network {#1-boot-network}
 
 ### 1.1 Check UEFI / BIOS
 ```bash
@@ -237,7 +237,7 @@ iwctl
 [iwd]# station wlp9s0 connect SSID
 ```
 
-### 1.4 (Optional) Temporary SSH (root password login)
+### 1.4 (Optional) Temporary SSH (root password login) {#1-4-temp-ssh}
 Purpose: let you continue installation remotely (copy/paste long commands, keep session stable, work from another machine). This is for the live install environment only; disable later.
 
 1. Set a root password (if not already):
@@ -265,7 +265,7 @@ Security note: After finishing the base install (inside your new Gentoo system),
 
 (Continue below with partitioning.)
 
-## 2. Partitioning (lsblk and cfdisk)
+## 2. Partitioning (lsblk and cfdisk) {#2-partitioning-lsblk-and-cfdisk}
 Check disks:  
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
@@ -295,7 +295,7 @@ cfdisk /dev/nvme0n1
 
 ---
 
-## 3. Filesystem Formatting & Mounting (ext4 / XFS / Btrfs)
+## 3. Filesystem Formatting & Mounting (ext4 / XFS / Btrfs) {#3-filesystem-formatting-mounting-ext4-xfs-btrfs}
 
 ### 3.1 Format
 
@@ -345,7 +345,7 @@ mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
 ---
 
-## 4. Download Stage3, Mount System Directories & chroot
+## 4. Download Stage3, Mount System Directories & chroot {#4-download-stage3-mount-system-directories-chroot}
 
 ### 4.1 Stage3 Choice
 - Use **standard Stage3 (glibc)**, with OpenRC or systemd.  
@@ -384,7 +384,7 @@ export PS1="(chroot) $PS1"
 
 ---
 
-## 5. Portage & Mirrors (with full make.conf example)
+## 5. Portage & Mirrors (with full make.conf example) {#5-portage-mirrors-with-full-makeconf-example}
 
 ### 5.1 Sync Portage
 ```bash
@@ -420,7 +420,7 @@ ACCEPT_LICENSE="*"
 
 ---
 
-## 6. USE flags & Licenses (Beginner Solutions)
+## 6. USE flags & Licenses (Beginner Solutions) {#6-use-flags-licenses-beginner-solutions}
 
 ### 6.1 Check USE
 ```bash
@@ -444,7 +444,7 @@ echo "www-client/google-chrome ~amd64" >> /etc/portage/package.accept_keywords
 
 ---
 
-## 7. Profile Selection (Desktop / Server)
+## 7. Profile Selection (Desktop / Server) {#7-profile-selection-desktop-server}
 ```bash
 eselect profile list
 ```
@@ -463,7 +463,7 @@ emerge -avuDN @world
 
 ---
 
-## 8. Localization (Language & Timezone)
+## 8. Localization (Language & Timezone) {#8-localization-language-timezone}
 
 **Locales**:  
 ```conf
@@ -485,7 +485,7 @@ emerge --config sys-libs/timezone-data
 
 ---
 
-## 9. Kernel Selection & Compilation (Full Commands)
+## 9. Kernel Selection & Compilation (Full Commands) {#9-kernel-selection-compilation-full-commands}
 
 **Prebuilt (recommended)**:  
 ```bash
@@ -532,7 +532,7 @@ genkernel initramfs
 
 ---
 
-## 10. Generate fstab (ext4 / Btrfs examples)
+## 10. Generate fstab (ext4 / Btrfs examples) {#10-generate-fstab-ext4-btrfs-examples}
 
 ```bash
 blkid
@@ -556,7 +556,7 @@ UUID=<UUID-ROOT> /home  btrfs  noatime,compress=zstd,subvol=@home 0 2
 
 ---
 
-## 11. Install Bootloader GRUB (with os-prober)
+## 11. Install Bootloader GRUB (with os-prober) {#11-install-bootloader-grub-with-os-prober}
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
@@ -572,7 +572,7 @@ emerge --ask sys-fs/btrfs-progs
 
 ---
 
-## 12. Enable Networking (OpenRC / systemd)
+## 12. Enable Networking (OpenRC / systemd) {#12-enable-networking-openrc-systemd}
 
 **systemd**:  
 ```bash
@@ -588,7 +588,7 @@ rc-update add dhcpcd default
 
 ---
 
-## 13. Wayland / X11 Choice & USE
+## 13. Wayland / X11 Choice & USE {#13-wayland-x11-choice-use}
 
 Wayland:  
 ```conf
@@ -602,7 +602,7 @@ USE="X xwayland egl pipewire vulkan"
 
 ---
 
-## 14. GPU Drivers & CPU Microcode
+## 14. GPU Drivers & CPU Microcode {#14-gpu-drivers-cpu-microcode}
 
 **NVIDIA Proprietary**:  
 ```conf
@@ -643,7 +643,7 @@ emerge sys-firmware/intel-microcode
 
 ---
 
-## 15. Desktop Environments (Optional)
+## 15. Desktop Environments (Optional) {#15-desktop-environments-optional}
 
 **KDE Plasma**:  
 ```bash
@@ -659,7 +659,7 @@ systemctl enable gdm
 
 ---
 
-## 16. Users & sudo
+## 16. Users & sudo {#16-users-sudo}
 ```bash
 passwd
 useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
@@ -671,7 +671,7 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 ---
 
-## 17. SSH (Optional)
+## 17. SSH (Optional) {#17-ssh-optional}
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -679,7 +679,7 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-## 18. Reboot
+## 18. Reboot {#18-reboot}
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -688,7 +688,7 @@ reboot
 
 ---
 
-# 💡 FAQ
+# 💡 FAQ {#faq}
 - **Slow downloads** → choose nearest mirror.  
 - **Wi‑Fi WPA3 unstable** → try WPA2.  
 - **Wayland vs X11** → AMD/Intel: Wayland; Compatibility: X11.  
@@ -700,57 +700,13 @@ reboot
 
 ---
 
-# 📎 References
+# 📎 References {#references}
 - Gentoo Handbook: <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
 - Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus: <https://rufus.ie/>  
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-
----
-
-## 🔍 Appendix: Site Search Troubleshooting
-If your site search UI shows results (or a panel) but typing / clicking does nothing, check:
-1. Input disabled / overlay blocking  
-   - Open DevTools Elements → confirm the search <input> does NOT have disabled or readonly.  
-   - Ensure no CSS sets pointer-events:none; on its parent (common in fixed headers).  
-2. JavaScript errors  
-   - DevTools Console: any error about lunr / fuse / index.json 404 will break typing.  
-3. Index file reachable  
-   - Visit /index.json (or /search.json) directly — must return JSON not 404/HTML.  
-   - If using Hugo, ensure:  
-     - config.toml has:  
-       ```toml
-       [outputs]
-       home = ["HTML","RSS","JSON"]
-       ```  
-     - And layouts/_default/list.json.json (or theme provided) generates the index.  
-4. Event listener not bound  
-   - Search JS might query an ID different from the actual input ID/class. Match them.  
-5. Theme lazy init timing  
-   - If search JS runs before DOM ready, wrap in:  
-     ```js
-     document.addEventListener('DOMContentLoaded', initSearch)
-     ```  
-6. CSP / blocked script  
-   - Check browser console for CSP violations; allow the script host if blocked.  
-7. Service Worker stale asset  
-   - Hard refresh (Ctrl+F5) or unregister service worker (Application tab) to drop cached broken JS.  
-8. Duplicate IDs  
-   - Only one element should have the search input ID; duplicates prevent correct binding.  
-9. Mobile overlay CSS  
-   - Some themes set pointer-events:none on header containers similar to:  
-     ```css
-     .header-overlay{pointer-events:none;}
-     .header-overlay input{pointer-events:auto;}
-     ```  
-     Ensure the inner input regains pointer-events:auto.
- 
-Minimal diagnostic snippet you can paste in DevTools Console:
-```js
-const inp=document.querySelector('input[type=search], .search input'); 
-console.log('Found input:', !!inp, 'Disabled:', inp?.disabled, 'PE:', getComputedStyle(inp?.parentElement||inp||document.body).pointerEvents); 
-```
-After fixes, no rebuild needed except when adding index output—then re-run your site generator.
-
-(Remove this appendix once search is fixed.)
+</div>
+- Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus: <https://rufus.ie/>  
+- Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 </div>

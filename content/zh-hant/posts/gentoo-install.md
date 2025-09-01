@@ -57,7 +57,8 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 <details open>
   <summary>📚 目錄</summary>
   <ol>
-    <li><a href="#-我的電腦配置示例">💻 我的電腦配置（示例）</a></li>
+-   <li><a href="#-我的電腦配置示例">💻 我的電腦配置（示例）</a></li>
++   <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
     <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
     <li><a href="#2-磁碟分割lsblk-與-cfdisk">2. 磁碟分割（lsblk 與 cfdisk）</a></li>
@@ -77,15 +78,15 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
     <li><a href="#16-使用者與-sudo">16. 使用者與 sudo</a></li>
     <li><a href="#17-ssh可選">17. SSH（可選）</a></li>
     <li><a href="#18-重開機">18. 重開機</a></li>
-    <li><a href="#-常見問題-faq">💡 常見問題 FAQ</a></li>
-    <li><a href="#-參考">📎 參考</a></li>
+    <li><a href="#faq-zh">💡 常見問題 FAQ</a></li>
+    <li><a href="#refs-zh">📎 參考</a></li>
   </ol>
 </details>
 </div>
 
 <div class="gentoo-article">
 
-# 💻 我的電腦配置（示例）
+# 💻 我的電腦配置（示例） {#my-hardware-zh}
 - **CPU**：AMD Ryzen 9 7950X3D（16C/32T）  
 - **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI  
 - **RAM**：64GB DDR5  
@@ -97,7 +98,7 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 
 ---
 
-## 0. 下載與製作安裝媒體
+## 0. 下載與製作安裝媒體 {#0-下載與製作安裝媒體}
 
 **官方鏡像列表**：<https://www.gentoo.org/downloads/mirrors/>
 
@@ -125,7 +126,7 @@ sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=syn
 
 ---
 
-## 1. 開機與網路
+## 1. 開機與網路 {#1-開機與網路}
 
 ### 1.1 確認 UEFI / BIOS
 ```bash
@@ -192,7 +193,7 @@ iwctl
 
 （以下繼續下一章節：磁碟分割）
 
-## 2. 磁碟分割（lsblk 與 cfdisk）
+## 2. 磁碟分割（lsblk 與 cfdisk） {#2-磁碟分割lsblk-與-cfdisk}
 檢視磁碟：
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
@@ -223,7 +224,7 @@ cfdisk /dev/nvme0n1
 
 ---
 
-## 3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）
+## 3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs） {#3-檔案系統格式化與掛載ext4--xfs--btrfs}
 
 ### 3.1 格式化
 **ext4**：
@@ -272,7 +273,7 @@ mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
 ---
 
-## 4. 下載 Stage3、掛載系統目錄與 chroot
+## 4. 下載 Stage3、掛載系統目錄與 chroot {#4-下載-stage3掛載系統目錄與-chroot}
 
 ### 4.1 選擇 Stage3
 - 建議下載 **標準 Stage3（glibc）**，依需求選 **OpenRC** 或 **systemd**。  
@@ -312,7 +313,7 @@ export PS1="(chroot) $PS1"
 
 ---
 
-## 5. Portage 與鏡像源（含 makeconf 完整示例）
+## 5. Portage 與鏡像源（含 makeconf 完整示例） {#5-portage-與鏡像源含-makeconf-完整示例}
 
 ### 5.1 同步 Portage 樹
 ```bash
@@ -367,7 +368,7 @@ ACCEPT_LICENSE="*"
 
 ---
 
-## 6. USE flags 與 License（新手解法）
+## 6. USE flags 與 License（新手解法） {#6-use-flags-與-license新手解法}
 
 ### 6.1 查詢與理解 USE
 ```bash
@@ -392,7 +393,7 @@ echo "www-client/google-chrome ~amd64" >> /etc/portage/package.accept_keywords
 
 ---
 
-## 7. 選擇 Profile（桌面／伺服器）
+## 7. 選擇 Profile（桌面／伺服器） {#7-選擇-profile桌面伺服器}
 
 列出可用 Profile：
 ```bash
@@ -415,7 +416,7 @@ emerge -avuDN @world
 
 ---
 
-## 8. 本地化 Localization（語言與時區）
+## 8. 本地化 Localization（語言與時區） {#8-本地化-localization語言與時區}
 
 **語言（/etc/locale.gen）**：
 ```conf
@@ -444,7 +445,7 @@ emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
 
 ---
 
-## 9. 內核選擇與編譯（完整指令）
+## 9. 內核選擇與編譯（完整指令） {#9-內核選擇與編譯完整指令}
 ### 9.1 最簡方案：預編譯內核
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
@@ -490,7 +491,7 @@ genkernel initramfs
 
 ---
 
-## 10. 產生 fstab（含 Btrfs / ext4 範例）
+## 10. 產生 fstab（含 Btrfs / ext4 範例） {#10-產生-fstab含-btrfs--ext4-範例}
 
 查詢 UUID：
 ```bash
@@ -515,7 +516,7 @@ UUID=<UUID-ROOT> /home  btrfs  noatime,compress=zstd,subvol=@home 0 2
 
 ---
 
-## 11. 安裝開機器 GRUB（含 os-prober）
+## 11. 安裝開機器 GRUB（含 os-prober） {#11-安裝開機器-grub含-os-prober}
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
@@ -531,7 +532,7 @@ emerge --ask sys-fs/btrfs-progs
 
 ---
 
-## 12. 啟用網路服務（OpenRC / systemd）
+## 12. 啟用網路服務（OpenRC / systemd） {#12-啟用網路服務openrc--systemd}
 
 **systemd**：
 ```bash
@@ -547,7 +548,7 @@ rc-update add dhcpcd default
 
 ---
 
-## 13. Wayland / X11 選擇與 USE
+## 13. Wayland / X11 選擇與 USE {#13-wayland--x11-選擇與-use}
 
 **Wayland**：
 ```conf
@@ -563,7 +564,7 @@ USE="X xwayland egl pipewire vulkan"
 
 ---
 
-## 14. 顯示卡與 CPU 微碼
+## 14. 顯示卡與 CPU 微碼 {#14-顯示卡與-cpu-微碼}
 
 **NVIDIA 專有**：
 ```conf
@@ -604,7 +605,7 @@ emerge sys-firmware/intel-microcode
 
 ---
 
-## 15. 桌面環境（可選）
+## 15. 桌面環境（可選） {#15-桌面環境可選}
 
 **KDE Plasma**：
 ```bash
@@ -620,7 +621,7 @@ systemctl enable gdm
 
 ---
 
-## 16. 使用者與 sudo
+## 16. 使用者與 sudo {#16-使用者與-sudo}
 ```bash
 passwd
 useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
@@ -632,7 +633,7 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 ---
 
-## 17. SSH（可選）
+## 17. SSH（可選） {#17-ssh可選}
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -640,7 +641,7 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-## 18. 重開機
+## 18. 重開機 {#18-重開機}
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -649,7 +650,7 @@ reboot
 
 ---
 
-# 💡 常見問題 FAQ
+# 💡 常見問題 FAQ {#faq-zh}
 - **下載慢／超時**：中國大陸請用境內鏡像；其他地區選最近鏡像。  
 - **Wi‑Fi 連不上**：檢查驅動與介面名稱；WPA3 不穩改 WPA2。  
 - **Wayland / X11**：AMD/Intel 新平台優先 Wayland；相容性需求選 X11 + xwayland。  
@@ -661,13 +662,12 @@ reboot
 
 ---
 
-# 📎 參考
+# 📎 參考 {#refs-zh}
 - Gentoo Handbook：<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-</div>
-
+</div> <!-- 單一結束標記，移除多餘重複 -->
 <!-- 檔尾清理：移除重複殘留行 -->
 </div>
 </div>

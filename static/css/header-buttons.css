@@ -122,3 +122,14 @@ body.dark{
 }
 
 /* 多語頂部按鈕樣式已載入（JS 會根據 lang 動態插入）。 */
+
+/* 停用搜尋：強制隱藏（若 header 仍插入節點也不顯示） */
+.cb-searchwrap,
+.cb-search-results{
+  display:none !important;
+  pointer-events:none !important;
+  visibility:hidden !important;
+}
+
+/* 若之前有附加搜尋結果高亮/面板樣式，可刪或保留不影響；這裡統一停用 */
+.cb-search-results mark{ /* 保留或刪除皆可 */ }
