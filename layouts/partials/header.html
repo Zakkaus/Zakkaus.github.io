@@ -1,8 +1,81 @@
-<div class="custom-topbuttons">
-  <button class="cb-toggle" aria-label="Menu" onclick="document.querySelector('.custom-topbuttons .cb-menu').classList.toggle('open')">☰</button>
-  <div class="cb-menu">
-    <a class="cb-btn" href="/">Home</a>
-    <a class="cb-btn" href="/zh-hant/">中文</a>
-    <button class="cb-btn" type="button" onclick="document.documentElement.classList.toggle('dark')">Theme</button>
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-brand">
+      <a href="{{ .Site.Home.RelPermalink }}">{{ .Site.Title }}</a>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}"
+             class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">
+            {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
+          </a>
+        </li>
+        <li>
+          <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}"
+             class="{{ if in .RelPermalink "/about/" }}active{{ end }}">
+            {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="top-action-group">
+      <div class="custom-topbuttons desktop-only">
+        <div class="cb-menu">
+          <a class="cb-btn lang-switch"
+             href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
+            {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}中文{{ end }}
+          </a>
+          <button class="cb-btn" id="themeToggle" type="button">
+            {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
+          </button>
+        </div>
+      </div>
+
+      <button class="cb-toggle mobile-only"
+              aria-label="Menu"
+              onclick="document.getElementById('mobileMenu').classList.toggle('open')">☰</button>
+      <div id="mobileMenu" class="cb-menu mobile-only">
+        <a class="cb-btn"
+           href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}">
+          {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
+        </a>
+        <a class="cb-btn"
+           href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}">
+          {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
+        </a>
+        <a class="cb-btn lang-switch"
+           href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
+          {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}中文{{ end }}
+        </a>
+        <button class="cb-btn" type="button" onclick="document.getElementById('themeToggle').click()">
+          {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
+        </button>
+      </div>
+    </div>
   </div>
-</div>
+</header>
+
+<script>
+(function(){
+  const btn = document.getElementById('themeToggle');
+  if(!btn) return;
+  const root = document.documentElement;
+  const KEY = 'site-theme';
+  function apply(mode){
+    if(mode==='dark') root.classList.add('dark'); else root.classList.remove('dark');
+  }
+  apply(localStorage.getItem(KEY));
+  btn.addEventListener('click', ()=>{
+    const dark = root.classList.toggle('dark');
+    localStorage.setItem(KEY, dark ? 'dark' : 'light');
+  });
+  window.addEventListener('resize', ()=> {
+    if(window.innerWidth > 900){
+      const m = document.getElementById('mobileMenu');
+      if(m) m.classList.remove('open');
+    }
+  });
+})();
+</script>

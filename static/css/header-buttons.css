@@ -1,141 +1,185 @@
-/* Container base (positioning is set by JS) */
+/* Header 基本框架 */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.85);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+body.dark .site-header{
+  background:rgba(30,30,30,0.82);
+  border-color:rgba(255,255,255,.12);
+}
+
+.site-header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  padding:.6rem 1.1rem;
+}
+
+.site-brand a{
+  font-weight:700;
+  font-size:1.05rem;
+  text-decoration:none;
+  color:var(--hb-text,#222);
+  letter-spacing:.5px;
+}
+body.dark .site-brand a{color:var(--hb-text,#eee);}
+
+.main-nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:.9rem;
+  align-items:center;
+}
+.main-nav a{
+  text-decoration:none;
+  padding:.4rem .7rem;
+  border-radius:6px;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--hb-text,#222);
+  position:relative;
+  border:1px solid transparent;
+  transition:background .25s,border-color .25s,color .25s;
+}
+.main-nav a:hover{
+  background:rgba(225,48,108,.09);
+  border-color:rgba(225,48,108,.4);
+}
+.main-nav a.active{
+  background:var(--hb-active,#e1306c);
+  color:#fff;
+  border-color:var(--hb-active,#e1306c);
+  box-shadow:0 2px 5px -2px rgba(225,48,108,.55);
+}
+
+body.dark .main-nav a:hover{
+  background:rgba(225,48,108,.22);
+}
+body.dark .main-nav a.active{
+  color:#fff;
+}
+
+/* 動作按鈕群組 */
+.top-action-group{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+}
+
+/* 右側自訂三鍵（桌面） */
 .custom-topbuttons{
   display:flex;
   align-items:center;
-  gap:8px;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  gap:.55rem;
   pointer-events:auto;
-  z-index:9999;
 }
-
-/* toggle (hamburger) hidden on desktop */
-.custom-topbuttons .cb-toggle{
-  display:none;
-  background: var(--hb-bg);
-  color: var(--hb-text);
-  border:1px solid var(--hb-border);
-  padding:6px 8px;
-  border-radius:6px;
-  font-size:16px;
-  box-shadow: var(--hb-shadow);
-  transition: background .25s, color .25s, transform .2s;
-  font-weight:600;
-  cursor:pointer;
-}
-
-/* menu style (desktop inline) */
 .custom-topbuttons .cb-menu{
   display:flex;
-  gap:8px;
+  gap:.55rem;
   align-items:center;
 }
-.custom-topbuttons .cb-menu .cb-btn{
-  display:inline-block;
-  padding:6px 10px;
-  background: var(--hb-bg);
-  color: var(--hb-text);
-  text-decoration:none;
+.custom-topbuttons .cb-btn,
+.cb-toggle{
+  background:var(--hb-bg,#fff);
+  color:var(--hb-text,#222);
+  border:1px solid var(--hb-border,rgba(0,0,0,.1));
+  padding:.5rem .75rem;
   border-radius:6px;
-  box-shadow: var(--hb-shadow);
-  border:1px solid var(--hb-border);
-  transition: background .25s, color .25s, transform .2s;
   font-weight:600;
-  font-size:14px;
+  font-size:.8rem;
   line-height:1.1;
   cursor:pointer;
+  text-decoration:none;
+  box-shadow:var(--hb-shadow,0 1px 2px rgba(0,0,0,.08));
+  transition:background .25s,transform .18s,border-color .25s,color .25s;
 }
-.custom-topbuttons .cb-menu .cb-btn.active{
-  background: var(--hb-active);
-  color:#fff;
-  border-color: var(--hb-active);
-}
-.custom-topbuttons .cb-menu .cb-btn:hover,
-.custom-topbuttons .cb-toggle:hover{
+.custom-topbuttons .cb-btn:hover,
+.cb-toggle:hover{
   transform:translateY(-1px);
-  filter:brightness(1.05);
+  background:rgba(225,48,108,.1);
+  border-color:var(--hb-active,#e1306c);
+}
+body.dark .custom-topbuttons .cb-btn,
+body.dark .cb-toggle{
+  background:var(--hb-bg,#2d2d2d);
+  color:var(--hb-text,#eee);
 }
 
-/* mobile: show toggle, collapse menu */
+/* 漢堡（手機顯示） */
+.cb-toggle{
+  display:none;
+}
+
+/* 手機版排版 */
 @media (max-width:900px){
-  .custom-topbuttons .cb-toggle{display:inline-block;}
-  .custom-topbuttons .cb-menu{
-    display:none;
-    position:absolute;
-    top:44px;
-    right:0;
-    flex-direction:column;
-    background: var(--hb-bg);
-    padding:10px 10px 12px;
-    border-radius:10px;
-    box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    border:1px solid var(--hb-border);
-    min-width:160px;
-    gap:4px;
+  .main-nav{display:none;}
+  .desktop-only{display:none!important;}
+  .mobile-only{display:block;}
+  .cb-toggle{
+    display:inline-block;
+    font-size:1.05rem;
   }
-  .custom-topbuttons .cb-menu.open{display:flex;}
-  .custom-topbuttons .cb-menu .cb-btn{
-    display:block;
-    padding:10px 12px;
+  #mobileMenu.cb-menu{
+    position:absolute;
+    top:100%;
+    right:1rem;
+    display:none;
+    flex-direction:column;
+    background:var(--hb-bg,#fff);
+    padding:.8rem .85rem .9rem;
+    border:1px solid var(--hb-border,rgba(0,0,0,.1));
+    border-radius:10px;
+    box-shadow:0 10px 30px -6px rgba(0,0,0,.35);
+    min-width:165px;
+    gap:.45rem;
+    z-index:1500;
+  }
+  #mobileMenu.cb-menu.open{display:flex;}
+  #mobileMenu .cb-btn{
     width:100%;
     text-align:left;
-    white-space:nowrap;
+    padding:.6rem .75rem;
+    font-size:.82rem;
   }
 }
 
-/* small screens: slightly smaller buttons */
-@media (max-width:420px){
-  .custom-topbuttons .cb-menu .cb-btn{
-    font-size:13px;
-    padding:8px 10px;
-  }
+/* 桌面保留 */
+@media (min-width:901px){
+  .mobile-only{display:none!important;}
 }
 
-/* color variables for light/dark mode */
+/* 變數（若未定義） */
 :root{
-  --hb-bg: rgba(255,255,255,0.96);
-  --hb-text:#111;
+  --hb-bg:rgba(255,255,255,.92);
+  --hb-text:#222;
   --hb-active:#e1306c;
-  --hb-shadow:0 1px 3px rgba(0,0,0,0.08);
-  --hb-hover-shift:-1px;
-  --hb-border:rgba(0,0,0,0.07);
+  --hb-border:rgba(0,0,0,.08);
+  --hb-shadow:0 1px 3px rgba(0,0,0,.08);
 }
 body.dark{
-  --hb-bg: rgba(40,40,40,0.92);
-  --hb-text:#eee;
-  --hb-active:#e1306c;
-  --hb-shadow:0 1px 4px rgba(0,0,0,0.6);
-  --hb-border:rgba(255,255,255,0.12);
+  --hb-bg:rgba(50,50,50,.9);
+  --hb-text:#e6e6e6;
+  --hb-border:rgba(255,255,255,.14);
+  --hb-shadow:0 2px 6px -2px rgba(0,0,0,.6);
 }
 
-/* 可選：focus 可見性（鍵盤導覽） */
+/* Focus */
 .custom-topbuttons .cb-btn:focus-visible,
-.custom-topbuttons .cb-toggle:focus-visible{
+.cb-toggle:focus-visible,
+.main-nav a:focus-visible{
   outline:2px solid var(--hb-active);
   outline-offset:2px;
-  border-color:var(--hb-active);
 }
 
-/* 固定備援 */
-.custom-topbuttons.fallback-fixed{
-  position:fixed;
-  top:12px;
-  right:12px;
-  z-index:9999;
-}
-@media (max-width:900px){
-  .custom-topbuttons.fallback-fixed{top:10px;right:10px;}
-}
-
-/* 移除舊搜尋相關的強制隱藏，避免誤刪整列（若仍存在可安全刪） */
-/*
+/* 移除（之前為刪搜尋設定的殘留） */
 .cb-searchwrap,
-.cb-search-results{display:none!important;}
-*/
-
-/* 保留 footer helper */
-.custom-footer-copyright,
-.custom-footer-powered{
-  pointer-events:none;
-  color:#888;
-  font-size:12px;
-}
+.cb-search-results{display:none !important;}
