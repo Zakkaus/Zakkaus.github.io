@@ -122,29 +122,3 @@ body.dark .about-block h3 + ul li a[href]:hover{background:var(--about-accent,#e
 - Email：[admin@zakk.au](mailto:admin@zakk.au)
 
 </div>
-- iPhone 16 Pro  
-
-### 🔗 聯絡方式
-- Instagram：[@zakk.au](https://www.instagram.com/zakk.au/)  
-- GitHub：[Zakkaus](https://github.com/Zakkaus)  
-- X：[ @zakkauu ](https://x.com/zakkauu)  
-- Email：[admin@zakk.au](mailto:admin@zakk.au)
-
-</div>
-### 💼 筆電
-- Apple MacBook Air M2（16GB / 512GB）  
-- ASUS ROG Zephyrus G16 Air  
-
-### 📱 手機
-- Samsung Galaxy Z Fold 7  
-- Google Pixel 7 Pro  
-- iPhone 14  
-- iPhone 16 Pro  
-
-### 🔗 聯絡方式
-- Instagram：[@zakk.au](https://www.instagram.com/zakk.au/)  
-- GitHub：[Zakkaus](https://github.com/Zakkaus)  
-- X：[ @zakkauu ](https://x.com/zakkauu)  
-- Email：[admin@zakk.au](mailto:admin@zakk.au)
-
-</div>
