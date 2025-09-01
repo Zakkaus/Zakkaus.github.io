@@ -1,55 +1,60 @@
 ---
-title: "Gentoo 安裝筆記"
+title: "Gentoo Installation Guide (Beginner-Friendly v4, Melbourne Edition)"
 date: 2025-09-01
-tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI"]
-categories: ["Linux筆記"]
+tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel"]
+categories: ["Linux Notes"]
 draft: false
 toc: true
 ---
 
-# 📑 目錄
-- [💻 我的電腦配置](#-我的電腦配置)
-- [0. 開機與網路](#0-開機與網路)
-- [1. 磁碟分割](#1-磁碟分割)
-- [2. 檔案系統與子卷](#2-檔案系統與子卷)
-- [3. Stage3 與 chroot](#3-stage3-與-chroot)
-- [4. Portage 與 make.conf](#4-portage-與-makeconf)
-- [5. Profile 與語言](#5-profile-與語言)
-- [6. 內核](#6-內核)
-- [7. fstab 與 UUID](#7-fstab-與-uuid)
+# 📑 Table of Contents
+- [💻 My Hardware](#-my-hardware)
+- [0. Boot & Network](#0-boot--network)
+- [1. Partitioning](#1-partitioning)
+- [2. Filesystems & Subvolumes](#2-filesystems--subvolumes)
+- [3. Stage3 & chroot](#3-stage3--chroot)
+- [4. Portage & Mirrors](#4-portage--mirrors)
+- [5. Profile & Locale](#5-profile--locale)
+- [5.x Localization](#5x-localization)
+- [6. Kernel](#6-kernel)
+- [7. fstab & UUID](#7-fstab--uuid)
 - [8. Bootloader](#8-bootloader)
-- [9. 網路服務](#9-網路服務)
-- [10. 桌面環境](#10-桌面環境)
-- [11. 使用者與 sudo](#11-使用者與-sudo)
-- [12. SSHD（可選）](#12-sshd可選)
-- [13. 重開機](#13-重開機)
-- [💡 常見問題](#-常見問題)
+- [9. Network Services](#9-network-services)
+- [10. Display Server Choice (Wayland / X11)](#10-display-server-choice-wayland--x11)
+- [11. GPU Drivers & Microcode](#11-gpu-drivers--microcode)
+- [12. Desktop Environments (Optional)](#12-desktop-environments-optional)
+- [13. Users & sudo](#13-users--sudo)
+- [14. SSHD (Optional)](#14-sshd-optional)
+- [15. Reboot](#15-reboot)
+- [💡 FAQ](#-faq)
+- [📚 References](#-references)
 
 ---
 
-# 💻 我的電腦配置
-- **CPU**：AMD Ryzen 9 7950X3D（16C/32T）
-- **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI
-- **記憶體**：64GB DDR5 6400MHz
-- **顯示卡**：NVIDIA GeForce RTX 4080 SUPER（主要）＋ AMD Radeon iGPU
-- **儲存**：NVMe SSD
-- **螢幕**：Samsung Odyssey G9 49" 5120×1440
-- **網路**：Aussie Broadband 1000/50Mbps，Wi-Fi 7 Router BE9300（家用公網 IP）
-- **雙系統**：Windows 11 ＋ Gentoo
-- **輔助機**：MacBook Air M2（16GB / 512GB）
-
-> ⚠️ **提示**：以下指令中的 `zakk` 是你的使用者名稱，請自行更改成你的名字。
+# 💻 My Hardware
+- **CPU**: AMD Ryzen 9 7950X3D (16C/32T)
+- **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI
+- **RAM**: 64GB DDR5 6400MHz
+- **GPU**: NVIDIA GeForce RTX 4080 SUPER + AMD Radeon iGPU
+- **Storage**: NVMe SSD
+- **Monitor**: Samsung Odyssey G9 49" 5120×1440
+- **Network**: Aussie Broadband 1000/50Mbps, Wi-Fi 7 Router BE9300 (static public IP)
+- **Dual boot**: Windows 11 + Gentoo
 
 ---
 
-# 0. 開機與網路
+# 0. Boot & Network
 
-## 0.1 確認 UEFI
+## 0.1 Check UEFI
 ```bash
-test -d /sys/firmware/efi && echo "UEFI OK" || echo "Not UEFI"
+ls /sys/firmware/efi
 ```
+- If this directory exists → You are in **UEFI mode**  
+- If not → Legacy BIOS mode
 
-## 0.2 有線網路
+💡 Tip: Use UEFI if possible. It's the standard for modern systems.
+
+## 0.2 Wired
 ```bash
 ip a
 dhcpcd eno1
@@ -62,9 +67,10 @@ iw dev
 wpa_passphrase "SSID" "PASSWORD" > /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 dhcpcd wlp9s0
+ping -c 3 gentoo.org
 ```
 
-## 0.4 LiveCD 開啟 SSH（可選）
+## 0.4 Enable SSH on LiveCD (optional)
 ```bash
 passwd
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -76,23 +82,25 @@ ssh root@<LiveCD IP>
 
 ---
 
-# 1. 磁碟分割
+# 1. Partitioning
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 cfdisk /dev/nvme0n1
 ```
 
-建議分割：  
-- 512M /efi (FAT32)  
-- 1G /boot (ext4)  
-- 100G / (Btrfs)  
-- 剩餘 /home (Btrfs)
+Suggested layout:  
+| Size | Filesystem | Mount |
+|---|---|---|
+| 512M | FAT32 | /efi |
+| 1G   | ext4  | /boot |
+| 100G | Btrfs | / |
+| Rest | Btrfs | /home |
 
 ---
 
-# 2. 檔案系統與子卷
+# 2. Filesystems & Subvolumes
 
-## 2.1 格式化
+## 2.1 Format
 ```bash
 mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.ext4 -L boot /dev/nvme0n1p2
@@ -100,12 +108,12 @@ mkfs.btrfs -L rootfs /dev/nvme0n1p3
 mkfs.btrfs -L home /dev/nvme0n1p4
 ```
 
-## 2.2 安裝工具
+## 2.2 Install tools
 ```bash
 emerge --ask sys-fs/btrfs-progs
 ```
 
-## 2.3 建立子卷
+## 2.3 Create subvolumes
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 btrfs subvolume create /mnt/gentoo/@
@@ -115,7 +123,7 @@ btrfs subvolume create /mnt/gentoo/@tmp
 umount /mnt/gentoo
 ```
 
-## 2.4 掛載
+## 2.4 Mount
 ```bash
 mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
 mkdir -p /mnt/gentoo/{boot,home,var/log,var/tmp,efi}
@@ -128,17 +136,25 @@ mount /dev/nvme0n1p1 /mnt/gentoo/efi
 
 ---
 
-# 3. Stage3 與 chroot
+# 3. Stage3 & chroot
 
-## 3.1 下載 Stage3
+## 3.1 Download Stage3
 ```bash
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-## 3.2 掛載系統目錄
-systemd 推薦：
+## 3.2 Mount system dirs
+
+OpenRC:
+```bash
+mount -t proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+```
+
+systemd:
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -146,7 +162,7 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 mount --rbind /run /mnt/gentoo/run && mount --make-rslave /mnt/gentoo/run
 ```
 
-## 3.3 進入 chroot
+## 3.3 Enter chroot
 ```bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
@@ -155,64 +171,88 @@ export PS1="(chroot) $PS1"
 
 ---
 
-# 4. Portage 與 make.conf
+# 4. Portage & Mirrors
 
-同步 Portage：
+Sync Portage:
 ```bash
 emerge-webrsync
 emerge --sync
 ```
 
-編輯 `/etc/portage/make.conf`：
+## 4.1 Select mirrors (mirrorselect)
+```bash
+emerge --ask app-portage/mirrorselect
+mirrorselect -i -o >> /etc/portage/make.conf
+```
+
+💡 Tip: Choose a mirror close to your location (e.g., Australia → AARNET, Swinburne).
+
+## 4.2 make.conf example
 ```bash
 nano /etc/portage/make.conf
 ```
-推薦內容：
+
+Example content:
 ```conf
-# 編譯選項
 COMMON_FLAGS="-march=native -O2 -pipe"
 MAKEOPTS="-j32"
-
-# Portage 與套件源
 GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
 ACCEPT_LICENSE="*"
-
-# 全域 USE 標誌
-USE="wayland pipewire egl vulkan"
-```
-
-快速設定 license：
-```bash
-echo "*/* @FREE" >> /etc/portage/package.license
 ```
 
 ---
 
-# 5. Profile 與語言
+# 5. Profile & Locale
 ```bash
 eselect profile list
-eselect profile set <編號>
+eselect profile set <id>
 emerge -avuDN @world
 ```
 
-設定時區與語言：
+Set timezone (Australia/Melbourne as example):
 ```bash
-echo "Asia/Taipei" > /etc/timezone
+ls /usr/share/zoneinfo   # explore available zones
+ls /usr/share/zoneinfo/Australia   # list Australian zones
+echo "Australia/Melbourne" > /etc/timezone
 emerge --config sys-libs/timezone-data
-echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
-echo 'zh_TW.UTF-8 UTF-8' >> /etc/locale.gen
-locale-gen
-eselect locale set zh_TW.utf8
 ```
+
+Set locales:
+```conf
+# /etc/locale.gen
+en_US.UTF-8 UTF-8
+```
+Generate and set:
+```bash
+locale-gen
+eselect locale set en_US.utf8
+```
+
+💡 Tip: You can add other locales (e.g. `en_AU.UTF-8`) if you want, but keep `en_US` as default for software compatibility.
 
 ---
 
-# 6. 內核
-快速：
+# 5.x Localization
+
+- **System language**: Keep `en_US.UTF-8` as default.  
+- **Other languages**: Add more lines to `/etc/locale.gen` if needed.  
+- **Fonts**: If you need Asian scripts, install Google Noto fonts:  
+  ```bash
+  emerge media-fonts/noto-cjk
+  ```
+- **Input methods**: For multilingual input, install fcitx5:  
+  ```bash
+  emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
+  ```
+
+---
+
+# 6. Kernel
+Binary:
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
-自編譯：
+Manual:
 ```bash
 emerge sys-kernel/gentoo-sources
 cd /usr/src/linux
@@ -224,14 +264,14 @@ make install
 
 ---
 
-# 7. fstab 與 UUID
-查詢 UUID：
+# 7. fstab & UUID
+Get UUIDs:
 ```bash
 blkid
 lsblk -f
 ```
 
-編輯 `/etc/fstab`：
+Edit `/etc/fstab`:
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
 UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
@@ -244,15 +284,13 @@ UUID=<UUID-ROOT> /var/tmp btrfs noatime,subvol=@tmp               0 0
 ---
 
 # 8. Bootloader
-
-安裝與設定：
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-啟用 os-prober：
+Enable os-prober:
 ```bash
 emerge --ask sys-boot/os-prober
 echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
@@ -261,13 +299,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 ---
 
-# 9. 網路服務
-systemd：
+# 9. Network Services
+systemd:
 ```bash
 emerge net-misc/networkmanager
 systemctl enable NetworkManager
 ```
-OpenRC：
+OpenRC:
 ```bash
 emerge net-misc/dhcpcd
 rc-update add dhcpcd default
@@ -275,7 +313,61 @@ rc-update add dhcpcd default
 
 ---
 
-# 10. 桌面環境
+# 10. Display Server Choice (Wayland / X11)
+
+- **Wayland**: Modern, good for KDE Plasma and GNOME on AMD/Intel GPUs.  
+- **X11**: Better compatibility for older software, games, or remote desktop.  
+
+Edit `/etc/portage/make.conf`:
+```conf
+# Wayland
+USE="wayland egl pipewire vulkan"
+
+# Or X11
+USE="X xwayland egl pipewire vulkan"
+```
+
+---
+
+# 11. GPU Drivers & Microcode
+
+## NVIDIA
+```conf
+VIDEO_CARDS="nvidia"
+```
+```bash
+emerge x11-drivers/nvidia-drivers
+```
+
+## AMD
+```conf
+VIDEO_CARDS="amdgpu radeonsi"
+```
+```bash
+emerge mesa vulkan-loader
+```
+
+## Intel
+```conf
+VIDEO_CARDS="intel i965 iris"
+```
+```bash
+emerge mesa vulkan-loader
+```
+
+## CPU Microcode
+Intel:
+```bash
+emerge sys-firmware/intel-microcode
+```
+AMD:
+```bash
+emerge sys-firmware/amd-ucode
+```
+
+---
+
+# 12. Desktop Environments (Optional)
 
 ## KDE Plasma
 ```bash
@@ -289,14 +381,11 @@ emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
 ```
 
-## 中文字型
-```bash
-emerge media-fonts/noto-cjk
-```
+💡 Tip: If you only want a server, you can skip this step entirely.
 
 ---
 
-# 11. 使用者與 sudo
+# 13. Users & sudo
 ```bash
 passwd
 useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
@@ -305,9 +394,11 @@ emerge app-admin/sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 ```
 
+⚠️ Note: Replace `zakk` with your own username.
+
 ---
 
-# 12. SSHD（可選）
+# 14. SSHD (Optional)
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -315,7 +406,7 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-# 13. 重開機
+# 15. Reboot
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -324,9 +415,15 @@ reboot
 
 ---
 
-# 💡 常見問題
-- WPA3 無法 → 請改 WPA2  
-- MAKEOPTS 請用數字，例如 -j32  
-- 建議 Btrfs 壓縮 zstd、子卷拆分  
-- os-prober 預設關閉需手動啟用  
-- 中文桌面請安裝 noto-cjk 字型
+# 💡 FAQ
+- WPA3 may fail → Use WPA2 for installation  
+- MAKEOPTS must match your CPU cores (e.g. -j32 for 16C/32T)  
+- Btrfs recommended with zstd compression & subvolumes  
+- os-prober is disabled by default, enable manually  
+- Keep `en_US.UTF-8` for system messages, add extra locales as needed  
+
+---
+
+# 📚 References
+- [Gentoo Handbook (Official)](https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation)  
+- [Bitbili Tutorial](https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html)
