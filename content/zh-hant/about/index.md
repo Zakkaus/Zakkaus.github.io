@@ -113,17 +113,95 @@ body.dark .about-block h3 + ul li a[href]{background:rgba(255,255,255,.09);}
   color:#fff!important;
 }
 
+/* === 強化 Intro 視覺高亮（僅作用於開頭簡介） === */
+.about-block .about-intro{
+  border:1px solid rgba(225,48,108,.35);
+  border-left:6px solid var(--about-accent,#e1306c);
+  background:
+    linear-gradient(140deg,rgba(225,48,108,.10),rgba(225,48,108,0) 75%),
+    linear-gradient(0deg,rgba(255,255,255,.55),rgba(255,255,255,.55));
+  position:relative;
+  overflow:hidden;
+}
+body.dark .about-block .about-intro{
+  background:
+    linear-gradient(140deg,rgba(225,48,108,.22),rgba(225,48,108,0) 75%),
+    linear-gradient(0deg,rgba(30,30,30,.75),rgba(30,30,30,.75));
+  border-color:rgba(225,48,108,.55);
+}
+.about-block .about-intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(225,48,108,.18),transparent 60%),
+    radial-gradient(circle at 12% 85%,rgba(225,48,108,.15),transparent 65%);
+  pointer-events:none;
+  mix-blend-mode:overlay;
+  opacity:.9;
+}
+body.dark .about-block .about-intro::after{mix-blend-mode:normal;opacity:.7;}
+
+/* 粗體關鍵詞高亮（僅在 intro 內） */
+.about-block .about-intro strong{
+  position:relative;
+  font-weight:700;
+  color:#c21752;
+  background:linear-gradient(transparent 62%,rgba(225,48,108,.35) 62%);
+  padding:0 .18em .05em;
+  border-radius:4px;
+  transition:background .35s,color .35s;
+}
+body.dark .about-block .about-intro strong{
+  color:#ff86b2;
+  background:linear-gradient(transparent 62%,rgba(225,48,108,.38) 62%);
+}
+.about-block .about-intro strong:hover{
+  background:linear-gradient(transparent 0%,rgba(225,48,108,.55) 0%);
+  color:#fff;
+}
+body.dark .about-block .about-intro strong:hover{
+  background:linear-gradient(transparent 0%,rgba(225,48,108,.65) 0%);
+  color:#fff;
+}
+
+/* 行間距微調：讓多重強調不擁擠 */
+.about-block .about-intro p{margin:.45rem 0;}
+
+/* 行首分隔微裝飾（第二、三行前的細線漸隱） */
+.about-block .about-intro p + p{
+  position:relative;
+  padding-top:.55rem;
+}
+.about-block .about-intro p + p::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.2rem;
+  width:70px;
+  height:2px;
+  background:linear-gradient(90deg,rgba(225,48,108,.55),transparent);
+  border-radius:2px;
+  opacity:.55;
+}
+body.dark .about-block .about-intro p + p::before{
+  opacity:.75;
+}
+
+/* 深色模式補色 */
+body.dark .about-block .about-intro{color:#e7e7e9;}
+/* 動畫偏好：停用過渡 */
+@media (prefers-reduced-motion:reduce){
+  .about-block .about-intro strong,
+  .about-block .about-intro{transition:none;}
+}
+
 /* 響應式 */
 @media(max-width:640px){
   .about-intro{padding:.75rem .85rem .85rem;font-size:.92rem;}
   .about-block h3{font-size:.95rem;margin:2rem 0 .75rem;padding:0 0 .3rem .75rem;}
   .about-block h3 + ul li{font-size:.86rem;padding:.34rem 0 .34rem .9rem;}
   .about-block h3 + ul li::before{top:.85em;}
-}
-
-/* 動畫偏好 */
-@media (prefers-reduced-motion:reduce){
-  .about-block h3 + ul li a[href]{transition:none;}
 }
 </style>
 
