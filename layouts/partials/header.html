@@ -27,7 +27,7 @@
       <div class="custom-topbuttons desktop-only">
         <div class="cb-menu">
           <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
-          <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}深色模式{{ else }}Dark Mode{{ end }}</button>
+          <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}黑暗{{ else }}Dark Mode{{ end }}</button>
         </div>
       </div>
 
@@ -43,8 +43,8 @@
     </div>
   </div>
 </header>
-
-<script>
+<!-- 外部腳本：移除原 inline 與殘留文字 -->
+<script src="/static/js/theme-toggle.js"></script>
 (function(){
   const root = document.documentElement;
   const body = document.body;
