@@ -19,6 +19,9 @@ defaultContentLanguageInSubdir = false
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
   mainSections = ["posts"]
+  # 自訂全站 CSS/JS（用於右上按鈕與搜尋頁）
+  customCSS = ["css/header-buttons.css"]
+  customJS = ["js/header-buttons.js"]
 
   [params.profileMode]
     enabled = true

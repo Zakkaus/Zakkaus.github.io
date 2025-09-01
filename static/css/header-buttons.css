@@ -1,0 +1,44 @@
+.custom-topbuttons{
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.custom-topbuttons .cb-btn{
+  display:inline-block;
+  padding:6px 10px;
+  background: rgba(255,255,255,0.95);
+  color:#111;
+  text-decoration:none;
+  border-radius:6px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.12);
+  font-weight:600;
+  font-size:14px;
+}
+.custom-topbuttons .cb-btn.active{
+  background:#e1306c;
+  color:#fff;
+}
+.custom-topbuttons .cb-btn:hover{
+  transform: translateY(-1px);
+}
+.search-page #site-search{
+  width:100%;
+  max-width:720px;
+  padding:10px 12px;
+  font-size:16px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  margin:16px 0;
+}
+.search-page #search-results .result{ margin:12px 0; padding:8px 0; border-bottom:1px solid #eee;}
+.search-page .result h3{ margin:0 0 6px 0; font-size:18px; }
+.search-page .result p{ margin:0; color:#555; }
+@media (max-width:600px){
+  .custom-topbuttons{ top:8px; right:8px; gap:6px; }
+  .custom-topbuttons .cb-btn{ padding:6px 8px; font-size:13px; }
+}

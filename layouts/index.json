@@ -1,0 +1,15 @@
+{{- /* JSON index for client-side search */ -}}
+[
+{{- $first := true -}}
+{{- range .Site.RegularPages -}}
+  {{- if not $first }},{{ end -}}
+  {{- $first = false -}}
+  {
+    "title": {{ .Title | jsonify }},
+    "url": {{ .RelPermalink | jsonify }},
+    "date": {{ .Date.Format "2006-01-02" | jsonify }},
+    "summary": {{ .Summary | plainify | jsonify }},
+    "content": {{ .Plain | jsonify }}
+  }
+{{- end -}}
+]
