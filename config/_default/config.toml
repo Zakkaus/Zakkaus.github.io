@@ -5,38 +5,110 @@ theme = "PaperMod"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
+enableRobotsTXT = true
 paginate = 10
+
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+home = ["HTML", "RSS", "JSON"]
 
-[markup]
-  [markup.goldmark.renderer]
-    unsafe = true
+[markup.goldmark.renderer]
+unsafe = true
 
-# 讓首頁有 JSON 供 PaperMod 搜尋使用
 [params]
-  env = "production"
-  ShowBreadCrumbs = true
-  ShowPostNavLinks = true
-  ShowCodeCopyButtons = true
-  ShowReadingTime = true
-  ShowToc  = true
-  TocOpen  = true
+env = "production"
+disableScrollToTop = false
+ShowShareButtons = false
+ShowReadingTime = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowToc = true
+comments = false
 
-# 語言定義
-[languages]
+# Profile Mode（首頁卡片）
+[params.profileMode]
+enabled = true
+title = "Zakk"
+subtitle = """📍 Melbourne 🐨 | ❄️ UTC +10 (AEST)
+❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
+🐹 Guinea pigs 🥔
+🎮 Gaming · 🐧 Linux · 💹 Finance
+"""
+imageURL = "https://avatars.githubusercontent.com/u/221879664?v=4"
+imageWidth = 160
+imageHeight = 160
+imageTitle = "Zakk"
 
-  [languages.en]
-    languageName = "English"
-    languageCode = "en"
-    weight = 1
-    title = "Zakk's Blog"
-    # 根路徑呈現英文
+[[params.profileMode.buttons]]
+name = "Posts"
+url = "/posts/"
 
-  [languages.zh-hant]
-    languageName = "漢語"
-    languageCode = "zh-Hant"
-    weight = 2
-    title = "Zakk 的部落格"
-    contentDir = "content/zh-hant"
-    languageDirection = "ltr"
+# 社交只放你的 IG
+[[params.socialIcons]]
+name = "Instagram"
+url = "https://www.instagram.com/zakk.au/"
+
+[languages.en]
+languageName = "English"
+weight = 1
+title = "Zakk's Blog"
+
+[languages.en.menu]
+  [[languages.en.menu.main]]
+  name = "Home"
+  url  = "/"
+  weight = 1
+
+  [[languages.en.menu.main]]
+  name = "Posts"
+  url  = "/posts/"
+  weight = 2
+
+  [[languages.en.menu.main]]
+  name = "Tags"
+  url  = "/tags/"
+  weight = 3
+
+  [[languages.en.menu.main]]
+  name = "Search"
+  url  = "/search/"
+  weight = 4
+
+[languages.zh-hant]
+languageName = "漢語"
+weight = 2
+title = "Zakk 的部落格"
+
+[languages.zh-hant.params.profileMode]
+enabled = true
+title = "Zakk"
+subtitle = """📍 墨爾本 🇦🇺
+❄️ UTC +10 (AEST) 🐨
+❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
+🐹 天竺鼠 🥔
+🎮 遊戲 · 🐧 Linux · 💹 金融
+"""
+imageURL = "https://avatars.githubusercontent.com/u/221879664?v=4"
+imageWidth = 160
+imageHeight = 160
+imageTitle = "Zakk"
+
+[languages.zh-hant.menu]
+  [[languages.zh-hant.menu.main]]
+  name = "主頁"
+  url  = "/zh-hant/"
+  weight = 1
+
+  [[languages.zh-hant.menu.main]]
+  name = "文章"
+  url  = "/zh-hant/posts/"
+  weight = 2
+
+  [[languages.zh-hant.menu.main]]
+  name = "標籤"
+  url  = "/zh-hant/tags/"
+  weight = 3
+
+  [[languages.zh-hant.menu.main]]
+  name = "搜尋"
+  url  = "/zh-hant/search/"
+  weight = 4
