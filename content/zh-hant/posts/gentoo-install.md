@@ -5,7 +5,8 @@ date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
 categories: ["Linux 筆記"]
 draft: false
-toc: true
+ShowToc: false        # 關閉主題自動 TOC（避免與自訂 TOC 重複）
+TocOpen: false
 ---
 
 <style>
@@ -57,8 +58,7 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 <details open>
   <summary>📚 目錄</summary>
   <ol>
--   <li><a href="#-我的電腦配置示例">💻 我的電腦配置（示例）</a></li>
-+   <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
+    <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
     <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
     <li><a href="#2-磁碟分割lsblk-與-cfdisk">2. 磁碟分割（lsblk 與 cfdisk）</a></li>
@@ -69,7 +69,7 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
     <li><a href="#7-選擇-profile桌面伺服器">7. 選擇 Profile（桌面／伺服器）</a></li>
     <li><a href="#8-本地化-localization語言與時區">8. 本地化 Localization（語言與時區）</a></li>
     <li><a href="#9-內核選擇與編譯完整指令">9. 內核選擇與編譯（完整指令）</a></li>
-    <li><a href="#10-產生-fstab含-btrfs--ext4-範例">10. 產生 fstab（含 Btrfs / ext4 範例）</a></li>
+    <li><a href="#10-產生-fstab含-btrfs--ext4-範例">10. 產生 fstab（含 Btrfs / ext4 範圍）</a></li>
     <li><a href="#11-安裝開機器-grub含-os-prober">11. 安裝開機器 GRUB（含 os-prober）</a></li>
     <li><a href="#12-啟用網路服務openrc--systemd">12. 啟用網路服務（OpenRC / systemd）</a></li>
     <li><a href="#13-wayland--x11-選擇與-use">13. Wayland / X11 選擇與 USE</a></li>
@@ -491,7 +491,7 @@ genkernel initramfs
 
 ---
 
-## 10. 產生 fstab（含 Btrfs / ext4 範例） {#10-產生-fstab含-btrfs--ext4-範例}
+## 10. 產生 fstab（含 Btrfs / ext4 範圍） {#10-產生-fstab含-btrfs--ext4-範例}
 
 查詢 UUID：
 ```bash
@@ -667,7 +667,7 @@ reboot
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-</div> <!-- 保留這一個 -->
+</div> <!-- 保留文章容器結束 -->
 <!-- 檔尾清理：移除重複殘留行 -->
 </div>
 </div>
