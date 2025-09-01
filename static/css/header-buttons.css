@@ -484,3 +484,36 @@ body.dark .post-section-list .post-item:hover{
     font-size:1.55rem;
   }
 }
+
+/* 移除主題可能加在文章內連結的分隔符（|） */
+.gentoo-article a::before,
+.gentoo-article a::after,
+.post-section-list a::before,
+.post-section-list a::after,
+.post-content a::before,
+.post-content a::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 防止以邊框/背景模擬的右側縱線 */
+.gentoo-article a,
+.post-content a,
+.post-section-list a {
+  border-right: none !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* 可以點擊的語言切換 / 主題切換按鈕同樣清除殘留線 */
+.cb-menu a::after,
+.cb-menu a::before {
+  content: none !important;
+  border: none !important;
+}

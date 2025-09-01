@@ -59,6 +59,24 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 .gentoo-article h2,
 .gentoo-article h3,
 .gentoo-article h4 { scroll-margin-top: 90px; }
+
+/* 移除可能由主題或舊樣式插入的連結分隔符（pseudo element 加上 |） */
+.gentoo-article a::before,
+.gentoo-article a::after,
+.post-content a::before,
+.post-content a::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 避免殘留邊框形式的分隔線 */
+.gentoo-article a,
+.post-content a {
+  border: none !important;
+  background-image: none !important;
+}
 </style>
 
 <div class="gentoo-toc">
@@ -675,10 +693,27 @@ reboot
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 </div> <!-- 保留文章容器結束 -->
-- Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
-- Rufus：<https://rufus.ie/>  
-- 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-</div> <!-- 保留文章容器結束 -->
-<!-- 檔尾清理：移除重複殘留行 -->
-</div>
-</div>
+
+<!-- 文字層級殘留管線符號清理（只在本頁執行） -->
+<script>
+(function(){
+  const root=document.querySelector('.gentoo-article');
+  if(!root) return;
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+  const del=[];
+  while(walker.nextNode()){
+    const n=walker.currentNode;
+    const txt=n.textContent;
+    if(!txt) continue;
+    const trim=txt.trim();
+    // 單獨一個 |
+    if(trim==='|'){ del.push(n); continue; }
+    // 行首孤立 | 或行尾孤立 |
+    let changed=txt;
+    changed = changed.replace(/^\s*\|\s*/,'');
+    changed = changed.replace(/\s*\|\s*$/,'');
+    if(changed!==txt) n.textContent=changed;
+  }
+  del.forEach(n=>n.parentNode&&n.parentNode.removeChild(n));
+})();
+</script>
