@@ -30,21 +30,26 @@ body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border
 .gentoo-article h4{margin:1.4rem 0 .6rem;font-size:1rem;}
 
 .gentoo-article pre{
-  background:linear-gradient(180deg,var(--g-code-bg),var(--g-code-bg))!important;
-  border:none;
-  border-left:4px solid var(--g-accent);
-  padding:.65rem .85rem;
+  background:#f4f4f6!important;
+  color:#222;
+  border:1px solid #e0e0e3;
+  padding:.75rem .95rem;
   margin:1rem 0;
-  border-radius:6px;
-  font-size:.82rem;
-  line-height:1.35;
-  box-shadow:none;
+  border-radius:8px;
+  font-size:.85rem;
+  line-height:1.4;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);
 }
 body.dark .gentoo-article pre{
-  background:#1e1e1e!important;
-  border-left-color:var(--g-accent);
+  background:#2e2e33!important;
+  color:#eee;
+  border:1px solid #444;
+  box-shadow:none;
 }
-.gentoo-article pre code{background:transparent!important;padding:0;border:none;box-shadow:none;}
+.gentoo-article pre code{
+  background:transparent!important;
+  color:inherit;
+}
 .gentoo-article code:not(pre code){
   background:var(--g-code-bg);
   padding:.1em .4em;
