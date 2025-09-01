@@ -2,11 +2,8 @@
 slug: gentoo-install
 title: "Gentoo Installation Guide (Beginner)"
 date: 2025-09-01
-tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
-categories: ["Linux Notes"]
-draft: false
-toc: true
-description: "Step-by-step Gentoo install: partitioning, Stage3, Portage, USE flags, kernel build, desktop environments, FAQ."
+tags: ["Gentoo","Linux","OpenRC","systemd"]
+description: "Beginner friendly Gentoo install: partitioning, Stage3, Portage, USE, kernel, desktop environments, FAQ."
 ---
 
 <style>
@@ -720,6 +717,9 @@ reboot
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 </div>
 - Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus: <https://rufus.ie/>  
+- Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+</div>
 - Rufus: <https://rufus.ie/>  
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 </div>

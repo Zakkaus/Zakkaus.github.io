@@ -538,9 +538,65 @@ body.dark .post-section-list .post-item:hover{
   background-image: none !important;
   border: none !important;
 }
-.post-meta span::before,
-.post-meta span::after,
-.post-meta a::before,
-.post-meta a::after {
-  content: none !important;
+
+/* Post meta & tags */
+.post-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:.45rem;
+  font-size:.72rem;
+  letter-spacing:.4px;
+  opacity:.78;
+  margin:.2rem 0 1.1rem;
 }
+.post-meta .post-date,
+.post-meta .post-reading{white-space:nowrap;}
+.post-meta .post-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  margin-left:.35rem;
+}
+.post-meta .post-tags .tag{
+  text-decoration:none;
+  padding:.28rem .55rem;
+  background:rgba(225,48,108,.10);
+  border:1px solid rgba(225,48,108,.35);
+  border-radius:999px;
+  font-size:.62rem;
+  line-height:1;
+  font-weight:600;
+  color:#c61d52;
+  transition:background .25s,border-color .25s,color .25s,transform .25s;
+}
+.post-meta .post-tags .tag:hover{
+  background:var(--hb-active,#e1306c);
+  border-color:var(--hb-active,#e1306c);
+  color:#fff;
+  transform:translateY(-2px);
+}
+body.dark .post-meta{opacity:.85;}
+body.dark .post-meta .post-tags .tag{
+  background:rgba(225,48,108,.18);
+  border-color:rgba(225,48,108,.5);
+  color:#ff6f9d;
+}
+body.dark .post-meta .post-tags .tag:hover{
+  background:var(--hb-active,#e1306c);
+  color:#fff;
+}
+
+/* 文章描述 */
+.post-header .post-desc{
+  margin:.6rem 0 1rem;
+  font-size:.9rem;
+  line-height:1.55;
+  color:#555;
+}
+body.dark .post-header .post-desc{color:#bbb;}
+
+/* 防止之前全域去除連結樣式導致 tag 失效 */
+.post-meta .post-tags .tag::before,
+.post-meta .post-tags .tag::after{content:none!important;}
+.post-meta .post-tags .tag{border-right:none!important;}
