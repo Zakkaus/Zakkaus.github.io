@@ -30,21 +30,20 @@ body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border
 .gentoo-article h4{margin:1.4rem 0 .6rem;font-size:1rem;}
 
 .gentoo-article pre{
-  background:#f4f4f6!important;
-  color:#222;
-  border:1px solid #e0e0e3;
+  background:#2e2e33!important;        /* 亮色模式也用深灰底 */
+  color:#f5f5f5!important;              /* 強制淺字，避免被主題覆寫成白字+淺底 */
+  border:1px solid #414146;
   padding:.75rem .95rem;
   margin:1rem 0;
   border-radius:8px;
   font-size:.85rem;
   line-height:1.4;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);
+  box-shadow:none;
 }
 body.dark .gentoo-article pre{
-  background:#2e2e33!important;
-  color:#eee;
-  border:1px solid #444;
-  box-shadow:none;
+  background:#1e1e22!important;
+  color:#ececec!important;
+  border:1px solid #323237;
 }
 .gentoo-article pre code{
   background:transparent!important;
@@ -626,4 +625,5 @@ reboot
 - Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus: <https://rufus.ie/>  
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+</div>
 </div>
