@@ -1,7 +1,8 @@
 <footer class="site-footer">
-  <div class="container">
-    <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p>
-    <!-- 你可以在此加入其它想顯示的 footer 內容 -->
+  <div class="site-footer-inner">
+    <p class="site-foot-text">
+      © {{ now.Format "2006" }} {{ if eq .Site.Language.Lang "zh-hant" }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ else }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ end }}
+    </p>
   </div>
 </footer>
 

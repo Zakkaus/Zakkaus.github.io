@@ -4,7 +4,7 @@
 {{- $about := printf "%sabout/" $home -}}
 {{- $rel := .RelPermalink -}}
 {{- $switch := cond $isZH (replace $rel "/zh-hant/" "/" 1) (printf "/zh-hant%s" $rel) -}}
-<header class="site-header" data-build-hash="hdr-v3">
+<header class="site-header" data-build-hash="hdr-v4">
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="{{ $home }}">{{ .Site.Title }}</a>
@@ -40,34 +40,6 @@
   </div>
 </header>
 
-<!-- 早期清理（防止舊殘碼在首屏可見） -->
-<script>
-(function(){
-  const PATS=[/nowDark\s*\?\s*'light':'dark'/,/toggleTheme/,/apply\(target\)/,/const\s+target\s*=\s*nowDark/];
-  const bad=[];
-  // 只掃描 body 直接子文字節點與 header 後第一層兄弟
-  [...document.body.childNodes].forEach(n=>{
-    if(n.nodeType===3){
-      const txt=n.textContent.trim();
-      if(txt && PATS.some(p=>p.test(txt))) bad.push(n);
-    }
-    if(n.tagName==='HEADER'){
-      let m=n.nextSibling;
-      let steps=0;
-      while(m && steps<6){
-        if(m.nodeType===3){
-          const t=m.textContent.trim();
-          if(t && PATS.some(p=>p.test(t))) bad.push(m);
-        }
-        m=m.nextSibling;steps++;
-      }
-    }
-  });
-  bad.forEach(n=>n.parentNode&&n.parentNode.removeChild(n));
-})();
-</script>
-
-<!-- 主題切換腳本（唯一） -->
 <script>
 (function(){
   if (window.__THEME_TOGGLE_INIT) return;
@@ -86,12 +58,40 @@
 })();
 </script>
 
-<!-- 次級補掃描：延遲 0/120ms/500ms 三次清理 -->
-<script src="/js/stray-cleanup.js?v=3" defer></script>
-<!-- END header partial -->
-      const m = document.getElementById('mobileMenu');
-      if (m) m.classList.remove('open');
+<!-- 強化清理：移除任何再次注入的殘餘腳本文字 -->
+<script>
+(function(){
+  const PAT=/nowDark|\bconst\s+target\s*=\s*nowDark|apply\(target\)|m\.classList\.remove\('open'\)/;
+  let rounds=0, removedTotal=0;
+  function sweep(){
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
+    const toDel=[];
+    while(walker.nextNode()){
+      const n=walker.currentNode;
+      const t=n.textContent;
+      if(!t) continue;
+      const s=t.trim();
+      if(!s) continue;
+      if(PAT.test(s) && s.length<500) toDel.push(n);
     }
+    toDel.forEach(n=>{ n.parentNode&&n.parentNode.removeChild(n); removedTotal++; });
+    rounds++;
+    if(rounds<15 && toDel.length>0) setTimeout(sweep,150);
+    else if(rounds<8) setTimeout(sweep,200); // 即使沒刪也多跑幾輪
+    if(removedTotal && !window.__STRAY_LOGGED){
+      console.warn('[header-sanitizer] removed stray fragments:',removedTotal);
+      window.__STRAY_LOGGED=true;
+    }
+  }
+  // 立即 + 延遲多次
+  [0,120,400,800,1500].forEach(d=>setTimeout(sweep,d));
+  // 同時監聽動態新增
+  const mo=new MutationObserver(()=>sweep());
+  mo.observe(document.body,{childList:true,subtree:true});
+  setTimeout(()=>mo.disconnect(),4000);
+})();
+</script>
+<!-- END header partial -->
   });
 })();
 </script>
