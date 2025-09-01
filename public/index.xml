@@ -37,7 +37,9 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id="0-download--create-installation-media"&gt;0. Download &amp;amp; Create Installation Media&lt;/h1&gt;
-&lt;p&gt;(Same process as v7, use Rufus on Windows or dd on Linux)&lt;/p&gt;</description></item><item><title>Gentoo 安裝指南</title><link>https://zakk.au/zh-hant/posts/gentoo-install/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/gentoo-install/</guid><description>&lt;h1 id="-目錄"&gt;📑 目錄&lt;/h1&gt;
+&lt;h2 id="01-download-iso"&gt;0.1 Download ISO&lt;/h2&gt;
+&lt;p&gt;Official download page:&lt;br&gt;
+&lt;a href="https://www.gentoo.org/downloads/mirrors/"&gt;Gentoo Downloads&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Gentoo 安裝指南</title><link>https://zakk.au/zh-hant/posts/gentoo-install/</link><pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/gentoo-install/</guid><description>&lt;h1 id="-目錄"&gt;📑 目錄&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/zh-hant/posts/gentoo-install/#-%e6%88%91%e7%9a%84%e9%9b%bb%e8%85%a6%e9%85%8d%e7%bd%ae"&gt;💻 我的電腦配置&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/zh-hant/posts/gentoo-install/#0-%e4%b8%8b%e8%bc%89%e8%88%87%e8%a3%bd%e4%bd%9c%e5%ae%89%e8%a3%9d%e5%aa%92%e9%ab%94"&gt;0. 下載與製作安裝媒體&lt;/a&gt;&lt;/li&gt;
@@ -76,7 +78,9 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id="0-下載與製作安裝媒體"&gt;0. 下載與製作安裝媒體&lt;/h1&gt;
-&lt;p&gt;（同 v7，省略，附 Rufus 連結）&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://zakk.au/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/hello-world/</guid><description>Tiny first English post.</description></item><item><title>哈囉，世界</title><link>https://zakk.au/zh-hant/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/hello-world/</guid><description>第一篇繁中測試文。</description></item><item><title>About Me</title><link>https://zakk.au/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zakk.au/about/</guid><description>&lt;p&gt;Hi, I&amp;rsquo;m &lt;strong&gt;Zakk&lt;/strong&gt;, based in &lt;strong&gt;Melbourne&lt;/strong&gt; 🇦🇺.&lt;br&gt;
+&lt;h2 id="01-下載-iso"&gt;0.1 下載 ISO&lt;/h2&gt;
+&lt;p&gt;官方下載頁：&lt;br&gt;
+&lt;a href="https://www.gentoo.org/downloads/mirrors/"&gt;Gentoo Downloads&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://zakk.au/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/hello-world/</guid><description>Tiny first English post.</description></item><item><title>哈囉，世界</title><link>https://zakk.au/zh-hant/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/hello-world/</guid><description>第一篇繁中測試文。</description></item><item><title>About Me</title><link>https://zakk.au/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zakk.au/about/</guid><description>&lt;p&gt;Hi, I&amp;rsquo;m &lt;strong&gt;Zakk&lt;/strong&gt;, based in &lt;strong&gt;Melbourne&lt;/strong&gt; 🇦🇺.&lt;br&gt;
 I keep &lt;strong&gt;two guinea pigs 🐹&lt;/strong&gt; — one named &lt;strong&gt;Potato&lt;/strong&gt; 🥔 and the other called &lt;strong&gt;Hash Brown&lt;/strong&gt;.&lt;br&gt;
 I enjoy &lt;strong&gt;gaming 🎮&lt;/strong&gt;, I&amp;rsquo;m into &lt;strong&gt;Linux 🐧&lt;/strong&gt; and &lt;strong&gt;finance 💹&lt;/strong&gt;, and I love spending time with my pets.&lt;/p&gt;
 &lt;hr&gt;
