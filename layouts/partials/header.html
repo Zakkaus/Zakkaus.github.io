@@ -4,7 +4,7 @@
 {{- $about := printf "%sabout/" $home -}}
 {{- $rel := .RelPermalink -}}
 {{- $switch := cond $isZH (replace $rel "/zh-hant/" "/" 1) (printf "/zh-hant%s" $rel) -}}
-<header class="site-header" data-build-hash="hdr-v4">
+<header class="site-header" data-build-hash="hdr-v5">
   <div class="site-header-inner">
     <div class="site-brand">
       <a href="{{ $home }}">{{ .Site.Title }}</a>
@@ -40,6 +40,7 @@
   </div>
 </header>
 
+<!-- 主題切換（保持不變） -->
 <script>
 (function(){
   if (window.__THEME_TOGGLE_INIT) return;
@@ -58,42 +59,41 @@
 })();
 </script>
 
-<!-- 強化清理：移除任何再次注入的殘餘腳本文字 -->
+<!-- 強化清理：新增括號殘碼 pattern -->
 <script>
 (function(){
-  const PAT=/nowDark|\bconst\s+target\s*=\s*nowDark|apply\(target\)|m\.classList\.remove\('open'\)/;
-  let rounds=0, removedTotal=0;
-  function sweep(){
+  const PAT_LIST = [
+    /nowDark\s*\?\s*'light':'dark'/,
+    /m\.classList\.remove\('open'\)/,
+    /const\s+target\s*=\s*nowDark/,
+    /apply\(target\)/,
+    /\}\);\s*\}\)\(\);\s*$/  // 捕捉 "}); })();"
+  ];
+  function sweep(limit){
+    let removed=0;
     const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);
-    const toDel=[];
+    const del=[];
     while(walker.nextNode()){
       const n=walker.currentNode;
-      const t=n.textContent;
-      if(!t) continue;
-      const s=t.trim();
-      if(!s) continue;
-      if(PAT.test(s) && s.length<500) toDel.push(n);
+      const txt=n.textContent.trim();
+      if(!txt) continue;
+      if(txt.length<600 && PAT_LIST.some(p=>p.test(txt))){
+        del.push(n);
+      }
     }
-    toDel.forEach(n=>{ n.parentNode&&n.parentNode.removeChild(n); removedTotal++; });
-    rounds++;
-    if(rounds<15 && toDel.length>0) setTimeout(sweep,150);
-    else if(rounds<8) setTimeout(sweep,200); // 即使沒刪也多跑幾輪
-    if(removedTotal && !window.__STRAY_LOGGED){
-      console.warn('[header-sanitizer] removed stray fragments:',removedTotal);
-      window.__STRAY_LOGGED=true;
-    }
+    del.forEach(n=>{ n.parentNode && n.parentNode.removeChild(n); removed++; });
+    if(removed) console.warn('[header sanitize] removed stray nodes:',removed);
+    if(limit>0) setTimeout(()=>sweep(limit-1),150);
   }
-  // 立即 + 延遲多次
-  [0,120,400,800,1500].forEach(d=>setTimeout(sweep,d));
-  // 同時監聽動態新增
-  const mo=new MutationObserver(()=>sweep());
+  // 多輪
+  sweep(8);
+  // Mutation 監控短期注入
+  const mo=new MutationObserver(()=>sweep(0));
   mo.observe(document.body,{childList:true,subtree:true});
   setTimeout(()=>mo.disconnect(),4000);
 })();
 </script>
 <!-- END header partial -->
-  });
-})();
 </script>
 
 <!-- 自動清理 & 診斷：移除任何殘留舊 JS 純文字 -->

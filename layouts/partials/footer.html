@@ -1,10 +1,21 @@
-<footer class="site-footer">
+<footer class="site-footer" id="siteFooter">
   <div class="site-footer-inner">
     <p class="site-foot-text">
       © {{ now.Format "2006" }} {{ if eq .Site.Language.Lang "zh-hant" }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ else }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ end }}
     </p>
   </div>
 </footer>
+<script>
+(function(){
+  // 去重：若主題本身還渲染另一個相同文字的 footer，移除後者
+  const seen=new Set();
+  document.querySelectorAll('.site-foot-text').forEach(p=>{
+    const t=p.textContent.trim();
+    if(seen.has(t)) p.closest('footer')?.remove();
+    else seen.add(t);
+  });
+})();
+</script>
 
 <!-- 注入按鈕與載入 CSS（若已存在則不重複） -->
 <script>
