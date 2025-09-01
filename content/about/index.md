@@ -216,6 +216,19 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
   background:var(--about-accent);
   color:#fff;
 }
+
+/* === Simplify section headings: keep only left red line === */
+.about-page h3{
+  background:none !important;
+  border-radius:0 !important;
+}
+.about-page h3::after{
+  content:none !important;
+}
+.about-page h3::before{
+  width:3px !important;
+}
+
 @media (max-width:640px){
   .about-page .about-hero{font-size:1.07rem;padding:.9rem 1rem 1rem;border-radius:16px;}
   .about-page h3{font-size:.95rem;margin:2rem 0 .65rem;}

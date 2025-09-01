@@ -365,6 +365,19 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
     top:.85rem;
   }
 }
+
+/* === 標題特效精簡：只留左側紅線 === */
+.about-page h3{
+  background:none !important;
+  border-radius:0 !important;
+}
+.about-page h3::after{
+  content:none !important;
+}
+/* 可加粗左線一點（可選） */
+.about-page h3::before{
+  width:3px !important;
+}
 </style>
 
 <div class="about-page">
