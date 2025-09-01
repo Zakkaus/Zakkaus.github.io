@@ -6,164 +6,98 @@ date: 2025-09-01
 lastmod: 2025-09-01
 ---
 <style>
-:root { --about-accent:#e1306c; }
+:root{--about-accent:var(--hb-active,#e1306c);}
 .about-wrap{
-  max-width:820px;
-  margin:0 auto;
-  padding:.5rem 0 2.5rem;
-  line-height:1.6;
-  font-size:.95rem;
+  max-width:820px;margin:0 auto;padding:.5rem 0 2.4rem;
+  font-size:.95rem;line-height:1.6;
 }
-
-/* === Intro（主要個人簡介）重新設計 === */
+/* Intro 主簡介 */
 .about-intro{
+  font-size:1.08rem;line-height:1.7;
+  padding:1rem 1.15rem 1.05rem;
   margin:0 0 2rem;
-  padding:1.05rem 1.15rem 1.15rem;
-  border:1px solid rgba(0,0,0,.08);
-  border-left:8px solid var(--about-accent);
-  background:#fafafa;
+  background:#f7f7f8;
+  border:1px solid #e3e3e6;
+  border-left:4px solid var(--about-accent);
   border-radius:14px;
-  font-size:1.05rem;
-  line-height:1.68;
-  position:relative;
-  box-shadow:0 2px 4px -2px rgba(0,0,0,.08),0 4px 14px -8px rgba(0,0,0,.08);
 }
 body.dark .about-intro{
-  background:#252526;
-  border:1px solid rgba(255,255,255,.14);
+  background:#262729;
+  border:1px solid #3a3d40;
   border-left-color:var(--about-accent);
-  box-shadow:0 2px 5px -2px rgba(0,0,0,.6);
 }
-.about-intro p{margin:.6rem 0;}
+.about-intro p{margin:.65rem 0;}
 .about-intro p:first-child{margin-top:0;}
 .about-intro p:last-child{margin-bottom:0;}
-
-/* 強調（**文字**）膠囊高亮 */
 .about-intro strong{
-  display:inline-block;
-  font-weight:600;
-  color:var(--about-accent);
   background:rgba(225,48,108,.16);
-  padding:.15rem .5rem .22rem;
-  margin:.1rem .2rem .1rem 0;
-  border-radius:8px;
-  line-height:1.2;
-  vertical-align:baseline;
+  color:var(--about-accent);
+  font-weight:600;
+  padding:.18rem .55rem .22rem;
+  margin:.12rem .25rem .12rem 0;
+  border-radius:999px;
+  line-height:1.15;
+  display:inline-block;
   letter-spacing:.3px;
 }
 body.dark .about-intro strong{
-  background:rgba(225,48,108,.30);
+  background:rgba(225,48,108,.32);
   color:#ff8fb7;
 }
-
-/* === 區塊標題樣式（簡潔、無漸變） === */
+/* 標題極簡 */
 .about-wrap h3{
-  margin:2.2rem 0 .9rem;
-  padding:.55rem .85rem .55rem .95rem;
-  font-size:1.0rem;
-  font-weight:600;
-  line-height:1.25;
+  margin:2.2rem 0 .85rem;
+  padding:0 0 .45rem .9rem;
+  font-size:1rem;line-height:1.25;font-weight:600;
   position:relative;
-  background:#f5f5f5;
-  border-left:6px solid var(--about-accent);
-  border-radius:10px;
-  border:1px solid rgba(0,0,0,.06);
+  background:transparent;
+  border:none;
+  border-bottom:1px solid #e2e2e4;
 }
-body.dark .about-wrap h3{
-  background:#2d2d2f;
-  border:1px solid rgba(255,255,255,.14);
+.about-wrap h3:before{
+  content:"";position:absolute;left:0;top:0;bottom:.45rem;
+  width:3px;background:var(--about-accent);border-radius:2px;
 }
-.about-wrap h3::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:0;
-  height:2px;
-  width:90px;
-  background:var(--about-accent);
-  border-radius:2px;
-  transform:translateY(100%);
-  opacity:.8;
-}
-
+body.dark .about-wrap h3{border-bottom:1px solid #3a3d40;}
 /* 列表 */
-.about-wrap h3+ul{
-  list-style:none;
-  margin:.1rem 0 0;
-  padding:0;
-}
+.about-wrap h3+ul{list-style:none;margin:.2rem 0 0;padding:0;}
 .about-wrap h3+ul li{
-  position:relative;
-  padding:.42rem 0 .42rem 1.05rem;
-  font-size:.9rem;
+  position:relative;padding:.44rem 0 .44rem 1.05rem;font-size:.9rem;
 }
 .about-wrap h3+ul li:before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:.95rem;
-  width:7px;
-  height:7px;
-  background:var(--about-accent);
-  border-radius:50%;
-  opacity:.65;
+  content:"";position:absolute;left:0;top:.95rem;
+  width:6px;height:6px;border-radius:50%;background:var(--about-accent);opacity:.55;
 }
-body.dark .about-wrap h3+ul li:before{opacity:.85;}
-
-/* 連結（正文/列表） */
+body.dark .about-wrap h3+ul li:before{opacity:.75;}
+/* 通用連結 */
 .about-wrap a[href^="http"], .about-wrap a[href^="mailto:"]{
-  color:var(--about-accent);
-  text-decoration:none;
-  font-weight:600;
+  color:var(--about-accent);text-decoration:none;font-weight:600;
 }
 .about-wrap a:hover{text-decoration:underline;}
-
 /* 聯絡方式 Pills */
-.about-contacts{
-  list-style:none;
-  margin:.4rem 0 0;
-  padding:0;
-}
-.about-contacts li{
-  display:inline-block;
-  margin:0 .5rem .6rem 0;
-  padding:0;
-}
+.about-contacts{list-style:none;margin:.4rem 0 0;padding:0;}
+.about-contacts li{display:inline-block;margin:0 .55rem .6rem 0;}
 .about-contacts li:before{display:none;}
 .about-contacts a{
   display:inline-block;
-  background:rgba(225,48,108,.12);
-  padding:.42rem .75rem .45rem;
-  font-size:.7rem;
-  letter-spacing:.45px;
-  border-radius:9px;
-  font-weight:600;
-  line-height:1;
-  text-decoration:none;
-  color:var(--about-accent);
-  transition:background .22s,color .22s;
+  background:rgba(225,48,108,.14);
+  padding:.45rem .8rem .48rem;
+  font-size:.7rem;line-height:1;font-weight:600;
+  letter-spacing:.45px;border-radius:9px;
+  text-decoration:none;color:var(--about-accent);
+  transition:background .2s,color .2s;
 }
-body.dark .about-contacts a{
-  background:rgba(225,48,108,.28);
-  color:#ff8fb7;
-}
-.about-contacts a:hover{
-  background:var(--about-accent);
-  color:#fff;
-}
-
-/* RWD */
+body.dark .about-contacts a{background:rgba(225,48,108,.30);color:#ff8fb7;}
+.about-contacts a:hover{background:var(--about-accent);color:#fff;}
+/* 行動版 */
 @media (max-width:640px){
-  .about-intro{font-size:1rem;padding:.8rem .85rem .9rem;border-radius:12px;}
-  .about-intro strong{padding:.12rem .45rem .18rem;}
-  .about-wrap h3{font-size:.95rem;padding:.5rem .75rem .5rem .85rem;}
-  .about-wrap h3+ul li{font-size:.86rem;padding:.38rem 0 .38rem .95rem;}
+  .about-intro{font-size:1.02rem;padding:.85rem .95rem .95rem;border-radius:12px;}
+  .about-intro strong{padding:.16rem .5rem .2rem;}
+  .about-wrap h3{margin:2rem 0 .7rem;font-size:.95rem;}
+  .about-wrap h3+ul li{font-size:.86rem;padding:.4rem 0 .4rem .95rem;}
 }
-
-/* 減少動態偏好 */
-@media (prefers-reduced-motion:reduce){
-  *{transition:none!important;}
-}
+/* 減少動態 */
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 
 <div class="about-wrap">
