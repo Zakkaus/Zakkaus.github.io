@@ -4,7 +4,7 @@
   align-items:center;
   gap:8px;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  pointer-events: auto;
+  pointer-events:auto; /* 還原互動，僅刪除搜尋相關 */
   z-index:9999;
 }
 
@@ -129,6 +129,9 @@ body.dark{
   display:none !important;
   pointer-events:none !important;
   visibility:hidden !important;
+  width:0 !important;
+  height:0 !important;
+  overflow:hidden !important;
 }
 
 /* 若之前有附加搜尋結果高亮/面板樣式，可刪或保留不影響；這裡統一停用 */
