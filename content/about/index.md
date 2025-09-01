@@ -3,6 +3,37 @@ title: "About"
 slug: "about"
 toc: false
 ---
+<style>
+.about-highlight a{
+  color: var(--hb-active,#e1306c) !important;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color .25s;
+}
+.about-highlight a::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:-2px;
+  width:100%;height:2px;
+  background:linear-gradient(90deg,var(--hb-active,#e1306c),transparent 85%);
+  opacity:.55;
+  transition:opacity .25s,transform .25s;
+  transform:translateY(2px);
+}
+.about-highlight a:hover{
+  color: var(--hb-active,#e1306c) !important;
+}
+.about-highlight a:hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+body.dark .about-highlight a::after{
+  opacity:.7;
+}
+</style>
+
+<div class="about-highlight">
 
 Hi, I'm **Zakk**, based in **Melbourne**.  
 I keep **🐹 guinea pigs** (their names are **Hash Brown** and **Potato Cake** 🥔), enjoy **gaming**, and I'm into **Linux** and **Finance**.  
@@ -32,3 +63,5 @@ Currently studying **Business**.
 - GitHub: [Zakkaus](https://github.com/Zakkaus)  
 - X: [@zakkauu](https://x.com/zakkauu)  
 - Email: [admin@zakk.au](mailto:admin@zakk.au)
+
+</div>

@@ -103,8 +103,8 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
     <li><a href="#16-使用者與-sudo">16. 使用者與 sudo</a></li>
     <li><a href="#17-ssh可選">17. SSH（可選）</a></li>
     <li><a href="#18-重開機">18. 重開機</a></li>
-    <li><a href="#faq-zh">💡 常見問題 FAQ</a></li>
-    <li><a href="#refs-zh">📎 參考</a></li>
+    <li><a href="#faq-zh">常見問題 FAQ</a></li>
+    <li><a href="#refs-zh">參考</a></li>
   </ol>
 </details>
 </div>
