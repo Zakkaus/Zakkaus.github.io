@@ -1,0 +1,79 @@
+/* Container base (positioning is set by JS) */
+.custom-topbuttons{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  pointer-events: auto;
+}
+
+/* toggle (hamburger) hidden on desktop */
+.custom-topbuttons .cb-toggle{
+  display:none;
+  background: rgba(255,255,255,0.96);
+  border: 0;
+  padding:6px 8px;
+  border-radius:6px;
+  font-size:16px;
+  box-shadow:0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* menu style (desktop inline) */
+.custom-topbuttons .cb-menu{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.custom-topbuttons .cb-menu .cb-btn{
+  display:inline-block;
+  padding:6px 10px;
+  background: rgba(255,255,255,0.96);
+  color:#111;
+  text-decoration:none;
+  border-radius:6px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  font-weight:600;
+  font-size:14px;
+}
+.custom-topbuttons .cb-menu .cb-btn.active{
+  background:#e1306c;
+  color:#fff;
+}
+.custom-topbuttons .cb-menu .cb-btn:hover{
+  transform: translateY(-1px);
+}
+
+/* mobile: show toggle, collapse menu */
+@media (max-width:900px){
+  .custom-topbuttons .cb-toggle{ display:inline-block; }
+  .custom-topbuttons .cb-menu{
+    display:none;
+    position:absolute;
+    top:44px;
+    right:0;
+    flex-direction:column;
+    background:rgba(255,255,255,0.98);
+    padding:8px;
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    min-width:160px;
+  }
+  .custom-topbuttons .cb-menu.open{ display:flex; }
+  .custom-topbuttons .cb-menu .cb-btn{ display:block; padding:10px 12px; white-space:nowrap; }
+}
+
+/* small screens: slightly smaller buttons */
+@media (max-width:420px){
+  .custom-topbuttons .cb-menu .cb-btn{ font-size:13px; padding:8px 10px; }
+}
+
+/* ensure not to visually block other header elements */
+.custom-topbuttons{ pointer-events: auto; }
+
+/* footer helper (if you keep custom footer) - non-interactive */
+.custom-footer-copyright,
+.custom-footer-powered{
+  pointer-events: none;
+  color:#888;
+  font-size:12px;
+}
