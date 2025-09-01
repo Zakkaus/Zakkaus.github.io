@@ -4,7 +4,7 @@
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#0-download--create-installation-media"&gt;0. Download &amp;amp; Create Installation Media&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#1-boot--network"&gt;1. Boot &amp;amp; Network&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#2-partitioning"&gt;2. Partitioning&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#3-filesystems"&gt;3. Filesystems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#3-filesystems--mounting"&gt;3. Filesystems &amp;amp; Mounting&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#4-stage3--chroot"&gt;4. Stage3 &amp;amp; chroot&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#5-portage--mirrors"&gt;5. Portage &amp;amp; Mirrors&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#6-profile--locale"&gt;6. Profile &amp;amp; Locale&lt;/a&gt;&lt;/li&gt;
@@ -18,24 +18,11 @@
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#13-desktop-environments-optional"&gt;13. Desktop Environments (Optional)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#14-users--sudo"&gt;14. Users &amp;amp; sudo&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#15-sshd-optional"&gt;15. SSHD (Optional)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#16-reboot"&gt;16. Reboot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#16-use-flags--licenses"&gt;16. USE flags &amp;amp; Licenses&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#17-reboot"&gt;17. Reboot&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#-faq"&gt;💡 FAQ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://zakk.au/posts/gentoo-install/#-references"&gt;📚 References&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id="-my-hardware"&gt;💻 My Hardware&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;: AMD Ryzen 9 7950X3D (16C/32T)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Motherboard&lt;/strong&gt;: ASUS ROG STRIX X670E-A GAMING WIFI&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;RAM&lt;/strong&gt;: 64GB DDR5 6400MHz&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GPU&lt;/strong&gt;: NVIDIA GeForce RTX 4080 SUPER + AMD Radeon iGPU&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt;: NVMe SSD&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Monitor&lt;/strong&gt;: Samsung Odyssey G9 49&amp;quot; 5120×1440&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Network&lt;/strong&gt;: Aussie Broadband 1000/50Mbps, Wi-Fi 7 Router BE9300 (static public IP)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Dual boot&lt;/strong&gt;: Windows 11 + Gentoo&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id="0-download--create-installation-media"&gt;0. Download &amp;amp; Create Installation Media&lt;/h1&gt;
-&lt;h2 id="01-download-iso"&gt;0.1 Download ISO&lt;/h2&gt;
-&lt;p&gt;Official mirrors:&lt;br&gt;
-&lt;a href="https://www.gentoo.org/downloads/mirrors/"&gt;Gentoo Downloads&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://zakk.au/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/hello-world/</guid><description>Tiny first English post.</description></item></channel></rss>
+&lt;p&gt;(Example setup, adjust according to your system)&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://zakk.au/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/posts/hello-world/</guid><description>Tiny first English post.</description></item></channel></rss>

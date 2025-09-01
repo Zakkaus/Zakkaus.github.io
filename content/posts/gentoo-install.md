@@ -12,7 +12,7 @@ toc: true
 - [0. Download & Create Installation Media](#0-download--create-installation-media)
 - [1. Boot & Network](#1-boot--network)
 - [2. Partitioning](#2-partitioning)
-- [3. Filesystems](#3-filesystems)
+- [3. Filesystems & Mounting](#3-filesystems--mounting)
 - [4. Stage3 & chroot](#4-stage3--chroot)
 - [5. Portage & Mirrors](#5-portage--mirrors)
 - [6. Profile & Locale](#6-profile--locale)
@@ -26,13 +26,16 @@ toc: true
 - [13. Desktop Environments (Optional)](#13-desktop-environments-optional)
 - [14. Users & sudo](#14-users--sudo)
 - [15. SSHD (Optional)](#15-sshd-optional)
-- [16. Reboot](#16-reboot)
+- [16. USE flags & Licenses](#16-use-flags--licenses)
+- [17. Reboot](#17-reboot)
 - [💡 FAQ](#-faq)
 - [📚 References](#-references)
 
 ---
 
 # 💻 My Hardware
+(Example setup, adjust according to your system)
+
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)
 - **Motherboard**: ASUS ROG STRIX X670E-A GAMING WIFI
 - **RAM**: 64GB DDR5 6400MHz
@@ -47,17 +50,19 @@ toc: true
 # 0. Download & Create Installation Media
 
 ## 0.1 Download ISO
-Official mirrors:  
+Official download page:  
 [Gentoo Downloads](https://www.gentoo.org/downloads/mirrors/)  
 
-💡 Tip: Choose a mirror close to you. For Australia, try **AARNET** or **Swinburne**.
+💡 Tip: Pick a mirror close to your location. For Australia, try **AARNET** or **Swinburne**.  
 
-Using `wget`:
+For Chinese users: 👉 Please check the localized tutorial here: [Chinese Guide](https://zakk.au/zh-hant/posts/gentoo-install/)  
+
+Download example:
 ```bash
 wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-## 0.2 Create bootable USB
+## 0.2 Create Bootable USB
 
 ### Linux (dd method)
 ```bash
@@ -85,7 +90,7 @@ ls /sys/firmware/efi
 - Exists → UEFI  
 - Not exists → Legacy BIOS  
 
-💡 Tip: Prefer UEFI for modern hardware.
+💡 Tip: Use UEFI for modern hardware.
 
 ## 1.2 Wired
 ```bash
@@ -121,7 +126,7 @@ Suggested layout:
 
 ---
 
-# 3. Filesystems
+# 3. Filesystems & Mounting
 
 ## 3.1 Format examples
 
@@ -143,13 +148,18 @@ mkfs.btrfs -L rootfs /dev/nvme0n1p3
 mkfs.btrfs -L home /dev/nvme0n1p4
 ```
 
-💡 Tips:  
-- **ext4** → Stable and simple, recommended for beginners.  
-- **XFS** → Great for large files.  
-- **Btrfs** → Supports snapshots and subvolumes, but requires `btrfs-progs`.  
+## 3.2 Mount examples
 
-## 3.2 Mount
-Example for Btrfs with subvolumes:
+Full mounting:
+```bash
+mount /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/{boot,home,efi}
+mount /dev/nvme0n1p4 /mnt/gentoo/home
+mount /dev/nvme0n1p2 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
+```
+
+Btrfs with subvolumes:
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 btrfs subvolume create /mnt/gentoo/@
@@ -163,36 +173,25 @@ mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
-For ext4/XFS:
-```bash
-mount /dev/nvme0n1p3 /mnt/gentoo
-mkdir -p /mnt/gentoo/{boot,home,efi}
-mount /dev/nvme0n1p4 /mnt/gentoo/home
-mount /dev/nvme0n1p2 /mnt/gentoo/boot
-mount /dev/nvme0n1p1 /mnt/gentoo/efi
-```
-
 ---
 
 # 4. Stage3 & chroot
 
-## 4.1 Download Stage3
+Download Stage3:
 ```bash
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-## 4.2 Mount system dirs
-
-OpenRC:
+Mount system dirs (OpenRC):
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 ```
 
-systemd:
+Mount system dirs (systemd):
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -200,7 +199,7 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 mount --rbind /run /mnt/gentoo/run && mount --make-rslave /mnt/gentoo/run
 ```
 
-## 4.3 Enter chroot
+Enter chroot:
 ```bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
@@ -217,32 +216,18 @@ emerge-webrsync
 emerge --sync
 ```
 
-💡 If sync fails, use `wget` to manually fetch snapshot.
-
 ## 5.1 Select mirrors
 ```bash
 emerge --ask app-portage/mirrorselect
 mirrorselect -i -o >> /etc/portage/make.conf
 ```
 
-💡 Choose a mirror near you (Australia → AARNET, Swinburne).
-
-## 5.2 make.conf example
-```bash
-nano /etc/portage/make.conf
-```
-
-Example content:
-```conf
-COMMON_FLAGS="-march=native -O2 -pipe"
-MAKEOPTS="-j32"
-GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
-ACCEPT_LICENSE="*"
-```
+💡 Tip: Select a mirror close to your location (AARNET in AU, etc).
 
 ---
 
 # 6. Profile & Locale
+
 ```bash
 eselect profile list
 eselect profile set <id>
@@ -257,14 +242,8 @@ echo "Australia/Melbourne" > /etc/timezone
 emerge --config sys-libs/timezone-data
 ```
 
-💡 Full timezone list:  
+Full timezone list:  
 [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
-Examples:  
-- Melbourne → `Australia/Melbourne`  
-- Tokyo → `Asia/Tokyo`  
-- London → `Europe/London`  
-- New York → `America/New_York`  
 
 ## 6.2 Locale
 ```conf
@@ -281,8 +260,8 @@ eselect locale set en_US.utf8
 # 6.x Localization
 
 - Keep `en_US.UTF-8` as default.  
-- Add others if needed (`en_AU.UTF-8`, `fr_FR.UTF-8`).  
-- Fonts for Asian languages:  
+- Add others if needed (`en_AU.UTF-8`, etc).  
+- Asian fonts if needed:  
   ```bash
   emerge media-fonts/noto-cjk
   ```
@@ -292,12 +271,11 @@ eselect locale set en_US.utf8
 # 7. Kernel Choices
 
 ## 7.1 gentoo-kernel-bin
-Easiest option, recommended for beginners:
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
 
-## 7.2 gentoo-sources (manual compile)
+## 7.2 gentoo-sources (manual)
 ```bash
 emerge sys-kernel/gentoo-sources
 cd /usr/src/linux
@@ -307,14 +285,11 @@ make modules_install
 make install
 ```
 
-💡 Notes:  
-- **ext4** → Usually enabled by default.  
-- **Btrfs** → Must enable manually in kernel.  
+💡 ext4 usually enabled, Btrfs requires manual enable.
 
 ---
 
 # 8. fstab & UUID
-Get UUIDs:
 ```bash
 blkid
 lsblk -f
@@ -332,7 +307,6 @@ UUID=<UUID-HOME> /home  ext4  noatime            0 2
 
 # 9. Bootloader
 
-Install GRUB:
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
@@ -346,7 +320,7 @@ echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-If using Btrfs, install tools:
+If using Btrfs:
 ```bash
 emerge --ask sys-fs/btrfs-progs
 ```
@@ -371,14 +345,11 @@ rc-update add dhcpcd default
 
 # 11. Display Server Choice (Wayland / X11)
 
-- **Wayland**: Modern, recommended for KDE/ GNOME on AMD/Intel GPUs.  
-- **X11**: Better compatibility for older software and some games.  
+- **Wayland**: modern, best for GNOME/KDE on AMD/Intel.  
+- **X11**: better compatibility for older apps and games.  
 
-Set in `/etc/portage/make.conf`:
 ```conf
-# Wayland
 USE="wayland egl pipewire vulkan"
-
 # Or X11
 USE="X xwayland egl pipewire vulkan"
 ```
@@ -425,19 +396,17 @@ emerge sys-firmware/amd-ucode
 
 # 13. Desktop Environments (Optional)
 
-## KDE Plasma
+KDE Plasma:
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
 
-## GNOME
+GNOME:
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
 ```
-
-💡 Tip: Skip this if you only want a server.
 
 ---
 
@@ -450,8 +419,6 @@ emerge app-admin/sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 ```
 
-⚠️ Replace `zakk` with your username.
-
 ---
 
 # 15. SSHD (Optional)
@@ -462,7 +429,34 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-# 16. Reboot
+# 16. USE flags & Licenses
+
+## 16.1 USE flags
+- Control optional features of packages (e.g., `gtk`, `qt`, `wayland`).  
+- Global: `/etc/portage/make.conf`  
+- Per-package: `/etc/portage/package.use`  
+
+Example:
+```conf
+# /etc/portage/package.use
+media-video/ffmpeg X wayland
+```
+
+Check dependencies:
+```bash
+emerge -pv firefox
+```
+
+## 16.2 Licenses
+Some packages require license acceptance, e.g. Google Chrome:
+```conf
+# /etc/portage/package.license
+www-client/google-chrome google-chrome
+```
+
+---
+
+# 17. Reboot
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -472,11 +466,11 @@ reboot
 ---
 
 # 💡 FAQ
-- ISO doesn’t boot → ensure you used dd mode (Linux `dd` or Rufus dd mode).  
-- WPA3 may fail → use WPA2.  
-- Filesystem choice: ext4 (safe), XFS (large files), Btrfs (snapshots).  
-- os-prober disabled by default, enable if dual-booting.  
-- Install btrfs-progs only if you use Btrfs.  
+- ISO doesn’t boot → use dd or Rufus (dd mode).  
+- USE flag conflict → run `emerge -pv package` to see options.  
+- WPA3 unstable → use WPA2.  
+- os-prober disabled by default, enable for dual boot.  
+- Install btrfs-progs if using Btrfs.  
 
 ---
 
@@ -484,4 +478,5 @@ reboot
 - [Gentoo Handbook (Official)](https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation)  
 - [Bitbili Tutorial](https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html)  
 - [Rufus official website](https://rufus.ie/)  
-- [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+- [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)  
+- [Chinese Guide](https://zakk.au/zh-hant/posts/gentoo-install/)

@@ -12,7 +12,7 @@ toc: true
 - [0. 下載與製作安裝媒體](#0-下載與製作安裝媒體)
 - [1. 開機與網路](#1-開機與網路)
 - [2. 磁碟分割](#2-磁碟分割)
-- [3. 檔案系統](#3-檔案系統)
+- [3. 檔案系統與掛載](#3-檔案系統與掛載)
 - [4. Stage3 與 chroot](#4-stage3-與-chroot)
 - [5. Portage 與軟體源](#5-portage-與軟體源)
 - [6. Profile 與語言](#6-profile-與語言)
@@ -26,13 +26,16 @@ toc: true
 - [13. 桌面環境（可選）](#13-桌面環境可選)
 - [14. 使用者與 sudo](#14-使用者與-sudo)
 - [15. SSHD（可選）](#15-sshd可選)
-- [16. 重開機](#16-重開機)
+- [16. USE flags 與 License](#16-use-flags-與-license)
+- [17. 重開機](#17-重開機)
 - [💡 常見問題](#-常見問題)
 - [📚 參考來源](#-參考來源)
 
 ---
 
 # 💻 我的電腦配置
+（此部分僅為示例，方便日後查閱與分享）
+
 - **CPU**：AMD Ryzen 9 7950X3D（16C/32T）
 - **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI
 - **記憶體**：64GB DDR5 6400MHz
@@ -50,14 +53,13 @@ toc: true
 官方下載頁：  
 [Gentoo Downloads](https://www.gentoo.org/downloads/mirrors/)  
 
-💡 建議：選擇離你最近的 mirror，例如：  
-- 台灣：NCHC  
-- 中國：USTC、清華  
-- 澳洲：AARNET、Swinburne  
+💡 建議：  
+- 在中國使用者可以選擇 **中科大 (USTC)**、清華大學、阿里雲的鏡像，速度較快。  
+- 在澳洲建議使用 **AARNET** 或 **Swinburne**。
 
 使用 `wget`：
 ```bash
-wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
+wget https://mirrors.ustc.edu.cn/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
 ## 0.2 製作 USB 開機碟
@@ -66,7 +68,7 @@ wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-i
 ```bash
 sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
-⚠️ `sdX` 請替換為你的 USB 裝置。
+⚠️ `sdX` 請替換為你的 USB 裝置名稱。
 
 ### Windows 下（Rufus）
 下載 Rufus：[Rufus 官方網站](https://rufus.ie/)  
@@ -87,8 +89,6 @@ ls /sys/firmware/efi
 ```
 - 有輸出 → **UEFI 模式**  
 - 無輸出 → **Legacy BIOS**  
-
-💡 建議：現代電腦建議使用 UEFI。
 
 ## 1.2 有線網路
 ```bash
@@ -124,7 +124,7 @@ cfdisk /dev/nvme0n1
 
 ---
 
-# 3. 檔案系統
+# 3. 檔案系統與掛載
 
 ## 3.1 格式化範例
 
@@ -146,12 +146,22 @@ mkfs.btrfs -L rootfs /dev/nvme0n1p3
 mkfs.btrfs -L home /dev/nvme0n1p4
 ```
 
-💡 建議：  
-- **ext4** → 最穩定，建議新手使用。  
-- **XFS** → 適合大檔案。  
-- **Btrfs** → 支援快照與子卷，但需額外工具（例如 btrfs-progs）。  
+## 3.2 掛載範例
 
-## 3.2 掛載
+完整掛載流程：
+```bash
+# 掛載 root
+mount /dev/nvme0n1p3 /mnt/gentoo
+
+# 建立目錄
+mkdir -p /mnt/gentoo/{boot,home,efi}
+
+# 掛載 home、boot、efi
+mount /dev/nvme0n1p4 /mnt/gentoo/home
+mount /dev/nvme0n1p2 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
+```
+
 Btrfs 子卷範例：
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
@@ -166,36 +176,25 @@ mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
-ext4 / XFS 範例：
-```bash
-mount /dev/nvme0n1p3 /mnt/gentoo
-mkdir -p /mnt/gentoo/{boot,home,efi}
-mount /dev/nvme0n1p4 /mnt/gentoo/home
-mount /dev/nvme0n1p2 /mnt/gentoo/boot
-mount /dev/nvme0n1p1 /mnt/gentoo/efi
-```
-
 ---
 
 # 4. Stage3 與 chroot
 
-## 4.1 下載 Stage3
+下載 Stage3：
 ```bash
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-## 4.2 掛載系統目錄
-
-OpenRC：
+掛載系統目錄（OpenRC）：
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 ```
 
-systemd：
+掛載系統目錄（systemd）：
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -203,7 +202,7 @@ mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
 mount --rbind /run /mnt/gentoo/run && mount --make-rslave /mnt/gentoo/run
 ```
 
-## 4.3 進入 chroot
+進入 chroot：
 ```bash
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
@@ -220,32 +219,21 @@ emerge-webrsync
 emerge --sync
 ```
 
-💡 如果失敗，可用 `wget` 手動下載 snapshot。
-
 ## 5.1 選擇鏡像
 ```bash
 emerge --ask app-portage/mirrorselect
 mirrorselect -i -o >> /etc/portage/make.conf
 ```
 
-💡 建議：選擇離你最近的鏡像（澳洲 → AARNET, Swinburne）。
-
-## 5.2 make.conf 範例
-```bash
-nano /etc/portage/make.conf
-```
-
-內容：
-```conf
-COMMON_FLAGS="-march=native -O2 -pipe"
-MAKEOPTS="-j32"
-GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
-ACCEPT_LICENSE="*"
-```
+💡 建議：  
+- **中國**：中科大、清華、阿里雲。  
+- **台灣**：NCHC。  
+- **澳洲**：AARNET, Swinburne。  
 
 ---
 
 # 6. Profile 與語言
+
 ```bash
 eselect profile list
 eselect profile set <編號>
@@ -261,16 +249,8 @@ echo "Asia/Taipei" > /etc/timezone
 emerge --config sys-libs/timezone-data
 ```
 
-💡 完整時區列表：  
+完整時區列表：  
 [tz database 時區列表](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-
-範例：  
-- 台北 → `Asia/Taipei`  
-- 上海 → `Asia/Shanghai`  
-- 東京 → `Asia/Tokyo`  
-- 墨爾本 → `Australia/Melbourne`  
-- 倫敦 → `Europe/London`  
-- 紐約 → `America/New_York`  
 
 ## 6.2 語言
 ```conf
@@ -303,7 +283,6 @@ eselect locale set en_US.utf8
 # 7. 內核選擇
 
 ## 7.1 gentoo-kernel-bin
-最簡單，建議新手使用：
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
@@ -318,14 +297,11 @@ make modules_install
 make install
 ```
 
-💡 建議：  
-- **ext4** → 內核通常已啟用。  
-- **Btrfs** → 需在內核手動啟用。  
+💡 ext4 幾乎預設啟用，Btrfs 需手動啟用。
 
 ---
 
 # 8. fstab 與 UUID
-查詢 UUID：
 ```bash
 blkid
 lsblk -f
@@ -343,21 +319,20 @@ UUID=<UUID-HOME> /home  ext4  noatime            0 2
 
 # 9. Bootloader
 
-安裝 GRUB：
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-啟用 os-prober：
+開啟 os-prober：
 ```bash
 emerge --ask sys-boot/os-prober
 echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-如果使用 Btrfs，請安裝：
+Btrfs 工具：
 ```bash
 emerge --ask sys-fs/btrfs-progs
 ```
@@ -382,15 +357,12 @@ rc-update add dhcpcd default
 
 # 11. 圖形化選擇（Wayland / X11）
 
-- **Wayland**：新技術，適合 KDE Plasma 與 GNOME，尤其 AMD/Intel GPU。  
-- **X11**：相容性更好，適合舊軟體與遊戲。  
+- **Wayland**：現代，推薦 KDE/ GNOME（AMD/Intel GPU）。  
+- **X11**：相容性佳，適合舊程式與遊戲。  
 
-設定（寫入 `/etc/portage/make.conf`）：
 ```conf
-# Wayland
 USE="wayland egl pipewire vulkan"
-
-# 或 X11
+# 或
 USE="X xwayland egl pipewire vulkan"
 ```
 
@@ -436,19 +408,17 @@ emerge sys-firmware/amd-ucode
 
 # 13. 桌面環境（可選）
 
-## KDE Plasma
+KDE Plasma：
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
 
-## GNOME
+GNOME：
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
 ```
-
-💡 如果只需伺服器，請跳過此步驟。
 
 ---
 
@@ -461,8 +431,6 @@ emerge app-admin/sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 ```
 
-⚠️ 注意：`zakk` 是範例名稱，請換成自己的名稱。
-
 ---
 
 # 15. SSHD（可選）
@@ -473,7 +441,28 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-# 16. 重開機
+# 16. USE flags 與 License
+
+## 16.1 USE flags 簡介
+- **用途**：控制軟體功能，例如 `gtk`、`qt`、`wayland`。  
+- **設定方式**：可在 `/etc/portage/make.conf` 全域設定，或在 `/etc/portage/package.use` 單獨設定。  
+
+範例：
+```conf
+# /etc/portage/package.use
+media-video/ffmpeg X wayland
+```
+
+## 16.2 License 問題
+某些軟體需同意授權，例如 Google Chrome：
+```conf
+# /etc/portage/package.license
+www-client/google-chrome google-chrome
+```
+
+---
+
+# 17. 重開機
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -483,11 +472,10 @@ reboot
 ---
 
 # 💡 常見問題
-- ISO 無法開機 → 請確保使用 **dd 或 Rufus (dd 模式)** 燒錄。  
-- WPA3 不穩定 → 建議使用 WPA2。  
-- 檔案系統選擇：ext4（穩定）、XFS（大檔案）、Btrfs（快照）。  
+- ISO 無法開機 → 請使用 **dd 或 Rufus (dd 模式)**。  
+- USE flags 衝突 → 用 `emerge -pv package` 查看需要哪些 USE。  
+- WPA3 不穩定 → 使用 WPA2。  
 - os-prober 預設關閉，需要手動開啟。  
-- 使用 Btrfs 請安裝 btrfs-progs。  
 
 ---
 
