@@ -19,7 +19,7 @@ defaultContentLanguageInSubdir = false
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
   mainSections = ["posts"]
-  # 請讓主題載入自訂的 CSS/JS（右上按鈕）
+  # 自訂右上角多語按鈕資源（確保存在）
   customCSS = ["css/header-buttons.css"]
   customJS = ["js/header-buttons.js"]
 

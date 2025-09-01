@@ -77,3 +77,13 @@
   color:#888;
   font-size:12px;
 }
+.custom-topbuttons.fallback-fixed{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:9999;
+}
+@media (max-width:900px){
+  .custom-topbuttons.fallback-fixed{ top:10px; right:10px; }
+}
+/* 多語頂部按鈕樣式已載入（JS 會根據 lang 動態插入）。 */
