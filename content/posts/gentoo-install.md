@@ -47,17 +47,17 @@ toc: true
 # 0. Download & Create Installation Media
 
 ## 0.1 Download ISO
-Official download page:  
+Official mirrors:  
 [Gentoo Downloads](https://www.gentoo.org/downloads/mirrors/)  
 
-💡 Tip: Choose a mirror close to you, e.g. in Australia use **AARNET** or **Swinburne**.
+💡 Tip: Choose a mirror close to you. For Australia, try **AARNET** or **Swinburne**.
 
 Using `wget`:
 ```bash
 wget https://mirror.aarnet.edu.au/pub/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-## 0.2 Create Bootable USB
+## 0.2 Create bootable USB
 
 ### Linux (dd method)
 ```bash
@@ -70,8 +70,8 @@ Download Rufus: [Rufus official website](https://rufus.ie/)
 
 Steps:  
 1. Open Rufus.  
-2. Select USB device and Gentoo ISO.  
-3. Select **dd mode** (not ISO mode).  
+2. Select your USB device and Gentoo ISO.  
+3. Choose **dd mode** (not ISO mode).  
 4. Click "Start".  
 
 ---
@@ -148,10 +148,64 @@ mkfs.btrfs -L home /dev/nvme0n1p4
 - **XFS** → Great for large files.  
 - **Btrfs** → Supports snapshots and subvolumes, but requires `btrfs-progs`.  
 
+## 3.2 Mount
+Example for Btrfs with subvolumes:
+```bash
+mount /dev/nvme0n1p3 /mnt/gentoo
+btrfs subvolume create /mnt/gentoo/@
+btrfs subvolume create /mnt/gentoo/@home
+umount /mnt/gentoo
+
+mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/{boot,home,efi}
+mount -o subvol=@home /dev/nvme0n1p3 /mnt/gentoo/home
+mount /dev/nvme0n1p2 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
+```
+
+For ext4/XFS:
+```bash
+mount /dev/nvme0n1p3 /mnt/gentoo
+mkdir -p /mnt/gentoo/{boot,home,efi}
+mount /dev/nvme0n1p4 /mnt/gentoo/home
+mount /dev/nvme0n1p2 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/efi
+```
+
 ---
 
 # 4. Stage3 & chroot
-(Same as v5)
+
+## 4.1 Download Stage3
+```bash
+cd /mnt/gentoo
+links https://www.gentoo.org/downloads/mirrors/
+tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+```
+
+## 4.2 Mount system dirs
+
+OpenRC:
+```bash
+mount -t proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+```
+
+systemd:
+```bash
+mount -t proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev
+mount --rbind /run /mnt/gentoo/run && mount --make-rslave /mnt/gentoo/run
+```
+
+## 4.3 Enter chroot
+```bash
+chroot /mnt/gentoo /bin/bash
+source /etc/profile
+export PS1="(chroot) $PS1"
+```
 
 ---
 
@@ -163,16 +217,32 @@ emerge-webrsync
 emerge --sync
 ```
 
-💡 If sync fails, use `wget` to fetch snapshot manually.  
+💡 If sync fails, use `wget` to manually fetch snapshot.
 
-## 5.1 OpenRC vs systemd
-- **OpenRC**: Default in Gentoo, simple and lightweight.  
-- **systemd**: Better integration with GNOME/KDE and modern software.  
+## 5.1 Select mirrors
+```bash
+emerge --ask app-portage/mirrorselect
+mirrorselect -i -o >> /etc/portage/make.conf
+```
+
+💡 Choose a mirror near you (Australia → AARNET, Swinburne).
+
+## 5.2 make.conf example
+```bash
+nano /etc/portage/make.conf
+```
+
+Example content:
+```conf
+COMMON_FLAGS="-march=native -O2 -pipe"
+MAKEOPTS="-j32"
+GENTOO_MIRRORS="https://mirror.aarnet.edu.au/pub/gentoo/"
+ACCEPT_LICENSE="*"
+```
 
 ---
 
 # 6. Profile & Locale
-
 ```bash
 eselect profile list
 eselect profile set <id>
@@ -244,7 +314,19 @@ make install
 ---
 
 # 8. fstab & UUID
-(Same as v5)
+Get UUIDs:
+```bash
+blkid
+lsblk -f
+```
+
+Edit `/etc/fstab`:
+```fstab
+UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
+UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
+UUID=<UUID-ROOT> /      ext4  noatime            0 1
+UUID=<UUID-HOME> /home  ext4  noatime            0 2
+```
 
 ---
 
@@ -272,32 +354,111 @@ emerge --ask sys-fs/btrfs-progs
 ---
 
 # 10. Network Services
-(Same as v5)
+
+systemd:
+```bash
+emerge net-misc/networkmanager
+systemctl enable NetworkManager
+```
+
+OpenRC:
+```bash
+emerge net-misc/dhcpcd
+rc-update add dhcpcd default
+```
 
 ---
 
 # 11. Display Server Choice (Wayland / X11)
-(Same as v5)
+
+- **Wayland**: Modern, recommended for KDE/ GNOME on AMD/Intel GPUs.  
+- **X11**: Better compatibility for older software and some games.  
+
+Set in `/etc/portage/make.conf`:
+```conf
+# Wayland
+USE="wayland egl pipewire vulkan"
+
+# Or X11
+USE="X xwayland egl pipewire vulkan"
+```
 
 ---
 
 # 12. GPU Drivers & Microcode
-(Same as v5)
+
+## NVIDIA
+```conf
+VIDEO_CARDS="nvidia"
+```
+```bash
+emerge x11-drivers/nvidia-drivers
+```
+
+## AMD
+```conf
+VIDEO_CARDS="amdgpu radeonsi"
+```
+```bash
+emerge mesa vulkan-loader
+```
+
+## Intel
+```conf
+VIDEO_CARDS="intel i965 iris"
+```
+```bash
+emerge mesa vulkan-loader
+```
+
+## CPU Microcode
+Intel:
+```bash
+emerge sys-firmware/intel-microcode
+```
+AMD:
+```bash
+emerge sys-firmware/amd-ucode
+```
 
 ---
 
 # 13. Desktop Environments (Optional)
-(Same as v5)
+
+## KDE Plasma
+```bash
+emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
+systemctl enable sddm
+```
+
+## GNOME
+```bash
+emerge gnome-base/gnome gnome-base/gdm
+systemctl enable gdm
+```
+
+💡 Tip: Skip this if you only want a server.
 
 ---
 
 # 14. Users & sudo
-(Same as v5)
+```bash
+passwd
+useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
+passwd zakk
+emerge app-admin/sudo
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+```
+
+⚠️ Replace `zakk` with your username.
 
 ---
 
 # 15. SSHD (Optional)
-(Same as v5)
+```bash
+emerge net-misc/openssh
+systemctl enable sshd && systemctl start sshd
+```
 
 ---
 
@@ -311,11 +472,11 @@ reboot
 ---
 
 # 💡 FAQ
-- ISO doesn’t boot → Use dd or Rufus (dd mode).  
-- WPA3 may fail → Use WPA2.  
-- Filesystem choice: ext4 (stable), XFS (large files), Btrfs (snapshots).  
+- ISO doesn’t boot → ensure you used dd mode (Linux `dd` or Rufus dd mode).  
+- WPA3 may fail → use WPA2.  
+- Filesystem choice: ext4 (safe), XFS (large files), Btrfs (snapshots).  
 - os-prober disabled by default, enable if dual-booting.  
-- Install btrfs-progs if using Btrfs.  
+- Install btrfs-progs only if you use Btrfs.  
 
 ---
 
