@@ -26,39 +26,54 @@ body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border
 .gentoo-article h2{position:relative;margin:2.25rem 0 1.1rem;padding:.55rem .9rem .55rem 1rem;border-left:6px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h2),rgba(0,0,0,0));border-radius:6px;font-size:1.28rem;}
 .gentoo-article h3{margin:1.8rem 0 .8rem;padding:.4rem .65rem .4rem .75rem;border-left:4px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h3),rgba(0,0,0,0));border-radius:5px;font-size:1.08rem;}
 .gentoo-article pre{
-  background:linear-gradient(180deg,var(--g-code-bg),var(--g-code-bg))!important;
-  border:none;
-  border-left:4px solid var(--g-accent);
-  padding:.65rem .85rem;
-  margin:1rem 0;
-  border-radius:6px;
-  font-size:.82rem;
-  line-height:1.35;
-  box-shadow:none;
+  background:#2b2f36!important;
+  color:#f3f5f7!important;
+  border:1px solid #3a4048;
+  padding:.85rem 1rem;
+  margin:1.15rem 0;
+  border-radius:10px;
+  font-size:.84rem;
+  line-height:1.45;
+  overflow:auto;
 }
 body.dark .gentoo-article pre{
-  background:#1e1e1e!important;
-  border-left-color:var(--g-accent);
+  background:#16181c!important;
+  border:1px solid #2b3036;
+  color:#e9ecef!important;
 }
-.gentoo-article pre code{background:transparent!important;padding:0;border:none;box-shadow:none;}
-.gentoo-article code:not(pre code){
-  background:var(--g-code-bg);
-  padding:.1em .4em;
+.gentoo-article pre code{
+  background:transparent!important;
+  padding:0;
   border:none;
-  border-radius:4px;
+  color:inherit;
+  font-size:inherit;
+}
+
+.gentoo-article code:not(pre code){
+  background:#343a40;
+  color:#f8f9fa;
+  padding:.18em .5em;
+  border:1px solid #454d55;
+  border-radius:6px;
   font-size:.78rem;
 }
 body.dark .gentoo-article code:not(pre code){
-  background:#2a2a2a;
+  background:#22272e;
+  border-color:#313a44;
+  color:#e6e8ea;
 }
-.gentoo-article blockquote{margin:1.2rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:var(--g-block-bg);border-radius:6px;}
-.gentoo-article table{border-collapse:collapse;margin:1rem 0;font-size:.85rem;width:100%;border:1px solid var(--g-border);border-radius:10px;overflow:hidden;box-shadow:var(--g-shadow);}
-.gentoo-article table th,
-.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);}
-.gentoo-article table thead th{background:var(--g-table-head);}
-.gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
-.gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
-body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
+
+/* 選取 */
+.gentoo-article pre::selection,
+.gentoo-article pre *::selection{
+  background:#e1306c;
+  color:#fff;
+}
+body.dark .gentoo-article pre::selection,
+body.dark .gentoo-article pre *::selection{
+  background:#ff478c;
+  color:#111;
+}
 </style>
 
 <div class="gentoo-toc">

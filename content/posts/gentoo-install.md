@@ -30,64 +30,74 @@ body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border
 .gentoo-article h4{margin:1.4rem 0 .6rem;font-size:1rem;}
 
 .gentoo-article pre{
-  background:#2e2e33!important;        /* 亮色模式也用深灰底 */
-  color:#f5f5f5!important;              /* 強制淺字，避免被主題覆寫成白字+淺底 */
-  border:1px solid #414146;
-  padding:.75rem .95rem;
-  margin:1rem 0;
-  border-radius:8px;
-  font-size:.85rem;
-  line-height:1.4;
-  box-shadow:none;
+  background:#2b2f36!important;
+  color:#f3f5f7!important;
+  border:1px solid #3a4048;
+  padding:.85rem 1rem;
+  margin:1.15rem 0;
+  border-radius:10px;
+  font-size:.84rem;
+  line-height:1.45;
+  overflow:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#555 transparent;
 }
 body.dark .gentoo-article pre{
-  background:#1e1e22!important;
-  color:#ececec!important;
-  border:1px solid #323237;
+  background:#16181c!important;
+  border:1px solid #2b3036;
+  color:#e9ecef!important;
 }
 .gentoo-article pre code{
   background:transparent!important;
+  padding:0;
+  border:none;
+  font-size:inherit;
   color:inherit;
 }
+
+/* inline code 高對比 */
 .gentoo-article code:not(pre code){
-  background:var(--g-code-bg);
-  padding:.1em .4em;
-  border:none;
-  border-radius:4px;
+  background:#343a40;
+  color:#f8f9fa;
+  padding:.18em .5em;
+  border:1px solid #454d55;
+  border-radius:6px;
   font-size:.78rem;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
 }
 body.dark .gentoo-article code:not(pre code){
-  background:#2a2a2a;
+  background:#22272e;
+  border-color:#313a44;
+  color:#e6e8ea;
 }
 
-.gentoo-article blockquote{margin:1.2rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:var(--g-block-bg);border-radius:6px;font-style:normal;}
-.gentoo-article blockquote > p{margin:.2rem 0;}
+/* 選取可見 */
+.gentoo-article pre::selection,
+.gentoo-article pre *::selection{
+  background:#e1306c;
+  color:#fff;
+}
+body.dark .gentoo-article pre::selection,
+body.dark .gentoo-article pre *::selection{
+  background:#ff478c;
+  color:#111;
+}
 
-.gentoo-article table{border-collapse:collapse;margin:1rem 0;font-size:.85rem;width:100%;overflow:hidden;border:1px solid var(--g-border);border-radius:10px;box-shadow:var(--g-shadow);}
-.gentoo-article table thead th{background:var(--g-table-head);font-weight:600;}
-.gentoo-article table th,
-.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);vertical-align:top;}
-.gentoo-article table tbody tr:nth-child(even){background:rgba(0,0,0,0.025);}
-body.dark .gentoo-article table tbody tr:nth-child(even){background:rgba(255,255,255,0.03);}
-
-.gentoo-article ul,
-.gentoo-article ol{margin:.6rem 0 .9rem;padding-left:1.35rem;}
-.gentoo-article li{margin:.15rem 0;}
-.gentoo-article hr{margin:2.2rem 0;border:none;height:1px;background:linear-gradient(90deg,rgba(0,0,0,.08),rgba(0,0,0,0));}
-body.dark .gentoo-article hr{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0));}
-
-.gentoo-article .inline-badge{display:inline-block;background:var(--g-accent);color:#fff;padding:.18em .55em;border-radius:999px;font-size:.65rem;letter-spacing:.5px;vertical-align:baseline;position:relative;top:-1px;}
-
-.gentoo-article .faq-list{display:grid;gap:.75rem;}
-@media(min-width:680px){.gentoo-article .faq-list{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}}
-
-.gentoo-article .callout{border:1px solid var(--g-accent-soft);background:linear-gradient(135deg,rgba(225,48,108,.09),rgba(225,48,108,.02));padding:.85rem 1rem;border-radius:10px;position:relative;overflow:hidden;}
-body.dark .gentoo-article .callout{border-color:var(--g-accent);}
-
-.gentoo-article .callout:before{content:"💡";position:absolute;top:.65rem;right:.75rem;opacity:.25;font-size:1.4rem;pointer-events:none;}
-.gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
-.gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
-body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
+/* 捲軸微樣式（Chromium / WebKit） */
+.gentoo-article pre::-webkit-scrollbar{
+  height:8px;
+  width:8px;
+}
+.gentoo-article pre::-webkit-scrollbar-track{
+  background:transparent;
+}
+.gentoo-article pre::-webkit-scrollbar-thumb{
+  background:#555;
+  border-radius:20px;
+}
+body.dark .gentoo-article pre::-webkit-scrollbar-thumb{
+  background:#4a4f56;
+}
 </style>
 
 <div class="gentoo-toc">
@@ -625,5 +635,4 @@ reboot
 - Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus: <https://rufus.ie/>  
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
-</div>
 </div>
