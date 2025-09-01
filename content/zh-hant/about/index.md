@@ -97,11 +97,30 @@ body.dark .about-page .about-hero strong{
   font-size:.98rem !important;
   line-height:1.25;
   font-weight:600;
+  position:relative;
+  background:linear-gradient(to right,rgba(225,48,108,.10),rgba(225,48,108,0) 72%) !important;
+  border-radius:6px !important;
 }
 .about-page h3::before{
   width:2px !important;
   background:var(--about-accent) !important;
   bottom:.3rem !important;
+}
+.about-page h3::after{
+  content:"";
+  position:absolute;
+  left:.75rem;
+  bottom:0;
+  height:2px;
+  width:64px;
+  background:var(--about-accent);
+  border-radius:2px;
+  opacity:.78;
+}
+body.dark .about-page h3,
+body.dark .about-page h3::after{
+  background:linear-gradient(to right,rgba(225,48,108,.22),rgba(225,48,108,0) 72%) !important;
+  opacity:.9;
 }
 
 /* 第一個標題（緊接 hero）再略縮 */
@@ -360,10 +379,10 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
 - 主機板：ASUS ROG STRIX X670E-A GAMING WIFI  
 - 處理器：AMD Ryzen 9 7950X3D（16C/32T）  
 - 顯示卡：NVIDIA GeForce RTX 4080 SUPER  
-- 記憶體：**64 GB DDR5 6400 MHz**  
+- 記憶體：64 GB DDR5 6400 MHz
 - 網路：固定公网 IP（Aussie Telecom，1000/50 Mbps）  
 - 路由器：BE9300 三頻 Wi-Fi 7  
-- 作業系統：Windows 11 Pro 64-bit + **Gentoo Linux（KDE Plasma）**
+- 作業系統：Windows 11 Pro 64-bit + Gentoo Linux（KDE Plasma）
 
 ### 💼 筆電
 - Apple MacBook Air M2（16GB / 512GB）  

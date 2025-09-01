@@ -56,7 +56,7 @@ body.dark .about-page .about-hero strong{
   color:#ff8fb7!important;
 }
 
-/* Headings simplified */
+/* Unified h3 heading effect (same as zh-hant) */
 .about-page h3{
   margin:1.9rem 0 .55rem;
   font-size:1.02rem;
@@ -65,13 +65,24 @@ body.dark .about-page .about-hero strong{
   padding:0 .2rem .15rem .85rem;
   border-bottom:none!important;
   position:relative;
+  background:linear-gradient(to right,rgba(225,48,108,.10),rgba(225,48,108,0) 72%) !important;
+  border-radius:6px !important;
 }
-.about-page h3::after{content:none!important;}
-.about-page h3::before{
+body.dark .about-page h3{
+  background:linear-gradient(to right,rgba(225,48,108,.22),rgba(225,48,108,0) 72%) !important;
+}
+.about-page h3::after{
   content:"";
-  position:absolute;left:0;top:0;bottom:.55rem;
-  width:3px;background:var(--about-accent);border-radius:2px;
+  position:absolute;
+  left:.75rem;
+  bottom:0;
+  height:2px;
+  width:64px;
+  background:var(--about-accent);
+  border-radius:2px;
+  opacity:.78;
 }
+body.dark .about-page h3::after{opacity:.9;}
 
 /* First heading after hero */
 .about-page .about-hero + h3{
@@ -234,10 +245,10 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
 - Motherboard: ASUS ROG STRIX X670E-A GAMING WIFI  
 - CPU: AMD Ryzen 9 7950X3D (16C/32T)  
 - GPU: NVIDIA GeForce RTX 4080 SUPER  
-- RAM: **64 GB DDR5 6400 MHz**  
+- RAM: 64 GB DDR5 6400 MHz  
 - Network: Static public IP (Aussie Telecom, 1000/50 Mbps)  
 - Router: BE9300 Tri-Band Wi-Fi 7  
-- OS: Windows 11 Pro 64-bit + **Gentoo Linux (KDE Plasma)**  
+- OS: Windows 11 Pro 64-bit + Gentoo Linux (KDE Plasma)  
 
 ### 💼 Laptops
 - Apple MacBook Air M2 (16GB / 512GB)  
