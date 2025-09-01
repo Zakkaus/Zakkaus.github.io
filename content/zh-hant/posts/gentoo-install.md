@@ -162,10 +162,35 @@ iwctl
 [iwd]# station wlp9s0 get-networks
 [iwd]# station wlp9s0 connect SSID
 ```
-
 > 若 WPA3 不穩，先改用 WPA2 試試。
 
----
+### 1.4 （可選）臨時開啟 SSH（root 密碼登入）
+目的：方便在另一台電腦遠端繼續安裝、複製貼上長指令。僅限安裝階段，完成後請關閉。
+
+1. 設定 root 密碼（若未設定）：
+   ```bash
+   passwd
+   ```
+2. 臨時允許 root 與密碼登入：
+   ```bash
+   echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+   echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+   ```
+3. 啟動 sshd：
+   ```bash
+   rc-service sshd start
+   ```
+4. 查詢 IP：
+   ```bash
+   ip a | grep inet
+   ```
+5. 從工作機連線：
+   ```bash
+   ssh root@<安裝機IP>
+   ```
+安全提醒：完成安裝後編輯 `/etc/ssh/sshd_config` 移除上述兩行或改為 `PermitRootLogin prohibit-password`，再重啟 sshd。
+
+（以下繼續下一章節：磁碟分割）
 
 ## 2. 磁碟分割（lsblk 與 cfdisk）
 檢視磁碟：
@@ -641,4 +666,8 @@ reboot
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+</div>
+
+<!-- 檔尾清理：移除重複殘留行 -->
+</div>
 </div>
