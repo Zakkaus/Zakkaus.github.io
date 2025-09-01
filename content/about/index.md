@@ -2,6 +2,8 @@
 title: "About"
 slug: "about"
 toc: false
+date: 2025-09-01
+lastmod: 2025-09-01
 ---
 <style>
 /* 共用簡潔 About 樣式（與中文同步） */
@@ -14,74 +16,95 @@ toc: false
   font-size:.95rem;
 }
 .about-block p{margin:0 0 1.05rem;}
-.about-block h3{
-  margin:2.1rem 0 .85rem;
-  padding:.4rem 0 .45rem .75rem;
-  border-left:4px solid var(--about-accent);
-  font-size:1.02rem;
-  font-weight:650;
-  line-height:1.25;
-  border-bottom:1px solid rgba(0,0,0,.1);
+.about-intro{
+  padding:.9rem 1rem 1rem;
+  margin:0 0 1.9rem;
+  background:linear-gradient(135deg,rgba(0,0,0,.03),rgba(0,0,0,0));
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  font-size:.95rem;
 }
-body.dark .about-block h3{border-bottom:1px solid rgba(255,255,255,.18);}
+body.dark .about-intro{
+  background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,0));
+  border-color:rgba(255,255,255,.15);
+}
+.about-intro strong{font-weight:600;color:#222;}
+body.dark .about-intro strong{color:#eee;}
+.about-block h3{
+  position:relative;
+  margin:2.2rem 0 .85rem;
+  padding:0 0 .35rem .85rem;
+  border-left:3px solid var(--about-accent);
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:.5px;
+}
+.about-block h3::after{
+  content:"";
+  position:absolute;
+  left:0;top:3px;
+  width:10px;height:10px;
+  background:var(--about-accent);
+  border-radius:50%;
+  transform:translate(-55%,0);
+  opacity:.85;
+}
+body.dark .about-block h3::after{opacity:.95;}
 .about-block h3 + ul{
   list-style:none;
-  margin:-.25rem 0 .4rem;
-  padding:0 0 0 .25rem;
+  margin:-.2rem 0 .4rem;
+  padding:0 0 0 .4rem;
 }
 .about-block h3 + ul li{
   position:relative;
-  padding:.38rem 0 .38rem 1.05rem;
+  padding:.38rem 0 .38rem 1rem;
   font-size:.9rem;
 }
 .about-block h3 + ul li::before{
   content:"";
   position:absolute;
-  left:.15rem;top:1em;
-  width:7px;height:7px;
+  left:0;top:.9em;
+  width:6px;height:6px;
   background:var(--about-accent);
   border-radius:50%;
-  box-shadow:0 0 0 4px rgba(225,48,108,.25),0 0 4px rgba(225,48,108,.45);
-  opacity:.85;
+  opacity:.65;
 }
-body.dark .about-block h3 + ul li::before{
-  box-shadow:0 0 0 4px rgba(225,48,108,.35),0 0 5px rgba(225,48,108,.65);
-  opacity:.95;
-}
+body.dark .about-block h3 + ul li::before{opacity:.8;}
 .about-block h3 + ul li a[href]{
   display:inline-block;
-  background:rgba(225,48,108,.10);
+  background:rgba(0,0,0,.05);
   color:var(--about-accent,#e1306c)!important;
-  padding:.38rem .7rem;
-  border-radius:999px;
-  font-size:.72rem;
-  letter-spacing:.3px;
+  padding:.32rem .65rem;
+  border-radius:9px;
+  font-size:.7rem;
   font-weight:600;
+  letter-spacing:.35px;
   text-decoration:none;
-  line-height:1.05;
-  transition:background .25s,color .25s,transform .22s;
+  transition:background .22s,color .22s;
 }
+body.dark .about-block h3 + ul li a[href]{background:rgba(255,255,255,.09);}
 .about-block h3 + ul li a[href]:hover{
   background:var(--about-accent,#e1306c);
   color:#fff!important;
-  transform:translateY(-2px);
 }
-body.dark .about-block h3 + ul li a[href]{background:rgba(225,48,108,.22);}
-body.dark .about-block h3 + ul li a[href]:hover{background:var(--about-accent,#e1306c);}
 @media(max-width:640px){
-  .about-block h3{font-size:.98rem;padding:.4rem 0 .46rem .65rem;}
-  .about-block h3 + ul li{font-size:.85rem;padding:.34rem 0 .34rem .95rem;}
-  .about-block h3 + ul li::before{width:6px;height:6px;}
+  .about-intro{padding:.75rem .85rem .85rem;font-size:.92rem;}
+  .about-block h3{font-size:.95rem;margin:2rem 0 .75rem;padding:0 0 .3rem .75rem;}
+  .about-block h3 + ul li{font-size:.86rem;padding:.34rem 0 .34rem .9rem;}
+  .about-block h3 + ul li::before{top:.85em;}
 }
 @media (prefers-reduced-motion:reduce){
-  .about-block h3 + ul li a[href]{transition:none;transform:none;}
+  .about-block h3 + ul li a[href]{transition:none;}
 }
 </style>
 
 <div class="about-block">
+<div class="about-intro">
 Hi, I'm **Zakk**, based in **Melbourne**.  
 I keep **🐹 guinea pigs** (their names are **Hash Brown** and **Potato Cake** 🥔), enjoy **gaming**, and I'm into **Linux** and **Finance**.  
 Currently studying **Business**.
+</div>
 
 ### 💻 Desktop PC
 - Motherboard: ASUS ROG STRIX X670E-A GAMING WIFI  

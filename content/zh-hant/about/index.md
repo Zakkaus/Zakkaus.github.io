@@ -6,7 +6,7 @@ date: 2025-09-01
 lastmod: 2025-09-01
 ---
 <style>
-/* About 統一樣式（中英文共用） */
+/* 簡潔 About 共用樣式 */
 .about-block{
   --about-accent: var(--hb-active,#e1306c);
   max-width:820px;
@@ -16,131 +16,122 @@ lastmod: 2025-09-01
   font-size:.95rem;
 }
 .about-block p{margin:0 0 1.05rem;}
-.about-block h3{
-  margin:2.1rem 0 .85rem;
-  padding:.42rem 0 .48rem .75rem;
-  border-left:4px solid var(--about-accent);
-  font-size:1.02rem;
-  font-weight:650;
-  line-height:1.25;
-  border-bottom:1px solid rgba(0,0,0,.10);
+
+/* Intro 區：低調柔和卡片 */
+.about-intro{
+  padding:.9rem 1rem 1rem;
+  margin:0 0 1.9rem;
+  background:linear-gradient(135deg,rgba(0,0,0,.03),rgba(0,0,0,0));
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:12px;
+  font-size:.95rem;
 }
-body.dark .about-block h3{border-bottom:1px solid rgba(255,255,255,.18);}
+body.dark .about-intro{
+  background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,0));
+  border-color:rgba(255,255,255,.15);
+}
+.about-intro strong{font-weight:600;color:#222;}
+body.dark .about-intro strong{color:#eee;}
+.about-intro mark{
+  background:rgba(225,48,108,.15);
+  color:#b41d55;
+  padding:.1rem .35rem .15rem;
+  border-radius:6px;
+  font-weight:600;
+}
+body.dark .about-intro mark{
+  background:rgba(225,48,108,.28);
+  color:#ff8ab4;
+}
+
+/* 標題：左細線 + 小圓點（無陰影、無漸層） */
+.about-block h3{
+  position:relative;
+  margin:2.2rem 0 .85rem;
+  padding:0 0 .35rem .85rem;
+  border-left:3px solid var(--about-accent);
+  font-size:1rem;
+  font-weight:600;
+  line-height:1.25;
+  letter-spacing:.5px;
+  color:inherit;
+}
+.about-block h3::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:3px;
+  width:10px;
+  height:10px;
+  background:var(--about-accent);
+  border-radius:50%;
+  transform:translate(-55%,0);
+  opacity:.85;
+}
+body.dark .about-block h3::after{opacity:.95;}
+
+/* 列表：極簡圓點 */
 .about-block h3 + ul{
   list-style:none;
-  margin:-.25rem 0 .4rem;
-  padding:0 0 0 .25rem;
+  margin:-.2rem 0 .4rem;
+  padding:0 0 0 .4rem;
 }
 .about-block h3 + ul li{
   position:relative;
-  padding:.38rem 0 .38rem 1.05rem;
+  padding:.38rem 0 .38rem 1rem;
   font-size:.9rem;
 }
 .about-block h3 + ul li::before{
   content:"";
   position:absolute;
-  left:.15rem;top:1em;
-  width:7px;height:7px;
+  left:0;
+  top:.9em;
+  width:6px;
+  height:6px;
   background:var(--about-accent);
   border-radius:50%;
-  box-shadow:0 0 0 4px rgba(225,48,108,.25),0 0 4px rgba(225,48,108,.45);
-  opacity:.85;
+  opacity:.65;
 }
-body.dark .about-block h3 + ul li::before{
-  box-shadow:0 0 0 4px rgba(225,48,108,.35),0 0 5px rgba(225,48,108,.65);
-  opacity:.95;
-}
-/* 聯絡方式標示（膠囊） */
+body.dark .about-block h3 + ul li::before{opacity:.8;}
+
+/* 聯絡方式：柔和灰底 → hover 主色 */
 .about-block h3 + ul li a[href]{
   display:inline-block;
-  background:rgba(225,48,108,.10);
+  background:rgba(0,0,0,.05);
   color:var(--about-accent,#e1306c)!important;
-  padding:.38rem .7rem;
-  border-radius:999px;
-  font-size:.72rem;
-  letter-spacing:.3px;
+  padding:.32rem .65rem;
+  border-radius:9px;
+  font-size:.7rem;
   font-weight:600;
+  letter-spacing:.35px;
   text-decoration:none;
-  line-height:1.05;
-  transition:background .25s,color .25s,transform .22s;
+  transition:background .22s,color .22s;
 }
+body.dark .about-block h3 + ul li a[href]{background:rgba(255,255,255,.09);}
 .about-block h3 + ul li a[href]:hover{
   background:var(--about-accent,#e1306c);
   color:#fff!important;
-  transform:translateY(-2px);
-}
-body.dark .about-block h3 + ul li a[href]{background:rgba(225,48,108,.22);}
-body.dark .about-block h3 + ul li a[href]:hover{background:var(--about-accent,#e1306c);}
-@media(max-width:640px){
-  .about-block h3{font-size:.98rem;padding:.4rem 0 .46rem .65rem;}
-  .about-block h3 + ul li{font-size:.85rem;padding:.34rem 0 .34rem .95rem;}
-  .about-block h3 + ul li::before{width:6px;height:6px;}
-}
-@media (prefers-reduced-motion:reduce){
-  .about-block h3 + ul li a[href]{transition:none;transform:none;}
 }
 
-/* 新增：開頭介紹強調區 */
-.about-intro{
-  margin:0 0 1.9rem;
-  padding:1rem 1.15rem 1.05rem 1.15rem;
-  border:1px solid rgba(225,48,108,.35);
-  border-left:6px solid var(--about-accent,#e1306c);
-  background:linear-gradient(135deg,rgba(225,48,108,.08),rgba(225,48,108,.00) 70%);
-  border-radius:14px;
-  font-size:.95rem;
-  line-height:1.62;
-  position:relative;
+/* 響應式 */
+@media(max-width:640px){
+  .about-intro{padding:.75rem .85rem .85rem;font-size:.92rem;}
+  .about-block h3{font-size:.95rem;margin:2rem 0 .75rem;padding:0 0 .3rem .75rem;}
+  .about-block h3 + ul li{font-size:.86rem;padding:.34rem 0 .34rem .9rem;}
+  .about-block h3 + ul li::before{top:.85em;}
 }
-body.dark .about-intro{
-  background:linear-gradient(135deg,rgba(225,48,108,.18),rgba(225,48,108,.02) 70%);
-  border-color:rgba(225,48,108,.55);
-}
-.about-intro p{margin:.35rem 0;}
-.about-intro strong{
-  font-weight:700;
-  color:var(--about-accent,#e1306c);
-}
-.about-intro mark{
-  background:rgba(225,48,108,.18);
-  color:#c31852;
-  padding:.15rem .35rem .2rem;
-  border-radius:6px;
-  font-weight:600;
-}
-body.dark .about-intro mark{
-  background:rgba(225,48,108,.32);
-  color:#ff8ab4;
-}
-.about-intro .intro-line + .intro-line{
-  margin-top:.55rem;
-  position:relative;
-}
-.about-intro .intro-line + .intro-line::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:-.4rem;
-  width:54px;
-  height:2px;
-  background:linear-gradient(90deg,var(--about-accent,#e1306c),transparent);
-  border-radius:2px;
-  opacity:.55;
-}
-@media (max-width:640px){
-  .about-intro{padding:.85rem .9rem .9rem .9rem;font-size:.93rem;border-radius:12px;}
-  .about-intro mark{padding:.12rem .32rem .16rem;}
-}
+
+/* 動畫偏好 */
 @media (prefers-reduced-motion:reduce){
-  .about-intro{transition:none;}
+  .about-block h3 + ul li a[href]{transition:none;}
 }
 </style>
 
 <div class="about-block">
 <div class="about-intro">
-  <p class="intro-line">嗨，我是 <strong>Zakk</strong>，在 <mark>墨爾本</mark> 生活。</p>
-  <p class="intro-line">我養了 <strong>🐹 天竺鼠</strong>（名字是 <mark>馬鈴薯</mark> 和 <mark>薯餅</mark> 🥔），喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>。</p>
-  <p class="intro-line">目前就讀 <mark>Business</mark>。</p>
+嗨，我是 **Zakk**，在 **墨爾本**生活。  
+我養了 **🐹 天竺鼠**（名字是 **馬鈴薯** 和 **薯餅** 🥔），喜歡 **遊戲**、**Linux** 與 **金融**。  
+目前就讀 **Business**。
 </div>
 
 ### 💻 桌機
