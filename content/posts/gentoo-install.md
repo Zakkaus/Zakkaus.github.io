@@ -1,5 +1,5 @@
 ---
-title: "Gentoo Installation Guide (Beginner v10)"
+title: "Gentoo Installation Guide (Beginner)"
 date: 2025-09-02
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
 categories: ["Linux Notes"]
@@ -139,7 +139,7 @@ Suggested layout:
 ---
 
 ## 3. Filesystems & Mounting
-*(same as v9, includes ext4/XFS/Btrfs formatting & mounting commands)*
+*(same as earlier version, includes ext4/XFS/Btrfs formatting & mounting commands)*
 
 ---
 
@@ -258,12 +258,12 @@ emerge --config sys-libs/timezone-data
 ---
 
 ## 8. Kernel Selection & Compilation (Full Commands)
-*(same as v9: includes gentoo-kernel-bin and gentoo-sources with full commands, dracut/genkernel)*
+*(same as earlier version: includes gentoo-kernel-bin and gentoo-sources with full commands, dracut/genkernel)*
 
 ---
 
 ## 9 ~ 14
-*(same as v9: fstab, GRUB, networking, Wayland/X11, GPU, microcode, DEs)*
+*(same as earlier version: fstab, GRUB, networking, Wayland/X11, GPU, microcode, DEs)*
 
 ---
 

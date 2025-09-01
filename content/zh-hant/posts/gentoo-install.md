@@ -1,5 +1,5 @@
 ---
-title: "Gentoo 安裝指南（新手版 v10）"
+title: "Gentoo 安裝指南（新手）"
 date: 2025-09-02
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
 categories: ["Linux筆記"]
@@ -115,6 +115,7 @@ iwctl
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 ```
+
 範例輸出：  
 ```
 nvme0n1    476G disk
@@ -137,7 +138,7 @@ nvme0n1    476G disk
 ---
 
 ## 3. 檔案系統與掛載
-（保持和 v9 相同，省略此處以節省字數，但完整文件已包含）
+（同前版本，包含 ext4/XFS/Btrfs 格式化與掛載完整範例）
 
 ---
 
@@ -154,12 +155,12 @@ links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-（Stage3 也可以選擇不同地區鏡像源下載，原則同 ISO。）
+（Stage3 也可以從其他鏡像源下載，原則同 ISO。）
 
 ---
 
 ## 5. Portage 與鏡像源（含 make.conf 完整示例）
-（保持和 v9 相同，完整文件包含 `mirrorselect` 與 `make.conf` 範例）
+（完整包含 mirrorselect、make.conf 範例，保持與前版一致）
 
 ---
 
@@ -185,22 +186,22 @@ echo "www-client/google-chrome google-chrome" >> /etc/portage/package.license
 ---
 
 ## 7. 選擇 Profile（桌面／伺服器）
-（補充 KDE / GNOME / Server Profile 的完整說明，與 v9 相同）
+（與前版相同，補充 KDE / GNOME / Server Profile 的完整說明）
 
 ---
 
 ## 7.x 本地化 Localization（語言與時區）
-（與 v9 相同，包含 en_US 與 zh_TW locale 及時區設定）
+（同前版，包含 en_US 與 zh_TW locale 及時區設定）
 
 ---
 
 ## 8. 內核選擇與編譯（完整指令）
-（與 v9 相同，包含 gentoo-kernel-bin、gentoo-sources 編譯與 dracut/genkernel）
+（與前版相同，包含 gentoo-kernel-bin、gentoo-sources 編譯與 dracut/genkernel）
 
 ---
 
 ## 9 ~ 14
-（與 v9 相同，包含 fstab、GRUB、網路服務、Wayland/X11、GPU、微碼、桌面環境）
+（與前版相同，包含 fstab、GRUB、網路服務、Wayland/X11、GPU、微碼、桌面環境）
 
 ---
 
@@ -212,8 +213,7 @@ passwd zakk
 emerge app-admin/sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 ```
-
-> ⚠️ **注意**：這裡的 `zakk` 是示例，請替換為你的使用者名稱。
+> ⚠️ **注意**：這裡的 `zakk` 是示例，請替換為你自己的使用者名稱。
 
 ---
 
@@ -235,7 +235,7 @@ reboot
 ---
 
 # 💡 常見問題 FAQ
-（與 v9 相同，包含鏡像下載、USE 衝突、NVIDIA 選擇、Btrfs Initramfs 等建議）
+（與前版相同，包含鏡像下載、USE 衝突、NVIDIA 選擇、Btrfs Initramfs 等建議）
 
 ---
 
