@@ -3,7 +3,6 @@
 {{- $posts := printf "%sposts/" $home -}}
 {{- $about := printf "%sabout/" $home -}}
 {{- $rel := .RelPermalink -}}
-{{- /* 當前頁面語言切換：如果是中文路徑去掉 /zh-hant/，反之加上 */ -}}
 {{- $switch := cond $isZH (replace $rel "/zh-hant/" "/" 1) (printf "/zh-hant%s" $rel) -}}
 <header class="site-header">
   <div class="site-header-inner">
@@ -96,18 +95,35 @@
   });
 })();
 </script>
-<!-- END header partial (若再出現外露 JS，請搜尋 nowDark 或 toggleTheme 於其它佈局) -->
-})();
-</script>
-    const target = nowDark ? 'light':'dark';
-    apply(target);
-    localStorage.setItem(KEY, target);
-  });
-  window.addEventListener('resize', ()=> {
-    if(window.innerWidth > 900){
-      const m = document.getElementById('mobileMenu');
-      if(m) m.classList.remove('open');
+
+<!-- 自動清理 & 診斷：移除任何殘留舊 JS 純文字 -->
+<script>
+(function(){
+  const PATTERNS = [
+    /nowDark\s*\?\s*'light':'dark'/,
+    /apply\(target\)/,
+    /toggleTheme/,
+    /const\s+target\s*=\s*nowDark/
+  ];
+  let removed = 0;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  const badNodes = [];
+  while(walker.nextNode()){
+    const n = walker.currentNode;
+    const t = n.textContent.trim();
+    if(!t) continue;
+    if(PATTERNS.some(p=>p.test(t))){
+      badNodes.push(n);
     }
+  }
+  badNodes.forEach(n=>{
+    removed++;
+    n.parentNode.removeChild(n);
   });
+  if(removed){
+    console.warn('[header-cleanup] removed stray script text nodes:', removed);
+  }
 })();
 </script>
+
+<!-- END header partial (檢查點：若再次出現外露文字，請全文 grep `nowDark ? 'light'` 或 `const target = nowDark`) -->
