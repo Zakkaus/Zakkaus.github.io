@@ -1,3 +1,24 @@
-[params]
-  ShowToc = true     # 右側顯示目錄
-  TocOpen = true     # 預設展開
+# ----- Global UI -----
+ShowBreadCrumbs = true
+ShowPostNavLinks = true
+ShowCodeCopyButtons = true
+ShowReadingTime = true
+# 內建 ToC（側邊或內文上方，依主題而定）
+ShowToc  = true
+TocOpen  = true
+
+# ----- Search -----
+# PaperMod 會自動注入 Fuse.js，網址為 /search/ 與 /zh-hant/search/
+fuseOpts = { isCaseSensitive = false, includeScore = true, shouldSort = true, threshold = 0.4 }
+
+# ----- Home Hero（保留你簡潔的自我介紹，雙語均會顯示）-----
+homeInfoParams = { Title = "Hi, I'm Zakk", Content = """
+📍 Melbourne 🐨  |  ❄️ UTC +10 (AEST)
+❤️ @abyss_74.50 ✨
+🐹 Guinea pigs 🥔
+🎮 Gaming · 🐧 Linux · 💹 Finance
+"""}
+
+# ----- i18n -----
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false

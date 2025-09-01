@@ -1,0 +1,44 @@
+# English menu
+[[main]]
+name = "Home"
+url  = "/"
+weight = 1
+
+[[main]]
+name = "Posts"
+url  = "/posts/"
+weight = 2
+
+[[main]]
+name = "Tags"
+url  = "/tags/"
+weight = 3
+
+[[main]]
+name = "Search"
+url  = "/search/"
+weight = 4
+
+# 正體中文選單
+[Languages.zh-hant]
+  title = "Zakk 的部落格"
+
+[[Languages.zh-hant.menu.main]]
+name = "首頁"
+url  = "/zh-hant/"
+weight = 1
+
+[[Languages.zh-hant.menu.main]]
+name = "文章"
+url  = "/zh-hant/posts/"
+weight = 2
+
+[[Languages.zh-hant.menu.main]]
+name = "標籤"
+url  = "/zh-hant/tags/"
+weight = 3
+
+[[Languages.zh-hant.menu.main]]
+name = "搜尋"
+url  = "/zh-hant/search/"
+weight = 4

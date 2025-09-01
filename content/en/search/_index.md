@@ -1,5 +1,5 @@
 ---
-title: "搜尋"
+title: "Search"
 layout: "search"
 _build:
   list: never
