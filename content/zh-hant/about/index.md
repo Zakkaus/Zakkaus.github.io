@@ -6,106 +6,189 @@ date: 2025-09-01
 lastmod: 2025-09-01
 ---
 <style>
-:root{--about-accent:var(--hb-active,#e1306c);}
-.about-wrap{
-  max-width:820px;margin:0 auto;padding:.5rem 0 2.4rem;
-  font-size:.95rem;line-height:1.6;
+:root {
+  --about-accent: var(--hb-active,#e1306c);
+  --about-bg-light: #fafafa;
+  --about-bg-dark: #242528;
+  --about-border-light: #e2e3e6;
+  --about-border-dark: #3a3d42;
+  --about-text-light: #222;
+  --about-text-dark: #e9e9eb;
+  --about-pill-bg-light: rgba(225,48,108,.12);
+  --about-pill-bg-dark: rgba(225,48,108,.30);
 }
-/* Intro 主簡介 */
-.about-intro{
-  font-size:1.08rem;line-height:1.7;
-  padding:1rem 1.15rem 1.05rem;
-  margin:0 0 2rem;
-  background:#f7f7f8;
-  border:1px solid #e3e3e6;
-  border-left:4px solid var(--about-accent);
-  border-radius:14px;
+/* 外層 */
+.about-page {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: .75rem 0 2.8rem;
+  font-size: 1.02rem;
+  line-height: 1.62;
+  font-kerning: normal;
+  color: var(--about-text-light);
 }
-body.dark .about-intro{
-  background:#262729;
-  border:1px solid #3a3d40;
-  border-left-color:var(--about-accent);
+body.dark .about-page { color: var(--about-text-dark); }
+
+/* Intro Hero */
+.about-page .about-hero {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  background: var(--about-bg-light);
+  border: 1px solid var(--about-border-light);
+  border-left: 6px solid var(--about-accent);
+  border-radius: 16px;
+  padding: 1.05rem 1.25rem 1.15rem;
+  margin: 0 0 2.1rem;
+  position: relative;
 }
-.about-intro p{margin:.65rem 0;}
-.about-intro p:first-child{margin-top:0;}
-.about-intro p:last-child{margin-bottom:0;}
-.about-intro strong{
-  background:rgba(225,48,108,.16);
-  color:var(--about-accent);
-  font-weight:600;
-  padding:.18rem .55rem .22rem;
-  margin:.12rem .25rem .12rem 0;
-  border-radius:999px;
-  line-height:1.15;
-  display:inline-block;
-  letter-spacing:.3px;
+body.dark .about-page .about-hero {
+  background: var(--about-bg-dark);
+  border: 1px solid var(--about-border-dark);
+  border-left-color: var(--about-accent);
 }
-body.dark .about-intro strong{
-  background:rgba(225,48,108,.32);
-  color:#ff8fb7;
+.about-page .about-hero p { margin: .65rem 0; }
+.about-page .about-hero p:first-child { margin-top: 0; }
+.about-page .about-hero p:last-child { margin-bottom: 0; }
+
+/* 強調 (所有 strong) */
+.about-page strong {
+  font-weight: 600;
+  color: var(--about-accent);
+  background: rgba(225,48,108,.16);
+  padding: .18rem .55rem .24rem;
+  margin: .12rem .3rem .12rem 0;
+  line-height: 1.2;
+  display: inline-block;
+  border-radius: 999px;
+  letter-spacing: .3px;
+  vertical-align: baseline;
 }
-/* 標題極簡 */
-.about-wrap h3{
-  margin:2.2rem 0 .85rem;
-  padding:0 0 .45rem .9rem;
-  font-size:1rem;line-height:1.25;font-weight:600;
-  position:relative;
-  background:transparent;
-  border:none;
-  border-bottom:1px solid #e2e2e4;
+body.dark .about-page strong {
+  background: rgba(225,48,108,.32);
+  color: #ff8fb7;
 }
-.about-wrap h3:before{
-  content:"";position:absolute;left:0;top:0;bottom:.45rem;
-  width:3px;background:var(--about-accent);border-radius:2px;
+.about-page .about-hero strong {
+  font-size: 1.0em; /* 不再額外放大，只維持一致比例 */
 }
-body.dark .about-wrap h3{border-bottom:1px solid #3a3d40;}
+
+/* 標題 (裝置分類) */
+.about-page h3 {
+  margin: 2.3rem 0 .95rem;
+  font-size: 1.02rem;
+  line-height: 1.28;
+  font-weight: 600;
+  padding: 0 0 .55rem .85rem;
+  position: relative;
+  border-bottom: 1px solid var(--about-border-light);
+}
+body.dark .about-page h3 { border-bottom: 1px solid var(--about-border-dark); }
+.about-page h3::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: .55rem;
+  width: 3px;
+  background: var(--about-accent);
+  border-radius: 2px;
+}
+.about-page h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 82px;
+  background: var(--about-accent);
+  border-radius: 2px;
+  opacity: .85;
+}
+
 /* 列表 */
-.about-wrap h3+ul{list-style:none;margin:.2rem 0 0;padding:0;}
-.about-wrap h3+ul li{
-  position:relative;padding:.44rem 0 .44rem 1.05rem;font-size:.9rem;
+.about-page h3 + ul {
+  list-style: none;
+  margin: .2rem 0 0;
+  padding: 0;
 }
-.about-wrap h3+ul li:before{
-  content:"";position:absolute;left:0;top:.95rem;
-  width:6px;height:6px;border-radius:50%;background:var(--about-accent);opacity:.55;
+.about-page h3 + ul li {
+  position: relative;
+  padding: .46rem 0 .46rem 1.15rem;
+  font-size: .9rem;
 }
-body.dark .about-wrap h3+ul li:before{opacity:.75;}
-/* 通用連結 */
-.about-wrap a[href^="http"], .about-wrap a[href^="mailto:"]{
-  color:var(--about-accent);text-decoration:none;font-weight:600;
+.about-page h3 + ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .98rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--about-accent);
+  opacity: .55;
 }
-.about-wrap a:hover{text-decoration:underline;}
+body.dark .about-page h3 + ul li::before { opacity: .75; }
+
+/* 連結（一般） */
+.about-page a[href^="http"],
+.about-page a[href^="mailto:"] {
+  color: var(--about-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .18s;
+}
+.about-page a:hover { text-decoration: underline; }
+
 /* 聯絡方式 Pills */
-.about-contacts{list-style:none;margin:.4rem 0 0;padding:0;}
-.about-contacts li{display:inline-block;margin:0 .55rem .6rem 0;}
-.about-contacts li:before{display:none;}
-.about-contacts a{
-  display:inline-block;
-  background:rgba(225,48,108,.14);
-  padding:.45rem .8rem .48rem;
-  font-size:.7rem;line-height:1;font-weight:600;
-  letter-spacing:.45px;border-radius:9px;
-  text-decoration:none;color:var(--about-accent);
-  transition:background .2s,color .2s;
+.about-page .about-contacts {
+  list-style: none;
+  margin: .55rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem .65rem;
 }
-body.dark .about-contacts a{background:rgba(225,48,108,.30);color:#ff8fb7;}
-.about-contacts a:hover{background:var(--about-accent);color:#fff;}
-/* 行動版 */
-@media (max-width:640px){
-  .about-intro{font-size:1.02rem;padding:.85rem .95rem .95rem;border-radius:12px;}
-  .about-intro strong{padding:.16rem .5rem .2rem;}
-  .about-wrap h3{margin:2rem 0 .7rem;font-size:.95rem;}
-  .about-wrap h3+ul li{font-size:.86rem;padding:.4rem 0 .4rem .95rem;}
+.about-page .about-contacts li { margin: 0; padding: 0; }
+.about-page .about-contacts li::before { display: none; }
+.about-page .about-contacts a {
+  background: var(--about-pill-bg-light);
+  padding: .48rem .85rem .5rem;
+  font-size: .7rem;
+  letter-spacing: .45px;
+  line-height: 1;
+  border-radius: 9px;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--about-accent);
+  transition: background .22s, color .22s;
 }
-/* 減少動態 */
-@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+body.dark .about-page .about-contacts a {
+  background: var(--about-pill-bg-dark);
+  color: #ff8fb7;
+}
+.about-page .about-contacts a:hover {
+  background: var(--about-accent);
+  color: #fff;
+}
+
+/* RWD */
+@media (max-width: 640px) {
+  .about-page { font-size: .97rem; }
+  .about-page .about-hero { font-size: 1.05rem; padding: .85rem 1rem .95rem; }
+  .about-page h3 { font-size: .95rem; margin: 2rem 0 .75rem; }
+  .about-page h3 + ul li { font-size: .86rem; padding: .4rem 0 .4rem 1rem; }
+  .about-page strong { padding: .16rem .5rem .2rem; }
+}
+
+/* 無動畫偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .about-page * { transition: none !important; }
+}
 </style>
 
-<div class="about-wrap">
-<div class="about-intro">
-嗨，我是 **Zakk**，在 **墨爾本**生活。  
-我養了 **🐹 天竺鼠**（名字是 **馬鈴薯** 和 **薯餅** 🥔），喜歡 **遊戲**、**Linux** 與 **金融**。  
-目前就讀 **Business**。
-</div>
+<div class="about-page">
+  <div class="about-hero">
+    嗨，我是 **Zakk**，在 **墨爾本**生活。  
+    我養了 **🐹 天竺鼠**（名字是 **馬鈴薯** 和 **薯餅** 🥔），喜歡 **遊戲**、**Linux** 與 **金融**。  
+    目前就讀 **Business**。
+  </div>
 
 ### 💻 桌機
 - 主機板：ASUS ROG STRIX X670E-A GAMING WIFI  

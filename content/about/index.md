@@ -6,73 +6,46 @@ date: 2025-09-01
 lastmod: 2025-09-01
 ---
 <style>
+/* 使用同 zh-hant 樣式，確保雙語一致 */
 :root{--about-accent:var(--hb-active,#e1306c);}
-.about-wrap{max-width:820px;margin:0 auto;padding:.5rem 0 2.4rem;font-size:.95rem;line-height:1.6;}
-.about-intro{
-  margin:0 0 2rem;padding:1.05rem 1.15rem 1.15rem;
-  border:1px solid #e3e3e6;border-left:8px solid var(--about-accent);
-  background:#fafafa;border-radius:14px;
-  font-size:1.05rem;line-height:1.68;
-  box-shadow:0 2px 4px -2px rgba(0,0,0,.08),0 4px 14px -8px rgba(0,0,0,.08);
-}
-body.dark .about-intro{
-  background:#252526;border:1px solid #3a3d40;border-left-color:var(--about-accent);
-  box-shadow:0 2px 5px -2px rgba(0,0,0,.6);
-}
-.about-intro p{margin:.6rem 0;} .about-intro p:first-child{margin-top:0;} .about-intro p:last-child{margin-bottom:0;}
-.about-intro strong{
-  display:inline-block;font-weight:600;color:var(--about-accent);
-  background:rgba(225,48,108,.16);
-  padding:.15rem .5rem .22rem;margin:.1rem .2rem .1rem 0;
-  border-radius:8px;line-height:1.2;letter-spacing:.3px;
-}
-body.dark .about-intro strong{background:rgba(225,48,108,.30);color:#ff8fb7;}
-.about-wrap h3{
-  margin:2.2rem 0 .9rem;padding:.55rem .85rem .55rem .95rem;
-  font-size:1rem;font-weight:600;line-height:1.25;
-  background:#f5f5f5;border-left:6px solid var(--about-accent);
-  border:1px solid rgba(0,0,0,.06);border-radius:10px;position:relative;
-}
-body.dark .about-wrap h3{background:#2d2d2f;border:1px solid rgba(255,255,255,.14);}
-.about-wrap h3:after{
-  content:"";position:absolute;left:0;bottom:0;height:2px;width:90px;
-  background:var(--about-accent);border-radius:2px;transform:translateY(100%);opacity:.8;
-}
-.about-wrap h3+ul{list-style:none;margin:.1rem 0 0;padding:0;}
-.about-wrap h3+ul li{position:relative;padding:.42rem 0 .42rem 1.05rem;font-size:.9rem;}
-.about-wrap h3+ul li:before{
-  content:"";position:absolute;left:0;top:.95rem;width:7px;height:7px;
-  background:var(--about-accent);border-radius:50%;opacity:.65;
-}
-body.dark .about-wrap h3+ul li:before{opacity:.85;}
-.about-wrap a[href^="http"], .about-wrap a[href^="mailto:"]{color:var(--about-accent);text-decoration:none;font-weight:600;}
-.about-wrap a:hover{text-decoration:underline;}
-.about-contacts{list-style:none;margin:.4rem 0 0;padding:0;}
-.about-contacts li{display:inline-block;margin:0 .5rem .6rem 0;}
-.about-contacts li:before{display:none;}
-.about-contacts a{
-  display:inline-block;background:rgba(225,48,108,.12);
-  padding:.42rem .75rem .45rem;font-size:.7rem;letter-spacing:.45px;
-  border-radius:9px;font-weight:600;line-height:1;color:var(--about-accent);
-  text-decoration:none;transition:background .22s,color .22s;
-}
-body.dark .about-contacts a{background:rgba(225,48,108,.30);color:#ff8fb7;}
-.about-contacts a:hover{background:var(--about-accent);color:#fff;}
+.about-page{max-width:840px;margin:0 auto;padding:.75rem 0 2.8rem;font-size:1.02rem;line-height:1.62;}
+body.dark .about-page{color:#e9e9eb;}
+.about-page .about-hero{font-size:1.15rem;line-height:1.75;background:#fafafa;border:1px solid #e2e3e6;border-left:6px solid var(--about-accent);border-radius:16px;padding:1.05rem 1.25rem 1.15rem;margin:0 0 2.1rem;}
+body.dark .about-page .about-hero{background:#242528;border:1px solid #3a3d42;border-left-color:var(--about-accent);}
+.about-page .about-hero p{margin:.65rem 0;}
+.about-page strong{font-weight:600;color:var(--about-accent);background:rgba(225,48,108,.16);padding:.18rem .55rem .24rem;margin:.12rem .3rem .12rem 0;line-height:1.2;display:inline-block;border-radius:999px;letter-spacing:.3px;}
+body.dark .about-page strong{background:rgba(225,48,108,.32);color:#ff8fb7;}
+.about-page h3{margin:2.3rem 0 .95rem;font-size:1.02rem;line-height:1.28;font-weight:600;padding:0 0 .55rem .85rem;position:relative;border-bottom:1px solid #e2e2e4;}
+body.dark .about-page h3{border-bottom:1px solid #3a3d42;}
+.about-page h3:before{content:"";position:absolute;left:0;top:0;bottom:.55rem;width:3px;background:var(--about-accent);border-radius:2px;}
+.about-page h3:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:82px;background:var(--about-accent);border-radius:2px;opacity:.85;}
+.about-page h3+ul{list-style:none;margin:.2rem 0 0;padding:0;}
+.about-page h3+ul li{position:relative;padding:.46rem 0 .46rem 1.15rem;font-size:.9rem;}
+.about-page h3+ul li:before{content:"";position:absolute;left:0;top:.98rem;width:6px;height:6px;border-radius:50%;background:var(--about-accent);opacity:.55;}
+body.dark .about-page h3+ul li:before{opacity:.75;}
+.about-page a[href^="http"],.about-page a[href^="mailto:"]{color:var(--about-accent);font-weight:600;text-decoration:none;transition:color .18s;}
+.about-page a:hover{text-decoration:underline;}
+.about-page .about-contacts{list-style:none;margin:.55rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.55rem .65rem;}
+.about-page .about-contacts li{margin:0;padding:0;}
+.about-page .about-contacts a{background:rgba(225,48,108,.12);padding:.48rem .85rem .5rem;font-size:.7rem;letter-spacing:.45px;line-height:1;border-radius:9px;font-weight:600;text-decoration:none;color:var(--about-accent);transition:background .22s,color .22s;}
+body.dark .about-page .about-contacts a{background:rgba(225,48,108,.30);color:#ff8fb7;}
+.about-page .about-contacts a:hover{background:var(--about-accent);color:#fff;}
 @media (max-width:640px){
-  .about-intro{font-size:1rem;padding:.85rem .95rem .95rem;border-radius:12px;}
-  .about-intro strong{padding:.12rem .45rem .18rem;}
-  .about-wrap h3{font-size:.95rem;padding:.5rem .75rem .5rem .85rem;}
-  .about-wrap h3+ul li{font-size:.86rem;padding:.38rem 0 .38rem .95rem;}
+  .about-page{font-size:.97rem;}
+  .about-page .about-hero{font-size:1.05rem;padding:.85rem 1rem .95rem;}
+  .about-page h3{font-size:.95rem;margin:2rem 0 .75rem;}
+  .about-page h3+ul li{font-size:.86rem;padding:.4rem 0 .4rem 1rem;}
+  .about-page strong{padding:.16rem .5rem .2rem;}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+@media (prefers-reduced-motion:reduce){.about-page *{transition:none!important;}}
 </style>
 
-<div class="about-wrap">
-<div class="about-intro">
-Hi, I'm **Zakk**, based in **Melbourne**.  
-I keep **🐹 guinea pigs** (their names are **Hash Brown** and **Potato Cake** 🥔), enjoy **gaming**, and I'm into **Linux** and **Finance**.  
-Currently studying **Business**.
-</div>
+<div class="about-page">
+  <div class="about-hero">
+    Hi, I'm **Zakk**, based in **Melbourne**.  
+    I keep **🐹 guinea pigs** (their names are **Hash Brown** and **Potato Cake** 🥔), enjoy **gaming**, and I'm into **Linux** and **Finance**.  
+    Currently studying **Business**.
+  </div>
 
 ### 💻 Desktop PC
 - Motherboard: ASUS ROG STRIX X670E-A GAMING WIFI  
