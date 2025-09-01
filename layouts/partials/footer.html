@@ -1,25 +1,23 @@
-<footer class="site-footer" id="siteFooter">
+<footer class="site-footer" role="contentinfo">
   <div class="site-footer-inner">
     <p class="site-foot-text">
-      © {{ now.Format "2006" }} {{ if eq .Site.Language.Lang "zh-hant" }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ else }}{{ .Site.Title }} · Powered by Hugo & PaperMod{{ end }}
+      © {{ now.Format "2006" }} <a class="sf-link" href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/{{ else }}/{{ end }}">{{ .Site.Title }}</a>
+      · Powered by <a class="sf-link" href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> &amp;
+      <a class="sf-link" href="https://github.com/adityatelange/hugo-PaperMod" target="_blank" rel="noopener">PaperMod</a>
     </p>
   </div>
 </footer>
 <script>
 (function(){
-  // 去重：若主題本身還渲染另一個相同文字的 footer，移除後者
+  // 去重：若主題仍輸出另一個 footer，移除後面重複文本
+  const txts=[...document.querySelectorAll('.site-foot-text')];
   const seen=new Set();
-  document.querySelectorAll('.site-foot-text').forEach(p=>{
-    const t=p.textContent.trim();
-    if(seen.has(t)) p.closest('footer')?.remove();
-    else seen.add(t);
+  txts.forEach(p=>{
+    const t=p.textContent.replace(/\s+/g,' ').trim();
+    if(seen.has(t)) p.closest('footer')?.remove(); else seen.add(t);
   });
 })();
 </script>
-
-<!-- 注入按鈕與載入 CSS（若已存在則不重複） -->
-<script>
-(function(){
   // 載入 CSS（來自 /static/css/header-buttons.css）
   if(!document.getElementById('custom-topbuttons-css')){
     var l = document.createElement('link');
@@ -52,5 +50,7 @@
       });
     });
   }
+})();
+</script>
 })();
 </script>
