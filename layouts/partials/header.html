@@ -17,15 +17,13 @@
     </nav>
 
     <div class="top-action-group">
-      <!-- 永遠顯示：語言 / 主題 -->
       <div class="custom-topbuttons">
         <div class="cb-menu">
           <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
-          <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}黑暗{{ else }}Dark Mode{{ end }}</button>
+          <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}黑暗{{ else }}Dark{{ end }}</button>
         </div>
       </div>
 
-      <!-- 手機漢堡：只控制主導航收合 -->
       <button class="cb-toggle mobile-only"
               aria-label="Menu"
               aria-controls="mobileMenu"
@@ -39,60 +37,62 @@
     </div>
   </div>
 </header>
-<script src="/js/theme-toggle.js"></script>
-    </div>
-  </div>
-</header>
-<!-- 正確引用（static/js/theme-toggle.js -> /js/theme-toggle.js） -->
-<script src="/js/theme-toggle.js"></script>
+
+<script>
 (function(){
+  // 防重入
+  if (window.__THEME_TOGGLE_INIT) return;
+  window.__THEME_TOGGLE_INIT = true;
+
   const root = document.documentElement;
   const body = document.body;
-  const isZH = (root.lang||'').toLowerCase().startsWith('zh');
+  const isZH = (root.lang || '').toLowerCase().startsWith('zh');
   const KEY = 'site-theme';
-  const btnDesktop = document.getElementById('themeToggle');
-  const btnMobile  = document.getElementById('themeToggleMobile');
+  const btn = document.getElementById('themeToggle');
 
-  function sysPref(){
+  function systemPref(){
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
-  function setLabels(current){
-    // 顯示「即將切換到」的模式
-    const next = current === 'dark' ? 'light' : 'dark';
-    const zhNext = next === 'dark' ? '黑暗' : '明亮';          // ← 中文用「黑暗 / 明亮」
-    const enNext = next === 'dark' ? 'Dark Mode' : 'Light Mode';
-    const txt = isZH
-      ? (next === 'dark' ? '🌓 ' + zhNext : '🌞 ' + zhNext)
-      : (next === 'dark' ? '🌓 ' + enNext : '🌞 ' + enNext);
-    if (btnDesktop) btnDesktop.textContent = txt;
-    if (btnMobile)  btnMobile.textContent  = txt;
+  // 產生顯示「要切換去」的模式文字
+  function nextLabel(nextMode){
+    if (isZH) return nextMode === 'dark' ? '🌓 黑暗' : '🌞 明亮';
+    return nextMode === 'dark' ? '🌓 Dark' : '🌞 Light';
+  }
+
+  function updateButton(currentMode){
+    if(!btn) return;
+    const next = currentMode === 'dark' ? 'light' : 'dark';
+    btn.textContent = nextLabel(next);
   }
 
   function apply(mode){
-    if(mode === 'dark'){
-      root.classList.add('dark');
-      body.classList.add('dark');
-    }else{
-      root.classList.remove('dark');
-      body.classList.remove('dark');
-    }
-    setLabels(mode);
+    const dark = mode === 'dark';
+    root.classList.toggle('dark', dark);
+    body.classList.toggle('dark', dark);
+    updateButton(mode);
   }
 
-  apply(localStorage.getItem(KEY) || sysPref());
-
-  function toggleTheme(){
+  function toggle(){
     const target = root.classList.contains('dark') ? 'light' : 'dark';
     apply(target);
     localStorage.setItem(KEY, target);
   }
 
-  if(btnDesktop) btnDesktop.addEventListener('click', toggleTheme);
-  if(btnMobile)  btnMobile.addEventListener('click',  toggleTheme);
+  // 初始化
+  apply(localStorage.getItem(KEY) || systemPref());
 
+  if(btn) btn.addEventListener('click', toggle);
+
+  // 視窗放大時自動收起手機菜單
   window.addEventListener('resize', () => {
-    if(window.innerWidth > 900){
+    if (window.innerWidth > 900){
+      const m = document.getElementById('mobileMenu');
+      if (m) m.classList.remove('open');
+    }
+  });
+})();
+</script>
       const m = document.getElementById('mobileMenu');
       if(m) m.classList.remove('open');
     }
