@@ -25,7 +25,7 @@
         <div class="cb-menu">
           <a class="cb-btn lang-switch"
              href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
-            {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}中文{{ end }}
+            {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
           </a>
           <button class="cb-btn" id="themeToggle" type="button">
             {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
@@ -47,7 +47,7 @@
         </a>
         <a class="cb-btn lang-switch"
            href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
-          {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}中文{{ end }}
+          {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
         </a>
         <button class="cb-btn" type="button" onclick="document.getElementById('themeToggle').click()">
           {{ if eq .Site.Language.Lang "zh-hant" }}主題{{ else }}Theme{{ end }}
