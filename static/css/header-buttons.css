@@ -413,3 +413,53 @@ a {
 a:visited {
   border-right: none !important;
 }
+
+/* ---- Post list card style (新增) ---- */
+.post-section-list .post-item{
+  padding:1.15rem 1.25rem 1.05rem;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:14px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(4px);
+  position:relative;
+  transition:background .3s,border-color .3s,box-shadow .28s,transform .25s;
+}
+body.dark .post-section-list .post-item{
+  border-color:rgba(255,255,255,.14);
+  background:rgba(40,40,40,.85);
+}
+.post-section-list .post-item:hover{
+  border-color:var(--hb-active,#e1306c);
+  box-shadow:0 6px 20px -8px rgba(0,0,0,.25);
+  background:rgba(255,255,255,.95);
+  transform:translateY(-2px);
+}
+body.dark .post-section-list .post-item:hover{
+  background:rgba(55,55,55,.92);
+  box-shadow:0 8px 28px -10px rgba(0,0,0,.55);
+}
+.post-section-list .post-item-title{
+  margin-top:0;
+}
+.post-section-list .post-item + .post-item{
+  /* 保險：若瀏覽器不支援 gap（舊）仍有垂直距離 */
+  margin-top:.5rem;
+}
+/* 小螢幕微調 */
+@media (max-width:600px){
+  .post-section-list .post-item{
+    padding:1rem .95rem .9rem;
+    border-radius:12px;
+  }
+}
+
+/* 偏好減少動態：降低 hover 動畫 */
+@media (prefers-reduced-motion:reduce){
+  .post-section-list .post-item{
+    transition:none;
+  }
+  .post-section-list .post-item:hover{
+    transform:none;
+    box-shadow:0 4px 14px -6px rgba(0,0,0,.18);
+  }
+}
