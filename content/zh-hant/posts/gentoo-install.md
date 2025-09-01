@@ -6,6 +6,8 @@ categories: ["Linux筆記"]
 draft: false
 toc: true
 ---
+{{< toc >}}
+
 
 
 ## 💻 我的電腦配置（示例）

@@ -1,0 +1,6 @@
+[params]
+  ShowToc = true     # 右側顯示 TOC
+  TocOpen = true     # 預設展開
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  UseHugoToc = true  # 用 Hugo 內建 TOC（更穩）

@@ -6,6 +6,8 @@ categories: ["Linux Notes"]
 draft: false
 toc: true
 ---
+{{< toc >}}
+
 
 
 ## 💻 My Hardware (Example)
