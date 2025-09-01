@@ -2,6 +2,9 @@
 {{- $home := cond $isZH "/zh-hant/" "/" -}}
 {{- $posts := printf "%sposts/" $home -}}
 {{- $about := printf "%sabout/" $home -}}
+{{- $rel := .RelPermalink -}}
+{{- /* 當前頁面語言切換：如果是中文路徑去掉 /zh-hant/，反之加上 */ -}}
+{{- $switch := cond $isZH (replace $rel "/zh-hant/" "/" 1) (printf "/zh-hant%s" $rel) -}}
 <header class="site-header">
   <div class="site-header-inner">
     <div class="site-brand">
@@ -19,7 +22,7 @@
     <div class="top-action-group">
       <div class="custom-topbuttons">
         <div class="cb-menu">
-          <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
+          <a class="cb-btn lang-switch" href="{{ $switch }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
           <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}黑暗{{ else }}Dark{{ end }}</button>
         </div>
       </div>
@@ -93,10 +96,7 @@
   });
 })();
 </script>
-<!-- END header partial (若之後再次看到多餘 JS，表示有其他流程再次附加內容) -->
-      if(m) m.classList.remove('open');
-    }
-  });
+<!-- END header partial -->
 })();
 </script>
     const target = nowDark ? 'light':'dark';
