@@ -1,4 +1,6 @@
 ---
+translationKey: "about"
+slug: "about"
 title: "About Me"
 draft: false
 ---
