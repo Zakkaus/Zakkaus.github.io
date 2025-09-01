@@ -17,22 +17,37 @@ lastmod: 2025-09-01
   --about-pill-bg-light: rgba(225,48,108,.12);
   --about-pill-bg-dark: rgba(225,48,108,.30);
 }
-/* 外層 */
-.about-page {
-  max-width: 840px;
-  margin: 0 auto;
-  padding: .75rem 0 2.8rem;
-  font-size: 1.02rem;
-  line-height: 1.62;
-  font-kerning: normal;
-  color: var(--about-text-light);
-}
-body.dark .about-page { color: var(--about-text-dark); }
 
-/* Intro Hero */
-.about-page .about-hero {
-  font-size: 1.15rem;
-  line-height: 1.75;
+/* 移除原全域 strong 高亮，統一還原 */
+.about-page strong{
+  background:none!important;
+  color:inherit!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:0!important;
+  font-weight:600;
+}
+
+/* 僅個人簡介內強調高亮 */
+.about-page .about-hero strong{
+  background:rgba(225,48,108,.16)!important;
+  color:var(--about-accent)!important;
+  padding:.18rem .55rem .22rem!important;
+  margin:.12rem .25rem .12rem 0!important;
+  border-radius:999px!important;
+  line-height:1.15;
+  display:inline-block;
+  letter-spacing:.3px;
+}
+body.dark .about-page .about-hero strong{
+  background:rgba(225,48,108,.32)!important;
+  color:#ff8fb7!important;
+}
+
+/* 個人簡介容器微調字級 (更突出) */
+.about-page .about-hero{
+  font-size:1.14rem;
+  line-height:1.72;
   background: var(--about-bg-light);
   border: 1px solid var(--about-border-light);
   border-left: 6px solid var(--about-accent);
@@ -50,38 +65,18 @@ body.dark .about-page .about-hero {
 .about-page .about-hero p:first-child { margin-top: 0; }
 .about-page .about-hero p:last-child { margin-bottom: 0; }
 
-/* 強調 (所有 strong) */
-.about-page strong {
-  font-weight: 600;
-  color: var(--about-accent);
-  background: rgba(225,48,108,.16);
-  padding: .18rem .55rem .24rem;
-  margin: .12rem .3rem .12rem 0;
-  line-height: 1.2;
-  display: inline-block;
-  border-radius: 999px;
-  letter-spacing: .3px;
-  vertical-align: baseline;
-}
-body.dark .about-page strong {
-  background: rgba(225,48,108,.32);
-  color: #ff8fb7;
-}
-.about-page .about-hero strong {
-  font-size: 1.0em; /* 不再額外放大，只維持一致比例 */
-}
-
-/* 標題 (裝置分類) */
-.about-page h3 {
-  margin: 2.3rem 0 .95rem;
+/* 標題去除底線與底部橫線 */
+.about-page h3{
+  margin:2.1rem 0 .7rem;
   font-size: 1.02rem;
   line-height: 1.28;
   font-weight: 600;
-  padding: 0 0 .55rem .85rem;
+  padding: 0 .2rem .15rem .85rem;
   position: relative;
-  border-bottom: 1px solid var(--about-border-light);
+  border-bottom:none!important;
 }
-body.dark .about-page h3 { border-bottom: 1px solid var(--about-border-dark); }
+.about-page h3::after{content:none!important;}
+/* 左側色條保持 */
 .about-page h3::before {
   content: "";
   position: absolute;
@@ -89,17 +84,6 @@ body.dark .about-page h3 { border-bottom: 1px solid var(--about-border-dark); }
   width: 3px;
   background: var(--about-accent);
   border-radius: 2px;
-}
-.about-page h3::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  height: 2px;
-  width: 82px;
-  background: var(--about-accent);
-  border-radius: 2px;
-  opacity: .85;
 }
 
 /* 列表 */
@@ -185,9 +169,9 @@ body.dark .about-page .about-contacts a {
 
 <div class="about-page">
   <div class="about-hero">
-    嗨，我是 **Zakk**，在 **墨爾本**生活。  
-    我養了 **🐹 天竺鼠**（名字是 **馬鈴薯** 和 **薯餅** 🥔），喜歡 **遊戲**、**Linux** 與 **金融**。  
-    目前就讀 **Business**。
+    <p>嗨，我是 <strong>Zakk</strong>，在 <strong>墨爾本</strong> 生活。</p>
+    <p>我養了 <strong>🐹 天竺鼠</strong>（名字是 <strong>馬鈴薯</strong> 和 <strong>薯餅</strong> 🥔），喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>。</p>
+    <p>目前就讀 <strong>Business</strong>。</p>
   </div>
 
 ### 💻 桌機

@@ -10,15 +10,15 @@ lastmod: 2025-09-01
 :root{--about-accent:var(--hb-active,#e1306c);}
 .about-page{max-width:840px;margin:0 auto;padding:.75rem 0 2.8rem;font-size:1.02rem;line-height:1.62;}
 body.dark .about-page{color:#e9e9eb;}
-.about-page .about-hero{font-size:1.15rem;line-height:1.75;background:#fafafa;border:1px solid #e2e3e6;border-left:6px solid var(--about-accent);border-radius:16px;padding:1.05rem 1.25rem 1.15rem;margin:0 0 2.1rem;}
+.about-page .about-hero{font-size:1.14rem;line-height:1.72;background:#fafafa;border:1px solid #e2e3e6;border-left:6px solid var(--about-accent);border-radius:16px;padding:1.05rem 1.25rem 1.15rem;margin:0 0 2.1rem;}
 body.dark .about-page .about-hero{background:#242528;border:1px solid #3a3d42;border-left-color:var(--about-accent);}
 .about-page .about-hero p{margin:.65rem 0;}
-.about-page strong{font-weight:600;color:var(--about-accent);background:rgba(225,48,108,.16);padding:.18rem .55rem .24rem;margin:.12rem .3rem .12rem 0;line-height:1.2;display:inline-block;border-radius:999px;letter-spacing:.3px;}
+.about-page strong{font-weight:600;color:var(--about-accent);background:rgba(225,48,108,.16);padding:.18rem .55rem .22rem!important;margin:.12rem .25rem .12rem 0!important;line-height:1.15;display:inline-block;border-radius:999px;letter-spacing:.3px;}
 body.dark .about-page strong{background:rgba(225,48,108,.32);color:#ff8fb7;}
-.about-page h3{margin:2.3rem 0 .95rem;font-size:1.02rem;line-height:1.28;font-weight:600;padding:0 0 .55rem .85rem;position:relative;border-bottom:1px solid #e2e2e4;}
+.about-page h3{margin:2.1rem 0 .7rem;font-size:1.02rem;line-height:1.28;font-weight:600;padding:0 .2rem .15rem .85rem;position:relative;border-bottom:none!important;}
 body.dark .about-page h3{border-bottom:1px solid #3a3d42;}
 .about-page h3:before{content:"";position:absolute;left:0;top:0;bottom:.55rem;width:3px;background:var(--about-accent);border-radius:2px;}
-.about-page h3:after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:82px;background:var(--about-accent);border-radius:2px;opacity:.85;}
+.about-page h3:after{content:none!important;}
 .about-page h3+ul{list-style:none;margin:.2rem 0 0;padding:0;}
 .about-page h3+ul li{position:relative;padding:.46rem 0 .46rem 1.15rem;font-size:.9rem;}
 .about-page h3+ul li:before{content:"";position:absolute;left:0;top:.98rem;width:6px;height:6px;border-radius:50%;background:var(--about-accent);opacity:.55;}
@@ -42,9 +42,9 @@ body.dark .about-page .about-contacts a{background:rgba(225,48,108,.30);color:#f
 
 <div class="about-page">
   <div class="about-hero">
-    Hi, I'm **Zakk**, based in **Melbourne**.  
-    I keep **🐹 guinea pigs** (their names are **Hash Brown** and **Potato Cake** 🥔), enjoy **gaming**, and I'm into **Linux** and **Finance**.  
-    Currently studying **Business**.
+    <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong>.</p>
+    <p>I keep <strong>🐹 guinea pigs</strong> (their names are <strong>Hash Brown</strong> and <strong>Potato Cake</strong> 🥔), enjoy <strong>gaming</strong>, and I'm into <strong>Linux</strong> and <strong>Finance</strong>.</p>
+    <p>Currently studying <strong>Business</strong>.</p>
   </div>
 
 ### 💻 Desktop PC
