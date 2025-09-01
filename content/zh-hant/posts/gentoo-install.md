@@ -57,18 +57,14 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 .gentoo-article h1,
 .gentoo-article h2,
 .gentoo-article h3,
-.gentoo-article h4 {
-  scroll-margin-top: 90px; /* 視你的 header 高度可調整 (例如 70~110) */
-}
+.gentoo-article h4 { scroll-margin-top: 90px; }
 </style>
 
 <div class="gentoo-toc">
 <details open>
   <summary>📚 目錄</summary>
   <ol>
--    <li><a href="#my-hardware-zh">💻 我的電腦配置（示例）</a></li>
--    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
-+    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
+    <li><a href="#my-hardware-zh">我的電腦配置（示例）</a></li>
     <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
     <li><a href="#2-磁碟分割lsblk-與-cfdisk">2. 磁碟分割（lsblk 與 cfdisk）</a></li>
@@ -674,6 +670,10 @@ reboot
 
 # 📎 參考 {#refs-zh}
 - Gentoo Handbook：<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
+- Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus：<https://rufus.ie/>  
+- 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+</div> <!-- 保留文章容器結束 -->
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  
 - 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
