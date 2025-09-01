@@ -14,7 +14,14 @@ toc: true
 body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
 .gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;outline:none;}
 .gentoo-toc summary::-webkit-details-marker{display:none;}
-.gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.18rem;}
+.gentoo-toc ol{
+  margin:0;
+  padding:0;
+  list-style:none;      /* 移除自動編號避免雙重數字 */
+  margin-left:0;
+  display:grid;
+  gap:.18rem;
+}
 @media(min-width:760px){.gentoo-toc ol{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}}
 .gentoo-toc a{text-decoration:none;color:inherit;}
 .gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
