@@ -25,7 +25,6 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id="-我的電腦配置"&gt;💻 我的電腦配置&lt;/h1&gt;
-&lt;p&gt;（此部分僅為示例，方便日後查閱與分享）&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt;：AMD Ryzen 9 7950X3D（16C/32T）&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;主機板&lt;/strong&gt;：ASUS ROG STRIX X670E-A GAMING WIFI&lt;/li&gt;
@@ -38,9 +37,7 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h1 id="0-下載與製作安裝媒體"&gt;0. 下載與製作安裝媒體&lt;/h1&gt;
-&lt;h2 id="01-下載-iso"&gt;0.1 下載 ISO&lt;/h2&gt;
-&lt;p&gt;官方下載頁：&lt;br&gt;
-&lt;a href="https://www.gentoo.org/downloads/mirrors/"&gt;Gentoo Downloads&lt;/a&gt;&lt;/p&gt;</description></item><item><title>哈囉，世界</title><link>https://zakk.au/zh-hant/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/hello-world/</guid><description>第一篇繁中測試文。</description></item><item><title>關於我</title><link>https://zakk.au/zh-hant/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/about/</guid><description>&lt;p&gt;嗨，我是 &lt;strong&gt;Zakk&lt;/strong&gt;，住在 &lt;strong&gt;墨爾本&lt;/strong&gt; 🇦🇺。&lt;br&gt;
+&lt;p&gt;（同 v7，省略，附 Rufus 連結）&lt;/p&gt;</description></item><item><title>哈囉，世界</title><link>https://zakk.au/zh-hant/posts/hello-world/</link><pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/posts/hello-world/</guid><description>第一篇繁中測試文。</description></item><item><title>關於我</title><link>https://zakk.au/zh-hant/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://zakk.au/zh-hant/about/</guid><description>&lt;p&gt;嗨，我是 &lt;strong&gt;Zakk&lt;/strong&gt;，住在 &lt;strong&gt;墨爾本&lt;/strong&gt; 🇦🇺。&lt;br&gt;
 我養了兩隻 🐹 天竺鼠：一隻叫 &lt;strong&gt;馬鈴薯&lt;/strong&gt; 🥔，另一隻叫 &lt;strong&gt;薯餅&lt;/strong&gt; 🥔。&lt;br&gt;
 平常喜歡 &lt;strong&gt;遊戲&lt;/strong&gt;、使用 &lt;strong&gt;Gentoo Linux + KDE&lt;/strong&gt;，也關注 &lt;strong&gt;金融&lt;/strong&gt;。&lt;br&gt;
 另外，我 &lt;strong&gt;很愛吃馬鈴薯&lt;/strong&gt; 🥔。&lt;/p&gt;
