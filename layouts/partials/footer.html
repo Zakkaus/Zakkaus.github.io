@@ -1,0 +1,44 @@
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}</p>
+    <!-- 你可以在此加入其它想顯示的 footer 內容 -->
+  </div>
+</footer>
+
+<!-- 注入按鈕與載入 CSS（若已存在則不重複） -->
+<script>
+(function(){
+  // 載入 CSS（來自 /static/css/header-buttons.css）
+  if(!document.getElementById('custom-topbuttons-css')){
+    var l = document.createElement('link');
+    l.id = 'custom-topbuttons-css';
+    l.rel = 'stylesheet';
+    l.href = '{{ "css/header-buttons.css" | relURL }}';
+    document.head.appendChild(l);
+  }
+
+  // 建立按鈕容器
+  if(!document.querySelector('.custom-topbuttons')){
+    var container = document.createElement('div');
+    container.className = 'custom-topbuttons';
+    container.innerHTML = ''
+      + '<a href="{{ "/" | relURL }}" class="cb-btn" data-name="home">首頁</a>'
+      + '<a href="{{ "/posts/" | relURL }}" class="cb-btn" data-name="posts">文章</a>'
+      + '<a href="{{ "/about/" | relURL }}" class="cb-btn" data-name="about">關於我</a>'
+      + '<a href="{{ "/search/" | relURL }}" class="cb-btn" data-name="search">🔍 搜尋</a>';
+    document.body.appendChild(container);
+
+    // 標示當前頁面
+    var path = location.pathname;
+    if(!path.endsWith('/')) path += '/';
+    var els = container.querySelectorAll('a.cb-btn');
+    els.forEach(function(a){
+      if(a.getAttribute('href') === path) a.classList.add('active');
+      a.addEventListener('click', function(){
+        els.forEach(function(x){ x.classList.remove('active'); });
+        a.classList.add('active');
+      });
+    });
+  }
+})();
+</script>
