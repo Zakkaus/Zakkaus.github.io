@@ -1,0 +1,24 @@
+[profileMode]
+enabled = true
+title = "嗨，我是 Zakk"
+subtitle = """📍 墨爾本 🇦🇺  |  ❄️ UTC +10 (AEST)
+❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨
+🐹 天竺鼠 🥔
+🎮 遊戲 · 🐧 Linux · 💹 金融
+"""
+imageURL = "https://avatars.githubusercontent.com/u/221879664?v=4"
+imageWidth = 160
+imageHeight = 160
+imageTitle = "Zakk"
+
+[[socialIcons]]
+name = "instagram"
+url  = "https://www.instagram.com/zakk.au/"
+
+[[socialIcons]]
+name = "github"
+url  = "https://github.com/Zakkaus/"
+
+[[socialIcons]]
+name = "x"
+url  = "https://x.com/zakkauu"

@@ -1,100 +1,42 @@
 baseURL = "https://zakk.au/"
-title   = "Zakk's Blog"
-theme   = "PaperMod"
+title = "Zakk's Blog"
+theme = "PaperMod"
 
-# 預設語言 English（根路徑）；繁中在 /zh-hant/
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
-# 站台輸出：啟用 JSON 以支援內建搜尋
+paginate = 10
 [outputs]
   home = ["HTML", "RSS", "JSON"]
-  section = ["HTML", "RSS"]    # /posts/ 有 RSS
-  taxonomy = ["HTML"]
-  term = ["HTML"]
 
-# 語言
-[languages]
-  [languages.en]
-    languageName = "English"
-    weight = 1
-
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        name = "Home"
-        url  = "/"
-        weight = 1
-      [[languages.en.menu.main]]
-        name = "Posts"
-        url  = "/posts/"
-        weight = 2
-      [[languages.en.menu.main]]
-        name = "Tags"
-        url  = "/tags/"
-        weight = 3
-      [[languages.en.menu.main]]
-        name = "About"
-        url  = "/about/"
-        weight = 4
-
-  [languages.zh-hant]
-    languageName = "漢語"
-    weight = 2
-
-    [languages.zh-hant.menu]
-      [[languages.zh-hant.menu.main]]
-        name = "首頁"
-        url  = "/zh-hant/"
-        weight = 1
-      [[languages.zh-hant.menu.main]]
-        name = "文章"
-        url  = "/zh-hant/posts/"
-        weight = 2
-      [[languages.zh-hant.menu.main]]
-        name = "標籤"
-        url  = "/zh-hant/tags/"
-        weight = 3
-      [[languages.zh-hant.menu.main]]
-        name = "關於我"
-        url  = "/zh-hant/about/"
-        weight = 4
-
-# PaperMod 參數（顯示 TOC、麵包屑、搜尋等）
-[params]
-  ShowReadingTime = true
-  ShowBreadCrumbs = true
-  ShowPostNavLinks = true
-  ShowCodeCopyButtons = true
-  UseHugoToc = true
-  TocOpen = true
-  # 顯示搜尋（需要上面的 outputs.home 包含 JSON）
-  search = true
-
-  # 首頁資訊塊（英）
-  [params.homeInfoParams]
-    Title = "📍 Melbourne 🐨 | ❄️ UTC +10 (AEST)"
-    Content = """❤️ [@abyss_74.50](https://www.instagram.com/abyss_74.50/) ✨  
-🐹 Guinea pigs 🥔  
-🎮 Gaming · 🐧 Linux · 💹 Finance"""
-
-  # 社群按鈕（僅你的 IG；伴侶 IG 保留在文案內）
-  [[params.socialIcons]]
-    name = "instagram"
-    url  = "https://www.instagram.com/zakk.au/"
-
-# 稅目（標籤/分類）
-[taxonomies]
-  tag = "tags"
-  category = "categories"
-
-# Markdown / TOC
 [markup]
   [markup.goldmark.renderer]
     unsafe = true
-  [markup.goldmark.parser]
-    autoHeadingID = true
-    autoHeadingIDType = "github"
-  [markup.tableOfContents]
-    startLevel = 2
-    endLevel = 4
-    ordered = false
+
+# 讓首頁有 JSON 供 PaperMod 搜尋使用
+[params]
+  env = "production"
+  ShowBreadCrumbs = true
+  ShowPostNavLinks = true
+  ShowCodeCopyButtons = true
+  ShowReadingTime = true
+  ShowToc  = true
+  TocOpen  = true
+
+# 語言定義
+[languages]
+
+  [languages.en]
+    languageName = "English"
+    languageCode = "en"
+    weight = 1
+    title = "Zakk's Blog"
+    # 根路徑呈現英文
+
+  [languages.zh-hant]
+    languageName = "漢語"
+    languageCode = "zh-Hant"
+    weight = 2
+    title = "Zakk 的部落格"
+    contentDir = "content/zh-hant"
+    languageDirection = "ltr"
