@@ -21,6 +21,46 @@ body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
 .gentoo-toc a{text-decoration:none;color:inherit;}
 .gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
 body.dark .gentoo-toc a:hover{color:#ff6f9d;}
+
+/* ===== Article 全局美化（僅此頁） ===== */
+.gentoo-article{--g-accent:#e1306c;--g-accent-soft:#ffbad4;--g-bg-h2:rgba(225,48,108,.08);--g-bg-h3:rgba(225,48,108,.05);--g-border:#e9e9e9;--g-code-bg:#fafafa;--g-code-border:#e5e5e5;--g-block-bg:rgba(0,0,0,0.04);--g-table-head:#f7f7f7;--g-shadow:0 2px 6px -2px rgba(0,0,0,.08);line-height:1.55;font-size:.97rem;}
+body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border:#333;--g-block-bg:rgba(255,255,255,0.05);--g-table-head:#262626;--g-shadow:0 2px 6px -2px rgba(0,0,0,.55);}
+
+.gentoo-article h2{position:relative;margin:2.25rem 0 1.1rem;padding:.55rem .9rem .55rem 1rem;border-left:6px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h2),rgba(0,0,0,0));border-radius:6px;font-size:1.28rem;}
+.gentoo-article h3{margin:1.8rem 0 .8rem;padding:.4rem .65rem .4rem .75rem;border-left:4px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h3),rgba(0,0,0,0));border-radius:5px;font-size:1.08rem;}
+.gentoo-article h4{margin:1.4rem 0 .6rem;font-size:1rem;}
+
+.gentoo-article pre{background:var(--g-code-bg)!important;border:1px solid var(--g-code-border);border-radius:10px;padding:.85rem 1rem;overflow:auto;font-size:.85rem;line-height:1.4;box-shadow:var(--g-shadow);}
+.gentoo-article code:not(pre code){background:var(--g-code-bg);border:1px solid var(--g-code-border);padding:.15em .45em;border-radius:6px;font-size:.83rem;}
+
+.gentoo-article blockquote{margin:1.2rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:var(--g-block-bg);border-radius:6px;font-style:normal;}
+.gentoo-article blockquote > p{margin:.2rem 0;}
+
+.gentoo-article table{border-collapse:collapse;margin:1rem 0;font-size:.85rem;width:100%;overflow:hidden;border:1px solid var(--g-border);border-radius:10px;box-shadow:var(--g-shadow);}
+.gentoo-article table thead th{background:var(--g-table-head);font-weight:600;}
+.gentoo-article table th,
+.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);vertical-align:top;}
+.gentoo-article table tbody tr:nth-child(even){background:rgba(0,0,0,0.025);}
+body.dark .gentoo-article table tbody tr:nth-child(even){background:rgba(255,255,255,0.03);}
+
+.gentoo-article ul,
+.gentoo-article ol{margin:.6rem 0 .9rem;padding-left:1.35rem;}
+.gentoo-article li{margin:.15rem 0;}
+.gentoo-article hr{margin:2.2rem 0;border:none;height:1px;background:linear-gradient(90deg,rgba(0,0,0,.08),rgba(0,0,0,0));}
+body.dark .gentoo-article hr{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0));}
+
+.gentoo-article .inline-badge{display:inline-block;background:var(--g-accent);color:#fff;padding:.18em .55em;border-radius:999px;font-size:.65rem;letter-spacing:.5px;vertical-align:baseline;position:relative;top:-1px;}
+
+.gentoo-article .faq-list{display:grid;gap:.75rem;}
+@media(min-width:680px){.gentoo-article .faq-list{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}}
+
+.gentoo-article .callout{border:1px solid var(--g-accent-soft);background:linear-gradient(135deg,rgba(225,48,108,.09),rgba(225,48,108,.02));padding:.85rem 1rem;border-radius:10px;position:relative;overflow:hidden;}
+body.dark .gentoo-article .callout{border-color:var(--g-accent);}
+
+.gentoo-article .callout:before{content:"💡";position:absolute;top:.65rem;right:.75rem;opacity:.25;font-size:1.4rem;pointer-events:none;}
+.gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
+.gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
+body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 </style>
 
 <div class="gentoo-toc">
@@ -52,6 +92,8 @@ body.dark .gentoo-toc a:hover{color:#ff6f9d;}
   </ol>
 </details>
 </div>
+
+<div class="gentoo-article">
 
 # 💻 My Hardware (Example)
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
@@ -556,3 +598,4 @@ reboot
 - Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus: <https://rufus.ie/>  
 - Timezones: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+</div>

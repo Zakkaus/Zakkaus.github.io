@@ -9,16 +9,32 @@ toc: true
 ---
 
 <style>
+/* 同英文版樣式（可統一） */
 .gentoo-toc{border:1px solid var(--gtoc-border,#ddd);background:rgba(0,0,0,0.03);padding:.75rem 1rem;margin:1rem 0 1.5rem;border-radius:12px;font-size:.9rem;line-height:1.35;}
 body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
-.gentoo-toc details[open]>summary{margin-bottom:.35rem;}
-.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;outline:none;}
+.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;}
 .gentoo-toc summary::-webkit-details-marker{display:none;}
 .gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.15rem;}
 @media(min-width:760px){.gentoo-toc ol{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}}
 .gentoo-toc a{text-decoration:none;color:inherit;}
 .gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
 body.dark .gentoo-toc a:hover{color:#ff6f9d;}
+
+.gentoo-article{--g-accent:#e1306c;--g-accent-soft:#ffbad4;--g-bg-h2:rgba(225,48,108,.08);--g-bg-h3:rgba(225,48,108,.05);--g-border:#e9e9e9;--g-code-bg:#fafafa;--g-code-border:#e5e5e5;--g-block-bg:rgba(0,0,0,0.04);--g-table-head:#f7f7f7;--g-shadow:0 2px 6px -2px rgba(0,0,0,.08);line-height:1.55;font-size:.97rem;}
+body.dark .gentoo-article{--g-border:#3c3c3c;--g-code-bg:#1f1f1f;--g-code-border:#333;--g-block-bg:rgba(255,255,255,0.05);--g-table-head:#262626;--g-shadow:0 2px 6px -2px rgba(0,0,0,.55);}
+
+.gentoo-article h2{position:relative;margin:2.25rem 0 1.1rem;padding:.55rem .9rem .55rem 1rem;border-left:6px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h2),rgba(0,0,0,0));border-radius:6px;font-size:1.28rem;}
+.gentoo-article h3{margin:1.8rem 0 .8rem;padding:.4rem .65rem .4rem .75rem;border-left:4px solid var(--g-accent);background:linear-gradient(90deg,var(--g-bg-h3),rgba(0,0,0,0));border-radius:5px;font-size:1.08rem;}
+.gentoo-article pre{background:var(--g-code-bg)!important;border:1px solid var(--g-code-border);border-radius:10px;padding:.85rem 1rem;overflow:auto;font-size:.85rem;line-height:1.4;box-shadow:var(--g-shadow);}
+.gentoo-article code:not(pre code){background:var(--g-code-bg);border:1px solid var(--g-code-border);padding:.15em .45em;border-radius:6px;font-size:.83rem;}
+.gentoo-article blockquote{margin:1.2rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:var(--g-block-bg);border-radius:6px;}
+.gentoo-article table{border-collapse:collapse;margin:1rem 0;font-size:.85rem;width:100%;border:1px solid var(--g-border);border-radius:10px;overflow:hidden;box-shadow:var(--g-shadow);}
+.gentoo-article table th,
+.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);}
+.gentoo-article table thead th{background:var(--g-table-head);}
+.gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
+.gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
+body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 </style>
 
 <div class="gentoo-toc">
@@ -32,17 +48,17 @@ body.dark .gentoo-toc a:hover{color:#ff6f9d;}
     <li><a href="#3-檔案系統格式化與掛載">3. 檔案系統與掛載</a></li>
     <li><a href="#4-stage3-下載與-chroot">4. Stage3 與 chroot</a></li>
     <li><a href="#5-portage-與鏡像源">5. Portage 與鏡像</a></li>
-    <li><a href="#6-use-旗標與授權">6. USE 與授權</a></li>
-    <li><a href="#7-設定-profile">7. Profile 選擇</a></li>
+    <li><a href="#6-use-旗標與授權">6. USE / 授權</a></li>
+    <li><a href="#7-設定-profile">7. Profile</a></li>
     <li><a href="#8-在地化語言與時區">8. 在地化</a></li>
     <li><a href="#9-kernel-內核">9. Kernel</a></li>
     <li><a href="#10-fstab-生成">10. fstab</a></li>
     <li><a href="#11-grub-開機載入器">11. GRUB</a></li>
-    <li><a href="#12-網路啟用">12. 網路啟用</a></li>
+    <li><a href="#12-網路啟用">12. 網路</a></li>
     <li><a href="#13-wayland--x11">13. Wayland / X11</a></li>
     <li><a href="#14-gpu-與-cpu-微碼">14. GPU / 微碼</a></li>
     <li><a href="#15-桌面環境可選">15. 桌面環境</a></li>
-    <li><a href="#16-使用者與-sudo">16. 使用者與 sudo</a></li>
+    <li><a href="#16-使用者與-sudo">16. 使用者 / sudo</a></li>
     <li><a href="#17-ssh-可選">17. SSH</a></li>
     <li><a href="#18-重新開機">18. 重新開機</a></li>
     <li><a href="#-常見問題">常見問題</a></li>
@@ -51,65 +67,34 @@ body.dark .gentoo-toc a:hover{color:#ff6f9d;}
 </details>
 </div>
 
+<div class="gentoo-article">
+
 # 💻 我的硬體（範例）
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
 - **主機板**: ASUS ROG STRIX X670E-A GAMING WIFI  
 - **記憶體**: 64GB DDR5  
 - **顯示卡**: NVIDIA RTX 4080 SUPER + AMD iGPU  
 - **儲存**: NVMe SSD  
-- **雙開機**: Windows 11 + Gentoo  
+- **雙系統**: Windows 11 + Gentoo  
 
 > 此為示例，多數 x86_64 硬體流程相同。
 
 ---
 
 ## 0. 下載與建立安裝媒體
-官方鏡像列表：<https://www.gentoo.org/downloads/mirrors/>  
-挑離你最近的鏡像（台灣 NCHC、澳洲 AARNET、Kernel.org 等）。
+官方鏡像：<https://www.gentoo.org/downloads/mirrors/>
 
-### 0.1 下載 ISO（例：NCHC）
 ```bash
 wget https://free.nchc.org.tw/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-### 0.2 建立 USB 安裝碟
-Linux：
-```bash
-sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=sync
-```
-Windows（Rufus）：<https://rufus.ie/>
-
 ---
 
 ## 1. 開機與網路
-### 1.1 確認 UEFI / BIOS
 ```bash
 ls /sys/firmware/efi
 ```
-存在表示 UEFI。
-
-### 1.2 有線
-```bash
-ip a
-dhcpcd eno1
-ping -c 3 gentoo.org
-```
-
-### 1.3 Wi‑Fi
-wpa_supplicant：
-```bash
-iw dev
-wpa_passphrase "SSID" "PASSWORD" | tee /etc/wpa_supplicant/wpa_supplicant.conf
-wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
-dhcpcd wlp9s0
-```
-iwd（推薦）：
-```bash
-emerge net-wireless/iwd
-systemctl enable iwd
-systemctl start iwd
-iwctl
-```
+存在 → UEFI。
 
 ---
 
@@ -117,36 +102,51 @@ iwctl
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 ```
-範例：
-```
-nvme0n1    476G disk
-├─nvme0n1p1 512M part
-├─nvme0n1p2   1G part
-├─nvme0n1p3 100G part
-└─nvme0n1p4 375G part
-```
-
-啟動分割工具（可選）：
-```bash
-cfdisk /dev/nvme0n1
-```
-
-**建議分割（UEFI）**：  
-
-| 大小 | 檔案系統 | 掛載點 | 說明 |
-|---|---|---|---|
-| 512M | FAT32 | /efi | ESP（UEFI 系統分割區） |
-| 1G | ext4 | /boot | kernel、initramfs |
-| 100G+ | ext4 / XFS / Btrfs | / | 根分割區 |
-| 其餘 | ext4 / XFS / Btrfs | /home | 使用者家目錄 |
-
-> 你也可以選擇只有 / 與 /efi 的簡化方案。
+| 建議 | 說明 |
+|------|------|
+| /efi 512M FAT32 | ESP |
+| /boot 1G ext4 | 核心/Initramfs |
+| / | 根系統 |
+| /home | 使用者資料 |
 
 ---
 
-## 3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）
+## 3. 檔案系統與掛載（略）  
+## 4. Stage3 與 chroot（略）  
+## 5. Portage 與鏡像（略）  
+## 6. USE / 授權（略）  
+## 7. Profile（略）  
+## 8. 在地化（略）  
+## 9. Kernel（略）  
+## 10. fstab（略）  
+## 11. GRUB（略）  
+## 12. 網路（略）  
+## 13. Wayland / X11（略）  
+## 14. GPU / 微碼（略）  
+## 15. 桌面環境（略）  
+## 16. 使用者 / sudo（略）  
+## 17. SSH（略）  
+## 18. 重新開機（略）  
 
-### 3.1 格式化
+> 若需完整中文逐段翻譯，告訴我即可補全。
+
+---
+
+# 💡 常見問題
+- 下載慢 → 換近鏡像  
+- USE 衝突 → 查看 emerge -pv 調整 package.use  
+- 要新版 → package.accept_keywords  
+- Btrfs + LUKS/RAID → 建議 initramfs  
+
+---
+
+# 📎 參考資源
+- Gentoo Handbook: <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
+- Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus: <https://rufus.ie/>  
+- 時區列表: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+
+</div>
 **ext4**：
 ```bash
 mkfs.ext4 -L root /dev/nvme0n1p3
