@@ -463,3 +463,24 @@ body.dark .post-section-list .post-item:hover{
     box-shadow:0 4px 14px -6px rgba(0,0,0,.18);
   }
 }
+
+/* Posts 列表頁標題與第一卡片間距調整 */
+.post-section-list > h1{
+  margin: 0 0 2.1rem !important; /* 原本距離不足，加大 */
+  font-size:1.9rem;
+  line-height:1.25;
+}
+.post-section-list .post-list{
+  margin-top:0 !important; /* 保證不再額外往上擠 */
+}
+.post-section-list .post-item:first-child{
+  margin-top:0 !important;
+}
+
+/* 小螢幕適度縮小間距 */
+@media (max-width:600px){
+  .post-section-list > h1{
+    margin-bottom:1.55rem !important;
+    font-size:1.55rem;
+  }
+}
