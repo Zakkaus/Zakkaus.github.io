@@ -38,7 +38,7 @@
         <a class="cb-btn" href="{{ $posts }}">📄 {{ if $isZH }}文章{{ else }}Posts{{ end }}</a>
         <a class="cb-btn" href="{{ $about }}">ℹ️ {{ if $isZH }}關於{{ else }}About{{ end }}</a>
         <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
-        <button class="cb-btn" type="button" onclick="document.getElementById('themeToggle').click()" id="themeToggleMobile">🌓 {{ if $isZH }}深色模式{{ else }}Dark Mode{{ end }}</button>
+        <button class="cb-btn" type="button" id="themeToggleMobile">🌓 {{ if $isZH }}黑暗{{ else }}Dark Mode{{ end }}</button>
       </div>
     </div>
   </div>
@@ -51,54 +51,54 @@
   const isZH = (root.lang||'').toLowerCase().startsWith('zh');
   const KEY = 'site-theme';
   const btnDesktop = document.getElementById('themeToggle');
-  const btnMobile = document.getElementById('themeToggleMobile');
+  const btnMobile  = document.getElementById('themeToggleMobile');
 
-  function sysPref(){return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
-  function setLabels(current){
-    const next = current==='dark'?'light':'dark';
-    const zhNext = next==='dark'?'深色模式':'淺色模式';
-    const enNext = next==='dark'?'Dark Mode':'Light Mode';
-    const txt = isZH
-      ? (next==='dark'?'🌓 '+zhNext:'🌞 '+zhNext)
-      : (next==='dark'?'🌓 '+enNext:'🌞 '+enNext);
-    if(btnDesktop) btnDesktop.textContent = txt;
-    if(btnMobile) btnMobile.textContent = txt;
+  function sysPref(){
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
+
+  function setLabels(current){
+    // 顯示「即將切換到」的模式
+    const next = current === 'dark' ? 'light' : 'dark';
+    const zhNext = next === 'dark' ? '黑暗' : '明亮';          // ← 中文用「黑暗 / 明亮」
+    const enNext = next === 'dark' ? 'Dark Mode' : 'Light Mode';
+    const txt = isZH
+      ? (next === 'dark' ? '🌓 ' + zhNext : '🌞 ' + zhNext)
+      : (next === 'dark' ? '🌓 ' + enNext : '🌞 ' + enNext);
+    if (btnDesktop) btnDesktop.textContent = txt;
+    if (btnMobile)  btnMobile.textContent  = txt;
+  }
+
   function apply(mode){
-    if(mode==='dark'){ root.classList.add('dark'); body.classList.add('dark'); }
-    else { root.classList.remove('dark'); body.classList.remove('dark'); }
+    if(mode === 'dark'){
+      root.classList.add('dark');
+      body.classList.add('dark');
+    }else{
+      root.classList.remove('dark');
+      body.classList.remove('dark');
+    }
     setLabels(mode);
   }
+
   apply(localStorage.getItem(KEY) || sysPref());
 
-  function toggle(){
+  function toggleTheme(){
     const target = root.classList.contains('dark') ? 'light' : 'dark';
     apply(target);
-    localStorage.setItem(KEY,target);
+    localStorage.setItem(KEY, target);
   }
-  if(btnDesktop) btnDesktop.addEventListener('click', toggle);
-  if(btnMobile) btnMobile.addEventListener('click', toggle);
 
-  window.addEventListener('resize',()=>{
-    if(window.innerWidth>900){
-      const m=document.getElementById('mobileMenu');
+  if(btnDesktop) btnDesktop.addEventListener('click', toggleTheme);
+  if(btnMobile)  btnMobile.addEventListener('click',  toggleTheme);
+
+  window.addEventListener('resize', () => {
+    if(window.innerWidth > 900){
+      const m = document.getElementById('mobileMenu');
       if(m) m.classList.remove('open');
     }
   });
 })();
 </script>
-  });
-})();
-</script>
-    if(isZH){
-      btn.textContent = next === 'dark' ? '🌓 深色模式' : '🌞 淺色模式';
-    }else{
-      btn.textContent = next === 'dark' ? '🌓 Dark Mode' : '🌞 Light Mode';
-    }
-  }
-  apply(localStorage.getItem(KEY) || systemPref());
-  btn.addEventListener('click', ()=>{
-    const nowDark = root.classList.contains('dark');
     const target = nowDark ? 'light':'dark';
     apply(target);
     localStorage.setItem(KEY, target);
