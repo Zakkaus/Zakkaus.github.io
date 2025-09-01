@@ -10,36 +10,36 @@
 
     <nav class="main-nav">
       <ul>
-        <li>
-          <a href="{{ $home }}" class="{{ if .IsHome }}active{{ end }}">🏠 {{ if $isZH }}首頁{{ else }}Home{{ end }}</a>
-        </li>
-        <li>
-          <a href="{{ $posts }}" class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">📄 {{ if $isZH }}文章{{ else }}Posts{{ end }}</a>
-        </li>
-        <li>
-          <a href="{{ $about }}" class="{{ if in .RelPermalink "/about/" }}active{{ end }}">ℹ️ {{ if $isZH }}關於{{ else }}About{{ end }}</a>
-        </li>
+        <li><a href="{{ $home }}" class="{{ if .IsHome }}active{{ end }}">🏠 {{ if $isZH }}首頁{{ else }}Home{{ end }}</a></li>
+        <li><a href="{{ $posts }}" class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">📄 {{ if $isZH }}文章{{ else }}Posts{{ end }}</a></li>
+        <li><a href="{{ $about }}" class="{{ if in .RelPermalink "/about/" }}active{{ end }}">ℹ️ {{ if $isZH }}關於{{ else }}About{{ end }}</a></li>
       </ul>
     </nav>
 
     <div class="top-action-group">
-      <!-- 桌面右側按鈕 -->
-      <div class="custom-topbuttons desktop-only">
+      <!-- 永遠顯示：語言 / 主題 -->
+      <div class="custom-topbuttons">
         <div class="cb-menu">
           <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
           <button class="cb-btn" id="themeToggle" type="button">🌓 {{ if $isZH }}黑暗{{ else }}Dark Mode{{ end }}</button>
         </div>
       </div>
 
-      <!-- 手機漢堡 -->
-      <button class="cb-toggle mobile-only" aria-label="Menu" onclick="document.getElementById('mobileMenu').classList.toggle('open')">☰</button>
+      <!-- 手機漢堡：只控制主導航收合 -->
+      <button class="cb-toggle mobile-only"
+              aria-label="Menu"
+              aria-controls="mobileMenu"
+              onclick="document.getElementById('mobileMenu').classList.toggle('open')">☰</button>
+
       <div id="mobileMenu" class="cb-menu mobile-only">
         <a class="cb-btn" href="{{ $home }}">🏠 {{ if $isZH }}首頁{{ else }}Home{{ end }}</a>
         <a class="cb-btn" href="{{ $posts }}">📄 {{ if $isZH }}文章{{ else }}Posts{{ end }}</a>
         <a class="cb-btn" href="{{ $about }}">ℹ️ {{ if $isZH }}關於{{ else }}About{{ end }}</a>
-        <a class="cb-btn lang-switch" href="{{ if $isZH }}/{{ else }}/zh-hant/{{ end }}">🌐 {{ if $isZH }}English{{ else }}漢語{{ end }}</a>
-        <button class="cb-btn" type="button" id="themeToggleMobile">🌓 {{ if $isZH }}黑暗{{ else }}Dark Mode{{ end }}</button>
       </div>
+    </div>
+  </div>
+</header>
+<script src="/js/theme-toggle.js"></script>
     </div>
   </div>
 </header>
