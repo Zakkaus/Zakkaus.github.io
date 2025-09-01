@@ -466,6 +466,22 @@ emerge --config sys-libs/timezone-data
 emerge sys-kernel/gentoo-kernel-bin
 ```
 
+### Firmware (linux-firmware) license unblock + initramfs USE
+To ensure bundled firmware and early firmware loading (via initramfs):
+1. Unblock licenses (adds redistributable/no-source-code acceptance for this package):
+   ```bash
+   echo "sys-kernel/linux-firmware linux-fw-redistributable no-source-code" >> /etc/portage/package.license
+   ```
+2. Enable initramfs USE flag (so firmware is packed for early loading):
+   ```bash
+   echo "sys-kernel/linux-firmware initramfs" >> /etc/portage/package.use/microcode
+   ```
+3. Install firmware (do this before (or after) installing/updating kernel):
+   ```bash
+   emerge --ask sys-kernel/linux-firmware
+   ```
+(Rebuild kernel or regenerate initramfs afterward if already installed.)
+
 **Manual compile**:  
 ```bash
 emerge sys-kernel/gentoo-sources
@@ -594,10 +610,9 @@ VIDEO_CARDS="intel i965 iris"
 emerge mesa vulkan-loader
 ```
 
-**CPU microcode**:  
+**CPU microcode (Intel)**:  
 ```bash
 emerge sys-firmware/intel-microcode
-emerge sys-firmware/amd-ucode
 ```
 
 ---

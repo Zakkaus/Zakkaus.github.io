@@ -420,11 +420,26 @@ emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
 ---
 
 ## 9. 內核選擇與編譯（完整指令）
-
 ### 9.1 最簡方案：預編譯內核
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
+
+### 9.x linux-firmware 授權解除 + initramfs USE
+若要包含最新硬體韌體並在開機初期 (initramfs) 載入：
+1. 解除授權限制（允許安裝該套件的再散布 / 無原始碼授權）：
+   ```bash
+   echo "sys-kernel/linux-firmware linux-fw-redistributable no-source-code" >> /etc/portage/package.license
+   ```
+2. 啟用 initramfs USE（將韌體打包進 early firmware）：
+   ```bash
+   echo "sys-kernel/linux-firmware initramfs" >> /etc/portage/package.use/microcode
+   ```
+3. 安裝韌體（建議在安裝或更新內核前後皆可執行一次）：
+   ```bash
+   emerge --ask sys-kernel/linux-firmware
+   ```
+若已安裝內核，完成後可重新產生 initramfs 以載入新韌體。
 
 ### 9.2 自行編譯
 ```bash
@@ -557,10 +572,9 @@ VIDEO_CARDS="intel i965 iris"
 emerge mesa vulkan-loader
 ```
 
-**CPU 微碼**：
+**CPU 微碼（Intel）**：
 ```bash
 emerge sys-firmware/intel-microcode
-emerge sys-firmware/amd-ucode
 ```
 
 ---
