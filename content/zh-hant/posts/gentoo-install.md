@@ -3,121 +3,117 @@ slug: gentoo-install
 title: "Gentoo 安裝指南（新手）"
 date: 2025-09-01
 tags: ["Gentoo","Linux","OpenRC","systemd","KDE","GNOME","SSH","Wayland","Btrfs","UEFI","NVIDIA","AMD","Intel","iwd","wpa_supplicant"]
-categories: ["Linux筆記"]
+categories: ["Linux 筆記"]
 draft: false
 toc: true
 ---
 
-# 📚 目錄
-- [💻 我的電腦配置（示例）](#-我的電腦配置示例)
-- [0. 下載與製作安裝媒體](#0-下載與製作安裝媒體)
-- [1. 開機與網路](#1-開機與網路)
-- [2. 磁碟分割（lsblk 與 cfdisk）](#2-磁碟分割lsblk-與-cfdisk)
-- [3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）](#3-檔案系統格式化與掛載ext4--xfs--btrfs)
-- [4. 下載 Stage3、掛載系統目錄與 chroot](#4-下載-stage3掛載系統目錄與-chroot)
-- [5. Portage 與鏡像源（含 makeconf 完整示例）](#5-portage-與鏡像源含-makeconf-完整示例)
-- [6. USE flags 與 License（新手解法）](#6-use-flags-與-license新手解法)
-- [7. 選擇 Profile（桌面／伺服器）](#7-選擇-profile桌面伺服器)
-- [8. 本地化 Localization（語言與時區）](#8-本地化-localization語言與時區)
-- [9. 內核選擇與編譯（完整指令）](#9-內核選擇與編譯完整指令)
-- [10. 產生 fstab（含 Btrfs / ext4 範例）](#10-產生-fstab含-btrfs--ext4-範例)
-- [11. 安裝開機器 GRUB（含 os-prober）](#11-安裝開機器-grub含-os-prober)
-- [12. 啟用網路服務（OpenRC / systemd）](#12-啟用網路服務openrc--systemd)
-- [13. Wayland / X11 選擇與 USE](#13-wayland--x11-選擇與-use)
-- [14. 顯示卡與 CPU 微碼](#14-顯示卡與-cpu-微碼)
-- [15. 桌面環境（可選）](#15-桌面環境可選)
-- [16. 使用者與 sudo](#16-使用者與-sudo)
-- [17. SSH（可選）](#17-ssh可選)
-- [18. 重開機](#18-重開機)
-- [💡 常見問題 FAQ](#-常見問題-faq)
-- [📎 參考](#-參考)
+<style>
+.gentoo-toc{border:1px solid var(--gtoc-border,#ddd);background:rgba(0,0,0,0.03);padding:.75rem 1rem;margin:1rem 0 1.5rem;border-radius:12px;font-size:.9rem;line-height:1.35;}
+body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
+.gentoo-toc details[open]>summary{margin-bottom:.35rem;}
+.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;outline:none;}
+.gentoo-toc summary::-webkit-details-marker{display:none;}
+.gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.15rem;}
+@media(min-width:760px){.gentoo-toc ol{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}}
+.gentoo-toc a{text-decoration:none;color:inherit;}
+.gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
+body.dark .gentoo-toc a:hover{color:#ff6f9d;}
+</style>
+
+<div class="gentoo-toc">
+<details open>
+  <summary>📚 目錄</summary>
+  <ol>
+    <li><a href="#-我的硬體範例">我的硬體（範例）</a></li>
+    <li><a href="#0-下載與建立安裝媒體">0. 下載與建立安裝媒體</a></li>
+    <li><a href="#1-開機與網路">1. 開機與網路</a></li>
+    <li><a href="#2-分割區">2. 分割區</a></li>
+    <li><a href="#3-檔案系統格式化與掛載">3. 檔案系統與掛載</a></li>
+    <li><a href="#4-stage3-下載與-chroot">4. Stage3 與 chroot</a></li>
+    <li><a href="#5-portage-與鏡像源">5. Portage 與鏡像</a></li>
+    <li><a href="#6-use-旗標與授權">6. USE 與授權</a></li>
+    <li><a href="#7-設定-profile">7. Profile 選擇</a></li>
+    <li><a href="#8-在地化語言與時區">8. 在地化</a></li>
+    <li><a href="#9-kernel-內核">9. Kernel</a></li>
+    <li><a href="#10-fstab-生成">10. fstab</a></li>
+    <li><a href="#11-grub-開機載入器">11. GRUB</a></li>
+    <li><a href="#12-網路啟用">12. 網路啟用</a></li>
+    <li><a href="#13-wayland--x11">13. Wayland / X11</a></li>
+    <li><a href="#14-gpu-與-cpu-微碼">14. GPU / 微碼</a></li>
+    <li><a href="#15-桌面環境可選">15. 桌面環境</a></li>
+    <li><a href="#16-使用者與-sudo">16. 使用者與 sudo</a></li>
+    <li><a href="#17-ssh-可選">17. SSH</a></li>
+    <li><a href="#18-重新開機">18. 重新開機</a></li>
+    <li><a href="#-常見問題">常見問題</a></li>
+    <li><a href="#-參考資源">參考資源</a></li>
+  </ol>
+</details>
+</div>
+
+# 💻 我的硬體（範例）
+- **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
+- **主機板**: ASUS ROG STRIX X670E-A GAMING WIFI  
+- **記憶體**: 64GB DDR5  
+- **顯示卡**: NVIDIA RTX 4080 SUPER + AMD iGPU  
+- **儲存**: NVMe SSD  
+- **雙開機**: Windows 11 + Gentoo  
+
+> 此為示例，多數 x86_64 硬體流程相同。
 
 ---
 
-# 💻 我的電腦配置（示例）
-- **CPU**：AMD Ryzen 9 7950X3D（16C/32T）  
-- **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI  
-- **RAM**：64GB DDR5  
-- **GPU**：NVIDIA RTX 4080 SUPER + AMD iGPU  
-- **儲存**：NVMe SSD  
-- **雙系統**：Windows 11 + Gentoo  
+## 0. 下載與建立安裝媒體
+官方鏡像列表：<https://www.gentoo.org/downloads/mirrors/>  
+挑離你最近的鏡像（台灣 NCHC、澳洲 AARNET、Kernel.org 等）。
 
-> 以上為示例，步驟對多數 x86_64 平台通用。
-
----
-
-## 0. 下載與製作安裝媒體
-
-**官方鏡像列表**：<https://www.gentoo.org/downloads/mirrors/>
-
-- **中國大陸**：通常**必須**使用境內鏡像（中科大 USTC / 清華 TUNA / 阿里雲），否則下載速度與連線穩定性可能不足。  
-- **台灣**：建議使用 **NCHC**；**澳洲**：AARNET。
-
-### 0.1 下載 ISO（示例：台灣 NCHC）
+### 0.1 下載 ISO（例：NCHC）
 ```bash
 wget https://free.nchc.org.tw/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-> 若在中國大陸，可將網址換成：`https://mirrors.ustc.edu.cn/gentoo/`、`https://mirrors.tuna.tsinghua.edu.cn/gentoo/` 或 `https://mirrors.aliyun.com/gentoo/`。
-
-### 0.2 製作 USB 安裝碟
-**Linux（dd）**：
+### 0.2 建立 USB 安裝碟
+Linux：
 ```bash
 sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
-> 將 `sdX` 換成 USB 裝置名稱（如 `/dev/sdb`）。
-
-**Windows（Rufus）**：<https://rufus.ie/>  
-1. 選擇 USB 與 Gentoo ISO  
-2. 模式選 **dd 模式**（非 ISO 模式）  
-3. Start
+Windows（Rufus）：<https://rufus.ie/>
 
 ---
 
 ## 1. 開機與網路
-
 ### 1.1 確認 UEFI / BIOS
 ```bash
 ls /sys/firmware/efi
 ```
-有輸出 → **UEFI**；沒有 → **Legacy BIOS**。
+存在表示 UEFI。
 
-### 1.2 有線網路（Live 環境）
+### 1.2 有線
 ```bash
 ip a
 dhcpcd eno1
 ping -c 3 gentoo.org
 ```
 
-### 1.3 Wi‑Fi（兩種工具擇一）
-
-**wpa_supplicant**：
+### 1.3 Wi‑Fi
+wpa_supplicant：
 ```bash
 iw dev
 wpa_passphrase "SSID" "PASSWORD" | tee /etc/wpa_supplicant/wpa_supplicant.conf
 wpa_supplicant -B -i wlp9s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 dhcpcd wlp9s0
-ping -c 3 gentoo.org
 ```
-
-**iwd（更簡單，推薦新手）**：
+iwd（推薦）：
 ```bash
 emerge net-wireless/iwd
 systemctl enable iwd
 systemctl start iwd
 iwctl
-[iwd]# device list
-[iwd]# station wlp9s0 scan
-[iwd]# station wlp9s0 get-networks
-[iwd]# station wlp9s0 connect SSID
 ```
-
-> 若 WPA3 不穩，先改用 WPA2 試試。
 
 ---
 
-## 2. 磁碟分割（lsblk 與 cfdisk）
-檢視磁碟：
+## 2. 分割區
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 ```
@@ -563,7 +559,7 @@ reboot
 
 ---
 
-# 💡 常見問題 FAQ
+# 💡 常見問題
 - **下載慢／超時**：中國大陸請用境內鏡像；其他地區選最近鏡像。  
 - **Wi‑Fi 連不上**：先檢查驅動與介面名稱，WPA3 不穩改 WPA2。  
 - **Wayland / X11**：AMD/Intel 新平台可優先 Wayland；相容性需求選 X11 + xwayland。  
@@ -575,7 +571,11 @@ reboot
 
 ---
 
-# 📎 參考
+# 📎 參考資源
+- Gentoo Handbook: <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>
+- Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>
+- Rufus: <https://rufus.ie/>
+- 時區列表: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 - Gentoo Handbook：<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
 - Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
 - Rufus：<https://rufus.ie/>  

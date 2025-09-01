@@ -8,31 +8,50 @@ draft: false
 toc: true
 ---
 
-# 📚 Table of Contents
-- [💻 My Hardware (Example)](#-my-hardware-example)
-- [0. Download & Create Installation Media](#0-download--create-installation-media)
-- [1. Boot & Network](#1-boot--network)
-- [2. Partitioning (lsblk and cfdisk)](#2-partitioning-lsblk-and-cfdisk)
-- [3. Filesystem Formatting & Mounting (ext4 / XFS / Btrfs)](#3-filesystem-formatting--mounting-ext4--xfs--btrfs)
-- [4. Download Stage3, Mount System Directories & chroot](#4-download-stage3-mount-system-directories--chroot)
-- [5. Portage & Mirrors (with full make.conf example)](#5-portage--mirrors-with-full-makeconf-example)
-- [6. USE flags & Licenses (Beginner Solutions)](#6-use-flags--licenses-beginner-solutions)
-- [7. Profile Selection (Desktop / Server)](#7-profile-selection-desktop--server)
-- [8. Localization (Language & Timezone)](#8-localization-language--timezone)
-- [9. Kernel Selection & Compilation (Full Commands)](#9-kernel-selection--compilation-full-commands)
-- [10. Generate fstab (ext4 / Btrfs examples)](#10-generate-fstab-ext4--btrfs-examples)
-- [11. Install Bootloader GRUB (with os-prober)](#11-install-bootloader-grub-with-os-prober)
-- [12. Enable Networking (OpenRC / systemd)](#12-enable-networking-openrc--systemd)
-- [13. Wayland / X11 Choice & USE](#13-wayland--x11-choice--use)
-- [14. GPU Drivers & CPU Microcode](#14-gpu-drivers--cpu-microcode)
-- [15. Desktop Environments (Optional)](#15-desktop-environments-optional)
-- [16. Users & sudo](#16-users--sudo)
-- [17. SSH (Optional)](#17-ssh-optional)
-- [18. Reboot](#18-reboot)
-- [💡 FAQ](#-faq)
-- [📎 References](#-references)
+<!-- 美化 TOC：可摺疊、縮小字體、深淺色模式適配 -->
+<style>
+.gentoo-toc{border:1px solid var(--gtoc-border,#ddd);background:rgba(0,0,0,0.03);padding:.75rem 1rem;margin:1rem 0 1.5rem;border-radius:12px;font-size:.9rem;line-height:1.35;}
+body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
+.gentoo-toc details{margin:0;}
+.gentoo-toc details[open]>summary{margin-bottom:.35rem;}
+.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;outline:none;}
+.gentoo-toc summary::-webkit-details-marker{display:none;}
+.gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.15rem;}
+@media(min-width:760px){.gentoo-toc ol{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}}
+.gentoo-toc a{text-decoration:none;color:inherit;}
+.gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
+body.dark .gentoo-toc a:hover{color:#ff6f9d;}
+</style>
 
----
+<div class="gentoo-toc">
+<details open>
+  <summary>📚 Table of Contents</summary>
+  <ol>
+    <li><a href="#-my-hardware-example">My Hardware (Example)</a></li>
+    <li><a href="#0-download--create-installation-media">0. Download & Create Installation Media</a></li>
+    <li><a href="#1-boot--network">1. Boot & Network</a></li>
+    <li><a href="#2-partitioning-lsblk-and-cfdisk">2. Partitioning</a></li>
+    <li><a href="#3-filesystem-formatting--mounting-ext4--xfs--btrfs">3. Filesystem Formatting & Mounting</a></li>
+    <li><a href="#4-download-stage3-mount-system-directories--chroot">4. Stage3 & chroot</a></li>
+    <li><a href="#5-portage--mirrors-with-full-makeconf-example">5. Portage & Mirrors</a></li>
+    <li><a href="#6-use-flags--licenses-beginner-solutions">6. USE Flags & Licenses</a></li>
+    <li><a href="#7-profile-selection-desktop--server">7. Profile Selection</a></li>
+    <li><a href="#8-localization-language--timezone">8. Localization</a></li>
+    <li><a href="#9-kernel-selection--compilation-full-commands">9. Kernel</a></li>
+    <li><a href="#10-generate-fstab-ext4--btrfs-examples">10. fstab</a></li>
+    <li><a href="#11-install-bootloader-grub-with-os-prober">11. GRUB</a></li>
+    <li><a href="#12-enable-networking-openrc--systemd">12. Networking</a></li>
+    <li><a href="#13-wayland--x11-choice--use">13. Wayland / X11</a></li>
+    <li><a href="#14-gpu-drivers--cpu-microcode">14. GPU & Microcode</a></li>
+    <li><a href="#15-desktop-environments-optional">15. Desktop Environments</a></li>
+    <li><a href="#16-users--sudo">16. Users & sudo</a></li>
+    <li><a href="#17-ssh-optional">17. SSH</a></li>
+    <li><a href="#18-reboot">18. Reboot</a></li>
+    <li><a href="#-faq">FAQ</a></li>
+    <li><a href="#-references">References</a></li>
+  </ol>
+</details>
+</div>
 
 # 💻 My Hardware (Example)
 - **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
