@@ -8,7 +8,7 @@
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
       </h2>
       <div class="post-item-meta">
-        <time datetime="{{ .Date }}">{{ .Date.Format "2006-01-02" }}</time>
+        <time datetime="{{ .Date }}">{{ .Date.Format "02/01/2006" }}</time>
         {{ with .Params.tags }}
           <span class="post-tags">
             {{ range . }}<span class="tag">#{{ . }}</span>{{ end }}

@@ -517,3 +517,30 @@ body.dark .post-section-list .post-item:hover{
   content: none !important;
   border: none !important;
 }
+
+/* 隱藏內文 / Meta 中語言切換及其分隔符 */
+.post-meta .translations,
+.post-meta .i18n-links,
+.post-meta .post-lang,
+.post-meta .post-language,
+.post-meta .lang-switch,
+.post-meta .language-switch,
+.post-meta a[hreflang],
+.article-lang-switch,
+.lang-switch-inline,
+.post-lang-switch {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 去除可能遺留的直線分隔符（語言切換旁） */
+.post-meta, .post-meta * {
+  background-image: none !important;
+  border: none !important;
+}
+.post-meta span::before,
+.post-meta span::after,
+.post-meta a::before,
+.post-meta a::after {
+  content: none !important;
+}
