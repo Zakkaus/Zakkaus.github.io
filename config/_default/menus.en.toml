@@ -1,0 +1,19 @@
+[[main]]
+name = "Home"
+url  = "/"
+weight = 1
+
+[[main]]
+name = "Posts"
+url  = "/posts/"
+weight = 2
+
+[[main]]
+name = "Tags"
+url  = "/tags/"
+weight = 3
+
+[[main]]
+name = "Search"
+url  = "/search/"
+weight = 4
