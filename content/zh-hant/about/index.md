@@ -54,7 +54,7 @@ body.dark .about-page .about-hero strong{
   font-size:1.08rem !important;
   line-height:1.7 !important;
   position:relative;
-  margin:0 0 2rem !important;
+  margin:0 0 1.6rem !important; /* 原 2.1rem */
 }
 body.dark .about-page .about-hero{
   background:#1f2021 !important;
@@ -93,7 +93,7 @@ body.dark .about-page .about-hero strong{
 /* 標題：更細緻左線，去除多餘 padding */
 .about-page h3{
   padding:0 0 .3rem .75rem !important;
-  margin:2.15rem 0 .75rem !important;
+  margin:1.9rem 0 .55rem !important;
   font-size:.98rem !important;
   line-height:1.25;
   font-weight:600;
@@ -104,15 +104,20 @@ body.dark .about-page .about-hero strong{
   bottom:.3rem !important;
 }
 
+/* 第一個標題（緊接 hero）再略縮 */
+.about-page .about-hero + h3{
+  margin-top:1.35rem !important;
+}
+
 /* 列表 */
 .about-page h3 + ul {
   list-style: none;
-  margin: .2rem 0 0;
+  margin:.15rem 0 .2rem !important;
   padding: 0;
 }
 .about-page h3 + ul li {
   position: relative;
-  padding: .46rem 0 .46rem 1.15rem;
+  padding:.4rem 0 .4rem 1.15rem !important;
   font-size: .9rem;
 }
 .about-page h3 + ul li::before {
@@ -175,7 +180,7 @@ body.dark .about-page .about-contacts a {
   display:block !important;
   flex-wrap:nowrap !important;
   gap:0 !important;
-  margin:.25rem 0 0 !important;
+  margin:.2rem 0 0 !important;
   padding:0 !important;
   list-style:none;
 }
@@ -216,6 +221,32 @@ body.dark .about-page .about-contacts a{
 .about-page .about-contacts a:hover{
   background:var(--about-accent) !important;
   color:#fff !important;
+}
+
+/* 頁面頂部與 Hero 間距（讓標題/日期與內容拉開） */
+.about-page{
+  padding-top:1.2rem !important;
+}
+
+/* 通用段落標題間距（縮短段落間空白） */
+.about-page h3{
+  margin:1.9rem 0 .55rem !important;
+}
+
+/* 列表與下一標題之間距離更緊湊 */
+.about-page h3 + ul{
+  margin:.15rem 0 .2rem !important;
+}
+.about-page h3 + ul li{
+  padding:.4rem 0 .4rem 1.15rem !important;
+}
+
+/* 聯絡方式區塊頂部再收斂 */
+.about-page h3:has(+ .about-contacts){
+  margin-top:1.6rem !important;
+}
+.about-page .about-contacts{
+  margin:.2rem 0 0 !important;
 }
 
 /* RWD */

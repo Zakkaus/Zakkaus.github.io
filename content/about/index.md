@@ -13,7 +13,7 @@ body.dark .about-page{color:#e9e9eb;}
 .about-page .about-hero{
   font-size:1.14rem;
   line-height:1.72;
-  margin:0 0 2.1rem;
+  margin:0 0 1.6rem;
   padding:1.1rem 1.35rem 1.2rem;
   background:#ffffff;
   border:1px solid #e6e7ea;
@@ -58,7 +58,7 @@ body.dark .about-page .about-hero strong{
 
 /* Headings simplified */
 .about-page h3{
-  margin:2.1rem 0 .7rem;
+  margin:1.9rem 0 .55rem;
   font-size:1.02rem;
   line-height:1.28;
   font-weight:600;
@@ -71,6 +71,19 @@ body.dark .about-page .about-hero strong{
   content:"";
   position:absolute;left:0;top:0;bottom:.55rem;
   width:3px;background:var(--about-accent);border-radius:2px;
+}
+
+/* First heading after hero */
+.about-page .about-hero + h3{
+  margin-top:1.35rem !important;
+}
+
+/* List compact */
+.about-page h3 + ul{
+  margin:.15rem 0 .2rem !important;
+}
+.about-page h3 + ul li{
+  padding:.4rem 0 .4rem 1.15rem !important;
 }
 
 /* Contacts vertical style already applied earlier (leave) */
@@ -88,6 +101,42 @@ body.dark .about-page .about-contacts a{
 .about-page .about-contacts a:hover{
   background:var(--about-accent)!important;
   color:#fff!important;
+}
+
+/* Top spacing from page title/meta */
+.about-page{
+  padding-top:1.2rem !important;
+}
+
+/* Hero bottom spacing reduced */
+.about-page .about-hero{
+  margin:0 0 1.6rem !important;
+}
+
+/* Section heading spacing */
+.about-page h3{
+  margin:1.9rem 0 .55rem !important;
+}
+
+/* First heading after hero */
+.about-page .about-hero + h3{
+  margin-top:1.35rem !important;
+}
+
+/* List compact */
+.about-page h3 + ul{
+  margin:.15rem 0 .2rem !important;
+}
+.about-page h3 + ul li{
+  padding:.4rem 0 .4rem 1.15rem !important;
+}
+
+/* Contacts block spacing */
+.about-page h3:has(+ .about-contacts){
+  margin-top:1.6rem !important;
+}
+.about-page .about-contacts{
+  margin:.2rem 0 0 !important;
 }
 
 @media (max-width:640px){
