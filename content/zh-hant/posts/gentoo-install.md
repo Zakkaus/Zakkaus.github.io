@@ -9,34 +9,37 @@ toc: true
 ---
 
 <style>
-/* TOC */
-.gentoo-toc{border:1px solid var(--gtoc-border,#ddd);background:rgba(0,0,0,0.03);padding:.75rem 1rem;margin:1rem 0 1.5rem;border-radius:12px;font-size:.9rem;line-height:1.35;}
+/* TOC 容器 */
+.gentoo-toc{border:1px solid var(--gtoc-border,#ddd);background:rgba(0,0,0,0.03);padding:.75rem 1rem;margin:1rem 0 1.4rem;border-radius:12px;font-size:.9rem;line-height:1.35;}
 body.dark .gentoo-toc{background:rgba(255,255,255,0.05);border-color:#444;}
-.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;}
+.gentoo-toc summary{cursor:pointer;font-weight:600;list-style:none;outline:none;}
 .gentoo-toc summary::-webkit-details-marker{display:none;}
-.gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.15rem;}
+.gentoo-toc ol{margin:0;padding:0;list-style:decimal;margin-left:1.1rem;display:grid;gap:.18rem;}
 @media(min-width:760px){.gentoo-toc ol{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));}}
 .gentoo-toc a{text-decoration:none;color:inherit;}
 .gentoo-toc a:hover{text-decoration:underline;color:#e1306c;}
 body.dark .gentoo-toc a:hover{color:#ff6f9d;}
 
-/* Article base + code (與英文一致) */
+/* 文章主體 + 程式碼高對比 */
 .gentoo-article{--g-accent:#e1306c;--g-code-bg:#2b2f36;--g-code-border:#3a4048;--g-border:#e1e1e3;--g-table-head:#f7f7f7;line-height:1.55;font-size:.97rem;}
 body.dark .gentoo-article{--g-code-bg:#16181c;--g-code-border:#2b3036;--g-table-head:#262626;}
-.gentoo-article h2{margin:2.25rem 0 1.1rem;padding:.55rem .9rem .55rem 1rem;border-left:6px solid var(--g-accent);background:linear-gradient(90deg,rgba(225,48,108,.08),rgba(0,0,0,0));border-radius:6px;font-size:1.26rem;}
-.gentoo-article h3{margin:1.8rem 0 .85rem;padding:.4rem .65rem .4rem .75rem;border-left:4px solid var(--g-accent);background:linear-gradient(90deg,rgba(225,48,108,.05),rgba(0,0,0,0));border-radius:5px;font-size:1.08rem;}
+/* h2: 主章節醒目；h3: 精簡左線；h4: 底線 */
+.gentoo-article h2{margin:2.3rem 0 1.05rem;padding:.55rem .9rem .55rem 1rem;border-left:6px solid var(--g-accent);background:linear-gradient(90deg,rgba(225,48,108,.08),rgba(0,0,0,0));border-radius:6px;font-size:1.26rem;}
+.gentoo-article h3{margin:1.6rem 0 .6rem;padding:.25rem .55rem .25rem .7rem;border-left:3px solid var(--g-accent);font-size:1.04rem;}
+.gentoo-article h4{margin:1.15rem 0 .5rem;padding:0 0 .25rem;font-size:.95rem;border-bottom:1px solid rgba(0,0,0,.12);}
+body.dark .gentoo-article h4{border-bottom:1px solid rgba(255,255,255,.18);}
+
 .gentoo-article pre{background:var(--g-code-bg)!important;color:#f3f5f7!important;border:1px solid var(--g-code-border);padding:.85rem 1rem;margin:1.15rem 0;border-radius:10px;font-size:.84rem;line-height:1.45;overflow:auto;}
 body.dark .gentoo-article pre{color:#e9ecef!important;}
 .gentoo-article pre code{background:transparent!important;padding:0;border:none;font-size:inherit;color:inherit;}
 .gentoo-article code:not(pre code){background:#343a40;color:#f8f9fa;padding:.18em .5em;border:1px solid #454d55;border-radius:6px;font-size:.78rem;}
 body.dark .gentoo-article code:not(pre code){background:#22272e;border-color:#313a44;color:#e6e8ea;}
-.gentoo-article blockquote{margin:1.2rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:rgba(0,0,0,0.04);border-radius:6px;}
+.gentoo-article blockquote{margin:1.15rem 0;padding:.75rem 1rem;border-left:4px solid var(--g-accent);background:rgba(0,0,0,0.04);border-radius:6px;}
 body.dark .gentoo-article blockquote{background:rgba(255,255,255,0.05);}
 .gentoo-article table{border-collapse:collapse;margin:1rem 0;font-size:.85rem;width:100%;border:1px solid var(--g-border);border-radius:10px;overflow:hidden;}
-.gentoo-article table th,
-.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);}
-.gentoo-article table thead th{background:var(--g-table-head);}
-.gentoo-article hr{margin:2.2rem 0;border:none;height:1px;background:linear-gradient(90deg,rgba(0,0,0,.08),rgba(0,0,0,0));}
+.gentoo-article table th,.gentoo-article table td{padding:.55rem .7rem;border:1px solid var(--g-border);vertical-align:top;}
+.gentoo-article table thead th{background:var(--g-table-head);font-weight:600;}
+.gentoo-article hr{margin:2.1rem 0;border:none;height:1px;background:linear-gradient(90deg,rgba(0,0,0,.09),rgba(0,0,0,0));}
 body.dark .gentoo-article hr{background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0));}
 .gentoo-article a:not(.cb-btn){color:var(--g-accent);text-decoration:none;}
 .gentoo-article a:not(.cb-btn):hover{text-decoration:underline;}
@@ -47,84 +50,92 @@ body.dark .gentoo-article a:not(.cb-btn){color:#ff6f9d;}
 <details open>
   <summary>📚 目錄</summary>
   <ol>
-    <li><a href="#my-hardware-example-zh">我的硬體（範例）</a></li>
-    <li><a href="#0-下載與建立安裝媒體">0. 下載與建立安裝媒體</a></li>
+    <li><a href="#-我的電腦配置示例">💻 我的電腦配置（示例）</a></li>
+    <li><a href="#0-下載與製作安裝媒體">0. 下載與製作安裝媒體</a></li>
     <li><a href="#1-開機與網路">1. 開機與網路</a></li>
-    <li><a href="#2-分割區-lsblk-與-cfdisk">2. 分割區（lsblk 與 cfdisk）</a></li>
-    <li><a href="#3-檔案系統格式化與掛載">3. 檔案系統格式化與掛載</a></li>
-    <li><a href="#4-stage3-掛載與-chroot">4. Stage3、掛載與 chroot</a></li>
-    <li><a href="#5-portage-與鏡像">5. Portage 與鏡像</a></li>
-    <li><a href="#6-use-旗標與授權">6. USE 旗標與授權</a></li>
-    <li><a href="#7-profile-選擇">7. Profile 選擇</a></li>
-    <li><a href="#8-本地化語言與時區">8. 本地化（語言與時區）</a></li>
-    <li><a href="#9-kernel-編譯">9. Kernel 編譯</a></li>
-    <li><a href="#10-產生-fstab">10. 產生 fstab</a></li>
-    <li><a href="#11-安裝-grub">11. 安裝 GRUB</a></li>
-    <li><a href="#12-啟用網路">12. 啟用網路</a></li>
-    <li><a href="#13-wayland-x11">13. Wayland / X11</a></li>
-    <li><a href="#14-gpu-與微碼">14. GPU 與微碼</a></li>
-    <li><a href="#15-桌面環境">15. 桌面環境</a></li>
+    <li><a href="#2-磁碟分割lsblk-與-cfdisk">2. 磁碟分割（lsblk 與 cfdisk）</a></li>
+    <li><a href="#3-檔案系統格式化與掛載ext4--xfs--btrfs">3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）</a></li>
+    <li><a href="#4-下載-stage3掛載系統目錄與-chroot">4. 下載 Stage3、掛載系統目錄與 chroot</a></li>
+    <li><a href="#5-portage-與鏡像源含-makeconf-完整示例">5. Portage 與鏡像源（含 makeconf 完整示例）</a></li>
+    <li><a href="#6-use-flags-與-license新手解法">6. USE flags 與 License（新手解法）</a></li>
+    <li><a href="#7-選擇-profile桌面伺服器">7. 選擇 Profile（桌面／伺服器）</a></li>
+    <li><a href="#8-本地化-localization語言與時區">8. 本地化 Localization（語言與時區）</a></li>
+    <li><a href="#9-內核選擇與編譯完整指令">9. 內核選擇與編譯（完整指令）</a></li>
+    <li><a href="#10-產生-fstab含-btrfs--ext4-範例">10. 產生 fstab（含 Btrfs / ext4 範例）</a></li>
+    <li><a href="#11-安裝開機器-grub含-os-prober">11. 安裝開機器 GRUB（含 os-prober）</a></li>
+    <li><a href="#12-啟用網路服務openrc--systemd">12. 啟用網路服務（OpenRC / systemd）</a></li>
+    <li><a href="#13-wayland--x11-選擇與-use">13. Wayland / X11 選擇與 USE</a></li>
+    <li><a href="#14-顯示卡與-cpu-微碼">14. 顯示卡與 CPU 微碼</a></li>
+    <li><a href="#15-桌面環境可選">15. 桌面環境（可選）</a></li>
     <li><a href="#16-使用者與-sudo">16. 使用者與 sudo</a></li>
-    <li><a href="#17-ssh">17. SSH</a></li>
-    <li><a href="#18-重新開機">18. 重新開機</a></li>
-    <li><a href="#常見問題">常見問題</a></li>
-    <li><a href="#參考資源">參考資源</a></li>
+    <li><a href="#17-ssh可選">17. SSH（可選）</a></li>
+    <li><a href="#18-重開機">18. 重開機</a></li>
+    <li><a href="#-常見問題-faq">💡 常見問題 FAQ</a></li>
+    <li><a href="#-參考">📎 參考</a></li>
   </ol>
 </details>
 </div>
 
 <div class="gentoo-article">
 
-# 💻 我的硬體（範例） {#my-hardware-example-zh}
-- **CPU**: AMD Ryzen 9 7950X3D (16C/32T)  
-- **主機板**: ASUS ROG STRIX X670E-A GAMING WIFI  
-- **記憶體**: 64GB DDR5  
-- **顯示卡**: NVIDIA RTX 4080 SUPER + AMD iGPU  
-- **儲存**: NVMe SSD  
-- **雙系統**: Windows 11 + Gentoo  
+# 💻 我的電腦配置（示例）
+- **CPU**：AMD Ryzen 9 7950X3D（16C/32T）  
+- **主機板**：ASUS ROG STRIX X670E-A GAMING WIFI  
+- **RAM**：64GB DDR5  
+- **GPU**：NVIDIA RTX 4080 SUPER + AMD iGPU  
+- **儲存**：NVMe SSD  
+- **雙系統**：Windows 11 + Gentoo  
 
-> 此為示例，步驟適用於大多數 x86_64 平台。
+> 以上為示例，步驟對多數 x86_64 平台通用。
 
 ---
 
-## 0. 下載與建立安裝媒體 {#0-下載與建立安裝媒體}
+## 0. 下載與製作安裝媒體
 
-官方鏡像列表：<https://www.gentoo.org/downloads/mirrors/>  
-選離你最近的鏡像（例：台灣 NCHC、澳洲 AARNET、Kernel.org）。
+**官方鏡像列表**：<https://www.gentoo.org/downloads/mirrors/>
 
-### 0.1 下載 ISO
+- **中國大陸**：通常**必須**使用境內鏡像（中科大 USTC / 清華 TUNA / 阿里雲），否則下載速度與連線穩定性可能不足。  
+- **台灣**：建議使用 **NCHC**；**澳洲**：AARNET。
+
+### 0.1 下載 ISO（示例：台灣 NCHC）
 ```bash
 wget https://free.nchc.org.tw/gentoo/releases/amd64/autobuilds/current-install-amd64-minimal/install-amd64-minimal.iso
 ```
 
-### 0.2 製作 USB 開機碟
-Linux：
+> 若在中國大陸，可將網址換成：`https://mirrors.ustc.edu.cn/gentoo/`、`https://mirrors.tuna.tsinghua.edu.cn/gentoo/` 或 `https://mirrors.aliyun.com/gentoo/`。
+
+### 0.2 製作 USB 安裝碟
+**Linux（dd）**：
 ```bash
 sudo dd if=install-amd64-minimal.iso of=/dev/sdX bs=4M status=progress oflag=sync
 ```
-將 sdX 換成實際 USB 裝置。  
-Windows（Rufus）：選 USB、ISO，建議 dd 模式寫入。
+> 將 `sdX` 換成 USB 裝置名稱（如 `/dev/sdb`）。
+
+**Windows（Rufus）**：<https://rufus.ie/>  
+1. 選擇 USB 與 Gentoo ISO  
+2. 模式選 **dd 模式**（非 ISO 模式）  
+3. Start
 
 ---
 
-## 1. 開機與網路 {#1-開機與網路}
+## 1. 開機與網路
 
-### 1.1 確認是否為 UEFI
+### 1.1 確認 UEFI / BIOS
 ```bash
 ls /sys/firmware/efi
 ```
-有輸出 → UEFI；否則 Legacy BIOS。
+有輸出 → **UEFI**；沒有 → **Legacy BIOS**。
 
-### 1.2 有線網路
+### 1.2 有線網路（Live 環境）
 ```bash
 ip a
 dhcpcd eno1
 ping -c 3 gentoo.org
 ```
 
-### 1.3 Wi‑Fi
+### 1.3 Wi‑Fi（兩種工具擇一）
 
-wpa_supplicant：
+**wpa_supplicant**：
 ```bash
 iw dev
 wpa_passphrase "SSID" "PASSWORD" | tee /etc/wpa_supplicant/wpa_supplicant.conf
@@ -133,7 +144,7 @@ dhcpcd wlp9s0
 ping -c 3 gentoo.org
 ```
 
-iwd（推薦）：
+**iwd（更簡單，推薦新手）**：
 ```bash
 emerge net-wireless/iwd
 systemctl enable iwd
@@ -145,11 +156,12 @@ iwctl
 [iwd]# station wlp9s0 connect SSID
 ```
 
+> 若 WPA3 不穩，先改用 WPA2 試試。
+
 ---
 
-## 2. 分割區（lsblk 與 cfdisk） {#2-分割區-lsblk-與-cfdisk}
-
-列出磁碟：
+## 2. 磁碟分割（lsblk 與 cfdisk）
+檢視磁碟：
 ```bash
 lsblk -o NAME,SIZE,TYPE,MOUNTPOINT
 ```
@@ -161,47 +173,49 @@ nvme0n1    476G disk
 ├─nvme0n1p3 100G part
 └─nvme0n1p4 375G part
 ```
-互動式分割：
+
+啟動分割工具（可選）：
 ```bash
 cfdisk /dev/nvme0n1
 ```
 
-建議 UEFI 佈局：
-| 大小 | FS | 掛載 | 用途 |
-|------|----|------|------|
-| 512M | FAT32 | /efi  | ESP |
-| 1G   | ext4  | /boot | 核心 / initramfs |
-| 100G+| ext4/XFS/Btrfs | / | Root |
-| 餘下 | ext4/XFS/Btrfs | /home | 使用者資料 |
+**建議分割（UEFI）**：  
+| 大小 | 檔案系統 | 掛載點 | 說明 |
+|---|---|---|---|
+| 512M | FAT32 | /efi | ESP（UEFI 系統分割區） |
+| 1G | ext4 | /boot | kernel、initramfs |
+| 100G+ | ext4 / XFS / Btrfs | / | 根分割區 |
+| 其餘 | ext4 / XFS / Btrfs | /home | 使用者家目錄 |
+
+> 你也可以選擇只有 / 與 /efi 的簡化方案。
 
 ---
 
-## 3. 檔案系統格式化與掛載 (ext4 / XFS / Btrfs) {#3-檔案系統格式化與掛載}
+## 3. 檔案系統格式化與掛載（ext4 / XFS / Btrfs）
 
 ### 3.1 格式化
-
-ext4：
+**ext4**：
 ```bash
 mkfs.ext4 -L root /dev/nvme0n1p3
 mkfs.ext4 -L home /dev/nvme0n1p4
 ```
 
-XFS：
+**XFS**：
 ```bash
 mkfs.xfs -L root /dev/nvme0n1p3
 mkfs.xfs -L home /dev/nvme0n1p4
 ```
 
-Btrfs：
+**Btrfs**（必要時可用 `-f` 強制覆蓋，⚠️ 會抹除該分割區資料）：
 ```bash
 mkfs.btrfs -L rootfs /dev/nvme0n1p3
 mkfs.btrfs -L home   /dev/nvme0n1p4
-# 若需覆蓋：加 -f
+# 需要強制時：mkfs.btrfs -f -L rootfs /dev/nvme0n1p3
 ```
 
-### 3.2 掛載
+### 3.2 掛載（完整流程）
 
-ext4 / XFS：
+**ext4 / XFS**：
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 mkdir -p /mnt/gentoo/{boot,home,efi}
@@ -210,26 +224,27 @@ mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
-Btrfs（子卷）：
+**Btrfs（子卷）**：
 ```bash
 mount /dev/nvme0n1p3 /mnt/gentoo
 btrfs subvolume create /mnt/gentoo/@
 btrfs subvolume create /mnt/gentoo/@home
 umount /mnt/gentoo
 
-mount -o compress=zstd,subvol=@ /dev/nvme0n1p3 /mnt/gentoo
+mount -o compress=zstd,subvol=@    /dev/nvme0n1p3 /mnt/gentoo
 mkdir -p /mnt/gentoo/{boot,home,efi}
-mount -o subvol=@home /dev/nvme0n1p3 /mnt/gentoo/home
+mount -o subvol=@home              /dev/nvme0n1p3 /mnt/gentoo/home
 mount /dev/nvme0n1p2 /mnt/gentoo/boot
 mount /dev/nvme0n1p1 /mnt/gentoo/efi
 ```
 
 ---
 
-## 4. Stage3、掛載與 chroot {#4-stage3-掛載與-chroot}
+## 4. 下載 Stage3、掛載系統目錄與 chroot
 
 ### 4.1 選擇 Stage3
-使用標準 glibc（OpenRC 或 systemd 版本皆可）。桌面變體可略。
+- 建議下載 **標準 Stage3（glibc）**，依需求選 **OpenRC** 或 **systemd**。  
+- 「desktop」Stage3 只是預設桌面化 USE，**非必須**；用標準 Stage3 + 正確 **Profile** 更靈活。
 
 ### 4.2 下載與解壓
 ```bash
@@ -238,16 +253,17 @@ links https://www.gentoo.org/downloads/mirrors/
 tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 ```
 
-### 4.3 掛載系統目錄
+> 同 ISO，一樣可選擇就近的鏡像源下載 Stage3。
 
-OpenRC：
+### 4.3 掛載系統目錄（依 init 系統不同）
+**OpenRC**：
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 ```
 
-systemd：
+**systemd**：
 ```bash
 mount -t proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys
@@ -264,115 +280,146 @@ export PS1="(chroot) $PS1"
 
 ---
 
-## 5. Portage 與鏡像 {#5-portage-與鏡像}
+## 5. Portage 與鏡像源（含 makeconf 完整示例）
 
-### 5.1 同步
+### 5.1 同步 Portage 樹
 ```bash
 emerge-webrsync
 emerge --sync
 ```
 
-### 5.2 鏡像選擇
-互動：
+### 5.2 選擇鏡像源（擇一）
+**互動工具**：
 ```bash
 emerge --ask app-portage/mirrorselect
 mirrorselect -i -o >> /etc/portage/make.conf
 ```
-手動：
+**手動指定（建議最終只保留一條）**：
 ```bash
 echo 'GENTOO_MIRRORS="https://free.nchc.org.tw/gentoo/"' >> /etc/portage/make.conf
 ```
 
-### 5.3 make.conf 範例
+> ⚠️ 避免重複與衝突：`mirrorselect` 可能加入多條鏡像，建議最後僅保留速度最快的一條。
+
+### 5.3 `/etc/portage/make.conf` 完整示例（含註解）
 ```conf
+# 編譯器參數：O2 與 pipe 足夠，多數情況不需要 -Ofast
 COMMON_FLAGS="-march=native -O2 -pipe"
+
+# 平行編譯：通常設成 CPU 執行緒數
 MAKEOPTS="-j32"
+
+# Portage 預設行為：互動、詳細、拉進建置依賴、完整圖
 EMERGE_DEFAULT_OPTS="--ask --verbose --with-bdeps=y --complete-graph=y"
+
+# 鏡像：請最終僅保留一條（下例為台灣 NCHC）
 GENTOO_MIRRORS="https://free.nchc.org.tw/gentoo/"
+
+# 全域 USE（兩套典型選擇二擇一；也可同時保留 xwayland 做相容）
 USE="wayland egl pipewire vulkan"
 # USE="X xwayland egl pipewire vulkan"
+
+# 顯示卡：請只填你的硬體（不要全抄）
+# 例：NVIDIA 新卡
 VIDEO_CARDS="nvidia"
+# 例：AMD
 # VIDEO_CARDS="amdgpu radeonsi"
+# 例：Intel
 # VIDEO_CARDS="intel i965 iris"
+# 例：老 NVIDIA 或想用開源
 # VIDEO_CARDS="nouveau"
+
+# 接受授權：新手可暫時開放全部，之後細化至 package.license
 ACCEPT_LICENSE="*"
 ```
 
 ---
 
-## 6. USE 旗標與授權 {#6-use-旗標與授權}
+## 6. USE flags 與 License（新手解法）
 
-### 6.1 檢視
+### 6.1 查詢與理解 USE
 ```bash
 emerge -pv firefox
 ```
 
-### 6.2 新增 USE
+### 6.2 對單一套件加入 USE
 ```bash
 echo "media-video/ffmpeg X wayland" >> /etc/portage/package.use/ffmpeg
 ```
 
-### 6.3 增加授權
+### 6.3 同意授權（例：Chrome）
 ```bash
 echo "www-client/google-chrome google-chrome" >> /etc/portage/package.license
 ```
 
-### 6.4 關鍵字（解鎖較新）
+### 6.4 關鍵詞（較新版本）
 ```bash
 echo "www-client/google-chrome ~amd64" >> /etc/portage/package.accept_keywords
 ```
+> 僅在需要較新（測試）版本時使用。
 
 ---
 
-## 7. Profile 選擇 {#7-profile-選擇}
+## 7. 選擇 Profile（桌面／伺服器）
 
-列出：
+列出可用 Profile：
 ```bash
 eselect profile list
 ```
-範例：
-- KDE + systemd → `default/linux/amd64/23.0/desktop/plasma/systemd`
-- GNOME + systemd → `default/linux/amd64/23.0/desktop/gnome/systemd`
-- Desktop + OpenRC → `default/linux/amd64/23.0/desktop`
-- Server → `default/linux/amd64/23.0`
 
-套用：
+常見選擇：
+- **KDE + systemd**：`default/linux/amd64/23.0/desktop/plasma/systemd`  
+- **GNOME + systemd**：`default/linux/amd64/23.0/desktop/gnome/systemd`  
+- **桌面 + OpenRC**：`default/linux/amd64/23.0/desktop` 或對應 plasma/openrc 變體  
+- **伺服器**：`default/linux/amd64/23.0`（較精簡）
+
+套用並更新系統：
 ```bash
-eselect profile set <id>
+eselect profile set <編號>
 emerge -avuDN @world
 ```
 
+> Profile 會設定一組預設 USE；需要時再以 package.use 調整。
+
 ---
 
-## 8. 本地化（語言與時區） {#8-本地化語言與時區}
+## 8. 本地化 Localization（語言與時區）
 
-Locales：
+**語言（/etc/locale.gen）**：
 ```conf
 en_US.UTF-8 UTF-8
-en_AU.UTF-8 UTF-8
+zh_TW.UTF-8 UTF-8
 ```
+產生並套用：
 ```bash
 locale-gen
 eselect locale set en_US.utf8
 ```
 
-時區：
+**時區**：
 ```bash
 ls /usr/share/zoneinfo
-echo "Australia/Melbourne" > /etc/timezone
+echo "Asia/Taipei" > /etc/timezone
 emerge --config sys-libs/timezone-data
+```
+完整清單：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+
+**字型與輸入法（可選）**：
+```bash
+emerge media-fonts/noto-cjk
+emerge app-i18n/fcitx5 app-i18n/fcitx5-rime
 ```
 
 ---
 
-## 9. Kernel 編譯 {#9-kernel-編譯}
+## 9. 內核選擇與編譯（完整指令）
 
-預建：
+### 9.1 最簡方案：預編譯內核
 ```bash
 emerge sys-kernel/gentoo-kernel-bin
 ```
 
-手動：
+### 9.2 自行編譯
 ```bash
 emerge sys-kernel/gentoo-sources
 cd /usr/src/linux
@@ -382,7 +429,7 @@ make modules_install
 make install
 ```
 
-Initramfs：
+**Initramfs（Btrfs、LUKS、RAID 或模組化驅動建議）**  
 Dracut：
 ```bash
 emerge sys-kernel/dracut
@@ -396,22 +443,23 @@ genkernel initramfs
 
 ---
 
-## 10. 產生 fstab {#10-產生-fstab}
+## 10. 產生 fstab（含 Btrfs / ext4 範例）
 
-查 UUID：
+查詢 UUID：
 ```bash
 blkid
 lsblk -f
 ```
 
-ext4：
+**ext4**：
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat  noatime,umask=0077 0 2
 UUID=<UUID-BOOT> /boot  ext4  noatime            0 2
 UUID=<UUID-ROOT> /      ext4  noatime            0 1
 UUID=<UUID-HOME> /home  ext4  noatime            0 2
 ```
-Btrfs：
+
+**Btrfs（子卷）**：
 ```fstab
 UUID=<UUID-ESP>  /efi   vfat   noatime,umask=0077 0 2
 UUID=<UUID-ROOT> /      btrfs  noatime,compress=zstd,subvol=@     0 1
@@ -420,7 +468,7 @@ UUID=<UUID-ROOT> /home  btrfs  noatime,compress=zstd,subvol=@home 0 2
 
 ---
 
-## 11. 安裝 GRUB {#11-安裝-grub}
+## 11. 安裝開機器 GRUB（含 os-prober）
 ```bash
 emerge grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=Gentoo
@@ -428,22 +476,23 @@ emerge --ask sys-boot/os-prober
 echo 'GRUB_DISABLE_OS_PROBER=false' >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
-Btrfs：
+
+若 root 使用 Btrfs：
 ```bash
 emerge --ask sys-fs/btrfs-progs
 ```
 
 ---
 
-## 12. 啟用網路 {#12-啟用網路}
+## 12. 啟用網路服務（OpenRC / systemd）
 
-systemd：
+**systemd**：
 ```bash
 emerge net-misc/networkmanager
 systemctl enable NetworkManager
 ```
 
-OpenRC：
+**OpenRC**：
 ```bash
 emerge net-misc/dhcpcd
 rc-update add dhcpcd default
@@ -451,22 +500,25 @@ rc-update add dhcpcd default
 
 ---
 
-## 13. Wayland / X11 {#13-wayland-x11}
+## 13. Wayland / X11 選擇與 USE
 
-Wayland：
+**Wayland**：
 ```conf
 USE="wayland egl pipewire vulkan"
 ```
-X11：
+
+**X11**：
 ```conf
 USE="X xwayland egl pipewire vulkan"
 ```
 
+> 可同時啟用 xwayland 以兼容 X11 程式。
+
 ---
 
-## 14. GPU 與微碼 {#14-gpu-與微碼}
+## 14. 顯示卡與 CPU 微碼
 
-NVIDIA：
+**NVIDIA 專有**：
 ```conf
 VIDEO_CARDS="nvidia"
 ```
@@ -474,7 +526,7 @@ VIDEO_CARDS="nvidia"
 emerge x11-drivers/nvidia-drivers
 ```
 
-Nouveau：
+**Nouveau（開源）**：
 ```conf
 VIDEO_CARDS="nouveau"
 ```
@@ -482,7 +534,7 @@ VIDEO_CARDS="nouveau"
 emerge x11-base/xorg-drivers
 ```
 
-AMD：
+**AMD**：
 ```conf
 VIDEO_CARDS="amdgpu radeonsi"
 ```
@@ -490,7 +542,7 @@ VIDEO_CARDS="amdgpu radeonsi"
 emerge mesa vulkan-loader
 ```
 
-Intel：
+**Intel**：
 ```conf
 VIDEO_CARDS="intel i965 iris"
 ```
@@ -498,7 +550,7 @@ VIDEO_CARDS="intel i965 iris"
 emerge mesa vulkan-loader
 ```
 
-CPU 微碼：
+**CPU 微碼**：
 ```bash
 emerge sys-firmware/intel-microcode
 emerge sys-firmware/amd-ucode
@@ -506,14 +558,15 @@ emerge sys-firmware/amd-ucode
 
 ---
 
-## 15. 桌面環境 {#15-桌面環境}
+## 15. 桌面環境（可選）
 
-KDE Plasma：
+**KDE Plasma**：
 ```bash
 emerge kde-plasma/plasma-meta x11-misc/sddm x11-base/xwayland
 systemctl enable sddm
 ```
-GNOME：
+
+**GNOME**：
 ```bash
 emerge gnome-base/gnome gnome-base/gdm
 systemctl enable gdm
@@ -521,7 +574,7 @@ systemctl enable gdm
 
 ---
 
-## 16. 使用者與 sudo {#16-使用者與-sudo}
+## 16. 使用者與 sudo
 ```bash
 passwd
 useradd -m -G wheel,audio,video,usb -s /bin/bash zakk
@@ -529,11 +582,11 @@ passwd zakk
 emerge app-admin/sudo
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 ```
-> 將 zakk 換成你的使用者名稱。
+> ⚠️ 請將 `zakk` 替換為你的使用者名稱。
 
 ---
 
-## 17. SSH {#17-ssh}
+## 17. SSH（可選）
 ```bash
 emerge net-misc/openssh
 systemctl enable sshd && systemctl start sshd
@@ -541,7 +594,7 @@ systemctl enable sshd && systemctl start sshd
 
 ---
 
-## 18. 重新開機 {#18-重新開機}
+## 18. 重開機
 ```bash
 exit
 umount -R /mnt/gentoo
@@ -550,21 +603,21 @@ reboot
 
 ---
 
-# 常見問題 {#常見問題}
-- 下載慢 → 換近鏡像  
-- Wi‑Fi WPA3 不穩 → 改 WPA2  
-- Wayland vs X11 → AMD/Intel 優先 Wayland；需要最大相容性選 X11  
-- NVIDIA → 新卡專有驅動；老卡可試 nouveau（效能較低）  
-- USE 衝突 → 先 `emerge -pv` 分析並拆到 package.use  
-- 授權阻擋 → 加入 package.license  
-- 要新版 → package.accept_keywords  
-- Btrfs + LUKS/RAID → 建議使用 initramfs  
+# 💡 常見問題 FAQ
+- **下載慢／超時**：中國大陸請用境內鏡像；其他地區選最近鏡像。  
+- **Wi‑Fi 連不上**：檢查驅動與介面名稱；WPA3 不穩改 WPA2。  
+- **Wayland / X11**：AMD/Intel 新平台優先 Wayland；相容性需求選 X11 + xwayland。  
+- **NVIDIA 選擇**：新卡建議 `nvidia-drivers`；舊卡或完全開源可試 `nouveau`（效能較低）。  
+- **USE 衝突**：`emerge -pv <套件>` 依提示拆分到 `package.use`。  
+- **License 阻擋**：將授權加入 `package.license`。  
+- **需要新版**：使用 `package.accept_keywords`。  
+- **Btrfs + LUKS/RAID**：建議使用 initramfs（dracut 或 genkernel）。  
 
 ---
 
-# 參考資源 {#參考資源}
-- Gentoo Handbook: <https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>
-- Bitbili: <https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>
-- Rufus: <https://rufus.ie/>
-- 時區列表: <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+# 📎 參考
+- Gentoo Handbook：<https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation>  
+- Bitbili：<https://bitbili.net/gentoo-linux-installation-and-usage-tutorial.html>  
+- Rufus：<https://rufus.ie/>  
+- 時區列表（tz database）：<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
 </div>
