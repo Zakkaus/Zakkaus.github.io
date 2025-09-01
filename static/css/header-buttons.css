@@ -183,3 +183,137 @@ body.dark{
 /* 移除（之前為刪搜尋設定的殘留） */
 .cb-searchwrap,
 .cb-search-results{display:none !important;}
+.site-header.header-sanitizing{
+  visibility:hidden;
+}
+
+/* Footer 樣式 */
+/* 刪除舊站腳樣式 */
+/* 移除：.site-footer, .site-footer-inner, .site-footer .site-foot-text 等所有舊定義 */
+
+/* 新站腳樣式 */
+.clean-footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  text-align: center !important;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+body.dark .clean-footer {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.clean-footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center !important;
+}
+
+.clean-footer small {
+  font-size: 12px !important;
+  color: #888 !important;  /* 灰色，不是亮白 */
+  font-weight: 400 !important;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  display: inline-block;
+  text-align: center !important;
+}
+
+body.dark .clean-footer small {
+  color: #aaa !important;  /* 暗色模式下稍亮一點的灰 */
+}
+
+.clean-footer a {
+  color: inherit !important;
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: all 0.2s ease;
+}
+
+.clean-footer a:hover {
+  color: var(--hb-active, #e1306c) !important;
+  border-color: var(--hb-active, #e1306c);
+}
+
+/* 站腳樣式 - 提高優先級 */
+footer.clean-footer {
+  margin-top: 3rem !important;
+  padding: 2rem 0 !important;
+  text-align: center !important;
+  border-top: 1px solid rgba(0,0,0,0.1) !important;
+  width: 100% !important;
+  background: transparent !important;
+  position: relative !important;
+}
+
+body.dark footer.clean-footer {
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+footer.clean-footer .footer-content {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 1rem !important;
+  text-align: center !important;
+}
+
+footer.clean-footer small {
+  font-size: 12px !important;
+  color: #888 !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.5 !important;
+  display: inline-block !important;
+  text-align: center !important;
+  margin: 0 !important;
+}
+
+body.dark footer.clean-footer small {
+  color: #aaa !important;
+}
+
+footer.clean-footer a {
+  color: inherit !important;
+  text-decoration: none !important;
+  border-bottom: 1px dotted transparent !important;
+  transition: all 0.2s ease !important;
+  font-size: 12px !important;
+}
+
+footer.clean-footer a:hover {
+  color: var(--hb-active, #e1306c) !important;
+  border-color: var(--hb-active, #e1306c) !important;
+}
+
+/* 覆蓋任何可能的主題樣式 */
+footer.clean-footer,
+footer.clean-footer *,
+footer.clean-footer p,
+footer.clean-footer div {
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #888 !important;
+  font-weight: 400 !important;
+}
+
+body.dark footer.clean-footer,
+body.dark footer.clean-footer *,
+body.dark footer.clean-footer p,
+body.dark footer.clean-footer div {
+  color: #aaa !important;
+}
+
+/* 覆蓋：去掉底欄上方的分界線 */
+.clean-footer,
+footer.clean-footer {
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* 若有暗色模式邊線覆蓋也一併清除 */
+body.dark .clean-footer,
+body.dark footer.clean-footer {
+  border-top: none !important;
+}
