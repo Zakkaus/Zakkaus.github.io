@@ -126,4 +126,65 @@
 })();
 </script>
 
+<!-- 強化清理腳本 -->
+<script>
+(function(){
+  // 移除頁面中的外露腳本文字
+  function cleanupStrayText() {
+    const body = document.body;
+    const walker = document.createTreeWalker(
+      body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    
+    const strayPatterns = [
+      /\}\);\s*\}\);\s*\}\s*\}\)\(\);\s*\}\)\(\);/,
+      /©.*Hugo.*PaperMod.*\}\)/,
+      /document\.createElement/,
+      /custom-topbuttons-css/
+    ];
+    
+    const nodesToRemove = [];
+    
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      const text = node.textContent.trim();
+      
+      if (text && strayPatterns.some(pattern => pattern.test(text))) {
+        nodesToRemove.push(node);
+      }
+    }
+    
+    nodesToRemove.forEach(node => {
+      if (node.parentNode) {
+        node.parentNode.removeChild(node);
+      }
+    });
+    
+    if (nodesToRemove.length > 0) {
+      console.log('清理了', nodesToRemove.length, '個外露文字節點');
+    }
+  }
+  
+  // 立即清理
+  cleanupStrayText();
+  
+  // 延遲清理（處理動態插入的內容）
+  setTimeout(cleanupStrayText, 100);
+  setTimeout(cleanupStrayText, 500);
+  
+  // 監聽 DOM 變化
+  const observer = new MutationObserver(cleanupStrayText);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  
+  // 2秒後停止監聽
+  setTimeout(() => observer.disconnect(), 2000);
+})();
+</script>
+
 <!-- END header partial (檢查點：若再次出現外露文字，請全文 grep `nowDark ? 'light'` 或 `const target = nowDark`) -->
