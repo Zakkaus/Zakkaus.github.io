@@ -5,17 +5,29 @@
     </div>
     <nav class="main-nav">
       <ul>
++       <li>
++         <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/{{ else }}/{{ end }}"
++            class="{{ if .IsHome }}active{{ end }}">🏠 {{ if eq .Site.Language.Lang "zh-hant" }}首頁{{ else }}Home{{ end }}</a>
++       </li>
         <li>
-          <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}"
-             class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">
-            {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
-          </a>
+-         <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}"
+-            class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">
+-            {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
+-          </a>
++         <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}"
++            class="{{ if or (eq .Section "posts") (in .RelPermalink "/posts/") }}active{{ end }}">
++            📄 {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
++         </a>
         </li>
         <li>
-          <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}"
-             class="{{ if in .RelPermalink "/about/" }}active{{ end }}">
-            {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
-          </a>
+-         <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}"
+-            class="{{ if in .RelPermalink "/about/" }}active{{ end }}">
+-            {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
+-          </a>
++         <a href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}"
++            class="{{ if in .RelPermalink "/about/" }}active{{ end }}">
++            ℹ️ {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
++         </a>
         </li>
       </ul>
     </nav>
@@ -25,10 +37,12 @@
         <div class="cb-menu">
           <a class="cb-btn lang-switch"
              href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
-            {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
+-            {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
++            🌐 {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
           </a>
           <button class="cb-btn" id="themeToggle" type="button">
-            {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
+-            {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
++            🌓 {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
           </button>
         </div>
       </div>
@@ -39,18 +53,22 @@
       <div id="mobileMenu" class="cb-menu mobile-only">
         <a class="cb-btn"
            href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/posts/{{ else }}/posts/{{ end }}">
-          {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
+-          {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
++          📄 {{ if eq .Site.Language.Lang "zh-hant" }}文章{{ else }}Posts{{ end }}
         </a>
         <a class="cb-btn"
            href="{{ if eq .Site.Language.Lang "zh-hant" }}/zh-hant/about/{{ else }}/about/{{ end }}">
-          {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
+-          {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
++          ℹ️ {{ if eq .Site.Language.Lang "zh-hant" }}關於{{ else }}About{{ end }}
         </a>
         <a class="cb-btn lang-switch"
            href="{{ if eq .Site.Language.Lang "zh-hant" }}/{{ else }}/zh-hant/{{ end }}">
-          {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
+-          {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
++          🌐 {{ if eq .Site.Language.Lang "zh-hant" }}English{{ else }}漢語{{ end }}
         </a>
         <button class="cb-btn" type="button" onclick="document.getElementById('themeToggle').click()">
-          {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
+-          {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
++          🌓 {{ if eq .Site.Language.Lang "zh-hant" }}深色模式{{ else }}Dark Mode{{ end }}
         </button>
       </div>
     </div>
@@ -65,39 +83,26 @@
   const body = document.body;
   const KEY = 'site-theme';
   const isZH = (root.lang || '').toLowerCase().startsWith('zh');
-  function systemPref(){
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light';
-  }
+  function systemPref(){ return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light'; }
   function apply(mode){
-    if(mode==='dark'){
-      root.classList.add('dark');
-      body.classList.add('dark');   // 確保 body.dark 樣式生效
-      updateLabel('dark');
-    }else{
-      root.classList.remove('dark');
-      body.classList.remove('dark');
-      updateLabel('light');
-    }
+    if(mode==='dark'){ root.classList.add('dark'); body.classList.add('dark'); updateLabel('dark'); }
+    else { root.classList.remove('dark'); body.classList.remove('dark'); updateLabel('light'); }
   }
   function updateLabel(current){
-    // current 代表目前狀態；按鈕顯示「將要切換到」的模式
     const next = current === 'dark' ? 'light':'dark';
     if(isZH){
-      btn.textContent = next === 'dark' ? '深色模式' : '淺色模式';
+      btn.textContent = next === 'dark' ? '🌓 深色模式' : '🌞 淺色模式';
     }else{
-      btn.textContent = next === 'dark' ? 'Dark Mode' : 'Light Mode';
+      btn.textContent = next === 'dark' ? '🌓 Dark Mode' : '🌞 Light Mode';
     }
   }
-  let saved = localStorage.getItem(KEY) || systemPref();
-  apply(saved);
-
+  apply(localStorage.getItem(KEY) || systemPref());
   btn.addEventListener('click', ()=>{
     const nowDark = root.classList.contains('dark');
     const target = nowDark ? 'light':'dark';
     apply(target);
     localStorage.setItem(KEY, target);
   });
-
   window.addEventListener('resize', ()=> {
     if(window.innerWidth > 900){
       const m = document.getElementById('mobileMenu');
