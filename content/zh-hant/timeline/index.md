@@ -280,10 +280,10 @@ body.dark .tl-container {
   }
 }
 
-/* 卡片樣式 - 改進卡片結構 */
+/* 卡片樣式 - 修復黑暗模式問題 */
 .tl-card {
   position: relative;
-  background: var(--tl-bg-light);
+  background-color: var(--tl-bg-light);  /* 使用 background-color 而非 background */
   border: 1px solid var(--tl-border-light);
   border-radius: var(--tl-radius);
   overflow: hidden;
@@ -293,12 +293,23 @@ body.dark .tl-container {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 100%;  /* 確保所有卡片高度一致 */
-  margin: 0 auto;  /* 卡片居中 */
-  width: 100%;     /* 確保卡片寬度充分 */
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
 }
 
-/* 卡片圖片 - 修復圖片裁切問題 */
+body.dark .tl-card {
+  background-color: var(--tl-bg-dark);  /* 確保黑暗模式背景色正確應用 */
+  border-color: var(--tl-border-dark);
+  box-shadow: 0 10px 35px -8px rgba(0,0,0,0.35);
+}
+
+.tl-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
+}
+
+/* 卡片圖片 - 完全修復圖片裁切飄移問題 */
 .tl-image {
   height: 0;
   padding-bottom: 75%;  /* 保持 4:3 比例 */
@@ -308,19 +319,23 @@ body.dark .tl-container {
   flex-shrink: 0;
 }
 
+body.dark .tl-image {
+  background-color: #333;
+}
+
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;  /* 改為完全居中，避免向下偏移 */
+  transform: translate(-50%, -50%);  /* 完美居中，避免飄移 */
   transition: transform 0.5s;
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);  /* 保持居中的同時縮放 */
 }
 
 /* 卡片內容 */
@@ -594,7 +609,7 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 更大更明顯的卡片 */
+/* 手機適配 - 修復小螢幕圖片問題 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
@@ -618,7 +633,18 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image img {
-    object-position: center;  /* 保持居中 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);  /* 手機版也保持完美居中 */
+    transition: transform 0.3s;
+  }
+  
+  .tl-card:hover .tl-image img {
+    transform: translate(-50%, -50%) scale(1.05);  /* 手機版縮放效果 */
   }
   
   .tl-content {

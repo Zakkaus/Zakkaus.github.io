@@ -10,7 +10,7 @@ lastmod: 2025-09-01
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Data definition
+  // 資料定義
   const timelineData = [
     {
       id: "couple",
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   ];
   
-  // Page HTML
+  // 頁面HTML
   let html = `
   <div class="tl-container">
     <div class="tl-grid">
@@ -101,40 +101,39 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   `;
   
-  // Insert HTML
+  // 插入HTML
   document.getElementById('timelineContainer').innerHTML = html;
   
-  // Get elements
+  // 獲取元素
   const modalBackdrop = document.querySelector('.tl-modal-backdrop');
   const modal = document.querySelector('.tl-modal');
   const closeButtons = document.querySelectorAll('.tl-close-btn');
   const aboutLink = document.querySelector('.tl-about-link');
-  const closeAltButton = document.querySelector('.tl-close-btn-alt');
   
-  // Handle modal closing
+  // 處理模態框關閉
   const closeModal = () => {
     modalBackdrop.classList.remove('active');
     document.body.style.overflow = '';
   };
   
-  // Bind close events
+  // 綁定關閉事件
   closeButtons.forEach(btn => {
     btn.addEventListener('click', closeModal);
   });
-  closeAltButton.addEventListener('click', closeModal);
+  document.querySelector('.tl-close-btn-alt').addEventListener('click', closeModal);
   
   modalBackdrop.addEventListener('click', e => {
     if (e.target === modalBackdrop) closeModal();
   });
   
-  // ESC key close
+  // ESC鍵關閉
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
       closeModal();
     }
   });
   
-  // Open modal
+  // 打開模態框
   const openModal = (key) => {
     const data = timelineData.find(item => item.id === key);
     if (!data) return;
@@ -148,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = 'hidden';
   };
   
-  // Bind card clicks
+  // 綁定卡片點擊
   document.querySelectorAll('.tl-card').forEach(card => {
     const key = card.getAttribute('data-key');
     const btn = card.querySelector('.tl-more');
@@ -165,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Calculate time
+  // 計算時間
   const MEL_TIMEZONE = 10; // UTC+10
   const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
   
@@ -174,12 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   const parseDate = (dateStr) => {
-    // Handle date time format: DD/MM/YYYY HH:MM
+    // 處理日期時間格式: DD/MM/YYYY HH:MM
     const [datePart, timePart = "00:00"] = dateStr.split(" ");
     const [day, month, year] = datePart.split('/').map(n => parseInt(n));
     const [hours, minutes] = timePart.split(':').map(n => parseInt(n));
     
-    // Using Australian time UTC+10
+    // 使用澳洲時間 UTC+10
     return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
   };
   
@@ -187,12 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const startDate = parseDate(dateStr);
     const now = getMelbourneTime();
     
-    // Calculate millisecond difference
+    // 計算毫秒差
     const diff = now - startDate;
     
-    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Future date
+    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // 未來日期
     
-    // Calculate days and remaining time
+    // 計算天數與剩餘時間
     const days = Math.floor(diff / (24 * 60 * 60 * 1000));
     const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
     const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
@@ -201,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return { days, hours, minutes, seconds };
   };
   
-  // Update counters
+  // 更新計數器
   const updateCounters = () => {
     timelineData.forEach(item => {
       const time = timeSince(item.date);
@@ -216,17 +215,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // Update time information with seconds
+    // 更新時間資訊，添加秒數顯示
     const now = getMelbourneTime();
     const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
     const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
     document.getElementById('timeInfo').textContent = `Melbourne time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
   };
   
-  // Update immediately once
+  // 立即更新一次
   updateCounters();
   
-  // Update every second
+  // 每秒更新
   setInterval(updateCounters, 1000);
 });
 </script>
@@ -258,7 +257,7 @@ body.dark .tl-container {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
   margin-bottom: 1.5rem;
-  justify-content: center;  /* 確保桌面版卡片居中 */
+  justify-content: center;
 }
 
 @media (max-width: 1080px) {
@@ -272,19 +271,19 @@ body.dark .tl-container {
   .tl-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    padding: 0 0.5rem;  /* 減少邊距，讓卡片更寬 */
+    padding: 0 0.5rem;
   }
   
   .tl-card {
-    max-width: none;  /* 移除最大寬度限制 */
-    width: 100%;      /* 確保卡片填滿容器 */
+    max-width: none;
+    width: 100%;
   }
 }
 
-/* 卡片樣式 - 改進卡片結構 */
+/* 卡片樣式 - 修復黑暗模式問題 */
 .tl-card {
   position: relative;
-  background: var(--tl-bg-light);
+  background-color: var(--tl-bg-light);  /* 使用 background-color 而非 background */
   border: 1px solid var(--tl-border-light);
   border-radius: var(--tl-radius);
   overflow: hidden;
@@ -294,13 +293,13 @@ body.dark .tl-container {
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: 100%;  /* 確保所有卡片高度一致 */
-  margin: 0 auto;  /* 卡片居中 */
-  width: 100%;     /* 確保卡片寬度充分 */
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
 }
 
 body.dark .tl-card {
-  background: var(--tl-bg-dark);
+  background-color: var(--tl-bg-dark);  /* 確保黑暗模式背景色正確應用 */
   border-color: var(--tl-border-dark);
   box-shadow: 0 10px 35px -8px rgba(0,0,0,0.35);
 }
@@ -310,7 +309,7 @@ body.dark .tl-card {
   box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
-/* 卡片圖片 - 修復圖片裁切問題 */
+/* 卡片圖片 - 完全修復圖片裁切飄移問題 */
 .tl-image {
   height: 0;
   padding-bottom: 75%;  /* 保持 4:3 比例 */
@@ -320,19 +319,23 @@ body.dark .tl-card {
   flex-shrink: 0;
 }
 
+body.dark .tl-image {
+  background-color: #333;
+}
+
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;  /* 改為完全居中，避免向下偏移 */
+  transform: translate(-50%, -50%);  /* 完美居中，避免飄移 */
   transition: transform 0.5s;
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);  /* 保持居中的同時縮放 */
 }
 
 /* 卡片內容 */
@@ -409,7 +412,7 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 頁腳與時區備註 - 靠左對齊 */
+/* 頁腳與時區備註 */
 .tl-footer {
   text-align: left;
   padding: 0;
@@ -436,7 +439,7 @@ body.dark .tl-more:hover {
   }
 }
 
-/* 模態框樣式 - 修復白色薄膜問題 */
+/* 模態框樣式 */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
@@ -606,16 +609,16 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 更大更明顯的卡片 */
+/* 手機適配 - 修復小螢幕圖片問題 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
-    padding: 0;  /* 去掉邊距，讓卡片能夠填滿更多空間 */
+    padding: 0;
   }
   
   .tl-card {
     display: grid;
-    grid-template-columns: 130px 1fr;  /* 增加圖片區域寬度 */
+    grid-template-columns: 130px 1fr;
     padding-bottom: 0;
     max-height: none;
     height: auto;
@@ -624,13 +627,24 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 130px;
-    height: 130px;  /* 增加圖片區域高度 */
+    height: 130px;
     padding-bottom: 0;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
   .tl-image img {
-    object-position: center;  /* 在小尺寸下恢復到中心裁切 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);  /* 手機版也保持完美居中 */
+    transition: transform 0.3s;
+  }
+  
+  .tl-card:hover .tl-image img {
+    transform: translate(-50%, -50%) scale(1.05);  /* 手機版縮放效果 */
   }
   
   .tl-content {
@@ -648,7 +662,7 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-days {
-    font-size: 2rem;  /* 增加字體大小 */
+    font-size: 2rem;
     margin-bottom: 0;
     line-height: 1;
   }
@@ -682,7 +696,7 @@ body.dark .tl-close-btn:hover {
 
 @media (max-width: 400px) {
   .tl-card {
-    grid-template-columns: 100px 1fr;  /* 小螢幕下稍微縮小圖片區域 */
+    grid-template-columns: 100px 1fr;
   }
   
   .tl-image {
@@ -691,7 +705,6 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 超小螢幕優化 */
 @media (max-width: 360px) {
   .tl-card {
     grid-template-columns: 90px 1fr;
@@ -723,18 +736,5 @@ body.dark .tl-close-btn:hover {
   font-weight: 500;
   opacity: 0.7;
 }
-
-/* 減少動畫 */
-@media (prefers-reduced-motion: reduce) {
-  .tl-card,
-  .tl-image img,
-  .tl-modal-backdrop,
-  .tl-highlight-link {
-    transition: none !important;
-  }
-  
-  .tl-card:hover {
-    transform: none;
-  }
-}
+</style>
 </style>
