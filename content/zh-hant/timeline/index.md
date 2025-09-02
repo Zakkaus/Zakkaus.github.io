@@ -231,118 +231,118 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== 完整重構時間線設計 ===== */
+/* 立即修復白色薄膜、圖片圓角和代碼外洩 */
 
-/* 1. 基本變量與容器 */
-.tl-container {
-  --tl-accent: var(--hb-active, #e1306c);
-  --tl-radius: 18px;
-  --tl-bg-light: #fff;
-  --tl-bg-dark: #2a2b2f;
-  --tl-border-light: rgba(0,0,0,0.06);
-  --tl-border-dark: rgba(255,255,255,0.1);
-  --tl-shadow: 0 8px 16px rgba(0,0,0,0.08);
-  --tl-shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
-  --tl-shadow-dark: 0 8px 20px rgba(0,0,0,0.25);
-  --tl-shadow-dark-hover: 0 12px 28px rgba(0,0,0,0.35);
-  
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 0 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
-
-/* 2. 卡片網格 - 桌面三列 */
-.tl-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 0.25rem;
-  margin-bottom: 1.25rem;
-}
-
-/* 3. 卡片基本樣式 - 解決白色薄膜問題 */
+/* 1. 徹底去除白色薄膜 */
 .tl-card {
-  background-color: var(--tl-bg-light);
+  background: var(--tl-bg-light) !important; /* 使用更強的強制背景色 */
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04), 0 8px 15px rgba(0,0,0,0.06) !important;
   border-radius: var(--tl-radius);
-  box-shadow: var(--tl-shadow);
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--tl-border-light);
-  height: 100%;
-  cursor: pointer;
+  overflow: visible !important; /* 避免隱藏溢出導致的層疊問題 */
+  margin-bottom: 1px; /* 防止某些瀏覽器的渲染問題 */
 }
 
 body.dark .tl-card {
-  background-color: var(--tl-bg-dark);
-  box-shadow: var(--tl-shadow-dark);
-  border-color: var(--tl-border-dark);
+  background: var(--tl-bg-dark) !important;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15), 0 8px 15px rgba(0,0,0,0.2) !important;
 }
 
-.tl-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--tl-shadow-hover);
-}
-
-body.dark .tl-card:hover {
-  box-shadow: var(--tl-shadow-dark-hover);
-}
-
-/* 4. 圖片容器 - 完美裁切與包裹圓角 */
-.tl-image {
-  position: relative;
+/* 2. 修復圖片與卡片邊緣的問題 */
+.tl-card {
+  border-radius: 0 0 var(--tl-radius) var(--tl-radius) !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
   overflow: hidden;
-  width: 100%;
-  padding-top: 100%; /* 1:1 正方形比例 */
-  background-color: #f0f0f0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 上部圓角 */
 }
 
-body.dark .tl-image {
-  background-color: #333;
+.tl-image {
+  margin: -1px !important;
+  margin-bottom: 0 !important;
+  width: calc(100% + 2px) !important;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0 !important;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
-/* 5. 圖片居中裁切 - 避免黑邊 */
 .tl-image img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.35s;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
 }
 
-.tl-card:hover .tl-image img {
-  transform: scale(1.05);
-}
-
-/* 6. 卡片內容區 */
+/* 確保內容區與卡片底部圓角正確 */
 .tl-content {
-  padding: 1rem 1.2rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  border-radius: 0 0 var(--tl-radius) var(--tl-radius);
+  position: relative;
+  z-index: 1;
+  background: inherit;
 }
 
-.tl-content h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.6rem;
-  color: var(--tl-accent);
+/* 修復手機版布局 */
+@media (max-width: 640px) {
+  .tl-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    border-radius: var(--tl-radius) !important;
+    overflow: hidden;
+  }
+  
+  .tl-image {
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius) !important;
+    width: 110px !important;
+    height: 110px !important;
+    margin: 0 !important;
+  }
+  
+  .tl-image img {
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
+  }
+  
+  .tl-content {
+    border-radius: 0 var(--tl-radius) var(--tl-radius) 0;
+  }
+  
+  .tl-more {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+    width: auto;
+    border: none;
+  }
 }
 
-/* 7. 計數器 */
-.tl-counter {
+/* 超小屏幕適配 - 保持簡潔 */
+@media (max-width: 380px) {
+  .tl-card {
+    grid-template-columns: 90px 1fr;
+  }
+  
+  .tl-image {
+    width: 90px !important;
+    height: 90px !important;
+  }
+}
+
+/* 底部備注確保無外洩 */
+.tl-note {
+  position: relative;
+  padding-left: 0.8rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.tl-note::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--tl-accent);
+  border-radius: 1px;
+}
+</style>
   margin-bottom: 0.6rem;
 }
 
