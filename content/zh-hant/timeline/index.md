@@ -326,51 +326,48 @@ body.dark .tl-card::before {
 /* 卡片圖片 - 完全覆蓋頂部，無邊緣 */
 .tl-image {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   position: relative;
-  overflow: hidden;
-  background-color: #f0f0f0;
-  flex-shrink: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
-  margin: 0;  /* 確保無邊距 */
-  padding: 0;  /* 確保無內邊距 */
+  margin: 0;
+  padding: 0;
+  background: #000;
+  border-radius: 0;                 /* 交由卡片本身控制圓角 */
 }
 
-body.dark .tl-image {
-  background-color: #333;
+.tl-card:first-child .tl-image,
+.tl-image { /* 讓圖片直接使用卡片頂部圓角 */
+  /* 上圓角繼承卡片：包一層即可直接隱藏邊緣 */
+  border-top-left-radius: var(--tl-radius);
+  border-top-right-radius: var(--tl-radius);
 }
 
 .tl-image img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-  object-position: center;  /* 簡化為center，避免偏移 */
-  transition: transform 0.3s ease;
-  display: block;  /* 移除img默認間距 */
+  object-position: center;
+  transform: none !important;
 }
 
+/* Hover 僅微縮放不改定位 */
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: scale(1.04) !important;
+  transition: transform .35s ease;
 }
 
-/* 卡片內容 */
+/* 內容區加邊框（避免圖片上方殘影 & 分層更乾淨） */
 .tl-content {
-  padding: 1.2rem 1.4rem;
-  text-align: center;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  background: var(--tl-bg-light);
+  border: 1px solid var(--tl-border-light);
+  border-top: none;
 }
 
-.tl-content h3 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-  color: var(--tl-accent);
+body.dark .tl-content {
+  background: var(--tl-bg-dark);
+  border: 1px solid var(--tl-border-dark);
+  border-top: none;
 }
 
 /* 計時器樣式 */
@@ -646,115 +643,385 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 120px;
-    height: 120px;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
-    margin: 0;
-    padding: 0;
-  }
-  
-  .tl-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-    display: block;
-  }
-  
-  .tl-card:hover .tl-image img {
-    transform: scale(1.03);
+    aspect-ratio: 1 / 1;
+    border-top-left-radius: var(--tl-radius);
+    border-top-right-radius: 0;
+    border-bottom-left-radius: var(--tl-radius);
+    border-bottom-right-radius: 0;
   }
   
   .tl-content {
-    width: auto;
-    padding: 0.8rem 0.5rem 2.5rem 0.8rem;
-    text-align: left;
-    position: relative;
+    border-top: 1px solid var(--tl-border-light);
+    border-left: none;
+    border-bottom-right-radius: var(--tl-radius);
+    border-top-left-radius: 0;
   }
   
-  .tl-counter {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 0.3rem;
-    gap: 0.5rem;
-  }
-  
-  .tl-days {
-    font-size: 1.8rem;
-    margin-bottom: 0;
-    line-height: 1;
-  }
-  
-  .tl-time {
-    font-size: 0.65rem;
-    line-height: 1.2;
-    padding-bottom: 0.15rem;
-  }
-  
-  .tl-meta {
-    font-size: 0.65rem;
-  }
-  
-  .tl-more {
-    padding: 0.5rem;
-    font-size: 0.7rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    border-radius: 0;
-  }
-  
-  .tl-content h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
+  body.dark .tl-content {
+    border-top: 1px solid var(--tl-border-dark);
   }
 }
 
-@media (max-width: 400px) {
-  .tl-card {
-    grid-template-columns: 100px 1fr;
-  }
-  
-  .tl-image {
-    width: 100px;
-    height: 100px;
-  }
-}
+/* === 修復區開始 === */
 
-@media (max-width: 360px) {
-  .tl-card {
-    grid-template-columns: 90px 1fr;
-  }
-  
-  .tl-image {
-    width: 90px;
-    height: 90px;
-  }
-  
-  .tl-days {
-    font-size: 1.5rem;
-  }
-  
-  .tl-content {
-    padding: 0.5rem 0.5rem 2.5rem 0.8rem;
-  }
-  
-  .tl-content h3 {
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
-  }
-}
-
-/* 載入提示 */
+/* 1) 標題與卡片距離壓縮 */
+.single .post-content > #timelineContainer,
 #timelineContainer {
-  text-align: center;
-  padding: 3rem 0;
-  font-weight: 500;
+  margin-top: .4rem !important;
+}
+.tl-container { padding-top: 0 !important; margin-top: 0 !important; }
+.tl-grid { margin-top: .4rem !important; }
+
+/* 2) 去除白色薄膜 & 回復乾淨卡片背景 */
+.tl-card {
+  background-color: var(--tl-bg-light) !important;
+  border: none !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+  overflow: hidden;
+  position: relative;
+}
+.tl-card::before { display: none !important; }
+body.dark .tl-card {
+  background-color: var(--tl-bg-dark) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.38) !important;
+}
+
+/* 3) 圖片完全貼頂覆蓋（移除殘留邊緣 & 不再漂移） */
+.tl-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  border-radius: 0;                 /* 交由卡片本身控制圓角 */
+}
+
+.tl-card:first-child .tl-image,
+.tl-image { /* 讓圖片直接使用卡片頂部圓角 */
+  /* 上圓角繼承卡片：包一層即可直接隱藏邊緣 */
+  border-top-left-radius: var(--tl-radius);
+  border-top-right-radius: var(--tl-radius);
+}
+
+.tl-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: none !important;
+}
+
+/* Hover 僅微縮放不改定位 */
+.tl-card:hover .tl-image img {
+  transform: scale(1.04) !important;
+  transition: transform .35s ease;
+}
+
+/* 內容區加邊框（避免圖片上方殘影 & 分層更乾淨） */
+.tl-content {
+  background: var(--tl-bg-light);
+  border: 1px solid var(--tl-border-light);
+  border-top: none;
+}
+
+body.dark .tl-content {
+  background: var(--tl-bg-dark);
+  border: 1px solid var(--tl-border-dark);
+  border-top: none;
+}
+
+/* 計時器樣式 */
+.tl-counter {
+  margin-bottom: 0.6rem;
+}
+
+.tl-days {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  color: var(--tl-accent);
+}
+
+.tl-time {
+  font-size: 0.85rem;
+  font-family: monospace;
+  letter-spacing: 0.03rem;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.tl-meta {
+  font-size: 0.7rem;
   opacity: 0.7;
+}
+
+/* 更多按鈕 */
+.tl-more {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #f5f5f7;
+  color: #333;
+  border: none;
+  padding: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tl-more:hover {
+  background: var(--tl-accent);
+  color: white;
+}
+
+body.dark .tl-more {
+  background: #3a3c42;
+  color: #ddd;
+}
+
+body.dark .tl-more:hover {
+  background: var(--tl-accent);
+  color: white;
+}
+
+/* 頁腳與時區備註 - 靠左對齊 */
+.tl-footer {
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+}
+
+.tl-note {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  padding-left: 0.8rem;
+  border-left: 4px solid var(--tl-accent);
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+  .tl-note {
+    white-space: normal;
+    font-size: 0.65rem;
+  }
+}
+
+/* 模態框樣式 - 修復白色薄膜問題 */
+.tl-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s;
+}
+
+.tl-modal-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tl-modal {
+  background: #fff;
+  width: 100%;
+  max-width: 540px;
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
+  max-height: 80vh;
+  overflow-y: auto;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .tl-modal {
+  background: #2a2b2f;
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+}
+
+/* 模態框標題 */
+.tl-modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--tl-accent);
+  margin-bottom: 0.3rem;
+}
+
+body.dark .tl-modal-title {
+  color: #ff8fb7;
+}
+
+.tl-modal-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* 模態框內容 */
+.tl-modal-body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.tl-modal-body p {
+  margin-bottom: 1rem;
+}
+
+/* 強調可點擊連結 */
+.tl-highlight-link {
+  color: var(--tl-accent);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid var(--tl-accent);
+  padding-bottom: 1px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tl-highlight-link:hover {
+  background-color: var(--tl-accent);
+  color: white;
+  border-color: transparent;
+}
+
+.tl-modal-body a {
+  color: var(--tl-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.tl-modal-body a:hover {
+  border-color: var(--tl-accent);
+}
+
+/* 模態框按鈕 */
+.tl-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tl-btn {
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.tl-about-link {
+  background: #f0f0f2;
+  color: #333;
+  text-decoration: none;
+}
+
+.tl-about-link:hover {
+  background: var(--tl-accent);
+  color: white;
+}
+
+.tl-close-btn-alt {
+  background: rgba(0,0,0,0.05);
+  color: #666;
+  border: none;
+}
+
+.tl-close-btn-alt:hover {
+  background: #f44336;
+  color: white;
+}
+
+body.dark .tl-close-btn-alt {
+  background: rgba(255,255,255,0.1);
+  color: #ddd;
+}
+
+.tl-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: background 0.2s;
+}
+
+.tl-close-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+body.dark .tl-close-btn {
+  color: #bbb;
+}
+
+body.dark .tl-close-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* 手機適配 - 修復小螢幕圖片邊緣問題 */
+@media (max-width: 480px) {
+  .tl-grid {
+    gap: 1rem;
+    padding: 0;
+    margin-top: 0;  /* 手機版也移除頂部間距 */
+  }
+  
+  .tl-card {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    padding-bottom: 0;
+    max-height: none;
+    height: auto;
+    border-radius: var(--tl-radius);
+  }
+  
+  .tl-image {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    border-top-left-radius: var(--tl-radius);
+    border-top-right-radius: 0;
+    border-bottom-left-radius: var(--tl-radius);
+    border-bottom-right-radius: 0;
+  }
+  
+  .tl-content {
+    border-top: 1px solid var(--tl-border-light);
+    border-left: none;
+    border-bottom-right-radius: var(--tl-radius);
+    border-top-left-radius: 0;
+  }
+  
+  body.dark .tl-content {
+    border-top: 1px solid var(--tl-border-dark);
+  }
 }
 </style>
