@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `).join('')}
     </div>
-    <p class="tl-note">墨爾本時間 UTC+10 (AEST) ❄️</p>
+    <div class="tl-footer">
+      <p class="tl-note">墨爾本時間 UTC+10 (AEST) ❄️</p>
+    </div>
   </div>
   
   <div class="tl-modal-backdrop">
@@ -93,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="tl-modal-body"></div>
       <div class="tl-modal-footer">
         <a href="#" class="tl-btn tl-about-link">查看詳情</a>
-        <button class="tl-btn tl-close-btn">關閉</button>
+        <button class="tl-btn tl-close-btn-alt">關閉</button>
       </div>
     </div>
   </div>
@@ -118,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
   closeButtons.forEach(btn => {
     btn.addEventListener('click', closeModal);
   });
+  document.querySelector('.tl-close-btn-alt').addEventListener('click', closeModal);
   
   modalBackdrop.addEventListener('click', e => {
     if (e.target === modalBackdrop) closeModal();
@@ -237,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (max-width: 1080px) {
@@ -263,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
   padding-bottom: 3rem;
   box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 body.dark .tl-card {
@@ -276,10 +280,18 @@ body.dark .tl-card {
   box-shadow: 0 14px 40px -12px rgba(0,0,0,0.2);
 }
 
-/* 卡片圖片 */
+/* 卡片圖片 - 調整裁切效果 */
 .tl-image {
-  height: 180px;
+  height: 200px;
   overflow: hidden;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark .tl-image {
+  background-color: #333;
 }
 
 .tl-image img {
@@ -363,23 +375,30 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 時區備註 */
+/* 頁腳與時區備註 - 靠左對齊 */
+.tl-footer {
+  text-align: left;
+  padding: 0;
+}
+
 .tl-note {
   font-size: 0.7rem;
   opacity: 0.7;
   padding-left: 0.8rem;
   border-left: 4px solid var(--tl-accent);
-  margin-top: 1rem;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
-/* 模態框樣式 */
+/* 模態框樣式 - 修復白色薄膜問題 */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,6 +441,10 @@ body.dark .tl-modal {
   margin-bottom: 0.3rem;
 }
 
+body.dark .tl-modal-title {
+  color: #ff8fb7;
+}
+
 .tl-modal-subtitle {
   font-size: 0.8rem;
   opacity: 0.7;
@@ -450,6 +473,11 @@ body.dark .tl-modal {
 }
 
 /* 模態框按鈕 */
+.tl-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .tl-btn {
   padding: 0.65rem 1.2rem;
   border-radius: 8px;
@@ -470,26 +498,60 @@ body.dark .tl-modal {
   color: white;
 }
 
-.tl-close-btn {
+.tl-close-btn-alt {
   background: rgba(0,0,0,0.05);
   color: #666;
   border: none;
 }
 
-.tl-close-btn:hover {
+.tl-close-btn-alt:hover {
   background: #f44336;
   color: white;
 }
 
-body.dark .tl-close-btn {
+body.dark .tl-close-btn-alt {
   background: rgba(255,255,255,0.1);
   color: #ddd;
+}
+
+.tl-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: background 0.2s;
+}
+
+.tl-close-btn:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+body.dark .tl-close-btn {
+  color: #bbb;
+}
+
+body.dark .tl-close-btn:hover {
+  background: rgba(255,255,255,0.1);
 }
 
 /* 手機適配 */
 @media (max-width: 640px) {
   .tl-image {
-    height: 160px;
+    height: 180px;
+  }
+  
+  .tl-content {
+    padding: 1rem 1.2rem;
   }
   
   .tl-days {
@@ -506,10 +568,10 @@ body.dark .tl-close-btn {
 }
 
 /* 載入提示 */
-#timelineContainer:not(.loaded) {
+#timelineContainer {
   text-align: center;
   padding: 3rem 0;
-  font-style: italic;
+  font-weight: 500;
   opacity: 0.7;
 }
 </style>
