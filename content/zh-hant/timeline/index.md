@@ -5,11 +5,12 @@ toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
 ---
-
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
-      <img src="/images/timeline/gf-avatar.jpg" alt="女友頭像" class="avatar">
+      <img class="avatar timeline-img" alt="女友頭像"
+           src="/images/timeline/gf-avatar.jpg"
+           data-fallback="/images/gf-avatar.jpg,/images/timeline/gf-avatar.webp,/images/gf-avatar.webp">
       <div class="d-content">
         <h3 data-i18n="coupleTitle">我們在一起的天數</h3>
         <p class="d-num" id="togetherDays">--</p>
@@ -17,7 +18,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/hashbrown.jpg" alt="薯餅" class="pet-img">
+      <img class="pet-img timeline-img" alt="薯餅"
+           src="/images/timeline/hashbrown.jpg"
+           data-fallback="/images/hashbrown.jpg,/images/timeline/hashbrown.webp,/images/hashbrown.webp">
       <div class="d-content">
         <h3 data-i18n="hashTitle">薯餅天數歲數</h3>
         <p class="d-num" id="hashDays">--</p>
@@ -25,7 +28,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/potato.jpg" alt="馬鈴薯" class="pet-img">
+      <img class="pet-img timeline-img" alt="馬鈴薯"
+           src="/images/timeline/potato.jpg"
+           data-fallback="/images/potato.jpg,/images/timeline/potato.webp,/images/potato.webp">
       <div class="d-content">
         <h3 data-i18n="potatoTitle">馬鈴薯天數歲數</h3>
         <p class="d-num" id="potatoDays">--</p>
@@ -37,7 +42,7 @@ lastmod: 2025-09-01
 </div>
 
 <style>
-/* 與英文版保持一致 */
+/* 與英文版一致 */
 .days-page{max-width:980px;margin:0 auto;padding:1.2rem 0 2.5rem;font-size:1rem;line-height:1.55;}
 .days-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;}
 .d-card{position:relative;padding:1.1rem 1.05rem 1.2rem;border:1px solid rgba(0,0,0,.1);border-radius:18px;background:rgba(255,255,255,.82);backdrop-filter:blur(6px);display:flex;gap:.95rem;align-items:center;overflow:hidden;transition:background .28s,border-color .28s,transform .25s,box-shadow .28s;}
@@ -65,28 +70,12 @@ body.dark .tz-note{opacity:.75;background:none!important;}
 </style>
 
 <script>
-/* 同英文版本 JS（雙語字典） */
+/* 共用 JS */
 (function(){
   const lang=(document.documentElement.lang||'').toLowerCase();
   const t={
-    zh:{
-      coupleTitle:'我們在一起的天數',
-      since:'自 07/08/2025 起',
-      hashTitle:'薯餅天數歲數',
-      hashSince:'生日：24/06/2025',
-      potatoTitle:'馬鈴薯天數歲數',
-      potatoSince:'生日：27/07/2025',
-      tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'
-    },
-    en:{
-      coupleTitle:'Days Together',
-      since:'Since 07/08/2025',
-      hashTitle:'Hash Brown Age (days)',
-      hashSince:'Birthday: 24/06/2025',
-      potatoTitle:'Potato Age (days)',
-      potatoSince:'Birthday: 27/07/2025',
-      tzNote:'Based on Australia time UTC+10 (AEST) ❄️'
-    }
+    zh:{coupleTitle:'我們在一起的天數',since:'自 07/08/2025 起',hashTitle:'薯餅天數歲數',hashSince:'生日：24/06/2025',potatoTitle:'馬鈴薯天數歲數',potatoSince:'生日：27/07/2025',tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'},
+    en:{coupleTitle:'Days Together',since:'Since 07/08/2025',hashTitle:'Hash Brown Age (days)',hashSince:'Birthday: 24/06/2025',potatoTitle:'Potato Age (days)',potatoSince:'Birthday: 27/07/2025',tzNote:'Based on Australia time UTC+10 (AEST) ❄️'}
   };
   const dict=lang.startsWith('zh')?t.zh:t.en;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
@@ -106,8 +95,20 @@ body.dark .tz-note{opacity:.75;background:none!important;}
   set('togetherDays','07/08/2025');
   set('hashDays','24/06/2025');
   set('potatoDays','27/07/2025');
+
+  document.querySelectorAll('.timeline-img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      const list=(img.getAttribute('data-fallback')||'').split(',').map(s=>s.trim()).filter(Boolean);
+      if(!list.length)return;
+      const tried=img.dataset.tried?img.dataset.tried.split('|'):[];
+      const next=list.find(p=>!tried.includes(p));
+      if(next){
+        tried.push(next);
+        img.dataset.tried=tried.join('|');
+        img.src=next;
+      }
+    });
+  });
 })();
 </script>
-
-<!-- 圖片請放到 /static/images/timeline/：
-     gf-avatar.jpg, hashbrown.jpg, potato.jpg -->
+<!-- 圖片請確認位於 /static/images/timeline/ 下：gf-avatar.jpg, hashbrown.jpg, potato.jpg -->

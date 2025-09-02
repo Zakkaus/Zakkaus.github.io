@@ -9,7 +9,9 @@ lastmod: 2025-09-01
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
-      <img src="/images/timeline/gf-avatar.jpg" alt="Avatar" class="avatar">
+      <img class="avatar timeline-img" alt="Avatar"
+           src="/images/timeline/gf-avatar.jpg"
+           data-fallback="/images/gf-avatar.jpg,/images/timeline/gf-avatar.webp,/images/gf-avatar.webp">
       <div class="d-content">
         <h3 data-i18n="coupleTitle">Days Together</h3>
         <p class="d-num" id="togetherDays">--</p>
@@ -17,7 +19,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/hashbrown.jpg" alt="Hash Brown" class="pet-img">
+      <img class="pet-img timeline-img" alt="Hash Brown"
+           src="/images/timeline/hashbrown.jpg"
+           data-fallback="/images/hashbrown.jpg,/images/timeline/hashbrown.webp,/images/hashbrown.webp">
       <div class="d-content">
         <h3 data-i18n="hashTitle">Hash Brown Age (days)</h3>
         <p class="d-num" id="hashDays">--</p>
@@ -25,7 +29,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/potato.jpg" alt="Potato" class="pet-img">
+      <img class="pet-img timeline-img" alt="Potato"
+           src="/images/timeline/potato.jpg"
+           data-fallback="/images/potato.jpg,/images/timeline/potato.webp,/images/potato.webp">
       <div class="d-content">
         <h3 data-i18n="potatoTitle">Potato Age (days)</h3>
         <p class="d-num" id="potatoDays">--</p>
@@ -37,6 +43,7 @@ lastmod: 2025-09-01
 </div>
 
 <style>
+/* === Timeline Cards === */
 .days-page{max-width:980px;margin:0 auto;padding:1.2rem 0 2.5rem;font-size:1rem;line-height:1.55;}
 .days-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;}
 .d-card{position:relative;padding:1.1rem 1.05rem 1.2rem;border:1px solid rgba(0,0,0,.1);border-radius:18px;background:rgba(255,255,255,.82);backdrop-filter:blur(6px);display:flex;gap:.95rem;align-items:center;overflow:hidden;transition:background .28s,border-color .28s,transform .25s,box-shadow .28s;}
@@ -64,35 +71,21 @@ body.dark .tz-note{opacity:.75;background:none!important;}
 </style>
 
 <script>
+/* === Multilingual & AEST Inclusive Day Counters === */
 (function(){
   const lang=(document.documentElement.lang||'').toLowerCase();
   const t={
-    zh:{
-      coupleTitle:'我們在一起的天數',
-      since:'自 07/08/2025 起',
-      hashTitle:'薯餅天數歲數',
-      hashSince:'生日：24/06/2025',
-      potatoTitle:'馬鈴薯天數歲數',
-      potatoSince:'生日：27/07/2025',
-      tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'
-    },
-    en:{
-      coupleTitle:'Days Together',
-      since:'Since 07/08/2025',
-      hashTitle:'Hash Brown Age (days)',
-      hashSince:'Birthday: 24/06/2025',
-      potatoTitle:'Potato Age (days)',
-      potatoSince:'Birthday: 27/07/2025',
-      tzNote:'Based on Australia time UTC+10 (AEST) ❄️'
-    }
+    zh:{coupleTitle:'我們在一起的天數',since:'自 07/08/2025 起',hashTitle:'薯餅天數歲數',hashSince:'生日：24/06/2025',potatoTitle:'馬鈴薯天數歲數',potatoSince:'生日：27/07/2025',tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'},
+    en:{coupleTitle:'Days Together',since:'Since 07/08/2025',hashTitle:'Hash Brown Age (days)',hashSince:'Birthday: 24/06/2025',potatoTitle:'Potato Age (days)',potatoSince:'Birthday: 27/07/2025',tzNote:'Based on Australia time UTC+10 (AEST) ❄️'}
   };
   const dict=lang.startsWith('zh')?t.zh:t.en;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent=dict[k];
   });
+
   const AEST_OFFSET_H=10, MS_DAY=86400000;
   const parseDMY=s=>{const[a,b,c]=s.split('/').map(Number);return{d:a,m:b,y:c};};
-  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0));
+  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0)); // 固定 +10h
   const inclusiveDays=start=>{
     const {d,m,y}=parseDMY(start);
     const startDate=makeAEST(y,m,d);
@@ -104,16 +97,23 @@ body.dark .tz-note{opacity:.75;background:none!important;}
   set('togetherDays','07/08/2025');
   set('hashDays','24/06/2025');
   set('potatoDays','27/07/2025');
+
+  /* === Image Fallbacks === */
+  document.querySelectorAll('.timeline-img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      const list=(img.getAttribute('data-fallback')||'').split(',').map(s=>s.trim()).filter(Boolean);
+      if(!list.length) return;
+      const tried=img.getAttribute('data-tried')?img.getAttribute('data-tried').split('|'):[];
+      const next=list.find(p=>!tried.includes(p));
+      if(next){
+        tried.push(next);
+        img.setAttribute('data-tried',tried.join('|'));
+        img.src=next;
+      }
+    },{once:false});
+  });
 })();
 </script>
-
-<!-- Images path: place files at /static/images/timeline/
-     gf-avatar.jpg, hashbrown.jpg, potato.jpg -->
-  background:linear-gradient(90deg,#ff8fb8,#ffa7c9);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.d-start{
   margin:0;
   font-size:.65rem;
   letter-spacing:.4px;
