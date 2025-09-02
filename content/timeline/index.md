@@ -252,17 +252,19 @@ body.dark .tl-container {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* 網格布局 - 優化手機顯示 */
+/* 網格布局 - 優化佈局 */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
   margin-bottom: 1.5rem;
+  justify-content: center;  /* 確保桌面版卡片居中 */
 }
 
 @media (max-width: 1080px) {
   .tl-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
@@ -270,15 +272,16 @@ body.dark .tl-container {
   .tl-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    padding: 0 0.5rem;  /* 減少邊距，讓卡片更寬 */
   }
   
   .tl-card {
-    max-width: 450px;
-    margin: 0 auto;
+    max-width: none;  /* 移除最大寬度限制 */
+    width: 100%;      /* 確保卡片填滿容器 */
   }
 }
 
-/* 卡片樣式 - 確保統一尺寸 */
+/* 卡片樣式 - 改進卡片結構 */
 .tl-card {
   position: relative;
   background: var(--tl-bg-light);
@@ -292,6 +295,8 @@ body.dark .tl-container {
   display: flex;
   flex-direction: column;
   height: 100%;  /* 確保所有卡片高度一致 */
+  margin: 0 auto;  /* 卡片居中 */
+  width: 100%;     /* 確保卡片寬度充分 */
 }
 
 body.dark .tl-card {
@@ -305,10 +310,10 @@ body.dark .tl-card {
   box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
-/* 卡片圖片 - 強制統一裁切比例 */
+/* 卡片圖片 - 改進裁切方式 */
 .tl-image {
   height: 0;
-  padding-bottom: 56.25%;  /* 16:9 比例 */
+  padding-bottom: 75%;  /* 改為 4:3 比例，更適合顯示內容 */
   position: relative;
   overflow: hidden;
   background-color: #f0f0f0;
@@ -322,7 +327,7 @@ body.dark .tl-card {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 35%;  /* 稍微往下移動焦點 */
   transition: transform 0.5s;
 }
 
@@ -601,30 +606,36 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 完全重新設計 */
+/* 手機適配 - 更大更明顯的卡片 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
+    padding: 0;  /* 去掉邊距，讓卡片能夠填滿更多空間 */
   }
   
   .tl-card {
     display: grid;
-    grid-template-columns: 110px 1fr;
+    grid-template-columns: 130px 1fr;  /* 增加圖片區域寬度 */
     padding-bottom: 0;
     max-height: none;
     height: auto;
+    border-radius: var(--tl-radius);
   }
   
   .tl-image {
-    width: 110px;
-    height: 110px;
+    width: 130px;
+    height: 130px;  /* 增加圖片區域高度 */
     padding-bottom: 0;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
+  .tl-image img {
+    object-position: center;  /* 在小尺寸下恢復到中心裁切 */
+  }
+  
   .tl-content {
     width: auto;
-    padding: 0.7rem 0.5rem 2.5rem 0.8rem;
+    padding: 0.8rem 0.5rem 2.5rem 0.8rem;
     text-align: left;
     position: relative;
   }
@@ -637,7 +648,7 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-days {
-    font-size: 1.8rem;
+    font-size: 2rem;  /* 增加字體大小 */
     margin-bottom: 0;
     line-height: 1;
   }
@@ -666,6 +677,17 @@ body.dark .tl-close-btn:hover {
   .tl-content h3 {
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .tl-card {
+    grid-template-columns: 100px 1fr;  /* 小螢幕下稍微縮小圖片區域 */
+  }
+  
+  .tl-image {
+    width: 100px;
+    height: 100px;
   }
 }
 
