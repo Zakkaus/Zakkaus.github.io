@@ -750,4 +750,15 @@ body.dark .tl-close-btn:hover {
     bottom: 0.4rem;
   }
 }
+
+/* === 中文版加粗小字（時間 & 開始日期 / 生日） === */
+.tl-time {
+  font-weight: 700; /* 原本 600 -> 提升可讀性 */
+}
+.tl-meta {
+  font-weight: 600; /* 加粗開始日期 / 生日行 */
+}
+
+/* 可選：時間備註（頁腳當前時間）若也需加粗可解除註解 */
+// .tl-note { font-weight:600; }
 </style>
