@@ -282,15 +282,15 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* Image Container - Simplified upward movement */
+/* Image Container - Increase upward movement */
 .tl-image {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 100%; /* Maintain 1:1 ratio */
+  padding-bottom: 100%;
   background: #f0f0f0;
   flex-shrink: 0;
-  margin-top: -10px; /* Move up 10px */
+  margin-top: -20px; /* Increase from -10px to -20px */
   border-radius: var(--tl-radius) var(--tl-radius) 0 0;
   overflow: hidden;
 }
@@ -316,7 +316,7 @@ body.dark .tl-image {
   transform: scale(1.05);
 }
 
-/* Card Content Area - Normal layout restored */
+/* Card Content Area - Increase upward movement */
 .tl-content {
   padding: 1rem 1.2rem;
   flex-grow: 1;
@@ -327,7 +327,7 @@ body.dark .tl-image {
   background: inherit;
   position: relative;
   z-index: 1;
-  margin-top: -5px; /* Slightly move up to reduce gap */
+  margin-top: -10px; /* Increase from -5px to -10px */
 }
 
 .tl-content h3 {
@@ -652,8 +652,8 @@ body.dark .tl-close-btn:hover {
     padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin-top: -5px; /* Mobile move up 5px */
-    margin-left: -5px; /* Mobile move left 5px */
+    margin-top: -10px; /* Increase from -5px to -10px */
+    margin-left: -10px; /* Increase from -5px to -10px */
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     overflow: hidden;
   }
@@ -721,8 +721,8 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 90px;
     height: 90px;
-    margin-top: -5px;
-    margin-left: -5px;
+    margin-top: -10px; /* Increase from -5px to -10px */
+    margin-left: -10px; /* Increase from -5px to -10px */
   }
   
   .tl-days {

@@ -290,7 +290,7 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 簡化為向上移動圖片 */
+/* 圖片容器 - 增加向上移動距離 */
 .tl-image {
   position: relative;
   width: 100%;
@@ -298,7 +298,7 @@ body.dark .tl-card {
   padding-bottom: 100%; /* 保持1:1比例 */
   background: #f0f0f0;
   flex-shrink: 0;
-  margin-top: -10px; /* 向上移動10px */
+  margin-top: -20px; /* 從 -10px 增加到 -20px */
   border-radius: var(--tl-radius) var(--tl-radius) 0 0;
   overflow: hidden;
 }
@@ -324,7 +324,7 @@ body.dark .tl-image {
   transform: scale(1.05);
 }
 
-/* 卡片內容區 - 恢復正常布局 */
+/* 卡片內容區 - 增加向上移動距離 */
 .tl-content {
   padding: 1rem 1.2rem;
   flex-grow: 1;
@@ -335,7 +335,7 @@ body.dark .tl-image {
   background: inherit;
   position: relative;
   z-index: 1;
-  margin-top: -5px; /* 稍微向上移動減少間隙 */
+  margin-top: -10px; /* 從 -5px 增加到 -10px */
 }
 
 .tl-content h3 {
@@ -661,8 +661,8 @@ body.dark .tl-close-btn:hover {
     padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin-top: -5px; /* 手機版向上移動5px */
-    margin-left: -5px; /* 手機版向左移動5px */
+    margin-top: -10px; /* 從 -5px 增加到 -10px */
+    margin-left: -10px; /* 從 -5px 增加到 -10px */
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     overflow: hidden;
   }
@@ -731,8 +731,8 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 90px;
     height: 90px;
-    margin-top: -5px;
-    margin-left: -5px;
+    margin-top: -10px; /* 從 -5px 增加到 -10px */
+    margin-left: -10px; /* 從 -5px 增加到 -10px */
   }
   
   .tl-content {
