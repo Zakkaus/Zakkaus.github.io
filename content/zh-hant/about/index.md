@@ -560,6 +560,7 @@ body.dark .about-page .pet_info .pet-tip a{
 body.dark .about-page .pet-info .pet-tip a:hover,
 body.dark .about-page .pet_info .pet-tip a:focus{
   color:#bfe9ff;
+  text-decoration:underline;
 }
 
 /* 移除舊 ::after 方案（若殘留） */
@@ -886,9 +887,7 @@ body.dark .about-page .about-hero a.blue-highlight{
       我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在
       <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>
       可以看到牠們的日常。</p>
-    <p>我與女朋友 <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> 目前分隔於澳洲與台灣，是遠距關係；我們都是 <strong>泛性戀 🩷💛🩵</strong>，每天分享生活、學習與工作，也常交流音樂與想法。我們有很多相同的愛好與價值觀，磨合自然，是彼此的 <strong>靈魂伴侶</strong>。我們在
-      <a class="blue-highlight" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組第一次認識並開始聊天建立連結 — <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>。</p>
-    <p>（含遠距 / pansexual / 日常分享 / 契合 等原內容）我們都很喜歡睡覺、喜歡宅在家，也分享了許多相同的想法、過去的經歷與各種小眾興趣，最初是在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a> 的 Discord 社群相識（後面原本的相遇與 timeline 連結句保持）。</p>
+    <p>我（Zakk）與女友 <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> 目前遠距（澳洲 / 台灣），我們都是 <strong>pansexual 🩷💛🩵</strong>，每天分享生活、學習、工作、音樂與想法，價值觀與節奏高度契合，是彼此真正的 <strong>靈魂伴侶</strong>；我們都很喜歡睡覺、喜歡宅在家，也分享了許多相同的想法、過去的經歷與各種小眾興趣，最初是在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a> 的 Discord 社群認識 — <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起多久</a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
