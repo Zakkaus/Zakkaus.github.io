@@ -797,16 +797,73 @@ body.dark .about-inline-link{background:rgba(225,48,108,.28);color:#ff8fb7;}
   margin:.2rem 0 .6rem;
 }
 
+/* 覆寫：統一所有可點擊的高亮為藍色樣式 */
+.about-page .blue-highlight,
+.about-page a.blue-highlight,
+.about-inline-link,
+.about-page .about-hero a.about-inline-link,
+.about-modal a,
+.about-modal .about-inline-link {
+  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%)!important;
+  color:#1d6fff!important;
+  padding:.18rem .55rem .22rem!important;
+  margin:.12rem .25rem .12rem 0!important;
+  border-radius:999px!important;
+  line-height:1.15!important;
+  letter-spacing:.3px;
+  display:inline-block;
+  font-weight:600;
+  text-decoration:none;
+  position:relative;
+  transition:color .25s,background .25s,box-shadow .25s,transform .15s;
+  border:none!important;
+}
+body.dark .about-page .blue-highlight,
+body.dark .about-page a.blue-highlight,
+body.dark .about-inline-link,
+body.dark .about-modal a,
+body.dark .about-modal .about-inline-link {
+  background:linear-gradient(to top,rgba(29,111,255,.48),rgba(29,111,255,0) 65%)!important;
+  color:#8bc4ff!important;
+}
+
+.about-page .blue-highlight:hover,
+.about-page a.blue-highlight:hover,
+.about-inline-link:hover,
+.about-modal a:hover,
+.about-modal .about-inline-link:hover {
+  background:#1d6fff!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  box-shadow:0 0 0 3px rgba(29,111,255,.25);
+  transform:translateY(-1px);
+}
+body.dark .about-page .blue-highlight:hover,
+body.dark .about-inline-link:hover,
+body.dark .about-modal a:hover {
+  box-shadow:0 0 0 3px rgba(29,111,255,.35);
+}
+
+.about-modal a { border-bottom:none!important; padding-bottom:.22rem!important; }
+
+/* 內文普通超連結仍保留粉色主題（若要全部改藍，可再覆寫） */
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 
-      <a href="#" class="about-inline-link" data-am-open="potato">馬鈴薯</a> 與
-      <a href="#" class="about-inline-link" data-am-open="hash">薯餅</a>。
-      我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
-    <p>我與女朋友 <a href="#" class="about-inline-link" data-am-open="couple">Paper</a> 目前分隔於澳洲與台灣，是遠距關係。我們都是 <strong>泛性戀 🩷💛🩵</strong>，每天分享生活、學習與工作。我們有很多相同的愛好與想法，磨合自然，是彼此的<strong> 靈魂伴侶</strong>。我們在 <a class="about-inline-link" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組首次認識 —— <a href="/zh-hant/timeline/#couple" class="about-inline-link">在這裡可以看到我們在一起的時間</a>。</p>
+    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，
+      <a href="#" class="blue-highlight" data-am-open="potato">馬鈴薯</a>
+      <a href="#" class="blue-highlight" data-am-open="hash">薯餅</a>。
+      我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在
+      <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>
+      可以看到日常。</p>
+    <p>我與女朋友
+      <a href="#" class="blue-highlight" data-am-open="couple">Paper</a>
+      … 於
+      <a class="blue-highlight" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a>
+      Discord 認識 —
+      <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
@@ -878,16 +935,17 @@ body.dark .about-inline-link{background:rgba(225,48,108,.28);color:#ff8fb7;}
       sub: "自 2025/08/07 11:38 起",
       html: `
         <div class="am-section">
-          <p>我 (Zakk) 與女朋友 (Paper) 目前分隔於 <strong>澳洲 / 台灣</strong>，是遠距關係，我們都是 <strong>泛性戀 🩷💛🩵</strong>，對多元與尊重保持開放。</p>
+          <p>我 (Zakk) 與女朋友 (Paper) 分隔 <strong>澳洲 / 台灣</strong>，是遠距關係，我們都是 <strong>泛性戀 🩷💛🩵</strong>。</p>
         </div>
         <div class="am-section">
-          <p>每天我們都分享生活、學習與工作進度，也交換想法、音樂與靈感。我們在價值觀、節奏與興趣上高度契合，磨合自然，是彼此認同的 <strong>靈魂伴侶</strong>。</p>
+          <p>分享生活、學習、工作與靈感；價值觀節奏契合，是彼此的 <strong>靈魂伴侶</strong>。</p>
         </div>
         <div class="am-section">
-          <p>我們最初在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組認識，從閒聊到陪伴，連結逐步加深；目前每隔幾個月會見面，Paper 計畫高中畢業後來澳洲留學。</p>
+          <p>最初在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">錫蘭 Ceylan</a> Discord 認識；每隔幾個月見面；Paper 計畫高中畢業赴澳。</p>
         </div>
         <div class="am-section">
-          <p><a href="/zh-hant/timeline/#couple" class="about-inline-link">在這裡可以看到我們在一起的時間</a>，也歡迎追蹤 Paper 的 IG：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener">@abyss_74.5</a></p>
+          <p><a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>｜Paper IG：
+             <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.5</a></p>
         </div>
       `
     },
@@ -902,7 +960,8 @@ body.dark .about-inline-link{background:rgba(225,48,108,.28);color:#ff8fb7;}
           <p>最愛 <strong>紅 / 綠甜椒、玉米鬚、胡蘿蔔</strong>。傍晚最活躍，會發出吱吱聲討零食。</p>
         </div>
         <div class="am-section">
-          <p><a href="/zh-hant/timeline/#hash" class="about-inline-link">在這裡可以看到牠的天數</a>，也可到 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a> 看更多照片。</p>
+          <p><a href="/zh-hant/timeline/#hash" class="blue-highlight">在這裡可以看到牠的天數</a>｜更多：
+             <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p>
         </div>
       `
     },
@@ -917,7 +976,8 @@ body.dark .about-inline-link{background:rgba(225,48,108,.28);color:#ff8fb7;}
           <p>喜歡 <strong>甜椒、玉米鬚、胡蘿蔔</strong>，也常埋在草堆裡睡覺醒來續吃，是個樂天的小傢伙。</p>
         </div>
         <div class="am-section">
-          <p><a href="/zh-hant/timeline/#potato" class="about-inline-link">在這裡可以看到牠的天數</a>，更多日常見 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a>。</p>
+          <p><a href="/zh-hant/timeline/#potato" class="blue-highlight">在這裡可以看到牠的天數</a>｜更多：
+             <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p>
         </div>
       `
     }

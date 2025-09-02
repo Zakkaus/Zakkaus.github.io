@@ -5,39 +5,39 @@ toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
 ---
-<style>
-/* 使用同 zh-hant 樣式，確保雙語一致 */
-:root{--about-accent:var(--hb-active,#e1306c);}
-.about-page{max-width:840px;margin:0 auto;padding:.75rem 0 2.8rem;font-size:1.02rem;line-height:1.62;}
-body.dark .about-page{color:#e9e9eb;}
-.about-page .about-hero{
-  font-size:1.14rem;
-  line-height:1.72;
-  margin:0 0 1.6rem;
-  padding:1.1rem 1.35rem 1.2rem;
-  background:#ffffff;
-  border:1px solid #e6e7ea;
-  border-radius:18px;
-  box-shadow:none;
-  position:relative;
-  overflow:hidden;
-}
-body.dark .about-page .about-hero{
-  background:#1f2022;
-  border:1px solid #35373a;
-}
-.about-page .about-hero::before,
-.about-page .about-hero::after{content:none!important;}
-.about-page .about-hero p{margin:.55rem 0;}
-.about-page .about-hero p:first-child{margin-top:0;}
-.about-page .about-hero p:last-child{margin-bottom:.2rem;}
 
-/* Strong highlight only inside hero */
-.about-page strong{
-  background:none!important;
-  color:inherit!important;
-  padding:0!important;
-  margin:0!important;
+<style>
+/* 引用與中文版相同的藍色高亮/Modal 主要樣式（可從 zh-hant 版複製完整樣式） */
+/* 簡化：僅保留必要覆寫（建議實務中複製完整 CSS 保持同步） */
+.about-page .blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%);
+  color:#1d6fff;
+  padding:.18rem .55rem .22rem;
+  margin:.12rem .25rem .12rem 0;
+  border-radius:999px;
+  font-weight:600;
+  text-decoration:none;
+  display:inline-block;
+  line-height:1.15;
+  transition:.25s;
+}
+.about-page .blue-highlight:hover{
+  background:#1d6fff;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 0 0 3px rgba(29,111,255,.25);
+  transform:translateY(-1px);
+}
+body.dark .about-page .blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.48),rgba(29,111,255,0) 65%);
+  color:#8bc4ff;
+}
+body.dark .about-page .blue-highlight:hover{
+  box-shadow:0 0 0 3px rgba(29,111,255,.35);
+}
+
+.about-modal-backdrop{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:9999;opacity:0;visibility:hidden;transition:.25s;}
+.about-modal-backdrop.active{opacity:1;visibility:visible;}
   border-radius:0!important;
   font-weight:600;
 }
