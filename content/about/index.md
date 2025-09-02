@@ -181,7 +181,50 @@ html[lang="en"] .about-page h3::after{
   border-radius:2px!important;
 }
 
-/* 保持中文版樣式，不影響 zh-hant */
+/* === EN Contact: pill style same as zh-hant (pink accent, no bullet) === */
+html[lang="en"] .about-page .about-contacts li::before{
+  display:none!important;
+}
+html[lang="en"] .about-page .about-contacts{
+  margin:.35rem 0 .3rem!important;
+  padding:0!important;
+}
+html[lang="en"] .about-page .about-contacts li{
+  padding:.42rem 0 .42rem 0!important;
+  font-size:.85rem;
+  line-height:1.4;
+}
+html[lang="en"] .about-page .about-contacts a{
+  background:rgba(225,48,108,.14)!important;
+  color:var(--about-accent)!important;
+  padding:.48rem .85rem .5rem!important;
+  border-radius:12px!important;
+  font-size:.72rem!important;
+  line-height:1!important;
+  letter-spacing:.3px;
+  font-weight:700!important;
+  text-decoration:none!important;
+  display:inline-block;
+  transition:background .22s,color .22s,box-shadow .22s;
+  box-shadow:none;
+}
+html[lang="en"] .about-page .about-contacts a:hover{
+  background:var(--about-accent)!important;
+  color:#fff!important;
+  box-shadow:0 4px 10px -4px rgba(225,48,108,.45);
+  text-decoration:none!important;
+}
+body.dark html[lang="en"] .about-page .about-contacts a{
+  background:rgba(225,48,108,.30)!important;
+  color:#ff8fb7!important;
+}
+body.dark html[lang="en"] .about-page .about-contacts a:hover{
+  background:var(--about-accent)!important;
+  color:#fff!important;
+  box-shadow:0 5px 14px -6px rgba(225,48,108,.65);
+}
+
+/* 保留其他語系樣式不變 */
 </style>
 
 <div class="about-page">
@@ -220,10 +263,10 @@ html[lang="en"] .about-page h3::after{
 
 ### 🔗 Contact
 <ul class="about-contacts">
-  <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
-  <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener">GitHub</a></li>
-  <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener">X / Twitter</a></li>
-  <li><a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
+  <li>Instagram: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
+  <li>GitHub: <a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
+  <li>X: <a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
+  <li>Email: <a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
 </ul>
 </div>
 
