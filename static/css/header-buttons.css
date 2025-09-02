@@ -822,3 +822,32 @@ html[lang="en"] .cb-menu .lang-switch::before {
   line-height: 1.1 !important;
   display: inline-block;
 }
+
+/* 覆寫：讓 Days 按鈕視覺與其他導航完全一致（不再單獨上移 / 動畫） */
+.main-nav a.nav-timeline {
+  /* 保留已存在設定，不調整 padding / 邊框，保持與 .main-nav a 相同基礎 */
+  display: inline-flex;
+  align-items: center;
+}
+
+.main-nav a.nav-timeline .tl-emoji {
+  /* 移除位移與特別動畫，保持與文字同一基線 */
+  transform: none !important;
+  transition: none !important;
+}
+
+.main-nav a.nav-timeline:hover .tl-emoji {
+  transform: none !important;
+}
+
+.main-nav a.nav-timeline.active,
+.main-nav a.active.nav-timeline {
+  /* 仍可享用共用 .main-nav a.active 樣式，這裡僅確保優先級 */
+  background: var(--hb-active,#e1306c) !important;
+  color: #fff !important;
+  border-color: var(--hb-active,#e1306c) !important;
+}
+
+#mobileMenu a.nav-timeline .tl-emoji {
+  transform: none !important;
+}
