@@ -298,10 +298,10 @@ body.dark .tl-container {
   width: 100%;     /* 確保卡片寬度充分 */
 }
 
-/* 卡片圖片 - 改進裁切方式 */
+/* 卡片圖片 - 修復圖片裁切問題 */
 .tl-image {
   height: 0;
-  padding-bottom: 75%;  /* 改為 4:3 比例，更適合顯示內容 */
+  padding-bottom: 75%;  /* 保持 4:3 比例 */
   position: relative;
   overflow: hidden;
   background-color: #f0f0f0;
@@ -315,7 +315,7 @@ body.dark .tl-container {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;  /* 稍微往下移動焦點 */
+  object-position: center;  /* 改為完全居中，避免向下偏移 */
   transition: transform 0.5s;
 }
 
@@ -612,13 +612,13 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 130px;
-    height: 130px;  /* 增加圖片區域高度 */
+    height: 130px;
     padding-bottom: 0;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
   .tl-image img {
-    object-position: center;  /* 在小尺寸下恢復到中心裁切 */
+    object-position: center;  /* 保持居中 */
   }
   
   .tl-content {
