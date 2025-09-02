@@ -295,8 +295,8 @@ body.dark html[lang="en"] .about-page .about-contacts a:hover{
       title:"Hash Brown",
       sub:"Birthday: 2025/06/24",
       html:`
-        <div class="am-section"><p>Purebred Teddy guinea pig, light brown, energetic and loves running laps.</p></div>
-        <div class="am-section"><p>Favorites: red/green bell peppers, corn silk, carrots; very vocal in evenings.</p></div>
+        <div class="am-section"><p>Purebred Teddy guinea pig, light brown (slightly yellowish), energetic and loves running laps.</p></div>
+        <div class="am-section"><p>Favorites: red/green bell peppers, corn silk, carrots; makes a <strong>“515151”</strong> sound when she sees people to ask for treats (not the usual generic squeak).</p></div>
         <div class="am-section"><p><a href="/timeline/#hash" class="blue-highlight">See her day counter</a> | More: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p></div>
       `
     },
@@ -304,8 +304,8 @@ body.dark html[lang="en"] .about-page .about-contacts a:hover{
       title:"Potato",
       sub:"Birthday: 2025/07/27",
       html:`
-        <div class="am-section"><p>Dark chocolate Teddy; bold and food‑driven; sometimes eats and poops simultaneously.</p></div>
-        <div class="am-section"><p>Loves bell peppers, corn silk, carrots; naps in hay then resumes eating.</p></div>
+        <div class="am-section"><p>Dark brown Teddy; bold and food‑driven; sometimes eats and poops simultaneously.</p></div>
+        <div class="am-section"><p>Loves bell peppers, corn silk, carrots; also uses a playful <strong>“515151”</strong> pattern when seeing people to request snacks; naps in hay then resumes eating.</p></div>
         <div class="am-section"><p><a href="/timeline/#potato" class="blue-highlight">See her day counter</a> | More: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p></div>
       `
     }

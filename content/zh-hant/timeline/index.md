@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "薯餅 (Hash Brown)",
       modalSubtitle: "生日：2025 年 6 月 24 日",
       modalContent: `
-        <p>薯餅是一隻純種泰迪天竺鼠，毛色淺咖啡。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
-        <p>最愛的食物：紅色和綠甜椒（超級喜歡）、玉米鬚和胡蘿蔔。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
+        <p>薯餅是一隻純種泰迪天竺鼠，毛色淺棕色（帶一點黃）。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
+        <p>最愛的食物：紅色和綠甜椒（超級喜歡）、玉米鬚和胡蘿蔔。看到人時會發出 <strong>515151</strong> 的聲音討零食。</p>
         <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="tl-highlight-link"><strong>薯餅</strong></a>，因為那香脆的感覺與牠活潑的性格很像。</p>
         <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "馬鈴薯 (Potato)",
       modalSubtitle: "生日：2025 年 7 月 27 日",
       modalContent: `
-        <p>馬鈴薯是一隻純種泰迪天竺鼠，毛色深巧克力色，性格較為貪吃且膽子比較大。牠常常一邊吃一邊玩，有時候會邊吃邊拉，偶爾會在糧盆裡面拉出糞便。</p>
-        <p>喜歡的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔。牠也喜歡在草堆裡面睡覺，醒來後會繼續吃，是個貪吃又勇敢的小家伙。</p>
-        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
+        <p>馬鈴薯是純種泰迪天竺鼠，毛色深棕色，個性勇敢偏貪吃，常邊吃邊玩甚至「吃到一半順便排泄」。</p>
+        <p>喜歡甜椒、玉米鬚與胡蘿蔔；看到人會用 <strong>515151</strong> 的節奏呼喚點心，也常埋在草堆裡睡醒再接著吃。</p>
+        <p>更多馬鈴薯的照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"
     }

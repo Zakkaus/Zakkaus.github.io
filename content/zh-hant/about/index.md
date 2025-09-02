@@ -950,10 +950,10 @@ body.dark .about-modal a:hover {
       sub: "生日：2025/06/24",
       html: `
         <div class="am-section">
-          <p>薯餅是一隻 <strong>純種泰迪天竺鼠</strong>，毛色淺咖啡，個性活潑好動，常在籠子裡高速跑圈並把小屋推著走。</p>
+          <p>薯餅是一隻 <strong>純種泰迪天竺鼠</strong>，毛色淺棕色（帶一點黃），個性活潑好動，常在籠子裡高速跑圈並把小屋推著走。</p>
         </div>
         <div class="am-section">
-          <p>最愛 <strong>紅 / 綠甜椒、玉米鬚、胡蘿蔔</strong>。傍晚最活躍，會發出吱吱聲討零食。</p>
+          <p>最愛 <strong>紅 / 綠甜椒、玉米鬚、胡蘿蔔</strong>。看到人時會發出 <strong>515151</strong> 的聲音討零食（不是一般吱吱叫）。</p>
         </div>
         <div class="am-section">
           <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="blue-highlight">薯餅</a>，因為我們很喜歡那種香脆的口感。</p>
@@ -968,16 +968,14 @@ body.dark .about-modal a:hover {
       sub: "生日：2025/07/27",
       html: `
         <div class="am-section">
-          <p>馬鈴薯是 <strong>純種泰迪天竺鼠</strong>，毛色深巧克力，勇敢又偏貪吃，常邊吃邊玩甚至「吃到一半順便排泄」。</p>
+          <p>馬鈴薯是 <strong>純種泰迪天竺鼠</strong>，毛色深棕色，勇敢又偏貪吃，常邊吃邊玩甚至「吃到一半順便排泄」。</p>
         </div>
         <div class="am-section">
-          <p>喜歡 <strong>甜椒、玉米鬚、胡蘿蔔</strong>，也常埋在草堆裡睡覺醒來續吃，是個樂天的小傢伙。</p>
+          <p>喜歡 <strong>甜椒、玉米鬚、胡蘿蔔</strong>，看到人也會用 <strong>515151</strong> 的節奏呼喚零食，常埋在草堆裡睡覺醒來續吃，是個樂天的小傢伙。</p>
         </div>
         <div class="am-section">
-          <p><a href="/zh-hant/timeline/#potato" class="blue-highlight">在這裡可以看到牠的天數</a>｜更多：
-             <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p>
-        </div>
-      `
+          <p><a href="/zh-hant/timeline/#potato" class="blue-highlight">在這裡可以看到牠的天數</a>，更多日常見 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a>。</p>
+        </div>`
     }
   };
 
