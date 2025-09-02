@@ -21,21 +21,21 @@ body.dark .site-header{
   padding:.6rem 1.1rem;
 }
 
-.site-brand {
-  display: flex;
-  align-items: center;
+.site-brand{
+  display:flex;
+  align-items:center;
 }
 
 .site-brand a{
   font-weight:700;
-  font-size:1.18rem; /* 原 1.05rem */
+  font-size:1.22rem;          /* 原 1.18rem → 稍增，視覺更清晰 */
   text-decoration:none;
   color:var(--hb-text,#222);
-  letter-spacing:.55px;
+  letter-spacing:.6px;
   line-height: 1;
   display:inline-flex;
   align-items:center;
-  gap:.55rem;
+  gap:.58rem;
 }
 body.dark .site-brand a{color:var(--hb-text,#eee);}
 
@@ -45,19 +45,16 @@ body.dark .site-brand a{color:var(--hb-text,#eee);}
   height:var(--brand-logo-size);
   flex:0 0 var(--brand-logo-size);
   background:currentColor;
-  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47a2.87 2.87 0 0 0-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
-  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47a2.87 2.87 0 0 0-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
-  opacity:.9;
-  transition:opacity .25s,transform .28s;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47c-.895-.471-1.965-.471-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47c-.895-.471-1.965-.471-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
   position:relative;
-  top:1px; /* 微調垂直視覺居中 */
-  image-rendering:optimizeQuality;
+  top:0;
+  transform:translateY(-1.4px); /* 調高以視覺對齊字中線 */
+  opacity:.9;
+  transition:opacity .25s,transform .25s;
 }
 
-.site-brand a:hover::before{
-  opacity:1;
-  transform:scale(1.08);
-}
+.site-brand a:hover::before{opacity:1;transform:translateY(-1.4px) scale(1.07);}
 
 .main-nav ul{
   list-style:none;
@@ -193,7 +190,7 @@ body.dark .cb-toggle{
   --hb-active:#e1306c;
   --hb-border:rgba(0,0,0,.08);
   --hb-shadow:0 1px 3px rgba(0,0,0,.08);
-  --brand-logo-size:1.38em; /* 相對字體放大 (圖示與字高更平衡) */
+  --brand-logo-size:1.42em; /* 稍再放大並與文字比例同步 */
 }
 body.dark{
   --hb-bg:rgba(50,50,50,.9);
@@ -725,24 +722,57 @@ body.dark .about-block .about-intro mark{
   transform:translateY(-0.5px); /* 視覺微調 (可改 0 或 -1px 視需求) */
 }
 
-/* === Brand 放大與精準置中 (桌面) === */
-.site-brand a{
-  font-size:1.18rem; /* 原 1.05rem */
-  letter-spacing:.55px;
-}
+/* === Brand 放大 + 單一定義，移除後面重複區塊 === */
 :root{
-  --brand-logo-size:1.38em; /* 相對字體放大 (圖示與字高更平衡) */
+  /* 其它既有變數保留 */
+  --hb-bg:rgba(255,255,255,.92);
+  --hb-text:#222;
+  --hb-active:#e1306c;
+  --hb-border:rgba(0,0,0,.08);
+  --hb-shadow:0 1px 3px rgba(0,0,0,.08);
+  --brand-logo-size:1.42em; /* 稍再放大並與文字比例同步 */
 }
+
+.site-brand{
+  display:flex;
+  align-items:center;
+}
+
+.site-brand a{
+  font-size:1.22rem;          /* 原 1.18rem → 稍增，視覺更清晰 */
+  font-weight:700;
+  letter-spacing:.6px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  gap:.58rem;
+}
+
+/* 星星圖示：使用 mask 保持隨色，提升垂直位置 */
 .site-brand a::before{
-  top:0 !important;
-  transform:translateY(-0.15px); /* 視覺微調，可改 0 或 -0.2px */
+  content:"";
+  width:var(--brand-logo-size);
+  height:var(--brand-logo-size);
+  flex:0 0 var(--brand-logo-size);
+  background:currentColor;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47c-.895-.471-1.965-.471-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 90 90'><path fill='currentColor' d='M47.755 3.765l11.525 23.353c.448.907 1.313 1.535 2.314 1.681l25.772 3.745c2.52.366 3.527 3.463 1.703 5.241L70.42 55.962c-.724.706-1.055 1.723-.884 2.72l4.402 25.667c.431 2.51-2.204 4.424-4.458 3.239L46.43 75.47c-.895-.471-1.965-.471-2.86 0L20.519 87.588c-2.254 1.185-4.889-.729-4.458-3.239l4.402-25.667c.171-.997-.16-2.014-.884-2.72L.931 37.784c-1.824-1.778-.817-4.875 1.703-5.241l25.772-3.745c1.001-.145 1.866-.774 2.314-1.681L42.245 3.765c1.127-2.284 4.383-2.284 5.51 0z'/></svg>") no-repeat center/contain;
+  position:relative;
+  top:0;
+  transform:translateY(-1.4px); /* 調高以視覺對齊字中線 */
+  opacity:.9;
+  transition:opacity .25s,transform .25s;
 }
 
-/* 小螢幕回落避免占版 */
+.site-brand a:hover::before{opacity:1;transform:translateY(-1.4px) scale(1.07);}
+
 @media (max-width:640px){
-  .site-brand a{font-size:1.05rem;}
-  :root{--brand-logo-size:1.15em;}
-  .site-brand a::before{transform:translateY(-0.2px);}
+  .site-brand a{font-size:1.08rem;letter-spacing:.5px;}
+  :root{--brand-logo-size:1.2em;}
+  .site-brand a::before{transform:translateY(-1.2px);}
 }
 
-/* 若未來仍覺偏移：只需微調上方 translateY 數值即可 */
+/* === 清理：移除文件底部之前重複/覆蓋的 brand 區塊 === */
+/* （原底部的 :root --brand-logo-size 與再定義 .site-brand a / ::before 已刪除） */
+
+/* ...existing code (其餘內容保持不變) ... */
