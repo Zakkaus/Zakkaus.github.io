@@ -858,12 +858,8 @@ body.dark .about-modal a:hover {
       我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在
       <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>
       可以看到日常。</p>
-    <p>我與女朋友
-      <a href="#" class="blue-highlight" data-am-open="couple">Paper</a>
-      … 於
-      <a class="blue-highlight" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a>
-      Discord 認識 —
-      <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>。</p>
+    <p>我與女朋友 <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> 目前分隔於澳洲與台灣，是遠距關係；我們都是 <strong>泛性戀 🩷💛🩵</strong>，每天分享生活、學習與工作，也常交流音樂與想法。我們有很多相同的愛好與價值觀，磨合自然，是彼此的 <strong>靈魂伴侶</strong>。我們在
+      <a class="blue-highlight" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組第一次認識並開始聊天建立連結 — <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
