@@ -113,4 +113,56 @@
   } catch (err) {
     console.error("header-buttons init error", err);
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const addTimelineButtons = () => {
+      const createTimelineLink = (className) => {
+        const link = document.createElement('a');
+        link.href = 'https://zakk.au/timeline/';
+        link.className = className + ' nav-timeline';
+        
+        // 檢查當前頁面是否為timeline頁面
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('/timeline')) {
+          link.classList.add('active');
+        }
+        
+        const emoji = document.createElement('span');
+        emoji.className = 'tl-emoji';
+        emoji.textContent = '🕒';
+        
+        const lang = (document.documentElement.lang || '').toLowerCase();
+        const text = lang.startsWith('zh') ? '天數' : 'Days';
+        
+        link.appendChild(emoji);
+        link.appendChild(document.createElement('span')).textContent = text;
+        
+        return link;
+      };
+      
+      // Desktop navigation
+      const mainNav = document.querySelector('.main-nav ul');
+      if (mainNav && !mainNav.querySelector('.nav-timeline')) {
+        const aboutLink = [...mainNav.querySelectorAll('a')]
+          .find(a => /\/about\/?$/.test(a.getAttribute('href') || '')) || mainNav.firstChild;
+        const listItem = document.createElement('li');
+        listItem.appendChild(createTimelineLink(''));
+        
+        if (aboutLink && aboutLink.parentElement.nextSibling) {
+          aboutLink.parentElement.after(listItem);
+        } else {
+          mainNav.appendChild(listItem);
+        }
+      }
+      
+      // Mobile navigation
+      const mobileMenu = document.querySelector('#mobileMenu.cb-menu');
+      if (mobileMenu && !mobileMenu.querySelector('.nav-timeline')) {
+        const timelineLink = createTimelineLink('cb-btn');
+        mobileMenu.appendChild(timelineLink);
+      }
+    };
+    
+    addTimelineButtons();
+  });
 })();

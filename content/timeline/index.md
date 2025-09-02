@@ -4,6 +4,7 @@ slug: "timeline"
 toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
+url: "/timeline/"  # 明確指定URL
 ---
 
 <div id="timelineContainer">Loading...</div>

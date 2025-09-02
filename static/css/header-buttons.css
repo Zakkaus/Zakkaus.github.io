@@ -800,3 +800,25 @@ body.dark #mobileMenu a.active.nav-timeline {
   border-color: var(--hb-active,#e1306c) !important;
   box-shadow: 0 2px 5px -2px rgba(225,48,108,.55) !important;
 }
+
+/* 語言切換按鈕文字修正 */
+.cb-menu .lang-switch::before {
+  content: "🇹🇼 漢語" !important;
+}
+
+/* 如果是英文版，顯示英文 */
+html[lang="en"] .cb-menu .lang-switch::before {
+  content: "🌐 English" !important;
+}
+
+/* 隱藏原有文字，顯示偽元素內容 */
+.cb-menu .lang-switch {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+.cb-menu .lang-switch::before {
+  font-size: 0.8rem !important;
+  line-height: 1.1 !important;
+  display: inline-block;
+}
