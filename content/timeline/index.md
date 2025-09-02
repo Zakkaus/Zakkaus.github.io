@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `).join('')}
     </div>
     <div class="tl-footer">
-      <p class="tl-note" id="timeInfo">Sydney time UTC+10 (AEST) ❄️</p>
+      <p class="tl-note" id="timeInfo">Sydney time loading...</p>
     </div>
   </div>
   

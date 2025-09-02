@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `).join('')}
     </div>
     <div class="tl-footer">
-      <p class="tl-note" id="timeInfo">雪梨時間 UTC+10 (AEST) ❄️</p>
+      <p class="tl-note" id="timeInfo">雪梨時間載入中...</p>
     </div>
   </div>
   
@@ -168,60 +168,96 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // === AEST 時間重寫（移除原本 UTC + 人工位移寫法） ===
-const parseDateAEST = (dateStr) => {
-  const [datePart, timePart = "00:00"] = dateStr.split(" ");
-  const [day, month, year] = datePart.split('/').map(Number);
-  const [hh, mm] = timePart.split(':').map(Number);
-  return Date.UTC(year, month - 1, day, (hh ?? 0) - 10, (mm ?? 0), 0);
-};
+  /* === Sydney 動態時間 (AEST / AEDT 自動) 取代舊時間計算區塊開始 === */
+const dtfSydney = new Intl.DateTimeFormat('en-CA',{
+  timeZone:'Australia/Sydney',
+  year:'numeric',month:'2-digit',day:'2-digit',
+  hour:'2-digit',minute:'2-digit',second:'2-digit',
+  hourCycle:'h23'
+});
 
-const timeSince = (dateStr) => {
-  const startUTC = parseDateAEST(dateStr);
-  const nowUTC = Date.now();
-  let diff = nowUTC - startUTC;
-  if (diff < 0) diff = 0;
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
-  return { days, hours, minutes, seconds };
-};
+function getSydneyOffsetMinutes(utcMs){
+  const parts = dtfSydney.formatToParts(new Date(utcMs));
+  let y,m,d,h,mi,s;
+  for(const p of parts){
+    if(p.type==='year') y=+p.value;
+    else if(p.type==='month') m=+p.value;
+    else if(p.type==='day') d=+p.value;
+    else if(p.type==='hour') h=+p.value;
+    else if(p.type==='minute') mi=+p.value;
+    else if(p.type==='second') s=+p.value;
+  }
+  const reconstructedUtc = Date.UTC(y,m-1,d,h,mi,s);
+  return (reconstructedUtc - utcMs)/60000;
+}
 
-const getSydneyNow = () =>
-  new Date(new Date().toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+// 將「DD/MM/YYYY HH:MM」(雪梨本地) 轉成 UTC ms（自動判斷 +10 / +11）
+function parseSydneyLocal(dateStr){
+  const [datePart,timePart='00:00'] = dateStr.split(' ');
+  const [day,month,year] = datePart.split('/').map(Number);
+  const [hh,mm] = timePart.split(':').map(Number);
+  let assumed = 600; // 先假設 +10
+  let utcMs = Date.UTC(year,month-1,day,hh,mm,0) - assumed*60000;
+  const actual = getSydneyOffsetMinutes(utcMs);
+  if(actual !== assumed){
+    utcMs = Date.UTC(year,month-1,day,hh,mm,0) - actual*60000;
+  }
+  return utcMs;
+}
 
-const formatSydneyDateTime = () => {
+function timeSinceSydney(dateStr){
+  const startUtc = parseSydneyLocal(dateStr);
+  let diff = Date.now() - startUtc;
+  if(diff < 0) diff = 0;
+  const days = Math.floor(diff/86400000);
+  const hours = Math.floor((diff%86400000)/3600000);
+  const minutes = Math.floor((diff%3600000)/60000);
+  const seconds = Math.floor((diff%60000)/1000);
+  return {days,hours,minutes,seconds};
+}
+
+function getSydneyNow(){
+  return new Date(new Date().toLocaleString('en-US',{timeZone:'Australia/Sydney'}));
+}
+
+function currentSydneyZoneLabel(){
+  const offset = getSydneyOffsetMinutes(Date.now());
+  return offset === 660 ? 'AEDT' : 'AEST';
+}
+
+function formatSydneyNow(){
   const now = getSydneyNow();
   const Y = now.getFullYear();
-  const M = String(now.getMonth() + 1).padStart(2,'0');
+  const M = String(now.getMonth()+1).padStart(2,'0');
   const D = String(now.getDate()).padStart(2,'0');
   const h = String(now.getHours()).padStart(2,'0');
   const m = String(now.getMinutes()).padStart(2,'0');
   const s = String(now.getSeconds()).padStart(2,'0');
-  return { date: `${D}/${M}/${Y}`, time: `${h}:${m}:${s}` };
-};
+  return {date:`${D}/${M}/${Y}`,time:`${h}:${m}:${s}`};
+}
 
-const updateCounters = () => {
-  timelineData.forEach(item => {
-    const t = timeSince(item.date);
-    const counter = document.getElementById(item.id + 'Counter');
-    if (!counter) return;
-    const dEl = counter.querySelector('.tl-days');
-    const timeEl = counter.querySelector('.tl-time');
-    if (dEl) dEl.textContent = t.days;
-    if (timeEl) timeEl.textContent =
+function updateCounters(){
+  timelineData.forEach(item=>{
+    const t = timeSinceSydney(item.date);
+    const wrap = document.getElementById(item.id+'Counter');
+    if(!wrap) return;
+    const dEl = wrap.querySelector('.tl-days');
+    const timeEl = wrap.querySelector('.tl-time');
+    if(dEl) dEl.textContent = t.days;
+    if(timeEl) timeEl.textContent =
       `${String(t.hours).padStart(2,'0')}:${String(t.minutes).padStart(2,'0')}:${String(t.seconds).padStart(2,'0')}`;
   });
   const info = document.getElementById('timeInfo');
-  if (info) {
-    const ft = formatSydneyDateTime();
-    info.textContent = `雪梨 (AEST) 時間：${ft.date} ${ft.time}`;
+  if(info){
+    const zone = currentSydneyZoneLabel();
+    const ft = formatSydneyNow();
+    info.textContent = `雪梨 (${zone}) 時間：${ft.date} ${ft.time}`;
   }
-};
+}
 
 updateCounters();
-setInterval(updateCounters, 1000);
+setInterval(updateCounters,1000);
+/* === Sydney 動態時間區塊結束 === */
   
   // 計算時間
   const MEL_TIMEZONE = 10; // UTC+10
