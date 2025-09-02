@@ -290,35 +290,30 @@ body.dark .tl-card {
 /* Image Container - Complete Card Top Coverage */
 .tl-image {
   position: relative;
-  width: calc(100% + 2px); /* Ensure complete border coverage */
-  height: 0;
-  padding-top: 100%; /* 1:1 square ratio */
-  margin-top: -1px;
-  margin-left: -1px;
-  margin-right: -1px;
-  margin-bottom: 0;
-  background-color: #f0f0f0;
+  width: 100%;
+  aspect-ratio: 1/1;
+  margin: 0;
+  padding: 0;
+  background: #f0f0f0;
+  border-radius: inherit;
   overflow: hidden;
-  border-top-left-radius: var(--tl-radius);
-  border-top-right-radius: var(--tl-radius);
-  z-index: 2; /* Higher priority */
+  border: 0;
 }
 
 body.dark .tl-image {
-  background-color: #333;
+  background: #333;
 }
 
 /* Image Centered Cropping */
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
+  display: block;
   transition: transform 0.35s;
-  display: block; /* Avoid image bottom gap */
 }
 
 .tl-card:hover .tl-image img {
@@ -335,7 +330,7 @@ body.dark .tl-image {
   text-align: center;
   background: inherit;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .tl-content h3 {
@@ -628,64 +623,69 @@ body.dark .tl-close-btn:hover {
   opacity: 0.7;
 }
 
-/* Tablet Responsive Design */
-@media (max-width: 1080px) {
-  .tl-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
+/* --- Image / radius / drift fix overrides --- */
+.tl-card{
+  overflow:hidden;
+  position:relative;
 }
 
-/* Mobile Responsive Design - Fix Mobile Button Issues */
-@media (max-width: 640px) {
-  .tl-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 0.5rem;
+.tl-image{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  margin:0;
+  padding:0;
+  background:#f0f0f0;
+  border-radius:inherit;
+  overflow:hidden;
+  border:0;
+}
+body.dark .tl-image{background:#333;}
+
+.tl-image img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transition:transform .35s;
+}
+
+.tl-card:hover .tl-image img{
+  transform:scale(1.05);
+}
+
+.tl-content{
+  background:inherit;
+  position:relative;
+  z-index:0;
+}
+
+/* Mobile */
+@media (max-width:640px){
+  .tl-card{
+    overflow:hidden;
   }
-  
-  .tl-card {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    height: auto;
-    min-height: 110px;
-    grid-template-rows: auto;
-    grid-template-areas: "image content";
+  .tl-image{
+    width:110px;
+    height:110px;
+    aspect-ratio:auto;
+    border-radius:var(--tl-radius) 0 0 var(--tl-radius);
   }
-  
-  .tl-image {
-    width: 110px;
-    height: 110px;
-    padding-top: 0;
-    margin: 0;
-    grid-area: image;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
-    border-bottom: none;
-    border-right: 1px solid var(--tl-border-light);
+  .tl-image img{inset:0;}
+}
+
+/* Extra small */
+@media (max-width:380px){
+  .tl-image{
+    width:90px;
+    height:90px;
   }
-  
-  body.dark .tl-image {
-    border-right: 1px solid var(--tl-border-dark);
-  }
-  
-  .tl-content {
-    width: auto;
-    text-align: left;
-    padding: 0.7rem 0.8rem;
-    padding-bottom: 2.5rem; /* Space for button */
-    position: relative;
-    grid-area: content;
-  }
-  
-  .tl-counter {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.5rem;
-    margin-bottom: 0.3rem;
-  }
-  
-  .tl-days {
-    font-size: 1.8rem;
+}
+/* --- End overrides --- */
+</style>
     margin-bottom: 0;
   }
   

@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return { days, hours, minutes, seconds };
   };
   
-  // 更新計數器
+  // 更新計數器 (只替換 timeInfo 文字內容)
   const updateCounters = () => {
     timelineData.forEach(item => {
       const time = timeSince(item.date);
@@ -217,9 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 更新時間資訊，使用指定格式
     const now = getMelbourneTime();
-    const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
-    const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
-    document.getElementById('timeInfo').textContent = `Melbourne time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+    const dateStr = `${String(now.getUTCDate()).padStart(2,'0')}/${String(now.getUTCMonth()+1).padStart(2,'0')}/${now.getUTCFullYear()}`;
+    const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
+    const info = document.getElementById('timeInfo');
+    if(info){
+      info.textContent = `墨爾本時間：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+    }
   };
   
   // 立即更新一次
@@ -290,35 +293,31 @@ body.dark .tl-card {
 /* 圖片容器 - 完全覆蓋卡片頂部 */
 .tl-image {
   position: relative;
-  width: calc(100% + 2px); /* 確保完全覆蓋邊框 */
-  height: 0;
-  padding-top: 100%; /* 1:1 正方形比例 */
-  margin-top: -1px;
-  margin-left: -1px;
-  margin-right: -1px;
-  margin-bottom: 0;
-  background-color: #f0f0f0;
+  width: 100%;
+  aspect-ratio: 1/1;              /* 1:1 正方形 */
+  padding: 0;                     /* 移除 padding-top 技巧改用 aspect-ratio */
+  margin: 0;                      /* 移除負邊距 */
+  background: #f0f0f0;
+  border-radius: inherit;         /* 直接繼承卡片上圓角 (因 overflow 裁切) */
+  border: 0;                      /* 去掉底線避免色差 */
   overflow: hidden;
-  border-top-left-radius: var(--tl-radius);
-  border-top-right-radius: var(--tl-radius);
-  z-index: 2; /* 提高優先級 */
+  /* 移除 z-index 以避免層級造成陰影或交互問題 */
 }
-
 body.dark .tl-image {
-  background-color: #333;
+  background: #333;
 }
 
 /* 圖片居中裁切 */
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  display: block;
+  transform: none;
   transition: transform 0.35s;
-  display: block; /* 避免圖片底部間隙 */
 }
 
 .tl-card:hover .tl-image img {
@@ -335,7 +334,7 @@ body.dark .tl-image {
   text-align: center;
   background: inherit;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .tl-content h3 {
@@ -656,16 +655,13 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 110px;
     height: 110px;
-    padding-top: 0;
-    margin: 0;
-    grid-area: image;
+    aspect-ratio: auto;  /* 實際固定尺寸時移除比例限制 */
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
-    border-bottom: none;
-    border-right: 1px solid var(--tl-border-light);
   }
   
-  body.dark .tl-image {
-    border-right: 1px solid var(--tl-border-dark);
+  .tl-image img {
+    position: absolute;
+    inset: 0;
   }
   
   .tl-content {
@@ -752,4 +748,77 @@ body.dark .tl-close-btn:hover {
     bottom: 0.4rem;
   }
 }
+
+/* --- 圖片裁切 / 圓角 / 漂移 修復覆寫開始 --- */
+
+/* 卡片：統一用 overflow:hidden 讓上圓角直接裁圖片，不再用負邊距 */
+.tl-card{
+  overflow:hidden; /* 確保子層不外露 */
+  position:relative;
+}
+
+/* 移除舊的 .tl-image 內 margin:-1px / width:calc(100%+2px) 設定，回歸標準 */
+.tl-image{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;              /* 1:1 正方形 */
+  padding:0;                     /* 移除 padding-top 技巧改用 aspect-ratio */
+  margin:0;                      /* 移除負邊距 */
+  background:#f0f0f0;
+  border-radius:inherit;         /* 直接繼承卡片上圓角 (因 overflow 裁切) */
+  border:0;                      /* 去掉底線避免色差 */
+  overflow:hidden;
+  /* 移除 z-index 以避免層級造成陰影或交互問題 */
+}
+body.dark .tl-image{background:#333;}
+
+.tl-image img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transform:none;
+  transition:transform .35s;
+}
+
+.tl-card:hover .tl-image img{
+  transform:scale(1.05);
+}
+
+/* 內容區不再需要背景遮蓋，保留原樣 */
+.tl-content{
+  background:inherit;
+  position:relative;
+  z-index:0;
+}
+
+/* 手機版：圖片改為固定方形側欄仍適用；刪除舊有調整影響 */
+@media (max-width:640px){
+  .tl-card{
+    overflow:hidden;
+  }
+  .tl-image{
+    width:110px;
+    height:110px;
+    aspect-ratio:auto;  /* 實際固定尺寸時移除比例限制 */
+    border-radius:var(--tl-radius) 0 0 var(--tl-radius);
+  }
+  .tl-image img{
+    position:absolute;
+    inset:0;
+  }
+}
+
+/* 超小螢幕 */
+@media (max-width:380px){
+  .tl-image{
+    width:90px;
+    height:90px;
+  }
+}
+
+/* --- 修復覆寫結束 --- */
 </style>
