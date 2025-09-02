@@ -8,9 +8,9 @@ lastmod: 2025-09-01
 
 <div id="timelineContainer">Loading...</div>
 
-<script type="text/javascript">
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 資料定義
+  // Data definition
   const timelineData = [
     {
       id: "couple",
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>We live in different countries/regions (Melbourne, Australia and Taipei, Taiwan) and maintain a long-distance relationship. We both identify as pansexual 🩷💛🩵, embracing diverse gender identities and relationship forms.</p>
         <p>Despite the distance, we stay connected through daily communication, sharing our lives, work, and interests. We respect each other's independence while planning regular visits.</p>
-        <p>To see more about our daily life, follow me on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>To see more about our daily life, follow my Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/about/#relationship"
     },
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>Hash Brown is a purebred Teddy guinea pig with light brown fur. He's very active and energetic, loves doing parkour in his cage, and often pushes his hideout around while playing with boundless energy.</p>
         <p>Favorite foods: red and green bell peppers, corn silk, and carrots (especially loves these). He's usually active in the evening and makes squeaking sounds when asking for treats.</p>
-        <p>See more adorable photos of Hash Brown on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>See more adorable photos of Hash Brown on Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/about/#pets"
     },
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>Potato is a purebred Teddy guinea pig with dark chocolate fur. He has a greedy personality and is quite brave. He often eats and plays simultaneously, sometimes pooping while eating, and occasionally even in his food bowl.</p>
         <p>Favorite foods: red and green bell peppers, corn silk, and carrots. He also enjoys sleeping in hay piles and continues eating right after waking up - a brave little glutton.</p>
-        <p>For more daily updates about Potato, check Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>For more daily updates about Potato, check Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/about/#pets"
     }
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const modal = document.querySelector('.tl-modal');
   const closeButtons = document.querySelectorAll('.tl-close-btn');
   const aboutLink = document.querySelector('.tl-about-link');
-  const closeBtnAlt = document.querySelector('.tl-close-btn-alt');
+  const closeAltButton = document.querySelector('.tl-close-btn-alt');
   
   // Handle modal closing
   const closeModal = () => {
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
   closeButtons.forEach(btn => {
     btn.addEventListener('click', closeModal);
   });
-  closeBtnAlt.addEventListener('click', closeModal);
+  closeAltButton.addEventListener('click', closeModal);
   
   modalBackdrop.addEventListener('click', e => {
     if (e.target === modalBackdrop) closeModal();
@@ -182,12 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const startDate = parseDate(dateStr);
     const now = getMelbourneTime();
     
-    // 計算毫秒差
+    // Calculate millisecond difference
     const diff = now - startDate;
     
-    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // 未來日期
+    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Future date
     
-    // 計算天數與剩餘時間
+    // Calculate days and remaining time
     const days = Math.floor(diff / (24 * 60 * 60 * 1000));
     const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
     const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return { days, hours, minutes, seconds };
   };
   
-  // 更新計數器
+  // Update counters
   const updateCounters = () => {
     timelineData.forEach(item => {
       const time = timeSince(item.date);
@@ -212,15 +212,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
   
-  // 立即更新一次
+  // Update immediately once
   updateCounters();
   
-  // 每秒更新
+  // Update every second
   setInterval(updateCounters, 1000);
 });
 </script>
 
-<style type="text/css">
+<style>
 /* 基本樣式 */
 .tl-container {
   --tl-accent: var(--hb-active, #e1306c);
@@ -462,6 +462,22 @@ body.dark .tl-modal-title {
   margin-bottom: 1rem;
 }
 
+/* 強調可點擊連結 */
+.tl-highlight-link {
+  color: var(--tl-accent);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid var(--tl-accent);
+  padding-bottom: 1px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tl-highlight-link:hover {
+  background-color: var(--tl-accent);
+  color: white;
+  border-color: transparent;
+}
+
 .tl-modal-body a {
   color: var(--tl-accent);
   text-decoration: none;
@@ -575,83 +591,18 @@ body.dark .tl-close-btn:hover {
   font-weight: 500;
   opacity: 0.7;
 }
-</style>
-  border: none;
-}
 
-body.dark .tl-modal-close {
-  background: rgba(255,255,255,0.1);
-  color: #ddd;
-}
-
-.tl-modal-close:hover {
-  background: #f44336;
-  color: white;
-}
-
-.tl-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #666;
-  transition: background 0.2s;
-}
-
-.tl-close-btn:hover {
-  background: rgba(0,0,0,0.05);
-}
-
-body.dark .tl-close-btn {
-  color: #bbb;
-}
-
-body.dark .tl-close-btn:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-/* 動畫偏好 */
+/* 減少動畫 */
 @media (prefers-reduced-motion: reduce) {
   .tl-card,
-  .tl-media img,
-  .tl-modal-backdrop {
+  .tl-image img,
+  .tl-modal-backdrop,
+  .tl-highlight-link {
     transition: none !important;
   }
   
   .tl-card:hover {
     transform: none;
-  }
-}
-
-/* 手機適配 */
-@media (max-width: 640px) {
-  .tl-media {
-    height: 160px;
-  }
-  
-  .tl-content {
-    padding: 1rem 1.2rem;
-  }
-  
-  .tl-days {
-    font-size: 2.4rem;
-  }
-  
-  .tl-modal {
-    padding: 1.2rem;
-  }
-  
-  .tl-modal-title {
-    font-size: 1.25rem;
   }
 }
 </style>

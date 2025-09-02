@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>我們生活在不同的國家/地區（澳洲墨爾本和台灣台北），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
         <p>雖然相隔兩地，我們仍保持每天的交流與聯繫，分享彼此的生活、工作與興趣愛好。我們彼此支持、尊重對方的獨立空間，同時也計劃定期見面。</p>
-        <p>想了解更多我們的日常點滴，歡迎關注我的 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>想了解更多我們的日常點滴，歡迎關注我的 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/zh-hant/about/#relationship"
     },
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>薯餅是一隻純種泰迪天竺鼠，毛色淺咖啡。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
         <p>最愛的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔（超級喜歡）。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
-        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"
     },
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>馬鈴薯是一隻純種泰迪天竺鼠，毛色深巧克力色，性格較為貪吃且膽子比較大。牠常常一邊吃一邊玩，有時候會邊吃邊拉，偶爾會在糧盆裡面拉出糞便。</p>
         <p>喜歡的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔。牠也喜歡在草堆裡面睡覺，醒來後會繼續吃，是個貪吃又勇敢的小家伙。</p>
-        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"
     }
@@ -459,6 +459,22 @@ body.dark .tl-modal-title {
 
 .tl-modal-body p {
   margin-bottom: 1rem;
+}
+
+/* 強調可點擊連結 */
+.tl-highlight-link {
+  color: var(--tl-accent);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid var(--tl-accent);
+  padding-bottom: 1px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tl-highlight-link:hover {
+  background-color: var(--tl-accent);
+  color: white;
+  border-color: transparent;
 }
 
 .tl-modal-body a {
