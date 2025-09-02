@@ -7,13 +7,13 @@ lastmod: 2025-09-01
 ---
 
 <!-- 圖片來源：請確認下列三檔案已放入 /static/images/timeline/ -->
-<!-- gf-avatar.jpg, hashbrown.jpg, potato.jpg -->
+<!-- f-avatar.webp, hashbrown.webp, potato.webp -->
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
       <!-- 女友頭像 -->
       <img class="avatar timeline-img" alt="Girlfriend Avatar"
-           src="/images/timeline/gf-avatar.jpg">
+           src="/images/timeline/f-avatar.webp">
       <div class="d-content">
         <h3 data-i18n="coupleTitle">Days Together</h3>
         <p class="d-num" id="togetherDays">--</p>
@@ -23,7 +23,7 @@ lastmod: 2025-09-01
     <div class="d-card pet">
       <!-- Hash Brown -->
       <img class="pet-img timeline-img" alt="Hash Brown"
-           src="/images/timeline/hashbrown.jpg">
+           src="/images/timeline/hashbrown.webp">
       <div class="d-content">
         <h3 data-i18n="hashTitle">Hash Brown Age (days)</h3>
         <p class="d-num" id="hashDays">--</p>
@@ -33,7 +33,7 @@ lastmod: 2025-09-01
     <div class="d-card pet">
       <!-- Potato -->
       <img class="pet-img timeline-img" alt="Potato"
-           src="/images/timeline/potato.jpg">
+           src="/images/timeline/potato.webp">
       <div class="d-content">
         <h3 data-i18n="potatoTitle">Potato Age (days)</h3>
         <p class="d-num" id="potatoDays">--</p>
@@ -158,34 +158,34 @@ body.dark .tz-note{opacity:.75;background:none!important;}
     const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent=dict[k];
   });
 
-  const AEST_OFFSET_H=10, MS_DAY=86400000;
-  const parseDMY=s=>{const[a,b,c]=s.split('/').map(Number);return{d:a,m:b,y:c};};
-  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0)); // 固定 +10h
-  const inclusiveDays=start=>{
-    const {d,m,y}=parseDMY(start);
-    const startDate=makeAEST(y,m,d);
-    const nowAEST=new Date(Date.now()+AEST_OFFSET_H*3600*1000);
-    const todayAEST=makeAEST(nowAEST.getUTCFullYear(),nowAEST.getUTCMonth()+1,nowAEST.getUTCDate());
-    return Math.floor((todayAEST-startDate)/MS_DAY)+1;
+  // AEST 計算（UTC+10，忽略夏令時間）
+  const AEST_OFFSET_HOURS = 10;
+  const MS_DAY = 86400000;
+  const parseDMY = (str)=> {
+    const [d,m,y]=str.split('/').map(Number);
+    return {d,m,y};
   };
-  const set=(id,date)=>{const el=document.getElementById(id); if(el) el.textContent=inclusiveDays(date).toLocaleString();};
-  set('togetherDays','07/08/2025');
-  set('hashDays','24/06/2025');
-  set('potatoDays','27/07/2025');
-
-  /* === Image Fallbacks === */
-  document.querySelectorAll('.timeline-img').forEach(img=>{
-    img.addEventListener('error',()=>{
-      const list=(img.getAttribute('data-fallback')||'').split(',').map(s=>s.trim()).filter(Boolean);
-      if(!list.length) return;
-      const tried=img.getAttribute('data-tried')?img.getAttribute('data-tried').split('|'):[];
-      const next=list.find(p=>!tried.includes(p));
-      if(next){
-        tried.push(next);
-        img.setAttribute('data-tried',tried.join('|'));
-        img.src=next;
-      }
-    },{once:false});
+  const makeAESTDate = (y,m,d)=>{
+    // 以 UTC 基準 +10h，再取該 AEST 日的 UTC 中午避免時差邊界
+    return new Date(Date.UTC(y,m-1,d,10,0,0));
+  };
+  const inclusiveDays = (startStr)=>{
+    const {d,m,y}=parseDMY(startStr);
+    const start = makeAESTDate(y,m,d);
+    const nowUTC = Date.now();
+    const nowAEST = new Date(nowUTC + AEST_OFFSET_HOURS*3600*1000);
+    const todayAEST = makeAESTDate(nowAEST.getUTCFullYear(), nowAEST.getUTCMonth()+1, nowAEST.getUTCDate());
+    return Math.floor((todayAEST - start)/MS_DAY)+1;
+  };
+  const setNum=(id,dateStr)=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent=inclusiveDays(dateStr).toLocaleString();
+  };
+  setNum('togetherDays','07/08/2025');
+  setNum('hashDays','24/06/2025');
+  setNum('potatoDays','27/07/2025');
+})();
+</script>
   });
 })();
 </script>
