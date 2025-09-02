@@ -231,118 +231,113 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* 立即修復白色薄膜、圖片圓角和代碼外洩 */
+/* ===== 時間線設計 ===== */
 
-/* 1. 徹底去除白色薄膜 */
+/* 基本變量與容器 */
+.tl-container {
+  --tl-accent: var(--hb-active, #e1306c);
+  --tl-radius: 18px;
+  --tl-bg-light: #fff;
+  --tl-bg-dark: #2a2b2f;
+  --tl-border-light: rgba(0,0,0,0.06);
+  --tl-border-dark: rgba(255,255,255,0.1);
+  --tl-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  --tl-shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
+  
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
+
+/* 卡片網格 - 桌面三列 */
+.tl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* 卡片基本樣式 */
 .tl-card {
-  background: var(--tl-bg-light) !important; /* 使用更強的強制背景色 */
-  box-shadow: 0 3px 8px rgba(0,0,0,0.04), 0 8px 15px rgba(0,0,0,0.06) !important;
+  background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
-  overflow: visible !important; /* 避免隱藏溢出導致的層疊問題 */
-  margin-bottom: 1px; /* 防止某些瀏覽器的渲染問題 */
+  box-shadow: var(--tl-shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--tl-border-light);
+  height: 100%;
 }
 
 body.dark .tl-card {
   background: var(--tl-bg-dark) !important;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15), 0 8px 15px rgba(0,0,0,0.2) !important;
+  border-color: var(--tl-border-dark);
 }
 
-/* 2. 修復圖片與卡片邊緣的問題 */
-.tl-card {
-  border-radius: 0 0 var(--tl-radius) var(--tl-radius) !important;
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-  overflow: hidden;
+.tl-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--tl-shadow-hover);
 }
 
+/* 圖片容器 - 解決圓角裁切問題 */
 .tl-image {
-  margin: -1px !important;
-  margin-bottom: 0 !important;
-  width: calc(100% + 2px) !important;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0 !important;
-  overflow: hidden;
   position: relative;
-  z-index: 2;
-}
-
-.tl-image img {
+  width: 100%;
+  padding-top: 100%; /* 1:1 正方形比例 */
+  background-color: #f0f0f0;
   border-radius: var(--tl-radius) var(--tl-radius) 0 0;
+  margin-top: -1px; /* 解決圓角露出問題 */
+  margin-left: -1px;
+  margin-right: -1px;
+  width: calc(100% + 2px); /* 稍微放大避免邊緣問題 */
 }
 
-/* 確保內容區與卡片底部圓角正確 */
-.tl-content {
-  border-radius: 0 0 var(--tl-radius) var(--tl-radius);
-  position: relative;
-  z-index: 1;
-  background: inherit;
+body.dark .tl-image {
+  background-color: #333;
 }
 
-/* 修復手機版布局 */
-@media (max-width: 640px) {
-  .tl-card {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    border-radius: var(--tl-radius) !important;
-    overflow: hidden;
-  }
-  
-  .tl-image {
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius) !important;
-    width: 110px !important;
-    height: 110px !important;
-    margin: 0 !important;
-  }
-  
-  .tl-image img {
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
-  }
-  
-  .tl-content {
-    border-radius: 0 var(--tl-radius) var(--tl-radius) 0;
-  }
-  
-  .tl-more {
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
-    border-radius: 6px;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.7rem;
-    width: auto;
-    border: none;
-  }
-}
-
-/* 超小屏幕適配 - 保持簡潔 */
-@media (max-width: 380px) {
-  .tl-card {
-    grid-template-columns: 90px 1fr;
-  }
-  
-  .tl-image {
-    width: 90px !important;
-    height: 90px !important;
-  }
-}
-
-/* 底部備注確保無外洩 */
-.tl-note {
-  position: relative;
-  padding-left: 0.8rem;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-}
-
-.tl-note::before {
-  content: "";
+/* 圖片居中裁切 */
+.tl-image img {
   position: absolute;
-  left: 0;
   top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: var(--tl-accent);
-  border-radius: 1px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.35s;
 }
-</style>
+
+.tl-card:hover .tl-image img {
+  transform: scale(1.05);
+}
+
+/* 卡片內容區 */
+.tl-content {
+  padding: 1rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.tl-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--tl-accent);
+}
+
+/* 計數器 */
+.tl-counter {
   margin-bottom: 0.6rem;
 }
 
@@ -356,7 +351,7 @@ body.dark .tl-card {
 
 .tl-time {
   font-size: 0.8rem;
-  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-family: monospace;
   letter-spacing: 0.02rem;
   opacity: 0.8;
   font-weight: 600;
@@ -368,7 +363,7 @@ body.dark .tl-card {
   margin-top: 0.4rem;
 }
 
-/* 8. 了解更多按鈕 */
+/* 了解更多按鈕 */
 .tl-more {
   margin-top: auto;
   background: #f5f5f7;
@@ -398,7 +393,7 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 9. 時間備註 - 左對齊與紅線 */
+/* 時間備註 - 左對齊與紅線 */
 .tl-footer {
   margin-top: 0.8rem;
   text-align: left;
@@ -410,9 +405,8 @@ body.dark .tl-more:hover {
   padding-left: 0.8rem;
   position: relative;
   line-height: 1.5;
-  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-family: monospace;
   display: inline-block;
-  text-align: left;
 }
 
 .tl-note::before {
@@ -426,7 +420,7 @@ body.dark .tl-more:hover {
   border-radius: 3px;
 }
 
-/* 10. 模態框樣式 */
+/* 模態框樣式 */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
@@ -617,7 +611,7 @@ body.dark .tl-close-btn:hover {
   color: white;
 }
 
-/* 11. 載入提示 */
+/* 載入提示 */
 #timelineContainer {
   text-align: center;
   padding: 1rem 0;
@@ -625,7 +619,7 @@ body.dark .tl-close-btn:hover {
   opacity: 0.7;
 }
 
-/* 12. 平板響應式設計 */
+/* 平板響應式設計 */
 @media (max-width: 1080px) {
   .tl-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -633,7 +627,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 13. 手機響應式設計 - 簡潔扁平化卡片 */
+/* 手機響應式設計 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -644,8 +638,6 @@ body.dark .tl-close-btn:hover {
   .tl-card {
     display: grid;
     grid-template-columns: 110px 1fr;
-    grid-template-rows: auto;
-    min-height: 110px;
     height: auto;
   }
   
@@ -653,8 +645,8 @@ body.dark .tl-close-btn:hover {
     width: 110px;
     height: 110px;
     padding-top: 0;
-    grid-row: 1;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
+    margin: 0;
   }
   
   .tl-content {
@@ -662,9 +654,6 @@ body.dark .tl-close-btn:hover {
     text-align: left;
     padding: 0.7rem 0.8rem;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
   
   .tl-counter {
@@ -707,7 +696,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 14. 超小屏幕適配 */
+/* 超小屏幕適配 */
 @media (max-width: 380px) {
   .tl-card {
     grid-template-columns: 90px 1fr;
@@ -726,6 +715,17 @@ body.dark .tl-close-btn:hover {
     padding: 0.6rem 0.7rem;
   }
   
+  .tl-content h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .tl-more {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+  }
+}
+</style>
   .tl-content h3 {
     font-size: 0.9rem;
     margin-bottom: 0.4rem;
