@@ -28,10 +28,10 @@ body.dark .site-header{
 
 .site-brand a{
   font-weight:700;
-  font-size:1.05rem;
+  font-size:1.18rem; /* 原 1.05rem */
   text-decoration:none;
   color:var(--hb-text,#222);
-  letter-spacing:.5px;
+  letter-spacing:.55px;
   line-height: 1;
   display:inline-flex;
   align-items:center;
@@ -193,7 +193,7 @@ body.dark .cb-toggle{
   --hb-active:#e1306c;
   --hb-border:rgba(0,0,0,.08);
   --hb-shadow:0 1px 3px rgba(0,0,0,.08);
-  --brand-logo-size:22px; /* 略放大以與 1.05rem 文字視覺平衡 */
+  --brand-logo-size:1.38em; /* 相對字體放大 (圖示與字高更平衡) */
 }
 body.dark{
   --hb-bg:rgba(50,50,50,.9);
@@ -724,3 +724,25 @@ body.dark .about-block .about-intro mark{
   top:0 !important;          /* 移除之前的位移 */
   transform:translateY(-0.5px); /* 視覺微調 (可改 0 或 -1px 視需求) */
 }
+
+/* === Brand 放大與精準置中 (桌面) === */
+.site-brand a{
+  font-size:1.18rem; /* 原 1.05rem */
+  letter-spacing:.55px;
+}
+:root{
+  --brand-logo-size:1.38em; /* 相對字體放大 (圖示與字高更平衡) */
+}
+.site-brand a::before{
+  top:0 !important;
+  transform:translateY(-0.15px); /* 視覺微調，可改 0 或 -0.2px */
+}
+
+/* 小螢幕回落避免占版 */
+@media (max-width:640px){
+  .site-brand a{font-size:1.05rem;}
+  :root{--brand-logo-size:1.15em;}
+  .site-brand a::before{transform:translateY(-0.2px);}
+}
+
+/* 若未來仍覺偏移：只需微調上方 translateY 數值即可 */

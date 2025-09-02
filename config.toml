@@ -14,3 +14,15 @@
 #   svg  = "/favicon.svg"
 #   png16 = "/favicon-16x16.png"
 #   png32 = "/favicon-32x32.png"
+
+[params.assets]
+# PaperMod 會依此輸出 <link rel="icon"> / PWA / pinned tab 等標籤
+favicon          = "favicon.svg"
+favicon16x16     = "favicon.svg"
+favicon32x32     = "favicon.svg"
+apple_touch_icon = "favicon.svg"
+safari_pinned_tab = "favicon.svg"
+
+# (可選) 若之後新增不同尺寸 PNG，只需把對應檔案放入 /static 並改這裡路徑即可
+# favicon16x16 = "favicon-16x16.png"
+# favicon32x32 = "favicon-32x32.png"
