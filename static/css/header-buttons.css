@@ -1047,3 +1047,21 @@ html[lang="en"] .about-page .about-contacts li .contact-label:before{
 }
 
 /* === End EN About Contact 對齊最終覆寫 === */
+
+/* === EN About Contact: remove column alignment for links, keep first-letter indent === */
+html[lang="en"] .about-page .about-contacts li {
+  gap:0 !important; /* 取消 flex 間距，讓連結緊跟冒號 */
+}
+html[lang="en"] .about-page .about-contacts li .contact-label{
+  min-width:0 !important;
+  width:auto !important;
+  margin-right:.45rem; /* 冒號與連結間距 */
+  padding-left:1.1rem; /* 保留與中文版首字對齊的縮排 */
+}
+@media (max-width:640px){
+  html[lang="en"] .about-page .about-contacts li .contact-label{
+    padding-left:1.0rem;
+    margin-right:.4rem;
+  }
+}
+/* === End EN About Contact override === */
