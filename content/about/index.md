@@ -125,6 +125,45 @@ body.dark .about-modal a:hover{box-shadow:0 0 0 3px rgba(29,111,255,.35);}
 @media (prefers-reduced-motion:reduce){
   .about-modal,.about-modal-backdrop,.about-page a.blue-highlight{transition:none!important;transform:none!important;}
 }
+
+/* === Fix: restore blue-highlight pill effect for Instagram link in hero (English) === */
+.about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%)!important;
+  display:inline-block!important;
+  color:#1d6fff!important;
+  border:none!important;
+  padding:.18rem .55rem .22rem!important;
+  margin:.12rem .25rem .12rem 0!important;
+  border-radius:999px!important;
+  line-height:1.15!important;
+  font-weight:600!important;
+  text-decoration:none!important;
+  transition:.25s;
+}
+body.dark .about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.48),rgba(29,111,255,0) 65%)!important;
+  color:#8bc4ff!important;
+}
+.about-page .about-hero a.blue-highlight:hover{
+  background:#1d6fff!important;
+  color:#fff!important;
+  box-shadow:0 0 0 3px rgba(29,111,255,.25);
+  transform:translateY(-1px);
+  text-decoration:none!important;
+}
+body.dark .about-page .about-hero a.blue-highlight:hover{
+  box-shadow:0 0 0 3px rgba(29,111,255,.35);
+}
+.about-page .about-hero a.blue-highlight strong{
+  background:none!important;
+  color:inherit!important;
+  padding:0!important;
+  margin:0!important;
+  font:inherit!important;
+  letter-spacing:inherit!important;
+}
+
+/* (保留其他 blue-highlight 規則不變) */
 </style>
 
 <div class="about-page">

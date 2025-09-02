@@ -179,5 +179,25 @@
         existingMobile.textContent = (isZh ? '🕒 天數' : '🕒 Days');
       }
     }
+
+    /* === 新增：手機選單 Active 標記 (Home / Posts / About / Timeline) === */
+    const markActiveMobile = () => {
+      const current = location.pathname.replace(/\/$/,'');
+      document.querySelectorAll('#mobileMenu.cb-menu a.cb-btn[href]').forEach(a=>{
+        try{
+          const u = new URL(a.getAttribute('href'), location.origin);
+          const p = u.pathname.replace(/\/$/,'');
+          if(p === current){
+            a.classList.add('active');
+          }
+        }catch(e){}
+      });
+    };
+
+    // 若 timeline 按鈕是動態插入，需在插入後再標記
+    markActiveMobile();
+
+    // 若之後有延遲載入（保險再跑一次）
+    setTimeout(markActiveMobile, 150);
   });
 })();

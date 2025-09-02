@@ -93,6 +93,21 @@ body.dark .main-nav a.active{
   color:#fff;
 }
 
+/* === 桌面導覽：強化 active 圓角與陰影 === */
+.main-nav a {
+  border-radius:10px; /* 原 6px -> 更圓 */
+}
+.main-nav a.active,
+.main-nav a.nav-timeline.active {
+  border-radius:12px;
+  box-shadow:0 4px 10px -3px rgba(225,48,108,.45);
+}
+
+/* Hover 時也保持較大圓角（避免跳動） */
+.main-nav a:hover {
+  border-radius:10px;
+}
+
 /* 動作按鈕群組 */
 .top-action-group{
   margin-left:auto;
@@ -850,4 +865,60 @@ html[lang="en"] .cb-menu .lang-switch::before {
 
 #mobileMenu a.nav-timeline .tl-emoji {
   transform: none !important;
+}
+
+/* === 桌面導覽：強化 active 圓角與陰影 === */
+.main-nav a {
+  border-radius:10px; /* 原 6px -> 更圓 */
+}
+.main-nav a.active,
+.main-nav a.nav-timeline.active {
+  border-radius:12px;
+  box-shadow:0 4px 10px -3px rgba(225,48,108,.45);
+}
+
+/* Hover 時也保持較大圓角（避免跳動） */
+.main-nav a:hover {
+  border-radius:10px;
+}
+
+/* === 手機選單：一般按鈕統一圓角 & active 視覺 === */
+#mobileMenu .cb-btn {
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+  transition:background .25s,color .25s,box-shadow .25s;
+}
+
+/* 手機 active（Home / Posts / About / Timeline 全部） */
+#mobileMenu .cb-btn.active,
+#mobileMenu a.nav-timeline.active {
+  background:var(--hb-active,#e1306c) !important;
+  color:#fff !important;
+  border-color:var(--hb-active,#e1306c) !important;
+  box-shadow:0 3px 10px -4px rgba(225,48,108,.55);
+  border-radius:12px;
+}
+
+/* 手機 hover 效果（未 active） */
+#mobileMenu .cb-btn:not(.active):hover {
+  background:rgba(225,48,108,.12);
+  border-color:rgba(225,48,108,.45);
+}
+
+/* 深色模式補強 active 對比 */
+body.dark #mobileMenu .cb-btn.active {
+  box-shadow:0 4px 12px -4px rgba(225,48,108,.65);
+}
+
+/* === Timeline 手機 emoji 與其他一致（保持圓角） === */
+#mobileMenu a.nav-timeline {
+  border-radius:10px;
+}
+
+/* === 若需要在較小螢幕也維持圓角陰影一致 === */
+@media (max-width:900px){
+  #mobileMenu .cb-btn.active {
+    border-radius:12px;
+  }
 }
