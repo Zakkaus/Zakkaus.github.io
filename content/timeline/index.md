@@ -236,39 +236,41 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
 /* ===== Timeline Design - Complete Image Fix ===== */
 
-/* Base container / variables */
-.tl-container{
-  --tl-accent:var(--hb-active,#e1306c);
-  --tl-radius:18px;
-  --tl-bg-light:#fff;
-  --tl-bg-dark:#2a2b2f;
-  --tl-border-light:rgba(0,0,0,.06);
-  --tl-border-dark:rgba(255,255,255,.1);
-  --tl-shadow:0 8px 16px rgba(0,0,0,.08);
-  --tl-shadow-hover:0 12px 24px rgba(0,0,0,.12);
-  max-width:1080px;
-  margin:0 auto;
-  padding:0 0 2rem;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:rgba(0,0,0,.85);
-}
-body.dark .tl-container{color:rgba(255,255,255,.85);}
-
-/* Grid */
-.tl-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
-  margin-top:.25rem;
-  margin-bottom:1.25rem;
+/* Basic Variables & Container */
+.tl-container {
+  --tl-accent: var(--hb-active, #e1306c);
+  --tl-radius: 18px;
+  --tl-bg-light: #fff;
+  --tl-bg-dark: #2a2b2f;
+  --tl-border-light: rgba(0,0,0,0.06);
+  --tl-border-dark: rgba(255,255,255,0.1);
+  --tl-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  --tl-shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
+  
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
 }
 
-/* Card base style - Enhanced overflow for perfect radius clipping */
+body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
+
+/* Card Grid - Desktop 3 columns */
+.tl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Card Base Style - Enhanced overflow for perfect radius clipping */
 .tl-card {
   background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
   box-shadow: var(--tl-shadow);
-  overflow: hidden; /* Critical: ensure perfect radius clipping */
+  overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
@@ -288,16 +290,15 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* Image container - Complete rebuild for perfect top coverage */
+/* Image Container - Complete rebuild for perfect top coverage */
 .tl-image {
   position: relative;
-  width: 100%;
+  width: calc(100% + 4px); /* Increase width for complete coverage */
   height: 0;
-  padding-bottom: 100%; /* Create 1:1 square using padding-bottom */
+  padding-bottom: calc(100% + 4px); /* Corresponding height increase */
   background: #f0f0f0;
   flex-shrink: 0;
-  margin: -1px -1px 0 -1px; /* CRITICAL: Negative margins to cover card edges */
-  width: calc(100% + 2px); /* CRITICAL: Extend width to cover borders */
+  margin: -2px -2px 0 -2px; /* Increase negative margins for coverage */
 }
 
 body.dark .tl-image {
@@ -315,10 +316,11 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
+  transform: scale(1.02); /* Slight enlargement for complete coverage */
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: scale(1.07); /* Further enlargement on hover */
 }
 
 /* Content */
@@ -572,12 +574,12 @@ body.dark .tl-close-btn:hover{
   }
 }
 
-/* Mobile layout (side image) */
-@media (max-width:640px){
-  .tl-grid{
-    grid-template-columns:1fr;
-    gap:1rem;
-    padding:0 0.5rem;
+/* Mobile Responsive - Rebuild side image layout */
+@media (max-width: 640px) {
+  .tl-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
   }
   
   .tl-card {
@@ -587,17 +589,24 @@ body.dark .tl-close-btn:hover{
     min-height: 110px;
     grid-template-rows: auto;
     grid-template-areas: "image content";
-    overflow: hidden; /* Ensure mobile radius clipping */
+    overflow: hidden;
   }
   
   .tl-image {
-    width: 110px;
-    height: 110px;
-    padding-bottom: 0; /* Remove padding-bottom for mobile */
+    width: calc(110px + 4px); /* Increase mobile width */
+    height: calc(110px + 4px); /* Increase mobile height */
+    padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin: -1px 0 -1px -1px; /* CRITICAL: Cover left edge on mobile */
-    width: calc(110px + 1px); /* CRITICAL: Extend to cover border */
+    margin: -2px 0 -2px -2px; /* Increase mobile negative margins */
+  }
+  
+  .tl-image img {
+    transform: scale(1.02); /* Mobile also slight enlargement */
+  }
+  
+  .tl-card:hover .tl-image img {
+    transform: scale(1.07); /* Mobile hover enlargement */
   }
   
   .tl-content{
@@ -643,13 +652,27 @@ body.dark .tl-close-btn:hover{
   }
 }
 
-/* Extra small */
-@media (max-width:380px){
-  .tl-card{grid-template-columns:90px 1fr;}
-  .tl-image{width:90px;height:90px;}
-  .tl-days{font-size:1.6rem;}
-  .tl-content{padding:.6rem .7rem 2.5rem;}
-  .tl-content h3{font-size:.9rem;margin-bottom:.4rem;}
+/* Extra Small Screen */
+@media (max-width: 380px) {
+  .tl-card {
+    grid-template-columns: 90px 1fr;
+  }
+  
+  .tl-image {
+    width: calc(90px + 4px); /* Extra small also increase width */
+    height: calc(90px + 4px); /* Extra small also increase height */
+  }
+  
+  .tl-days{
+    font-size:1.6rem;
+  }
+  .tl-content{
+    padding:.6rem .7rem 2.5rem;
+  }
+  .tl-content h3{
+    font-size:.9rem;
+    margin-bottom:.4rem;
+  }
   .tl-more{
     padding:.3rem .6rem;
     font-size:.6rem;
@@ -661,9 +684,6 @@ body.dark .tl-close-btn:hover{
 /* Prefers reduced motion */
 @media (prefers-reduced-motion:reduce){
   .tl-card,.tl-image img,.tl-more,.tl-close-btn,.tl-about-link{transition:none!important;}
-  .tl-card:hover .tl-image img{transform:none;}
-}
-</style>
   .tl-card:hover .tl-image img{transform:none;}
 }
 </style>

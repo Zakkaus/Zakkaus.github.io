@@ -293,13 +293,12 @@ body.dark .tl-card {
 /* 圖片容器 - 完全重構實現完美頂部覆蓋 */
 .tl-image {
   position: relative;
-  width: 100%;
+  width: calc(100% + 4px); /* 增加寬度確保完全覆蓋 */
   height: 0;
-  padding-bottom: 100%; /* 使用padding-bottom創建1:1正方形 */
+  padding-bottom: calc(100% + 4px); /* 對應增加高度 */
   background: #f0f0f0;
   flex-shrink: 0;
-  margin: -1px -1px 0 -1px; /* 關鍵：負邊距覆蓋卡片邊緣 */
-  width: calc(100% + 2px); /* 關鍵：擴展寬度覆蓋邊框 */
+  margin: -2px -2px 0 -2px; /* 增加負邊距確保覆蓋 */
 }
 
 body.dark .tl-image {
@@ -317,10 +316,11 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
+  transform: scale(1.02); /* 輕微放大確保完全覆蓋 */
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: scale(1.07); /* hover時進一步放大 */
 }
 
 /* 卡片內容區 */
@@ -653,13 +653,20 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    width: 110px;
-    height: 110px;
-    padding-bottom: 0; /* 手機版取消padding-bottom */
+    width: calc(110px + 4px); /* 增加手機版寬度 */
+    height: calc(110px + 4px); /* 增加手機版高度 */
+    padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin: -1px 0 -1px -1px; /* 關鍵：手機版覆蓋左邊緣 */
-    width: calc(110px + 1px); /* 關鍵：擴展覆蓋邊框 */
+    margin: -2px 0 -2px -2px; /* 增加手機版負邊距 */
+  }
+  
+  .tl-image img {
+    transform: scale(1.02); /* 手機版也輕微放大 */
+  }
+  
+  .tl-card:hover .tl-image img {
+    transform: scale(1.07); /* 手機版hover放大 */
   }
   
   .tl-content {
@@ -722,7 +729,8 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    width: calc(90px + 1px); /* 調整小尺寸 */
+    width: calc(90px + 4px); /* 超小屏也增加寬度 */
+    height: calc(90px + 4px); /* 超小屏也增加高度 */
   }
   
   .tl-days {
