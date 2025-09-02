@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
       image: "/images/timeline/f-avatar.webp",
       alt: "Girlfriend avatar",
       modalTitle: "Relationship",
-      modalSubtitle: "Started on August 7, 2025 at 11:38am",
+      modalSubtitle: "Started on 07 Aug 2025 11:38 (Sydney time)",
       modalContent: `
         <p>I (Zakk) and my girlfriend (Paper) currently live apart (Australia / Taiwan) and maintain a long-distance relationship. We are both pansexual 🩷💛🩵 and we embrace openness, respect, and diversity in identity and love.</p>
         <p>Even with distance, we share daily life, study progress, work, thoughts and emotions. We happen to have a lot of overlapping interests, values and perspectives — our rhythm fits naturally and we became what we both feel is a <span style="font-weight:700;">soulmate</span> connection.</p>

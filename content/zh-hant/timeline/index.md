@@ -4,65 +4,63 @@ slug: "timeline"
 toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
-url: "/zh-hant/timeline/"  # 明確指定URL
+url: "/zh-hant/timeline/"
 ---
-
-<div id="timelineContainer">正在載入...</div>
+<div id="timelineContainer">載入中...</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // 資料定義
+document.addEventListener('DOMContentLoaded',function(){
   const timelineData = [
     {
-      id: "couple",
-      title: "我們在一起",
-      date: "07/08/2025 11:38",
-      image: "/images/timeline/f-avatar.webp",
-      alt: "女友頭像",
-      modalTitle: "關係",
-      modalSubtitle: "開始於 2025 年 8 月 7 日 11:38am",
-      modalContent: `
-        <p>我 (Zakk) 與女朋友 (Paper) 目前分隔於澳大利亞與台灣，以遠距方式維繫感情；我們都是泛性戀 🩷💛🩵，對多元性別與情感形式抱持開放與尊重。</p>
-        <p>雖然不在同一個城市，我們每天都會分享生活、學習與工作進度，還有彼此的心情。最特別的是，我們有非常多相同的愛好、價值觀與想法，彼此的節奏很好磨合，也很自然地成為了對方的<span style="font-weight:700;">靈魂伴侶</span>。</p>
-        <p>我們是在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">錫蘭 Ceylan</a> 的 Discord 群組裡第一次認識並開始聊天，從遊戲、分享與陪伴逐漸靠近，最後順理成章地在一起。</p>
-        <p>目前我們每隔幾個月就會安排見面；Paper 計畫在高中（三年級）畢業後到澳洲留學，也期待未來能有更多面對面的日常與共同成長的旅程。</p>
-        <p>想追蹤更多我們的互動與日常側寫，歡迎關注 Paper 的 Instagram：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
+      id:"couple",
+      title:"在一起",
+      date:"07/08/2025 11:38",
+      image:"/images/timeline/f-avatar.webp",
+      alt:"我們",
+      modalTitle:"關係",
+      modalSubtitle:"開始於 07/08/2025 11:38（雪梨時間）",
+      modalContent:`
+        <p>我（Zakk）與女友 Paper 現在是遠距（澳洲 / 台灣），我們都是 pansexual 🩷💛🩵，尊重並擁抱多元身分與情感。</p>
+        <p>距離之下仍每日分享生活、課業、工作、想法與情緒；價值觀與節奏自然契合，是彼此的 <strong>靈魂伴侶</strong>。</p>
+        <p>最初在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">Ceylan</a> 的 Discord 認識，輕鬆聊天逐漸變成陪伴，直到「在一起」成為最自然的決定。</p>
+        <p>我們每隔幾個月線下見面；Paper 高中畢業後計畫來澳洲求學，期待一起寫更多篇章。</p>
+        <p>更多片段（Paper IG）：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
       `,
-      linkUrl: "/zh-hant/about/#relationship"
+      linkUrl:"/zh-hant/about/#relationship"
     },
     {
-      id: "hash",
-      title: "薯餅年齡",
-      date: "24/06/2025",
-      image: "/images/timeline/hashbrown.webp",
-      alt: "薯餅",
-      modalTitle: "薯餅 (Hash Brown)",
-      modalSubtitle: "生日：2025 年 6 月 24 日",
-      modalContent: `
-        <p>薯餅是一隻純種泰迪天竺鼠，毛色淺棕色（帶一點黃）。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑。</p>
-        <p>最愛紅色和綠甜椒、玉米鬚和胡蘿蔔。看到人或我打開冰箱時會發出 <strong>515151</strong> 聲討零食。牠是女生。</p>
-        <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="tl-highlight-link"><strong>薯餅</strong></a>，那香脆感與牠活潑的性格很像。</p>
-        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
+      id:"hash",
+      title:"薯餅天數",
+      date:"24/06/2025",
+      image:"/images/timeline/hashbrown.webp",
+      alt:"薯餅",
+      modalTitle:"薯餅",
+      modalSubtitle:"生日：2025/06/24",
+      modalContent:`
+        <p>薯餅是純種泰迪天竺鼠，毛色淺棕（帶一點黃），很活潑，愛跑圈並把小屋推來推去。</p>
+        <p>最愛紅/綠甜椒、玉米鬚、胡蘿蔔。看到人或我打開冰箱時會發出 <strong>515151</strong> 聲討零食。牠是女生。</p>
+        <p>名字來自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="tl-highlight-link">薯餅</a>。</p>
+        <p>更多照片：<a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
-      linkUrl: "/zh-hant/about/#pets"
+      linkUrl:"/zh-hant/about/#pets"
     },
     {
-      id: "potato",
-      title: "馬鈴薯年齡",
-      date: "27/07/2025",
-      image: "/images/timeline/potato.webp",
-      alt: "馬鈴薯",
-      modalTitle: "馬鈴薯 (Potato)",
-      modalSubtitle: "生日：2025 年 7 月 27 日",
-      modalContent: `
-        <p>馬鈴薯是純種泰迪天竺鼠，毛色深棕色，個性勇敢偏貪吃，常邊吃邊玩甚至「吃到一半順便排泄」。</p>
-        <p>喜歡甜椒、玉米鬚與胡蘿蔔；常埋在草堆裡睡醒再接著吃。牠是女生。</p>
-        <p>更多馬鈴薯的照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
+      id:"potato",
+      title:"馬鈴薯天數",
+      date:"27/07/2025",
+      image:"/images/timeline/potato.webp",
+      alt:"馬鈴薯",
+      modalTitle:"馬鈴薯",
+      modalSubtitle:"生日：2025/07/27",
+      modalContent:`
+        <p>馬鈴薯是純種泰迪天竺鼠，毛色深棕，膽大又很愛吃，偶爾邊吃邊排泄。</p>
+        <p>喜歡甜椒、玉米鬚、胡蘿蔔；常埋進草堆睡一覺醒來繼續吃。牠是女生。</p>
+        <p>更多照片：<a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
-      linkUrl: "/zh-hant/about/#pets"
+      linkUrl:"/zh-hant/about/#pets"
     }
   ];
-  
+
   // 頁面HTML
   let html = `
   <div class="tl-container">
@@ -168,163 +166,80 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  /* === Sydney 動態時間 (AEST / AEDT 自動) 取代舊時間計算區塊開始 === */
-const dtfSydney = new Intl.DateTimeFormat('en-CA',{
-  timeZone:'Australia/Sydney',
-  year:'numeric',month:'2-digit',day:'2-digit',
-  hour:'2-digit',minute:'2-digit',second:'2-digit',
-  hourCycle:'h23'
-});
-
-function getSydneyOffsetMinutes(utcMs){
-  const parts = dtfSydney.formatToParts(new Date(utcMs));
-  let y,m,d,h,mi,s;
-  for(const p of parts){
-    if(p.type==='year') y=+p.value;
-    else if(p.type==='month') m=+p.value;
-    else if(p.type==='day') d=+p.value;
-    else if(p.type==='hour') h=+p.value;
-    else if(p.type==='minute') mi=+p.value;
-    else if(p.type==='second') s=+p.value;
-  }
-  const reconstructedUtc = Date.UTC(y,m-1,d,h,mi,s);
-  return (reconstructedUtc - utcMs)/60000;
-}
-
-// 將「DD/MM/YYYY HH:MM」(雪梨本地) 轉成 UTC ms（自動判斷 +10 / +11）
-function parseSydneyLocal(dateStr){
-  const [datePart,timePart='00:00'] = dateStr.split(' ');
-  const [day,month,year] = datePart.split('/').map(Number);
-  const [hh,mm] = timePart.split(':').map(Number);
-  let assumed = 600; // 先假設 +10
-  let utcMs = Date.UTC(year,month-1,day,hh,mm,0) - assumed*60000;
-  const actual = getSydneyOffsetMinutes(utcMs);
-  if(actual !== assumed){
-    utcMs = Date.UTC(year,month-1,day,hh,mm,0) - actual*60000;
-  }
-  return utcMs;
-}
-
-function timeSinceSydney(dateStr){
-  const startUtc = parseSydneyLocal(dateStr);
-  let diff = Date.now() - startUtc;
-  if(diff < 0) diff = 0;
-  const days = Math.floor(diff/86400000);
-  const hours = Math.floor((diff%86400000)/3600000);
-  const minutes = Math.floor((diff%3600000)/60000);
-  const seconds = Math.floor((diff%60000)/1000);
-  return {days,hours,minutes,seconds};
-}
-
-function getSydneyNow(){
-  return new Date(new Date().toLocaleString('en-US',{timeZone:'Australia/Sydney'}));
-}
-
-function currentSydneyZoneLabel(){
-  const offset = getSydneyOffsetMinutes(Date.now());
-  return offset === 660 ? 'AEDT' : 'AEST';
-}
-
-function formatSydneyNow(){
-  const now = getSydneyNow();
-  const Y = now.getFullYear();
-  const M = String(now.getMonth()+1).padStart(2,'0');
-  const D = String(now.getDate()).padStart(2,'0');
-  const h = String(now.getHours()).padStart(2,'0');
-  const m = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-  return {date:`${D}/${M}/${Y}`,time:`${h}:${m}:${s}`};
-}
-
-function updateCounters(){
-  timelineData.forEach(item=>{
-    const t = timeSinceSydney(item.date);
-    const wrap = document.getElementById(item.id+'Counter');
-    if(!wrap) return;
-    const dEl = wrap.querySelector('.tl-days');
-    const timeEl = wrap.querySelector('.tl-time');
-    if(dEl) dEl.textContent = t.days;
-    if(timeEl) timeEl.textContent =
-      `${String(t.hours).padStart(2,'0')}:${String(t.minutes).padStart(2,'0')}:${String(t.seconds).padStart(2,'0')}`;
+  /* === Sydney 動態時間 (AEST/AEDT) === */
+  const dtfSydney = new Intl.DateTimeFormat('en-CA',{
+    timeZone:'Australia/Sydney',
+    year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit',
+    hourCycle:'h23'
   });
-  const info = document.getElementById('timeInfo');
-  if(info){
-    const zone = currentSydneyZoneLabel();
-    const ft = formatSydneyNow();
-    info.textContent = `雪梨 (${zone}) 時間：${ft.date} ${ft.time}`;
-  }
-}
-
-updateCounters();
-setInterval(updateCounters,1000);
-/* === Sydney 動態時間區塊結束 === */
-  
-  // 計算時間
-  const MEL_TIMEZONE = 10; // UTC+10
-  const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
-  
-  const getMelbourneTime = () => {
-    return new Date(Date.now() + MEL_MS);
-  };
-  
-  const parseDate = (dateStr) => {
-    // 處理日期時間格式: DD/MM/YYYY HH:MM
-    const [datePart, timePart = "00:00"] = dateStr.split(" ");
-    const [day, month, year] = datePart.split('/').map(n => parseInt(n));
-    const [hours, minutes] = timePart.split(':').map(n => parseInt(n));
-    
-    // 使用澳洲時間 UTC+10
-    return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
-  };
-  
-  const timeSinceOld = (dateStr) => {
-    const startDate = parseDate(dateStr);
-    const now = getMelbourneTime();
-    
-    // 計算毫秒差
-    const diff = now - startDate;
-    
-    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // 未來日期
-    
-    // 計算天數與剩餘時間
-    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
-    
-    return { days, hours, minutes, seconds };
-  };
-  
-  // 更新計數器 (只替換 timeInfo 文字內容)
-  const updateCountersOld = () => {
-    timelineData.forEach(item => {
-      const time = timeSinceOld(item.date);
-      const counter = document.getElementById(`${item.id}Counter`);
-      if (counter) {
-        const daysEl = counter.querySelector('.tl-days');
-        const timeEl = counter.querySelector('.tl-time');
-        
-        if (daysEl) daysEl.textContent = time.days;
-        if (timeEl) timeEl.textContent = 
-          `${String(time.hours).padStart(2, '0')}:${String(time.minutes).padStart(2, '0')}:${String(time.seconds).padStart(2, '0')}`;
-      }
-    });
-    
-    // 更新時間資訊，使用指定格式
-    const now = getMelbourneTime();
-    const dateStr = `${String(now.getUTCDate()).padStart(2,'0')}/${String(now.getUTCMonth()+1).padStart(2,'0')}/${now.getUTCFullYear()}`;
-    const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
-    const info = document.getElementById('timeInfo');
-    if(info){
-      info.textContent = `雪梨時間：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+  function getSydneyOffsetMinutes(utcMs){
+    const parts = dtfSydney.formatToParts(new Date(utcMs));
+    let y,m,d,h,mi,s;
+    for(const p of parts){
+      if(p.type==='year') y=+p.value;
+      else if(p.type==='month') m=+p.value;
+      else if(p.type==='day') d=+p.value;
+      else if(p.type==='hour') h=+p.value;
+      else if(p.type==='minute') mi=+p.value;
+      else if(p.type==='second') s=+p.value;
     }
-  };
-  
-  // 立即更新一次
+    const reconstructedUtc = Date.UTC(y,m-1,d,h,mi,s);
+    return (reconstructedUtc - utcMs)/60000;
+  }
+  function parseSydneyLocal(str){
+    const [dPart,tPart='00:00'] = str.split(' ');
+    const [day,mon,year] = dPart.split('/').map(Number);
+    const [hh,mm] = tPart.split(':').map(Number);
+    let assumed = 600;
+    let utcMs = Date.UTC(year,mon-1,day,hh,mm,0)-assumed*60000;
+    const actual = getSydneyOffsetMinutes(utcMs);
+    if(actual!==assumed) utcMs = Date.UTC(year,mon-1,day,hh,mm,0)-actual*60000;
+    return utcMs;
+  }
+  function timeSinceSydney(str){
+    const start = parseSydneyLocal(str);
+    let diff = Date.now()-start;
+    if(diff<0) diff=0;
+    const days=Math.floor(diff/86400000);
+    const hours=Math.floor((diff%86400000)/3600000);
+    const minutes=Math.floor((diff%3600000)/60000);
+    const seconds=Math.floor((diff%60000)/1000);
+    return {days,hours,minutes,seconds};
+  }
+  function sydneyNow(){
+    return new Date(new Date().toLocaleString('en-US',{timeZone:'Australia/Sydney'}));
+  }
+  function zoneLabel(){
+    return getSydneyOffsetMinutes(Date.now())===660?'AEDT':'AEST';
+  }
+  function formatNow(){
+    const n=sydneyNow();
+    return {
+      date:`${String(n.getDate()).padStart(2,'0')}/${String(n.getMonth()+1).padStart(2,'0')}/${n.getFullYear()}`,
+      time:`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`
+    };
+  }
+  function updateCounters(){
+    timelineData.forEach(item=>{
+      const t=timeSinceSydney(item.date);
+      const wrap=document.getElementById(item.id+'Counter');
+      if(!wrap) return;
+      const dEl=wrap.querySelector('.tl-days');
+      const timeEl=wrap.querySelector('.tl-time');
+      if(dEl) dEl.textContent=t.days;
+      if(timeEl) timeEl.textContent=`${String(t.hours).padStart(2,'0')}:${String(t.minutes).padStart(2,'0')}:${String(t.seconds).padStart(2,'0')}`;
+    });
+    const info=document.getElementById('timeInfo');
+    if(info){
+      const z=zoneLabel();
+      const f=formatNow();
+      info.textContent=`雪梨 (${z}) 時間：${f.date} ${f.time}`;
+    }
+  }
   updateCounters();
-  
-  // 每秒更新
-  setInterval(updateCounters, 1000);
+  setInterval(updateCounters,1000);
+  /* === End Sydney Time === */
 });
 </script>
 
