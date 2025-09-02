@@ -168,6 +168,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // === AEST 時間重寫（移除原本 UTC + 人工位移寫法） ===
+const parseDateAEST = (dateStr) => {
+  const [datePart, timePart = "00:00"] = dateStr.split(" ");
+  const [day, month, year] = datePart.split('/').map(Number);
+  const [hh, mm] = timePart.split(':').map(Number);
+  return Date.UTC(year, month - 1, day, (hh ?? 0) - 10, (mm ?? 0), 0);
+};
+
+const timeSince = (dateStr) => {
+  const startUTC = parseDateAEST(dateStr);
+  const nowUTC = Date.now();
+  let diff = nowUTC - startUTC;
+  if (diff < 0) diff = 0;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+  return { days, hours, minutes, seconds };
+};
+
+const getSydneyNow = () =>
+  new Date(new Date().toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+
+const formatSydneyDateTime = () => {
+  const now = getSydneyNow();
+  const Y = now.getFullYear();
+  const M = String(now.getMonth() + 1).padStart(2,'0');
+  const D = String(now.getDate()).padStart(2,'0');
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  return { date: `${D}/${M}/${Y}`, time: `${h}:${m}:${s}` };
+};
+
+const updateCounters = () => {
+  timelineData.forEach(item => {
+    const t = timeSince(item.date);
+    const counter = document.getElementById(item.id + 'Counter');
+    if (!counter) return;
+    const dEl = counter.querySelector('.tl-days');
+    const timeEl = counter.querySelector('.tl-time');
+    if (dEl) dEl.textContent = t.days;
+    if (timeEl) timeEl.textContent =
+      `${String(t.hours).padStart(2,'0')}:${String(t.minutes).padStart(2,'0')}:${String(t.seconds).padStart(2,'0')}`;
+  });
+  const info = document.getElementById('timeInfo');
+  if (info) {
+    const ft = formatSydneyDateTime();
+    info.textContent = `雪梨 (AEST) 時間：${ft.date} ${ft.time}`;
+  }
+};
+
+updateCounters();
+setInterval(updateCounters, 1000);
+  
   // 計算時間
   const MEL_TIMEZONE = 10; // UTC+10
   const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
@@ -186,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
   };
   
-  const timeSince = (dateStr) => {
+  const timeSinceOld = (dateStr) => {
     const startDate = parseDate(dateStr);
     const now = getMelbourneTime();
     
@@ -205,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // 更新計數器 (只替換 timeInfo 文字內容)
-  const updateCounters = () => {
+  const updateCountersOld = () => {
     timelineData.forEach(item => {
-      const time = timeSince(item.date);
+      const time = timeSinceOld(item.date);
       const counter = document.getElementById(`${item.id}Counter`);
       if (counter) {
         const daysEl = counter.querySelector('.tl-days');

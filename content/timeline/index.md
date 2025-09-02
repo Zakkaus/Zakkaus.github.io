@@ -168,59 +168,60 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Time calculations
-  const MEL_TIMEZONE = 10; // UTC+10
-  const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
-  
-  const getMelbourneTime = () => {
-    return new Date(Date.now() + MEL_MS);
-  };
-  
-  const parseDate = (dateStr) => {
+  // === REPLACED: 時間計算（移除 MEL_TIMEZONE / 人工加 10 小時方案） ===
+  // 將資料中的日期字串視為 AEST (UTC+10) 的本地時間，轉換成對應 UTC 時間做差
+  const parseDateAEST = (dateStr) => {
     const [datePart, timePart = "00:00"] = dateStr.split(" ");
-    const [day, month, year] = datePart.split('/').map(n => parseInt(n));
-    const [hours, minutes] = timePart.split(':').map(n => parseInt(n));
-    
-    return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
+    const [day, month, year] = datePart.split('/').map(Number);
+    const [hh, mm] = timePart.split(':').map(Number);
+    // AEST 是 UTC+10：UTC = 本地(AEST) - 10 小時
+    return Date.UTC(year, month - 1, day, (hh ?? 0) - 10, (mm ?? 0), 0);
   };
   
   const timeSince = (dateStr) => {
-    const startDate = parseDate(dateStr);
-    const now = getMelbourneTime();
-    
-    const diff = now - startDate;
-    
-    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    
-    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
-    
+    const startUTC = parseDateAEST(dateStr);
+    const nowUTC = Date.now();
+    let diff = nowUTC - startUTC;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
     return { days, hours, minutes, seconds };
   };
   
-  // Update counters
+  // 取得當前 AEST (不考慮夏令時，固定 Australia/Sydney 時區顯示；若進入 AEDT 仍以系統自動切換顯示當地時間)
+  const getSydneyNow = () => {
+    // 利用 Intl 取得 Australia/Sydney 當地時間字串再 new Date 反序列化
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
+  };
+  
+  const formatSydneyDateTime = () => {
+    const now = getSydneyNow();
+    const Y = now.getFullYear();
+    const M = String(now.getMonth() + 1).padStart(2,'0');
+    const D = String(now.getDate()).padStart(2,'0');
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    const s = String(now.getSeconds()).padStart(2,'0');
+    return { date: `${D}/${M}/${Y}`, time: `${h}:${m}:${s}` };
+  };
+  
   const updateCounters = () => {
     timelineData.forEach(item => {
-      const time = timeSince(item.date);
+      const t = timeSince(item.date);
       const counter = document.getElementById(`${item.id}Counter`);
-      if (counter) {
-        const daysEl = counter.querySelector('.tl-days');
-        const timeEl = counter.querySelector('.tl-time');
-        
-        if (daysEl) daysEl.textContent = time.days;
-        if (timeEl) timeEl.textContent = 
-          `${String(time.hours).padStart(2, '0')}:${String(time.minutes).padStart(2, '0')}:${String(time.seconds).padStart(2, '0')}`;
-      }
+      if (!counter) return;
+      const dEl = counter.querySelector('.tl-days');
+      const timeEl = counter.querySelector('.tl-time');
+      if (dEl) dEl.textContent = t.days;
+      if (timeEl) timeEl.textContent =
+        `${String(t.hours).padStart(2,'0')}:${String(t.minutes).padStart(2,'0')}:${String(t.seconds).padStart(2,'0')}`;
     });
-    
-    const now = getMelbourneTime();
-    const dateStr = `${String(now.getUTCDate()).padStart(2,'0')}/${String(now.getUTCMonth()+1).padStart(2,'0')}/${now.getUTCFullYear()}`;
-    const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
     const info = document.getElementById('timeInfo');
-    if(info){
-      info.textContent = `Sydney time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+    if (info) {
+      const ft = formatSydneyDateTime();
+      info.textContent = `Sydney (AEST) time: ${ft.date} ${ft.time}`;
     }
   };
   
