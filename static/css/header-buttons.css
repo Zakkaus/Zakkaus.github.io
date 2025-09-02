@@ -28,7 +28,7 @@ body.dark .site-header{
 
 .site-brand a{
   font-weight:700;
-  font-size:1.22rem;          /* 原 1.18rem → 稍增，視覺更清晰 */
+  font-size:1.22rem;
   text-decoration:none;
   color:var(--hb-text,#222);
   letter-spacing:.6px;
@@ -734,7 +734,4 @@ body.dark .about-block .about-intro mark{
   align-items:center;
   gap:.45rem;
   font-weight:600;
-}
-#mobileMenu a.nav-timeline .tl-emoji{
-  transform:none;
 }

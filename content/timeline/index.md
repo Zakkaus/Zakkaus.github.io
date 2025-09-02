@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== Timeline Design - Complete Image Fix ===== */
+/* ===== Timeline Design - Perfect Image Edge Alignment ===== */
 
 /* Basic Variables & Container */
 .tl-container {
@@ -277,7 +277,7 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   flex-direction: column;
   border: 1px solid var(--tl-border-light);
   height: 100%;
-  position: relative; /* Ensure absolute positioning reference */
+  position: relative;
 }
 
 body.dark .tl-card {
@@ -290,24 +290,26 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* Image Container - Complete rebuild for top alignment */
+/* Image Container - Perfect top edge alignment */
 .tl-image {
-  position: absolute; /* Change to absolute positioning for top alignment */
-  top: 0; /* Directly stick to card top */
-  left: 0;
-  right: 0;
+  position: absolute; /* Absolute positioning for perfect alignment */
+  top: 0; /* Direct top edge alignment */
+  left: 0; /* Direct left edge alignment */
+  right: 0; /* Direct right edge alignment */
   width: 100%;
-  height: 100%; /* Change to percentage height */
+  height: 0;
+  padding-bottom: 100%; /* Maintain 1:1 ratio */
   background: #f0f0f0;
-  overflow: hidden;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Only top radius */
+  flex-shrink: 0;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Explicit top radius */
+  overflow: hidden; /* Ensure radius clipping */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* Image completely fills container */
+/* Image perfect fill */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -324,9 +326,8 @@ body.dark .tl-image {
   transform: scale(1.05);
 }
 
-/* Content area needs to make space for image */
+/* Card Content Area - Consistent with layout */
 .tl-content {
-  margin-top: 50%; /* Reserve 50% space for image */
   padding: 1rem 1.2rem;
   flex-grow: 1;
   display: flex;
@@ -336,12 +337,14 @@ body.dark .tl-image {
   background: inherit;
   position: relative;
   z-index: 1;
+  margin-top: 100%; /* Leave space for image */
 }
-.tl-content h3{
-  font-size:1rem;
-  font-weight:700;
-  margin:.0 0 .6rem;
-  color:var(--tl-accent);
+
+.tl-content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--tl-accent);
 }
 
 /* Counter */
@@ -576,7 +579,7 @@ body.dark .tl-close-btn:hover{
   }
 }
 
-/* Mobile Responsive - Side layout image positioning */
+/* Mobile Responsive - Fix mobile image position */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -592,7 +595,7 @@ body.dark .tl-close-btn:hover{
     grid-template-rows: auto;
     grid-template-areas: "image content";
     overflow: hidden;
-    position: relative;
+    position: relative; /* Ensure positioning context */
   }
   
   .tl-image {
@@ -600,19 +603,23 @@ body.dark .tl-close-btn:hover{
     top: 0;
     left: 0;
     width: 110px;
-    height: 100%; /* Fill entire card height */
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Left radius */
+    height: 110px;
+    padding-bottom: 0;
     grid-area: image;
+    flex-shrink: 0;
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Mobile left radius */
+    overflow: hidden;
   }
   
   .tl-content {
-    margin-top: 0; /* Reset margin-top for mobile */
-    margin-left: 110px; /* Make space for left image */
+    width: auto;
+    text-align: left;
     padding: 0.7rem 0.8rem;
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    text-align: left;
+    margin-top: 0; /* Mobile doesn't need margin-top */
+    margin-left: 110px; /* Leave space for left image */
   }
   
   .tl-counter{
@@ -661,11 +668,11 @@ body.dark .tl-close-btn:hover{
   
   .tl-image {
     width: 90px;
+    height: 90px;
   }
   
   .tl-content {
-    margin-left: 90px; /* Adjust left margin */
-    padding: 0.6rem 0.7rem 2.5rem 0.7rem;
+    margin-left: 90px; /* Adjust to 90px */
   }
 }
 
@@ -675,13 +682,6 @@ body.dark .tl-close-btn:hover{
   .tl-card:hover .tl-image img{transform:none;}
 }
 </style>
-    font-size:.6rem;
-    right:.4rem;
-    bottom:.4rem;
-  }
-}
-
-/* Prefers reduced motion */
 @media (prefers-reduced-motion:reduce){
   .tl-card,.tl-image img,.tl-more,.tl-close-btn,.tl-about-link{transition:none!important;}
   .tl-card:hover .tl-image img{transform:none;}
