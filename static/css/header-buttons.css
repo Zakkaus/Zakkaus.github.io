@@ -708,35 +708,33 @@ body.dark .about-block .about-intro mark{
   border-right-color:transparent !important;
 }
 
-/* === About 導覽後加入時間點 Emoji === */
-.main-nav a[href$="/about/"]{
+/* === Timeline / Days 按鈕樣式 === */
+.main-nav a.nav-timeline{
   position:relative;
-  padding-right:1.9rem; /* 預留給 emoji */
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  font-weight:700;
+  letter-spacing:.4px;
 }
-.main-nav a[href$="/about/"]::after{
-  content:"🕒";
-  position:absolute;
-  right:.55rem;
-  top:50%;
-  transform:translateY(-54%);
-  font-size:.9rem;
-  opacity:.78;
-  transition:opacity .25s,transform .25s;
-  pointer-events:none;
+.main-nav a.nav-timeline .tl-emoji{
+  line-height:1;
+  font-size:1.05em;
+  transform:translateY(-1px);
+  opacity:.92;
+  transition:transform .25s;
 }
-.main-nav a[href$="/about/"]:hover::after,
-.main-nav a[href$="/about/"]:focus-visible::after{
-  opacity:1;
-  transform:translateY(-54%) scale(1.1);
+.main-nav a.nav-timeline:hover .tl-emoji{
+  transform:translateY(-2px) rotate(-8deg);
 }
-body.dark .main-nav a[href$="/about/"]::after{opacity:.85;}
 
-/* 手機版（如隱藏主選單則不影響；若顯示仍對齊） */
-@media (max-width:900px){
-  .main-nav a[href$="/about/"]{
-    padding-right:1.7rem;
-  }
-  .main-nav a[href$="/about/"]::after{
-    right:.45rem;
-  }
+/* Mobile menu 內（cb-menu）沿用相同 class */
+#mobileMenu a.nav-timeline{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  font-weight:600;
+}
+#mobileMenu a.nav-timeline .tl-emoji{
+  transform:none;
 }
