@@ -22,9 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "Relationship",
       modalSubtitle: "Started on August 7, 2025 at 11:38am",
       modalContent: `
-        <p>We live in different countries (Australia / Taiwan) and maintain a long-distance relationship. We are both pansexual 🩷💛🩵, embracing diverse gender identities and relationship forms.</p>
-        <p>Despite being apart, we maintain daily communication and connection, sharing our lives, work, and hobbies. We support each other and respect each other's independence while planning regular meetings.</p>
-        <p>To learn more about our daily life, follow my Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>I (Zakk) and my girlfriend (Paper) live in different countries (Australia / Taiwan) and are in a long-distance relationship. We are both pansexual 🩷💛🩵. Even though we’re apart, we stay closely connected every day—sharing life, study, and work, and we also have many similar hobbies and thoughts.</p>
+        <p>We support each other and meet every few months in person. Paper plans to come to Australia to study after graduating senior high school (Year 12), and we’re looking forward to building more chapters together.</p>
+        <p>We first met in the Discord community of <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">Ceylan</a>, started chatting there, and gradually formed our bond.</p>
+        <p>For more of our daily moments, you can follow Paper’s Instagram: <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
       `,
       linkUrl: "/about/#relationship"
     },
