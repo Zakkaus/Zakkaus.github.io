@@ -572,7 +572,7 @@ body.dark .about-page .pet_info .pet-tip a:focus{
     font-size:.75rem;
     margin:.06rem .22rem .06rem 0;
   }
-  .about-page .pet-info .pet-tip{
+  .about-page .pet_info .pet-tip{
     font-size:.66rem;
     max-width:200px;
   }
@@ -660,73 +660,34 @@ body.dark .about-page .about-hero .blue-highlight strong{
 .about-page .pet-info .pet-tip a.pet-origin{
   all:unset;
   cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:.25rem;
-  padding:0 .4rem .05rem;
+  display:inline-block;
+  padding:.32rem .6rem .36rem;
   font-size:.68rem;
-  line-height:1.15;
+  line-height:1.1;
   font-weight:600;
-  color:#1d6fff;
-  background:rgba(29,111,255,.08);
-  border:1px solid rgba(29,111,255,.45);
-  border-radius:7px;
-  transition:background .18s,border-color .18s,color .18s,box-shadow .18s,transform .18s;
+  background:#1d6fff;
+  color:#fff;
+  border-radius:6px;
+  transition:background-color .18s ease-in-out;
 }
 .about-page .pet-info .pet-tip a.pet-origin:hover,
 .about-page .pet-info .pet-tip a.pet-origin:focus-visible{
-  background:#1d6fff;
+  background:#0b55d4;
+}
+body.dark .about-page .pet-info .pet-tip a.pet-origin{
+  background:#2e7fff;
   color:#fff;
-  border-color:#1d6fff;
-  box-shadow:0 0 0 3px rgba(29,111,255,.22);
-  transform:translateY(-1px);
-}
-.about-page .pet-info .pet-tip a.pet-origin:active{
-  transform:translateY(0);
-}
-body.dark .about-page .pet_info .pet-tip a.pet-origin{
-  color:#8ec4ff;
-  background:rgba(29,111,255,.16);
-  border-color:rgba(142,196,255,.55);
 }
 body.dark .about-page .pet_info .pet-tip a.pet-origin:hover,
 body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
-  background:#2e7fff;
-  color:#fff;
-  border-color:#2e7fff;
-  box-shadow:0 0 0 4px rgba(46,127,255,.38);
+  background:#1b63e6;
 }
 .about-page .pet-info .pet-tip a.pet-origin strong{
-  font-weight:600;
   background:none!important;
-  padding:0;
-  margin:0;
-  color:inherit;
-}
-
-/* 保障舊樣式不干擾 pet-origin (之前針對 .pet-tip a 的 underline 已被 all:unset 重置) */
-.about-page .pet-info .pet-tip a{
-  color:#1d6fff;
+  padding:0!important;
+  margin:0!important;
+  color:inherit!important;
   font-weight:600;
-  text-decoration:underline;
-  border-bottom:none!important; /* 移除原本 dotted 底線樣式 */
-  padding-bottom:0!important;
-  background:none!important;
-  box-shadow:none!important;
-  transition:color .16s ease-in-out;
-}
-.about-page .pet-info .pet-tip a:hover,
-.about-page .pet_info .pet-tip a:focus{
-  color:#0b3dff;
-  text-decoration:underline;
-  box-shadow:none;
-}
-body.dark .about-page .pet_info .pet-tip a{
-  color:#7fc8ff;
-}
-body.dark .about-page .pet-info .pet-tip a:hover,
-body.dark .about-page .pet_info .pet-tip a:focus{
-  color:#bfe9ff;
 }
 </style>
 

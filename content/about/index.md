@@ -407,7 +407,7 @@ body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
 body.dark .about-page .pet-info .pet-tip a{
   color:#7fc8ff;
 }
-body.dark .about-page .pet-info .pet-tip a:hover,
+body.dark .about-page .pet_info .pet-tip a:hover,
 body.dark .about-page .pet_info .pet-tip a:focus{
   color:#bfe9ff;
 }
@@ -503,48 +503,34 @@ body.dark .about-page .about-hero a.blue-highlight{
 .about-page .pet-info .pet-tip a.pet-origin{
   all:unset;
   cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:.25rem;
-  padding:0 .4rem .05rem;
+  display:inline-block;
+  padding:.32rem .6rem .36rem;
   font-size:.68rem;
-  line-height:1.15;
+  line-height:1.1;
   font-weight:600;
-  color:#1d6fff;
-  background:rgba(29,111,255,.08);
-  border:1px solid rgba(29,111,255,.45);
-  border-radius:7px;
-  transition:background .18s,border-color .18s,color .18s,box-shadow .18s,transform .18s;
+  background:#1d6fff;
+  color:#fff;
+  border-radius:6px;
+  transition:background-color .18s ease-in-out;
 }
 .about-page .pet-info .pet-tip a.pet-origin:hover,
 .about-page .pet-info .pet-tip a.pet-origin:focus-visible{
-  background:#1d6fff;
-  color:#fff;
-  border-color:#1d6fff;
-  box-shadow:0 0 0 3px rgba(29,111,255,.22);
-  transform:translateY(-1px);
+  background:#0b55d4;
 }
-.about-page .pet-info .pet-tip a.pet-origin:active{
-  transform:translateY(0);
-}
-body.dark .about-page .pet_info .pet-tip a.pet-origin{
-  color:#8ec4ff;
-  background:rgba(29,111,255,.16);
-  border-color:rgba(142,196,255,.55);
-}
-body.dark .about-page .pet_info .pet-tip a.pet-origin:hover,
-body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
+body.dark .about-page .pet-info .pet-tip a.pet-origin{
   background:#2e7fff;
   color:#fff;
-  border-color:#2e7fff;
-  box-shadow:0 0 0 4px rgba(46,127,255,.38);
+}
+body.dark .about-page .pet-info .pet-tip a.pet-origin:hover,
+body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
+  background:#1b63e6;
 }
 .about-page .pet-info .pet-tip a.pet-origin strong{
-  font-weight:600;
   background:none!important;
-  padding:0;
-  margin:0;
-  color:inherit;
+  padding:0!important;
+  margin:0!important;
+  color:inherit!important;
+  font-weight:600;
 }
 </style>
 
