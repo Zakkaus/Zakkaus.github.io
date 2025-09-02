@@ -290,26 +290,24 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 完全重構確保圖片貼合頂部邊緣 */
+/* 圖片容器 - 簡化為向上移動圖片 */
 .tl-image {
-  position: absolute; /* 改為絕對定位 */
-  top: 0; /* 直接貼合頂部 */
-  left: 0; /* 直接貼合左側 */
-  right: 0; /* 直接貼合右側 */
+  position: relative;
   width: 100%;
   height: 0;
   padding-bottom: 100%; /* 保持1:1比例 */
   background: #f0f0f0;
   flex-shrink: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 明確設定上圓角 */
-  overflow: hidden; /* 確保圓角裁切 */
+  margin-top: -10px; /* 向上移動10px */
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
+  overflow: hidden;
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* 圖片絕對定位完美填充 */
+/* 圖片填充 */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -326,7 +324,7 @@ body.dark .tl-image {
   transform: scale(1.05);
 }
 
-/* 卡片內容區 - 調整為與英文版一致 */
+/* 卡片內容區 - 恢復正常布局 */
 .tl-content {
   padding: 1rem 1.2rem;
   flex-grow: 1;
@@ -337,7 +335,7 @@ body.dark .tl-image {
   background: inherit;
   position: relative;
   z-index: 1;
-  margin-top: 100%; /* 為圖片留出空間 */
+  margin-top: -5px; /* 稍微向上移動減少間隙 */
 }
 
 .tl-content h3 {
@@ -638,7 +636,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機響應式設計 - 修復手機版圖片位置 */
+/* 手機響應式設計 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -658,15 +656,14 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    position: absolute; /* 手機版也用絕對定位 */
-    top: 0;
-    left: 0;
     width: 110px;
     height: 110px;
     padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* 手機版左圓角 */
+    margin-top: -5px; /* 手機版向上移動5px */
+    margin-left: -5px; /* 手機版向左移動5px */
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     overflow: hidden;
   }
   
@@ -678,7 +675,7 @@ body.dark .tl-close-btn:hover {
     position: relative;
     grid-area: content;
     margin-top: 0; /* 手機版不需要margin-top */
-    margin-left: 110px; /* 為左側圖片留出空間 */
+    margin-left: 0;
   }
   
   .tl-counter {
@@ -734,10 +731,12 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 90px;
     height: 90px;
+    margin-top: -5px;
+    margin-left: -5px;
   }
   
   .tl-content {
-    margin-left: 90px; /* 調整為90px */
+    margin-left: 0; /* 調整為0 */
   }
   
   .tl-days {

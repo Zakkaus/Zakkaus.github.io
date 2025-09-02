@@ -1,5 +1,5 @@
 baseURL = "https://zakk.au/"
-title = "Zakk's Blog"
+title = "Zakk"
 theme = "PaperMod"
 canonifyURLs = true
 
@@ -56,14 +56,14 @@ defaultContentLanguageInSubdir = false
     languageName = "English"
     languageCode = "en"
     weight = 1
-    title = "Zakk's Blog"
+    title = "Zakk"
     contentDir = "content"
 
   [languages.zh-hant]
     languageName = "漢語"
     languageCode = "zh-Hant"
     weight = 2
-    title = "Zakk 的部落格"
+    title = "Zakk"
     contentDir = "content/zh-hant"
     [languages.zh-hant.params.profileMode]
       enabled = true
