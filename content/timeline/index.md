@@ -661,16 +661,16 @@ body.dark .tl-close-btn:hover {
   .tl-content {
     width: auto;
     text-align: left;
-    padding: 0.5rem 0.8rem; /* Reduce from 0.7rem to 0.5rem, move up */
+    padding: 0.6rem 0.8rem; /* Adjust back from 0.5rem to 0.6rem */
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    margin-top: -5px; /* Add negative margin, move further up */
+    margin-top: -2px; /* Reduce from -5px to -2px, leave more gap */
     margin-left: 0;
   }
   
   .tl-content h3 {
-    margin-top: -5px; /* Move title up */
+    margin-top: -2px; /* Reduce from -5px to -2px */
     margin-bottom: 0.4rem;
   }
   
@@ -678,12 +678,12 @@ body.dark .tl-close-btn:hover {
     display: flex;
     align-items: flex-end;
     gap: 0.5rem;
-    margin-bottom: 0.1rem; /* Reduce from 0.3rem to 0.1rem */
+    margin-bottom: 0.2rem; /* Increase from 0.1rem to 0.2rem */
   }
   
   .tl-meta {
     font-size: 0.65rem;
-    margin-top: 0.1rem; /* Reduce from 0.2rem to 0.1rem */
+    margin-top: 0.15rem; /* Increase from 0.1rem to 0.15rem */
   }
   
   .tl-more {
@@ -715,7 +715,7 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 90px;
-    height: 105px; /* Increase from 90px to 105px, extend downward */
+    height: 105px;
     margin-top: -15px;
     margin-left: -5px;
   }
@@ -725,13 +725,13 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    padding: 0.4rem 0.7rem 2.5rem 0.7rem; /* Reduce from 0.6rem to 0.4rem */
-    margin-top: -5px; /* Add negative margin */
+    padding: 0.5rem 0.7rem 2.5rem 0.7rem; /* Adjust back from 0.4rem to 0.5rem */
+    margin-top: -2px; /* Reduce from -5px to -2px */
   }
   
   .tl-content h3 {
     font-size: 0.9rem;
-    margin-top: -5px; /* Move title up */
+    margin-top: -2px; /* Reduce from -5px to -2px */
     margin-bottom: 0.4rem;
   }
   

@@ -670,16 +670,16 @@ body.dark .tl-close-btn:hover {
   .tl-content {
     width: auto;
     text-align: left;
-    padding: 0.5rem 0.8rem; /* 從 0.7rem 減少到 0.5rem，向上移動 */
+    padding: 0.6rem 0.8rem; /* 從 0.5rem 調整回 0.6rem */
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    margin-top: -5px; /* 新增負邊距，進一步向上移動 */
+    margin-top: -2px; /* 從 -5px 減少到 -2px，留更多空隙 */
     margin-left: 0;
   }
   
   .tl-content h3 {
-    margin-top: -5px; /* 標題向上移動 */
+    margin-top: -2px; /* 從 -5px 減少到 -2px */
     margin-bottom: 0.4rem;
   }
   
@@ -687,12 +687,12 @@ body.dark .tl-close-btn:hover {
     display: flex;
     align-items: flex-end;
     gap: 0.5rem;
-    margin-bottom: 0.1rem; /* 從 0.3rem 減少到 0.1rem */
+    margin-bottom: 0.2rem; /* 從 0.1rem 增加到 0.2rem */
   }
   
   .tl-meta {
     font-size: 0.65rem;
-    margin-top: 0.1rem; /* 從 0.2rem 減少到 0.1rem */
+    margin-top: 0.15rem; /* 從 0.1rem 增加到 0.15rem */
   }
   
   /* 修復手機版按鈕 */
@@ -731,13 +731,13 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    padding: 0.4rem 0.7rem 2.5rem 0.7rem; /* 從 0.6rem 減少到 0.4rem */
-    margin-top: -5px; /* 新增負邊距 */
+    padding: 0.5rem 0.7rem 2.5rem 0.7rem; /* 從 0.4rem 調整回 0.5rem */
+    margin-top: -2px; /* 從 -5px 減少到 -2px */
   }
   
   .tl-content h3 {
     font-size: 0.9rem;
-    margin-top: -5px; /* 標題向上移動 */
+    margin-top: -2px; /* 從 -5px 減少到 -2px */
     margin-bottom: 0.4rem;
   }
   
