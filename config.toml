@@ -17,11 +17,12 @@
 
 [params.assets]
 # PaperMod 會依此輸出 <link rel="icon"> / PWA / pinned tab 等標籤
-favicon          = "favicon.ico"     # 主流瀏覽器優先抓 .ico
-favicon16x16     = "favicon-16x16.png"
-favicon32x32     = "favicon-32x32.png"
-apple_touch_icon = "apple-touch-icon.png"
-safari_pinned_tab = "favicon.svg"    # Safari pinned
-favicon_svg      = "favicon.svg"     # 方便未來檢查
-
-# 若已存在其它鍵，保持；以上鍵缺哪個就補哪個。
+favicon          = "favicon.svg"
+favicon16x16     = "favicon.svg"
+favicon32x32     = "favicon.svg"
+apple_touch_icon = "favicon.svg"
+safari_pinned_tab = "favicon.svg"
+# 若將來補 PNG / ICO，再替換為對應檔：
+# favicon16x16 = "favicon-16x16.png"
+# favicon32x32 = "favicon-32x32.png"
+# favicon = "favicon.ico"
