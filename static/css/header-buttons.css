@@ -922,3 +922,61 @@ body.dark #mobileMenu .cb-btn.active {
     border-radius:12px;
   }
 }
+
+/* === About 聯絡方式膠囊統一 (中 / 英同步) === */
+.about-page .about-contacts li {
+  /* 統一垂直間距（避免語系差異） */
+  padding: .40rem 0 .40rem 0 !important;
+  line-height: 1.45;
+}
+
+.about-page .about-contacts a {
+  /* 統一膠囊尺寸 / 內距 / 圓角 / 字級 */
+  display:inline-block;
+  padding:.46rem .95rem .50rem !important;
+  border-radius:16px !important;
+  font-size:.72rem !important;
+  font-weight:700 !important;
+  letter-spacing:.35px;
+  background:rgba(225,48,108,.14) !important;
+  color:var(--about-accent,#e1306c) !important;
+  line-height:1 !important;
+  transition:background .22s,color .22s,box-shadow .22s;
+}
+
+body.dark .about-page .about-contacts a {
+  background:rgba(225,48,108,.30) !important;
+  color:#ff8fb7 !important;
+}
+
+.about-page .about-contacts a:hover {
+  background:var(--about-accent,#e1306c) !important;
+  color:#fff !important;
+  box-shadow:0 4px 12px -5px rgba(225,48,108,.55);
+}
+
+body.dark .about-page .about-contacts a:hover {
+  box-shadow:0 5px 15px -6px rgba(225,48,108,.65);
+}
+
+/* 保險：移除語系特殊覆寫造成的差異 */
+html[lang="en"] .about-page .about-contacts a,
+html[lang="zh-hant"] .about-page .about-contacts a {
+  font-size:.72rem !important;
+  padding:.46rem .95rem .50rem !important;
+  border-radius:16px !important;
+}
+
+/* 行動版微調：稍微縮減內距避免換行 */
+@media (max-width:640px){
+  .about-page .about-contacts a{
+    padding:.42rem .80rem .46rem !important;
+    font-size:.70rem !important;
+  }
+}
+
+/* 動畫減少偏好 */
+@media (prefers-reduced-motion:reduce){
+  .about-page .about-contacts a{transition:none!important;box-shadow:none!important;}
+}
+/* === End About 聯絡方式膠囊統一 === */
