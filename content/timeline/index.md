@@ -361,7 +361,7 @@ body.dark .tl-image {
 .tl-meta {
   font-size: 0.7rem;
   opacity: 0.7;
-  margin-top: 0.4rem;
+  margin-top: 0.2rem; /* 從 0.4rem 減少到 0.2rem */
 }
 
 /* Learn More Button */
@@ -683,7 +683,7 @@ body.dark .tl-close-btn:hover {
   
   .tl-meta {
     font-size: 0.65rem;
-    margin-top: 0.1rem; /* 從 0.15rem 減少到 0.1rem */
+    margin-top: 0.05rem; /* 從 0.1rem 減少到 0.05rem */
   }
   
   .tl-more {
