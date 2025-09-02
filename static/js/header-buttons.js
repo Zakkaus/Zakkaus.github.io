@@ -117,52 +117,53 @@
   document.addEventListener('DOMContentLoaded', () => {
     const addTimelineButtons = () => {
       const createTimelineLink = (className) => {
+        const lang = (document.documentElement.lang || '').toLowerCase();
+        // 根據語言選擇正確的 timeline 路徑
+        const href = lang.startsWith('zh') ? '/zh-hant/timeline/' : '/timeline/';
         const link = document.createElement('a');
-        link.href = 'https://zakk.au/timeline/';
+        link.href = href;
         link.className = className + ' nav-timeline';
-        
-        // 檢查當前頁面是否為timeline頁面
-        const currentPath = window.location.pathname;
-        if (currentPath.includes('/timeline')) {
+
+        // 激活判斷：如果當前頁面是 timeline 則加上 active
+        const currentPath = window.location.pathname.replace(/\/$/, '');
+        const timelinePath = href.replace(/\/$/, '');
+        if (currentPath === timelinePath) {
           link.classList.add('active');
         }
-        
+
         const emoji = document.createElement('span');
         emoji.className = 'tl-emoji';
         emoji.textContent = '🕒';
-        
-        const lang = (document.documentElement.lang || '').toLowerCase();
+
         const text = lang.startsWith('zh') ? '天數' : 'Days';
-        
         link.appendChild(emoji);
         link.appendChild(document.createElement('span')).textContent = text;
-        
+
         return link;
       };
-      
-      // Desktop navigation
+
+      // 桌面導航
       const mainNav = document.querySelector('.main-nav ul');
       if (mainNav && !mainNav.querySelector('.nav-timeline')) {
         const aboutLink = [...mainNav.querySelectorAll('a')]
           .find(a => /\/about\/?$/.test(a.getAttribute('href') || '')) || mainNav.firstChild;
         const listItem = document.createElement('li');
         listItem.appendChild(createTimelineLink(''));
-        
         if (aboutLink && aboutLink.parentElement.nextSibling) {
           aboutLink.parentElement.after(listItem);
         } else {
           mainNav.appendChild(listItem);
         }
       }
-      
-      // Mobile navigation
+
+      // 手機導航
       const mobileMenu = document.querySelector('#mobileMenu.cb-menu');
       if (mobileMenu && !mobileMenu.querySelector('.nav-timeline')) {
         const timelineLink = createTimelineLink('cb-btn');
         mobileMenu.appendChild(timelineLink);
       }
     };
-    
+
     addTimelineButtons();
   });
 })();
