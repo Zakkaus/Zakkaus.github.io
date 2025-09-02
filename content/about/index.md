@@ -265,6 +265,7 @@ body.dark .about-page .about-hero a.blue-highlight{
     <p>My girlfriend <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> and I are currently long‑distance (Australia / Taiwan); we are both <strong>pansexual 🩷💛🩵</strong> and share daily life, study, work, music and thoughts. We have many aligned interests and values, naturally compatible — true <strong>soulmates</strong>. We first met in
       <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord community — <a href="/timeline/#couple" class="blue-highlight">see how long we've been together here</a>.
     </p>
+    <p>We both love sleeping, being cozy at home, and we share many aligned thoughts, past experiences, and niche interests.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main setup and contact links — feel free to connect.</p>
   </div>
 
@@ -314,6 +315,7 @@ body.dark .about-page .about-hero a.blue-highlight{
         <div class="am-section"><p>I (Zakk) and Paper live apart (Australia / Taiwan) in a long‑distance relationship; we are both <strong>pansexual 🩷💛🩵</strong>.</p></div>
         <div class="am-section"><p>We share daily life, study, work, music and ideas; aligned values & rhythm — genuine <strong>soulmates</strong>.</p></div>
         <div class="am-section"><p>We first met inside <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord; we meet every few months; Paper plans to study in Australia after high school.</p></div>
+        <div class="am-section"><p>We both love sleeping, being cozy at home, and we share many aligned thoughts, past experiences, and niche interests.</p></div>
         <div class="am-section"><p><a href="/timeline/#couple" class="blue-highlight">See how long we've been together</a> | Paper IG: <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.5</a></p></div>
       `
     },
