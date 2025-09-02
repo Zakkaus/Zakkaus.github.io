@@ -231,81 +231,81 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* 基本樣式 - 大幅減少標題間距 */
-.tl-container {
-  --tl-accent: var(--hb-active, #e1306c);
-  --tl-radius: 22px;
-  --tl-bg-light: #fff;
-  --tl-bg-dark: #2a2b2f;
-  --tl-border-light: rgba(0,0,0,0.08);
-  --tl-border-dark: rgba(255,255,255,0.15);
-  
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 0 3rem;  /* 完全移除頂部間距 */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: rgba(0, 0, 0, 0.85);
-}
+/* ---- Sync overrides (same as zh-hant version) ---- */
+.tl-container { padding-top: 0 !important; }
+.tl-grid { margin-top: .25rem !important; }
 
-body.dark .tl-container {
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* 網格布局 - 最小間距 */
-.tl-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.8rem;
-  margin-bottom: 1.5rem;
-  justify-content: center;
-  margin-top: 0;  /* 完全移除頂部間距 */
-}
-
-@media (max-width: 1080px) {
-  .tl-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .tl-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0 0.5rem;
-    margin-top: 0;  /* 手機版也移除頂部間距 */
-  }
-  
-  .tl-card {
-    max-width: none;
-    width: 100%;
-  }
-}
-
-/* 卡片樣式 - 徹底解決薄膜問題 */
 .tl-card {
-  position: relative;
-  background: transparent;  /* 先設為透明 */
-  border: none;  /* 移除邊框避免薄膜 */
+  background: var(--tl-bg-light) !important;
+  border: 1px solid var(--tl-border-light) !important;
   border-radius: var(--tl-radius);
-  overflow: hidden;
-  padding-bottom: 3rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);  /* 極簡陰影 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  box-shadow: 0 6px 18px -6px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin: 0 auto;
+  padding-bottom: 3rem;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow .25s, transform .25s;
+}
+body.dark .tl-card {
+  background: var(--tl-bg-dark) !important;
+  border-color: var(--tl-border-dark) !important;
+  box-shadow: 0 8px 26px -8px rgba(0,0,0,0.55);
+}
+.tl-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px -8px rgba(0,0,0,0.22); }
+.tl-card::before { display: none !important; }
+
+.tl-image {
+  aspect-ratio: 16/10;
   width: 100%;
+  background: #eee;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+}
+body.dark .tl-image { background: #444; }
+.tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
+
+.tl-image img {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform: none !important;
+  transition: transform .35s ease;
+}
+.tl-card:hover .tl-image img { transform: scale(1.045); }
+
+.tl-content {
+  flex: 1 1 auto;
+  background: transparent;
+  border: none;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+}
+body.dark .tl-content { background: transparent; }
+
+.tl-more { border-top: 1px solid rgba(0,0,0,0.06); }
+body.dark .tl-more { border-top: 1px solid rgba(255,255,255,0.15); }
+
+@media (max-width: 480px) {
+  .tl-card { display: flex; padding-bottom: 3rem; }
+  .tl-image { aspect-ratio: 16/10; width:100%; }
+  .tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
+  .tl-content { text-align: center; padding: 1rem 1rem; }
+  .tl-more { font-size: .7rem; }
 }
 
-.tl-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+@media (max-width: 360px) {
+  .tl-days { font-size: 2.2rem; }
+  .tl-content h3 { font-size: .95rem; }
+}
+/* ---- End overrides ---- */
+</style>
   bottom: 0;
   background: var(--tl-bg-light);
   border-radius: var(--tl-radius);

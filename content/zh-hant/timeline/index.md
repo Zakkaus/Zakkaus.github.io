@@ -231,797 +231,106 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* 基本樣式 - 大幅減少標題間距 */
-.tl-container {
-  --tl-accent: var(--hb-active, #e1306c);
-  --tl-radius: 22px;
-  --tl-bg-light: #fff;
-  --tl-bg-dark: #2a2b2f;
-  --tl-border-light: rgba(0,0,0,0.08);
-  --tl-border-dark: rgba(255,255,255,0.15);
-  
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 0 3rem;  /* 完全移除頂部間距 */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: rgba(0, 0, 0, 0.85);
-}
+/* ---- 覆寫開始：同步修正卡片 / 圖片 / 間距 ---- */
 
-body.dark .tl-container {
-  color: rgba(255, 255, 255, 0.85);
-}
+/* 1. 標題與卡片距離（再壓縮） */
+.tl-container { padding-top: 0 !important; }
+.tl-grid { margin-top: .25rem !important; }
 
-/* 網格布局 - 最小間距 */
-.tl-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.8rem;
-  margin-bottom: 1.5rem;
-  justify-content: center;
-  margin-top: 0;  /* 完全移除頂部間距 */
-}
-
-@media (max-width: 1080px) {
-  .tl-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .tl-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0 0.5rem;
-    margin-top: 0.3rem;  /* 手機版最小間距 */
-  }
-  
-  .tl-card {
-    max-width: none;
-    width: 100%;
-  }
-}
-
-/* 卡片樣式 - 徹底解決薄膜問題 */
+/* 2. 單層乾淨卡片（移除 ::before 疊層 & 透明背景） */
 .tl-card {
-  position: relative;
-  background: transparent;  /* 先設為透明 */
-  border: none;  /* 移除邊框避免薄膜 */
+  background: var(--tl-bg-light) !important;
+  border: 1px solid var(--tl-border-light) !important;
   border-radius: var(--tl-radius);
-  overflow: hidden;
-  padding-bottom: 3rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);  /* 極簡陰影 */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  box-shadow: 0 6px 18px -6px rgba(0,0,0,0.15);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  margin: 0 auto;
-  width: 100%;
+  padding-bottom: 3rem; /* 為底部按鈕預留空間 */
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow .25s, transform .25s;
 }
-
-.tl-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--tl-bg-light);
-  border-radius: var(--tl-radius);
-  z-index: -1;
-  border: 1px solid var(--tl-border-light);
+body.dark .tl-card {
+  background: var(--tl-bg-dark) !important;
+  border-color: var(--tl-border-dark) !important;
+  box-shadow: 0 8px 26px -8px rgba(0,0,0,0.55);
 }
-
-body.dark .tl-card::before {
-  background: var(--tl-bg-dark);
-  border-color: var(--tl-border-dark);
-}
-
 .tl-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 32px -8px rgba(0,0,0,0.22);
 }
-
-/* 卡片圖片 - 完全覆蓋頂部，無邊緣 */
-.tl-image {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  height: auto;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  background: #000;
-  border-radius: 0;                 /* 交由卡片本身控制圓角 */
-}
-
-.tl-card:first-child .tl-image,
-.tl-image { /* 讓圖片直接使用卡片頂部圓角 */
-  /* 上圓角繼承卡片：包一層即可直接隱藏邊緣 */
-  border-top-left-radius: var(--tl-radius);
-  border-top-right-radius: var(--tl-radius);
-}
-
-.tl-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  transform: none !important;
-}
-
-/* Hover 僅微縮放不改定位 */
-.tl-card:hover .tl-image img {
-  transform: scale(1.04) !important;
-  transition: transform .35s ease;
-}
-
-/* 內容區加邊框（避免圖片上方殘影 & 分層更乾淨） */
-.tl-content {
-  background: var(--tl-bg-light);
-  border: 1px solid var(--tl-border-light);
-  border-top: none;
-}
-
-body.dark .tl-content {
-  background: var(--tl-bg-dark);
-  border: 1px solid var(--tl-border-dark);
-  border-top: none;
-}
-
-/* 計時器樣式 */
-.tl-counter {
-  margin-bottom: 0.6rem;
-}
-
-.tl-days {
-  font-size: 2.8rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 0.3rem;
-  color: var(--tl-accent);
-}
-
-.tl-time {
-  font-size: 0.85rem;
-  font-family: monospace;
-  letter-spacing: 0.03rem;
-  opacity: 0.8;
-  font-weight: 600;
-}
-
-.tl-meta {
-  font-size: 0.7rem;
-  opacity: 0.7;
-}
-
-/* 更多按鈕 */
-.tl-more {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #f5f5f7;
-  color: #333;
-  border: none;
-  padding: 0.7rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.tl-more:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
-body.dark .tl-more {
-  background: #3a3c42;
-  color: #ddd;
-}
-
-body.dark .tl-more:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
-/* 頁腳與時區備註 - 靠左對齊 */
-.tl-footer {
-  text-align: left;
-  padding: 0;
-  overflow: hidden;
-}
-
-.tl-note {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  padding-left: 0.8rem;
-  border-left: 4px solid var(--tl-accent);
-  margin: 0;
-  font-weight: 500;
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 480px) {
-  .tl-note {
-    white-space: normal;
-    font-size: 0.65rem;
-  }
-}
-
-/* 模態框樣式 - 修復白色薄膜問題 */
-.tl-modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 9999;
-  backdrop-filter: blur(5px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s;
-}
-
-.tl-modal-backdrop.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.tl-modal {
-  background: #fff;
-  width: 100%;
-  max-width: 540px;
-  border-radius: 16px;
-  padding: 1.5rem;
-  position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
-  max-height: 80vh;
-  overflow-y: auto;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-body.dark .tl-modal {
-  background: #2a2b2f;
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
-}
-
-/* 模態框標題 */
-.tl-modal-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--tl-accent);
-  margin-bottom: 0.3rem;
-}
-
-body.dark .tl-modal-title {
-  color: #ff8fb7;
-}
-
-.tl-modal-subtitle {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-/* 模態框內容 */
-.tl-modal-body {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.tl-modal-body p {
-  margin-bottom: 1rem;
-}
-
-/* 強調可點擊連結 */
-.tl-highlight-link {
-  color: var(--tl-accent);
-  text-decoration: none;
-  font-weight: 700;
-  border-bottom: 2px solid var(--tl-accent);
-  padding-bottom: 1px;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.tl-highlight-link:hover {
-  background-color: var(--tl-accent);
-  color: white;
-  border-color: transparent;
-}
-
-.tl-modal-body a {
-  color: var(--tl-accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
-}
-
-.tl-modal-body a:hover {
-  border-color: var(--tl-accent);
-}
-
-/* 模態框按鈕 */
-.tl-modal-footer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.tl-btn {
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.tl-about-link {
-  background: #f0f0f2;
-  color: #333;
-  text-decoration: none;
-}
-
-.tl-about-link:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
-.tl-close-btn-alt {
-  background: rgba(0,0,0,0.05);
-  color: #666;
-  border: none;
-}
-
-.tl-close-btn-alt:hover {
-  background: #f44336;
-  color: white;
-}
-
-body.dark .tl-close-btn-alt {
-  background: rgba(255,255,255,0.1);
-  color: #ddd;
-}
-
-.tl-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #666;
-  transition: background 0.2s;
-}
-
-.tl-close-btn:hover {
-  background: rgba(0,0,0,0.05);
-}
-
-body.dark .tl-close-btn {
-  color: #bbb;
-}
-
-body.dark .tl-close-btn:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-/* 手機適配 - 修復小螢幕圖片邊緣問題 */
-@media (max-width: 480px) {
-  .tl-grid {
-    gap: 1rem;
-    padding: 0;
-    margin-top: 0;  /* 手機版也移除頂部間距 */
-  }
-  
-  .tl-card {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    padding-bottom: 0;
-    max-height: none;
-    height: auto;
-    border-radius: var(--tl-radius);
-  }
-  
-  .tl-image {
-    width: 120px;
-    aspect-ratio: 1 / 1;
-    border-top-left-radius: var(--tl-radius);
-    border-top-right-radius: 0;
-    border-bottom-left-radius: var(--tl-radius);
-    border-bottom-right-radius: 0;
-  }
-  
-  .tl-content {
-    border-top: 1px solid var(--tl-border-light);
-    border-left: none;
-    border-bottom-right-radius: var(--tl-radius);
-    border-top-left-radius: 0;
-  }
-  
-  body.dark .tl-content {
-    border-top: 1px solid var(--tl-border-dark);
-  }
-}
-
-/* === 修復區開始 === */
-
-/* 1) 標題與卡片距離壓縮 */
-.single .post-content > #timelineContainer,
-#timelineContainer {
-  margin-top: .4rem !important;
-}
-.tl-container { padding-top: 0 !important; margin-top: 0 !important; }
-.tl-grid { margin-top: .4rem !important; }
-
-/* 2) 去除白色薄膜 & 回復乾淨卡片背景 */
-.tl-card {
-  background-color: var(--tl-bg-light) !important;
-  border: none !important;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
-  overflow: hidden;
-  position: relative;
-}
+/* 移除之前的 .tl-card::before (請刪除舊定義) */
 .tl-card::before { display: none !important; }
-body.dark .tl-card {
-  background-color: var(--tl-bg-dark) !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.38) !important;
-}
 
-/* 3) 圖片完全貼頂覆蓋（移除殘留邊緣 & 不再漂移） */
+/* 3. 圖片裁切：完全貼頂 + 自動放大居中，不出現黑邊/殘留圓角 */
 .tl-image {
+  aspect-ratio: 16/10;
   width: 100%;
-  aspect-ratio: 16 / 9;
   height: auto;
   position: relative;
-  margin: 0;
-  padding: 0;
-  background: #000;
-  border-radius: 0;                 /* 交由卡片本身控制圓角 */
+  background: #eee;
+  border-radius: 0; /* 由卡片控制上圓角 */
 }
-
-.tl-card:first-child .tl-image,
-.tl-image { /* 讓圖片直接使用卡片頂部圓角 */
-  /* 上圓角繼承卡片：包一層即可直接隱藏邊緣 */
-  border-top-left-radius: var(--tl-radius);
-  border-top-right-radius: var(--tl-radius);
-}
+body.dark .tl-image { background: #444; }
 
 .tl-image img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
-  object-position: center;
+  object-fit: cover;          /* 放大覆蓋裁切 */
+  object-position: 50% 50%;   /* 垂直水平居中 */
   transform: none !important;
-}
-
-/* Hover 僅微縮放不改定位 */
-.tl-card:hover .tl-image img {
-  transform: scale(1.04) !important;
   transition: transform .35s ease;
 }
 
-/* 內容區加邊框（避免圖片上方殘影 & 分層更乾淨） */
+.tl-card:hover .tl-image img { transform: scale(1.045); }
+
+/* 讓卡片上圓角直接作用於圖片 */
+.tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
+
+/* 4. 內容區填滿剩餘高度 */
 .tl-content {
-  background: var(--tl-bg-light);
-  border: 1px solid var(--tl-border-light);
-  border-top: none;
+  flex: 1 1 auto;
+  background: transparent; /* 不再單獨加邊框，避免層次裂縫 */
+  border: none;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
 }
+body.dark .tl-content { background: transparent; }
 
-body.dark .tl-content {
-  background: var(--tl-bg-dark);
-  border: 1px solid var(--tl-border-dark);
-  border-top: none;
-}
-
-/* 計時器樣式 */
-.tl-counter {
-  margin-bottom: 0.6rem;
-}
-
-.tl-days {
-  font-size: 2.8rem;
-  font-weight: 800;
-  line-height: 1;
-  margin-bottom: 0.3rem;
-  color: var(--tl-accent);
-}
-
-.tl-time {
-  font-size: 0.85rem;
-  font-family: monospace;
-  letter-spacing: 0.03rem;
-  opacity: 0.8;
-  font-weight: 600;
-}
-
-.tl-meta {
-  font-size: 0.7rem;
-  opacity: 0.7;
-}
-
-/* 更多按鈕 */
+/* 5. 更多按鈕與底部銜接 */
 .tl-more {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #f5f5f7;
-  color: #333;
-  border: none;
-  padding: 0.7rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
-
-.tl-more:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
 body.dark .tl-more {
-  background: #3a3c42;
-  color: #ddd;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
 
-body.dark .tl-more:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
-/* 頁腳與時區備註 - 靠左對齊 */
-.tl-footer {
-  text-align: left;
-  padding: 0;
-  overflow: hidden;
-}
-
-.tl-note {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  padding-left: 0.8rem;
-  border-left: 4px solid var(--tl-accent);
-  margin: 0;
-  font-weight: 500;
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+/* 6. 手機版橫排時圖片仍需正確裁切（覆寫舊的方形分割樣式） */
 @media (max-width: 480px) {
-  .tl-note {
-    white-space: normal;
-    font-size: 0.65rem;
-  }
-}
-
-/* 模態框樣式 - 修復白色薄膜問題 */
-.tl-modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 9999;
-  backdrop-filter: blur(5px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s;
-}
-
-.tl-modal-backdrop.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.tl-modal {
-  background: #fff;
-  width: 100%;
-  max-width: 540px;
-  border-radius: 16px;
-  padding: 1.5rem;
-  position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
-  max-height: 80vh;
-  overflow-y: auto;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-body.dark .tl-modal {
-  background: #2a2b2f;
-  color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
-}
-
-/* 模態框標題 */
-.tl-modal-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--tl-accent);
-  margin-bottom: 0.3rem;
-}
-
-body.dark .tl-modal-title {
-  color: #ff8fb7;
-}
-
-.tl-modal-subtitle {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-/* 模態框內容 */
-.tl-modal-body {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.tl-modal-body p {
-  margin-bottom: 1rem;
-}
-
-/* 強調可點擊連結 */
-.tl-highlight-link {
-  color: var(--tl-accent);
-  text-decoration: none;
-  font-weight: 700;
-  border-bottom: 2px solid var(--tl-accent);
-  padding-bottom: 1px;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.tl-highlight-link:hover {
-  background-color: var(--tl-accent);
-  color: white;
-  border-color: transparent;
-}
-
-.tl-modal-body a {
-  color: var(--tl-accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s;
-}
-
-.tl-modal-body a:hover {
-  border-color: var(--tl-accent);
-}
-
-/* 模態框按鈕 */
-.tl-modal-footer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.tl-btn {
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.tl-about-link {
-  background: #f0f0f2;
-  color: #333;
-  text-decoration: none;
-}
-
-.tl-about-link:hover {
-  background: var(--tl-accent);
-  color: white;
-}
-
-.tl-close-btn-alt {
-  background: rgba(0,0,0,0.05);
-  color: #666;
-  border: none;
-}
-
-.tl-close-btn-alt:hover {
-  background: #f44336;
-  color: white;
-}
-
-body.dark .tl-close-btn-alt {
-  background: rgba(255,255,255,0.1);
-  color: #ddd;
-}
-
-.tl-close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 32px;
-  height: 32px;
-  background: transparent;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #666;
-  transition: background 0.2s;
-}
-
-.tl-close-btn:hover {
-  background: rgba(0,0,0,0.05);
-}
-
-body.dark .tl-close-btn {
-  color: #bbb;
-}
-
-body.dark .tl-close-btn:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-/* 手機適配 - 修復小螢幕圖片邊緣問題 */
-@media (max-width: 480px) {
-  .tl-grid {
-    gap: 1rem;
-    padding: 0;
-    margin-top: 0;  /* 手機版也移除頂部間距 */
-  }
-  
   .tl-card {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    padding-bottom: 0;
-    max-height: none;
-    height: auto;
-    border-radius: var(--tl-radius);
+    display: flex;            /* 改回縱向堆疊，避免高度錯亂；若仍想橫排可再告知 */
+    padding-bottom: 3rem;
   }
-  
   .tl-image {
-    width: 120px;
-    aspect-ratio: 1 / 1;
-    border-top-left-radius: var(--tl-radius);
-    border-top-right-radius: 0;
-    border-bottom-left-radius: var(--tl-radius);
-    border-bottom-right-radius: 0;
+    aspect-ratio: 16/10;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
   }
-  
-  .tl-content {
-    border-top: 1px solid var(--tl-border-light);
-    border-left: none;
-    border-bottom-right-radius: var(--tl-radius);
-    border-top-left-radius: 0;
-  }
-  
-  body.dark .tl-content {
-    border-top: 1px solid var(--tl-border-dark);
-  }
+  .tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
+  .tl-content { text-align: center; padding: 1rem 1rem; }
+  .tl-more { font-size: .7rem; }
 }
+
+/* 7. 超小螢幕微調字級 (保留原結構即可) */
+@media (max-width: 360px) {
+  .tl-days { font-size: 2.2rem; }
+  .tl-content h3 { font-size: .95rem; }
+}
+
+/* ---- 覆寫結束 ---- */
 </style>
