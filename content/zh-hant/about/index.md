@@ -639,13 +639,25 @@ body.dark .about-page .about-hero .blue-highlight strong{
 .about-page .pet-info > strong{
   box-shadow:none!important;
 }
+
+/* === 修正：寵物名稱字體與一般文字一致，並確保藍色高亮套用 === */
+.about-page .pet-info > strong{
+  font-size:inherit!important;
+}
+
+/* === 修正：若有舊 pill 間距殘留，統一為與一般 strong 一致 === */
+.about-page .pet-info > strong.blue-highlight{
+  margin:.12rem .25rem .12rem 0!important;
+  padding:.18rem .55rem .22rem!important;
+  line-height:1.25!important;
+}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
     <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 <span class="pet-info"><strong class="blue-highlight">馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span> 與 <span class="pet-info"><strong class="blue-highlight">薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a class="blue-highlight" href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
-    <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
+    <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a class="blue-highlight" href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
