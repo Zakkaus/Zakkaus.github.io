@@ -386,6 +386,59 @@ body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
   border-radius:2px;
   opacity:.82;
 }
+
+/* === Hero 內可點擊連結專屬樣式（與一般 strong 區分） === */
+.about-page .about-hero a{
+  --hero-link-accent:var(--about-accent,#e1306c);
+  position:relative;
+  display:inline-block;
+  padding:.16rem .55rem .20rem;
+  margin:.08rem .18rem .08rem 0;
+  color:#c81352;
+  background:rgba(225,48,108,.12);
+  border-radius:9px;
+  font-weight:600;
+  text-decoration:none;
+  line-height:1.18;
+  vertical-align:baseline;
+  border:1px solid rgba(225,48,108,.28);
+  transition:background .22s,color .22s,box-shadow .22s,border-color .22s;
+}
+body.dark .about-page .about-hero a{
+  color:#ff8fb7;
+  background:rgba(225,48,108,.28);
+  border-color:rgba(225,48,108,.45);
+}
+.about-page .about-hero a:hover,
+.about-page .about-hero a:focus-visible{
+  background:var(--hero-link-accent);
+  color:#fff;
+  border-color:var(--hero-link-accent);
+  box-shadow:0 0 0 3px rgba(225,48,108,.18);
+  text-decoration:none;
+}
+body.dark .about-page .about-hero a:hover,
+body.dark .about-page .about-hero a:focus-visible{
+  box-shadow:0 0 0 3px rgba(225,48,108,.35);
+}
+.about-page .about-hero a:active{
+  transform:translateY(1px);
+}
+
+/* 連結內的 strong 去除原高亮，僅繼承顏色 */
+.about-page .about-hero a strong{
+  background:none!important;
+  padding:0!important;
+  margin:0!important;
+  border-radius:0!important;
+  color:inherit!important;
+  line-height:inherit!important;
+}
+
+/* 行動版微調間距 */
+@media (max-width:640px){
+  .about-page .about-hero a{padding:.14rem .5rem .18rem;margin:.06rem .15rem .06rem 0;}
+}
 </style>
 
 <div class="about-page">
