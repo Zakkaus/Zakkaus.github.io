@@ -290,7 +290,7 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 完全重構避免漂移和圓角問題 */
+/* 圖片容器 - 完全重構實現完美頂部覆蓋 */
 .tl-image {
   position: relative;
   width: 100%;
@@ -298,14 +298,15 @@ body.dark .tl-card {
   padding-bottom: 100%; /* 使用padding-bottom創建1:1正方形 */
   background: #f0f0f0;
   flex-shrink: 0;
-  /* 移除所有邊距和邊框半徑設定，讓父容器處理裁切 */
+  margin: -1px -1px 0 -1px; /* 關鍵：負邊距覆蓋卡片邊緣 */
+  width: calc(100% + 2px); /* 關鍵：擴展寬度覆蓋邊框 */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* 圖片絕對定位填滿容器 */
+/* 圖片絕對定位完美填充 */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -316,7 +317,6 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  /* 移除圖片自身的圓角設定，讓父容器overflow處理 */
 }
 
 .tl-card:hover .tl-image img {
@@ -658,11 +658,8 @@ body.dark .tl-close-btn:hover {
     padding-bottom: 0; /* 手機版取消padding-bottom */
     grid-area: image;
     flex-shrink: 0;
-    /* 移除手機版圓角設定，讓父容器處理 */
-  }
-  
-  .tl-image img {
-    /* 移除手機版圖片圓角，讓父容器overflow處理 */
+    margin: -1px 0 -1px -1px; /* 關鍵：手機版覆蓋左邊緣 */
+    width: calc(110px + 1px); /* 關鍵：擴展覆蓋邊框 */
   }
   
   .tl-content {
@@ -725,8 +722,7 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    width: 90px;
-    height: 90px;
+    width: calc(90px + 1px); /* 調整小尺寸 */
   }
   
   .tl-days {

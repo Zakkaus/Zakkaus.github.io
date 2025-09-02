@@ -10,20 +10,20 @@ lastmod: 2025-09-01
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 資料定義
+  // Data definitions
   const timelineData = [
     {
       id: "couple",
-      title: "Days Together",
+      title: "Together",
       date: "07/08/2025 11:38",
       image: "/images/timeline/f-avatar.webp",
-      alt: "Avatar",
-      modalTitle: "Our Relationship",
-      modalSubtitle: "Started on August 7, 2025 11:38am",
+      alt: "Girlfriend avatar",
+      modalTitle: "Relationship",
+      modalSubtitle: "Started on August 7, 2025 at 11:38am",
       modalContent: `
-        <p>We live in different countries/regions (Australia and Taiwan) and maintain a long-distance relationship. We both identify as pansexual 🩷💛🩵, embracing diverse gender identities and relationship forms.</p>
-        <p>Despite the distance, we stay connected through daily communication, sharing our lives, work, and interests. We respect each other's independence while planning regular visits.</p>
-        <p>To see more about our daily life, follow my Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>We live in different countries (Australia / Taiwan) and maintain a long-distance relationship. We are both pansexual 🩷💛🩵, embracing diverse gender identities and relationship forms.</p>
+        <p>Despite being apart, we maintain daily communication and connection, sharing our lives, work, and hobbies. We support each other and respect each other's independence while planning regular meetings.</p>
+        <p>To learn more about our daily life, follow my Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/about/#relationship"
     },
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "Hash Brown",
       modalSubtitle: "Birthday: June 24, 2025",
       modalContent: `
-        <p>Hash Brown is a purebred Teddy guinea pig with light brown fur. He's very active and energetic, loves doing parkour in his cage, and often pushes his hideout around while playing with boundless energy.</p>
-        <p>Favorite foods: red and green bell peppers (loves these the most), corn silk and carrots. He's usually active in the evening and makes squeaking sounds when asking for treats.</p>
-        <p>See more adorable photos of Hash Brown on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
+        <p>Hash Brown is a purebred Teddy guinea pig with light brown fur. She's quite active and playful, loves running laps in her cage, often pushing her house around, and is very energetic during playtime.</p>
+        <p>Favorite foods: Red and green bell peppers (absolutely loves them), corn silk, and carrots. She likes to be active in the evening and makes squeaking sounds when asking for treats.</p>
+        <p>More cute photos of Hash Brown on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
     },
@@ -51,15 +51,15 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "Potato",
       modalSubtitle: "Birthday: July 27, 2025",
       modalContent: `
-        <p>Potato is a purebred Teddy guinea pig with dark chocolate fur. He has a greedy personality and is quite brave. He often eats and plays simultaneously, sometimes pooping while eating, and occasionally even in his food bowl.</p>
-        <p>Favorite foods: red and green bell peppers, corn silk and carrots. He also enjoys sleeping in hay piles and continues eating right after waking up - a brave little glutton.</p>
-        <p>For more daily updates about Potato, check Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
+        <p>Potato is a purebred Teddy guinea pig with dark chocolate fur. She's quite food-motivated and bolder in personality. She often eats and plays at the same time, sometimes even pooping while eating, occasionally leaving droppings in her food bowl.</p>
+        <p>Favorite foods: Red and green bell peppers, corn silk, and carrots. She also likes sleeping in hay piles and continues eating after waking up - a greedy but brave little one.</p>
+        <p>More daily sharing of Potato on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
     }
   ];
   
-  // 頁面HTML
+  // Page HTML
   let html = `
   <div class="tl-container">
     <div class="tl-grid">
@@ -263,12 +263,12 @@ body.dark .tl-container{color:rgba(255,255,255,.85);}
   margin-bottom:1.25rem;
 }
 
-/* Card */
+/* Card base style - Enhanced overflow for perfect radius clipping */
 .tl-card {
   background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
   box-shadow: var(--tl-shadow);
-  overflow: hidden; /* Critical: ensure all content is clipped */
+  overflow: hidden; /* Critical: ensure perfect radius clipping */
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
@@ -288,22 +288,23 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* Image container - Complete rebuild to avoid drift and radius issues */
+/* Image container - Complete rebuild for perfect top coverage */
 .tl-image {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 100%; /* Use padding-bottom to create 1:1 square */
+  padding-bottom: 100%; /* Create 1:1 square using padding-bottom */
   background: #f0f0f0;
   flex-shrink: 0;
-  /* Remove all margin and border-radius settings, let parent handle clipping */
+  margin: -1px -1px 0 -1px; /* CRITICAL: Negative margins to cover card edges */
+  width: calc(100% + 2px); /* CRITICAL: Extend width to cover borders */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* Image absolute positioning to fill container */
+/* Image absolute positioning for perfect fill */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -314,7 +315,6 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  /* Remove image's own radius settings, let parent overflow handle */
 }
 
 .tl-card:hover .tl-image img {
@@ -596,11 +596,8 @@ body.dark .tl-close-btn:hover{
     padding-bottom: 0; /* Remove padding-bottom for mobile */
     grid-area: image;
     flex-shrink: 0;
-    /* Remove mobile radius settings, let parent handle */
-  }
-  
-  .tl-image img {
-    /* Remove mobile image radius, let parent overflow handle */
+    margin: -1px 0 -1px -1px; /* CRITICAL: Cover left edge on mobile */
+    width: calc(110px + 1px); /* CRITICAL: Extend to cover border */
   }
   
   .tl-content{
@@ -664,6 +661,9 @@ body.dark .tl-close-btn:hover{
 /* Prefers reduced motion */
 @media (prefers-reduced-motion:reduce){
   .tl-card,.tl-image img,.tl-more,.tl-close-btn,.tl-about-link{transition:none!important;}
+  .tl-card:hover .tl-image img{transform:none;}
+}
+</style>
   .tl-card:hover .tl-image img{transform:none;}
 }
 </style>
