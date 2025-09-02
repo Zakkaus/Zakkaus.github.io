@@ -219,7 +219,7 @@ body.dark .tz-note{opacity:.75;background:none!important;}
 </style>
 
 <script>
-/* === Multilingual & AEST Inclusive Day Counters === */
+/* 與 zh-hant 相同，請複製上方 zh-hant 的整段 JS */
 (function(){
   const lang=(document.documentElement.lang||'').toLowerCase();
   const t={
