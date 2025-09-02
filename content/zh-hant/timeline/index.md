@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
     const info = document.getElementById('timeInfo');
     if(info){
-      info.textContent = `墨爾本時間：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+      info.textContent = `Melbourne time：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
     }
   };
   
@@ -748,7 +748,7 @@ body.dark .tl-close-btn:hover {
     bottom: 0.4rem;
   }
 }
-
+</style>
 /* --- 圖片裁切 / 圓角 / 漂移 修復覆寫開始 --- */
 
 /* 卡片：統一用 overflow:hidden 讓上圓角直接裁圖片，不再用負邊距 */
