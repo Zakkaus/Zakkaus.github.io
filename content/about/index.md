@@ -298,12 +298,74 @@ body.dark .about-page .about-hero a:focus-visible{
 @media (prefers-reduced-motion:reduce){
   .about-page .about-hero *{transition:none!important;}
 }
+
+/* === Pet info tooltip (EN) === */
+.about-page .pet-info{
+  position:relative;
+  cursor:help;
+  display:inline-block;
+  line-height:1;
+}
+.about-page .pet-info > strong{
+  position:relative;
+  z-index:2;
+  border-bottom:1px dotted rgba(225,48,108,.65);
+  padding-bottom:1px;
+}
+body.dark .about-page .pet-info > strong{
+  border-bottom-color:rgba(225,48,108,.85);
+}
+.about-page .pet-info::after{
+  content:attr(data-tip);
+  position:absolute;
+  left:50%;
+  top:100%;
+  transform:translate(-50%,8px) scale(.92);
+  transform-origin:top center;
+  background:#fff;
+  color:#222;
+  font-weight:500;
+  font-size:.68rem;
+  line-height:1.25;
+  letter-spacing:.45px;
+  padding:.55rem .65rem .58rem;
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:10px;
+  box-shadow:0 6px 22px -8px rgba(0,0,0,.28);
+  width:max-content;
+  max-width:240px;
+  white-space:normal;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s,transform .22s;
+  backdrop-filter:blur(6px);
+  text-align:left;
+}
+body.dark .about-page .pet-info::after{
+  background:rgba(40,40,40,.95);
+  color:#eee;
+  border-color:rgba(255,255,255,.18);
+  box-shadow:0 8px 26px -10px rgba(0,0,0,.6);
+}
+.about-page .pet-info:hover::after,
+.about-page .pet-info:focus-visible::after,
+.about-page .pet-info.tip-open::after{
+  opacity:1;
+  transform:translate(-50%,6px) scale(1);
+  pointer-events:auto;
+}
+@media (max-width:640px){
+  .about-page .pet-info::after{font-size:.66rem;max-width:190px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .about-page .pet-info::after{transition:none;}
+}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
-    <p>I keep <strong>🐹 guinea pigs</strong> (names: <strong>Hash&nbsp;Brown🥔</strong> and <strong>Potato</strong><small style="opacity:.6;margin-left:.35rem;">name idea from <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></small>). I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see my guinea pigs and daily life on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
+    <p>I keep <strong>🐹 guinea pigs</strong> (names: <span class="pet-info" data-tip="Hash Brown • Birthday: 27 Jul 2025 • Breed: Purebred Teddy Guinea Pig"><strong>Hash&nbsp;Brown🥔</strong></span> and <span class="pet-info" data-tip="Potato • Birthday: 24 Jun • Breed: Purebred Teddy Guinea Pig"><strong>Potato</strong></span><small style="opacity:.6;margin-left:.35rem;">name idea from <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></small>). I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see my guinea pigs and daily life on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
   </div>
@@ -335,3 +397,28 @@ body.dark .about-page .about-hero a:focus-visible{
   <li>Email: <a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
 </ul>
 </div>
+
+<script>
+/* Pet tooltip click support (mobile) */
+(()=> {
+  const pets=document.querySelectorAll('.about-page .pet-info');
+  const closeAll=()=>pets.forEach(p=>p.classList.remove('tip-open'));
+  pets.forEach(p=>{
+    p.setAttribute('tabindex','0');
+    p.addEventListener('click',e=>{
+      e.stopPropagation();
+      const on=p.classList.contains('tip-open');
+      closeAll();
+      if(!on) p.classList.add('tip-open');
+    });
+    p.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){
+        e.preventDefault();
+        p.click();
+      }
+      if(e.key==='Escape'){closeAll();}
+    });
+  });
+  document.addEventListener('click',closeAll);
+})();
+</script>
