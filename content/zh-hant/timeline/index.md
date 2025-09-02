@@ -290,22 +290,24 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 完全重構實現完美頂部覆蓋 */
+/* 圖片容器 - 徹底重構確保頂部對齊 */
 .tl-image {
-  position: relative;
-  width: calc(100% + 4px); /* 增加寬度確保完全覆蓋 */
-  height: 0;
-  padding-bottom: calc(100% + 4px); /* 對應增加高度 */
+  position: absolute; /* 改為絕對定位直接貼頂部 */
+  top: 0; /* 直接貼著卡片頂部 */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%; /* 改為百分比高度 */
   background: #f0f0f0;
-  flex-shrink: 0;
-  margin: -2px -2px 0 -2px; /* 增加負邊距確保覆蓋 */
+  overflow: hidden;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 只要上圓角 */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* 圖片絕對定位完美填充 */
+/* 圖片完全填充容器 */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -316,15 +318,20 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  transform: scale(1.02); /* 輕微放大確保完全覆蓋 */
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.07); /* hover時進一步放大 */
+  transform: scale(1.05);
 }
 
-/* 卡片內容區 */
+/* 卡片結構調整 - 為圖片預留空間 */
+.tl-card {
+  position: relative; /* 確保絕對定位參考點 */
+}
+
+/* 內容區需要給圖片讓出空間 */
 .tl-content {
+  margin-top: 50%; /* 給圖片預留50%的空間 */
   padding: 1rem 1.2rem;
   flex-grow: 1;
   display: flex;
@@ -333,7 +340,7 @@ body.dark .tl-image {
   text-align: center;
   background: inherit;
   position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 
 .tl-content h3 {
@@ -634,7 +641,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機響應式設計 - 重構側邊圖片布局 */
+/* 手機響應式設計 - 側邊布局的圖片定位 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -649,33 +656,28 @@ body.dark .tl-close-btn:hover {
     min-height: 110px;
     grid-template-rows: auto;
     grid-template-areas: "image content";
-    overflow: hidden; /* 確保手機版圓角裁切 */
+    overflow: hidden;
+    position: relative;
   }
   
   .tl-image {
-    width: calc(110px + 4px); /* 增加手機版寬度 */
-    height: calc(110px + 4px); /* 增加手機版高度 */
-    padding-bottom: 0;
+    position: absolute; /* 手機版也用絕對定位 */
+    top: 0;
+    left: 0;
+    width: 110px;
+    height: 100%; /* 填滿整個卡片高度 */
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* 左側圓角 */
     grid-area: image;
-    flex-shrink: 0;
-    margin: -2px 0 -2px -2px; /* 增加手機版負邊距 */
-  }
-  
-  .tl-image img {
-    transform: scale(1.02); /* 手機版也輕微放大 */
-  }
-  
-  .tl-card:hover .tl-image img {
-    transform: scale(1.07); /* 手機版hover放大 */
   }
   
   .tl-content {
-    width: auto;
-    text-align: left;
+    margin-top: 0; /* 手機版重置margin-top */
+    margin-left: 110px; /* 給左側圖片讓出空間 */
     padding: 0.7rem 0.8rem;
-    padding-bottom: 2.5rem; /* 為按鈕留出空間 */
+    padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
+    text-align: left;
   }
   
   .tl-counter {
@@ -729,15 +731,11 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    width: calc(90px + 4px); /* 超小屏也增加寬度 */
-    height: calc(90px + 4px); /* 超小屏也增加高度 */
-  }
-  
-  .tl-days {
-    font-size: 1.6rem;
+    width: 90px;
   }
   
   .tl-content {
+    margin-left: 90px; /* 調整左邊距 */
     padding: 0.6rem 0.7rem 2.5rem 0.7rem;
   }
   

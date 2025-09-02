@@ -265,7 +265,7 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   margin-bottom: 1.25rem;
 }
 
-/* Card Base Style - Enhanced overflow for perfect radius clipping */
+/* Card Base Style */
 .tl-card {
   background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
@@ -277,7 +277,7 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   flex-direction: column;
   border: 1px solid var(--tl-border-light);
   height: 100%;
-  position: relative;
+  position: relative; /* Ensure absolute positioning reference */
 }
 
 body.dark .tl-card {
@@ -290,22 +290,24 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* Image Container - Complete rebuild for perfect top coverage */
+/* Image Container - Complete rebuild for top alignment */
 .tl-image {
-  position: relative;
-  width: calc(100% + 4px); /* Increase width for complete coverage */
-  height: 0;
-  padding-bottom: calc(100% + 4px); /* Corresponding height increase */
+  position: absolute; /* Change to absolute positioning for top alignment */
+  top: 0; /* Directly stick to card top */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%; /* Change to percentage height */
   background: #f0f0f0;
-  flex-shrink: 0;
-  margin: -2px -2px 0 -2px; /* Increase negative margins for coverage */
+  overflow: hidden;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Only top radius */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* Image absolute positioning for perfect fill */
+/* Image completely fills container */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -316,24 +318,24 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  transform: scale(1.02); /* Slight enlargement for complete coverage */
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.07); /* Further enlargement on hover */
+  transform: scale(1.05);
 }
 
-/* Content */
-.tl-content{
-  padding:1rem 1.2rem;
-  flex:1 1 auto;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  text-align:center;
-  background:inherit;
-  position:relative;
-  z-index:0;
+/* Content area needs to make space for image */
+.tl-content {
+  margin-top: 50%; /* Reserve 50% space for image */
+  padding: 1rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background: inherit;
+  position: relative;
+  z-index: 1;
 }
 .tl-content h3{
   font-size:1rem;
@@ -574,7 +576,7 @@ body.dark .tl-close-btn:hover{
   }
 }
 
-/* Mobile Responsive - Rebuild side image layout */
+/* Mobile Responsive - Side layout image positioning */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -590,30 +592,29 @@ body.dark .tl-close-btn:hover{
     grid-template-rows: auto;
     grid-template-areas: "image content";
     overflow: hidden;
+    position: relative;
   }
   
   .tl-image {
-    width: calc(110px + 4px); /* Increase mobile width */
-    height: calc(110px + 4px); /* Increase mobile height */
-    padding-bottom: 0;
+    position: absolute; /* Mobile also uses absolute positioning */
+    top: 0;
+    left: 0;
+    width: 110px;
+    height: 100%; /* Fill entire card height */
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Left radius */
     grid-area: image;
-    flex-shrink: 0;
-    margin: -2px 0 -2px -2px; /* Increase mobile negative margins */
   }
   
-  .tl-image img {
-    transform: scale(1.02); /* Mobile also slight enlargement */
+  .tl-content {
+    margin-top: 0; /* Reset margin-top for mobile */
+    margin-left: 110px; /* Make space for left image */
+    padding: 0.7rem 0.8rem;
+    padding-bottom: 2.5rem;
+    position: relative;
+    grid-area: content;
+    text-align: left;
   }
   
-  .tl-card:hover .tl-image img {
-    transform: scale(1.07); /* Mobile hover enlargement */
-  }
-  
-  .tl-content{
-    text-align:left;
-    padding:.7rem .8rem 2.5rem;
-    grid-area:content;
-  }
   .tl-counter{
     display:flex;
     align-items:flex-end;
@@ -659,22 +660,21 @@ body.dark .tl-close-btn:hover{
   }
   
   .tl-image {
-    width: calc(90px + 4px); /* Extra small also increase width */
-    height: calc(90px + 4px); /* Extra small also increase height */
+    width: 90px;
   }
   
-  .tl-days{
-    font-size:1.6rem;
+  .tl-content {
+    margin-left: 90px; /* Adjust left margin */
+    padding: 0.6rem 0.7rem 2.5rem 0.7rem;
   }
-  .tl-content{
-    padding:.6rem .7rem 2.5rem;
-  }
-  .tl-content h3{
-    font-size:.9rem;
-    margin-bottom:.4rem;
-  }
-  .tl-more{
-    padding:.3rem .6rem;
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .tl-card,.tl-image img,.tl-more,.tl-close-btn,.tl-about-link{transition:none!important;}
+  .tl-card:hover .tl-image img{transform:none;}
+}
+</style>
     font-size:.6rem;
     right:.4rem;
     bottom:.4rem;
