@@ -549,12 +549,12 @@ body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
   transition:color .16s ease-in-out;
 }
 .about-page .pet-info .pet-tip a:hover,
-.about-page .pet-info .pet-tip a:focus{
+.about-page .pet_info .pet-tip a:focus{
   color:#0b3dff;
   text-decoration:underline;
   box-shadow:none;
 }
-body.dark .about-page .pet-info .pet-tip a{
+body.dark .about-page .pet_info .pet-tip a{
   color:#7fc8ff;
 }
 body.dark .about-page .pet-info .pet-tip a:hover,
@@ -655,12 +655,85 @@ body.dark .about-page .about-hero .blue-highlight strong{
   padding:.18rem .55rem .22rem!important;
   line-height:1.25!important;
 }
+
+/* === Tooltip 命名靈感連結全新簡潔特效 (與其他可點擊樣式區隔) === */
+.about-page .pet-info .pet-tip a.pet-origin{
+  all:unset;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  padding:0 .4rem .05rem;
+  font-size:.68rem;
+  line-height:1.15;
+  font-weight:600;
+  color:#1d6fff;
+  background:rgba(29,111,255,.08);
+  border:1px solid rgba(29,111,255,.45);
+  border-radius:7px;
+  transition:background .18s,border-color .18s,color .18s,box-shadow .18s,transform .18s;
+}
+.about-page .pet-info .pet-tip a.pet-origin:hover,
+.about-page .pet-info .pet-tip a.pet-origin:focus-visible{
+  background:#1d6fff;
+  color:#fff;
+  border-color:#1d6fff;
+  box-shadow:0 0 0 3px rgba(29,111,255,.22);
+  transform:translateY(-1px);
+}
+.about-page .pet-info .pet-tip a.pet-origin:active{
+  transform:translateY(0);
+}
+body.dark .about-page .pet_info .pet-tip a.pet-origin{
+  color:#8ec4ff;
+  background:rgba(29,111,255,.16);
+  border-color:rgba(142,196,255,.55);
+}
+body.dark .about-page .pet_info .pet-tip a.pet-origin:hover,
+body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
+  background:#2e7fff;
+  color:#fff;
+  border-color:#2e7fff;
+  box-shadow:0 0 0 4px rgba(46,127,255,.38);
+}
+.about-page .pet-info .pet-tip a.pet-origin strong{
+  font-weight:600;
+  background:none!important;
+  padding:0;
+  margin:0;
+  color:inherit;
+}
+
+/* 保障舊樣式不干擾 pet-origin (之前針對 .pet-tip a 的 underline 已被 all:unset 重置) */
+.about-page .pet-info .pet-tip a{
+  color:#1d6fff;
+  font-weight:600;
+  text-decoration:underline;
+  border-bottom:none!important; /* 移除原本 dotted 底線樣式 */
+  padding-bottom:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  transition:color .16s ease-in-out;
+}
+.about-page .pet-info .pet-tip a:hover,
+.about-page .pet_info .pet-tip a:focus{
+  color:#0b3dff;
+  text-decoration:underline;
+  box-shadow:none;
+}
+body.dark .about-page .pet_info .pet-tip a{
+  color:#7fc8ff;
+}
+body.dark .about-page .pet-info .pet-tip a:hover,
+body.dark .about-page .pet_info .pet-tip a:focus{
+  color:#bfe9ff;
+}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 <span class="pet-info"><strong class="blue-highlight">馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span> 與 <span class="pet-info"><strong class="blue-highlight">薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a class="blue-highlight" href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
+    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 <span class="pet-info"><strong class="blue-highlight">馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span> 與 <span class="pet-info"><strong class="blue-highlight">薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a class="pet-origin" href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
     <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a class="blue-highlight" href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
