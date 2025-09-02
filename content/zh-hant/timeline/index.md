@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   max-width: 1080px;
   margin: 0 auto;
-  padding: 1rem 0 3rem;  /* 減少頂部內邊距 */
+  padding: 0.5rem 0 3rem;  /* 大幅減少頂部間距 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: rgba(0, 0, 0, 0.85);
 }
@@ -251,14 +251,14 @@ body.dark .tl-container {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* 網格布局 - 優化佈局 */
+/* 網格布局 - 大幅減少間距 */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
   margin-bottom: 1.5rem;
   justify-content: center;
-  margin-top: 1rem;  /* 減少與標題的間距 */
+  margin-top: 0.5rem;  /* 大幅減少與標題的間距 */
 }
 
 @media (max-width: 1080px) {
@@ -273,7 +273,7 @@ body.dark .tl-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 0 0.5rem;
-    margin-top: 0.8rem;  /* 手機版進一步減少間距 */
+    margin-top: 0.3rem;  /* 手機版最小間距 */
   }
   
   .tl-card {
@@ -282,16 +282,16 @@ body.dark .tl-container {
   }
 }
 
-/* 卡片樣式 - 重新設計 */
+/* 卡片樣式 - 完全重新設計，消除薄膜效果 */
 .tl-card {
   position: relative;
-  background-color: var(--tl-bg-light);
+  background: var(--tl-bg-light) !important;  /* 強制應用背景色 */
   border: 1px solid var(--tl-border-light);
   border-radius: var(--tl-radius);
   overflow: hidden;
   padding-bottom: 3rem;
-  box-shadow: 0 8px 25px -10px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* 簡化陰影，避免薄膜效果 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -301,24 +301,29 @@ body.dark .tl-container {
 }
 
 body.dark .tl-card {
-  background-color: var(--tl-bg-dark);
+  background: var(--tl-bg-dark) !important;  /* 強制應用暗色背景 */
   border-color: var(--tl-border-dark);
-  box-shadow: 0 10px 35px -8px rgba(0,0,0,0.35);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
 .tl-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
 }
 
-/* 卡片圖片 - 重新設計圖片裁切 */
+body.dark .tl-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* 卡片圖片 - 完全重新設計，修復圓角和裁切問題 */
 .tl-image {
   width: 100%;
-  height: 200px;  /* 固定高度 */
+  height: 200px;
   position: relative;
   overflow: hidden;
   background-color: #f0f0f0;
   flex-shrink: 0;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0;  /* 只給頂部圓角 */
 }
 
 body.dark .tl-image {
@@ -327,17 +332,17 @@ body.dark .tl-image {
 
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;  /* 完全居中 */
-  transition: transform 0.5s ease;
+  transform: translate(-50%, -50%);  /* 精確居中，避免偏移 */
+  transition: transform 0.3s ease;
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 /* 卡片內容 */
@@ -611,7 +616,7 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 重新設計小螢幕佈局 */
+/* 手機適配 - 修復小螢幕問題 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
@@ -620,7 +625,7 @@ body.dark .tl-close-btn:hover {
   
   .tl-card {
     display: grid;
-    grid-template-columns: 120px 1fr;  /* 調整比例 */
+    grid-template-columns: 120px 1fr;
     padding-bottom: 0;
     max-height: none;
     height: auto;
@@ -630,22 +635,22 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 120px;
     height: 120px;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);  /* 手機版左側圓角 */
   }
   
   .tl-image img {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;  /* 手機版也完全居中 */
+    transform: translate(-50%, -50%);  /* 手機版也保持居中 */
     transition: transform 0.3s ease;
   }
   
   .tl-card:hover .tl-image img {
-    transform: scale(1.03);  /* 手機版較小的縮放 */
+    transform: translate(-50%, -50%) scale(1.03);
   }
   
   .tl-content {
