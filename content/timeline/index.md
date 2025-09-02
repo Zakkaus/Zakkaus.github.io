@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // 更新時間資訊，添加秒數顯示
+    // 更新時間資訊，使用指定格式
     const now = getMelbourneTime();
     const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
     const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
@@ -231,151 +231,120 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ---- Sync overrides (same as zh-hant version) ---- */
-.tl-container { padding-top: 0 !important; }
-.tl-grid { margin-top: .25rem !important; }
+/* ===== 全新時間線設計 - 2023 ===== */
 
+/* 基本變量與容器 */
+.tl-container {
+  --tl-accent: var(--hb-active, #e1306c);
+  --tl-radius: 22px;
+  --tl-bg-light: #fff;
+  --tl-bg-dark: #2a2b2f;
+  --tl-border-light: rgba(0,0,0,0.08);
+  --tl-border-dark: rgba(255,255,255,0.15);
+  --tl-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  --tl-shadow-hover: 0 15px 35px -10px rgba(0,0,0,0.2);
+  --tl-shadow-dark: 0 10px 30px -5px rgba(0,0,0,0.3);
+  --tl-shadow-dark-hover: 0 20px 40px -10px rgba(0,0,0,0.5);
+  --tl-transition: .3s cubic-bezier(0.22, 1, 0.36, 1);
+  
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 0 3rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
+
+/* 卡片網格 - 桌面三列 */
+.tl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 卡片基本樣式 */
 .tl-card {
-  background: var(--tl-bg-light) !important;
-  border: 1px solid var(--tl-border-light) !important;
+  background-color: var(--tl-bg-light);
   border-radius: var(--tl-radius);
-  box-shadow: 0 6px 18px -6px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 3rem;
+  box-shadow: var(--tl-shadow);
   overflow: hidden;
-  position: relative;
-  transition: box-shadow .25s, transform .25s;
-}
-body.dark .tl-card {
-  background: var(--tl-bg-dark) !important;
-  border-color: var(--tl-border-dark) !important;
-  box-shadow: 0 8px 26px -8px rgba(0,0,0,0.55);
-}
-.tl-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px -8px rgba(0,0,0,0.22); }
-.tl-card::before { display: none !important; }
-
-.tl-image {
-  aspect-ratio: 16/10;
-  width: 100%;
-  background: #eee;
-  position: relative;
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
-}
-body.dark .tl-image { background: #444; }
-.tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
-
-.tl-image img {
-  width: 100%; height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: 50% 50%;
-  transform: none !important;
-  transition: transform .35s ease;
-}
-.tl-card:hover .tl-image img { transform: scale(1.045); }
-
-.tl-content {
-  flex: 1 1 auto;
-  background: transparent;
-  border: none;
-  padding: 1.1rem 1.3rem;
+  cursor: pointer;
+  transition: transform var(--tl-transition), box-shadow var(--tl-transition);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  text-align: center;
-}
-body.dark .tl-content { background: transparent; }
-
-.tl-more { border-top: 1px solid rgba(0,0,0,0.06); }
-body.dark .tl-more { border-top: 1px solid rgba(255,255,255,0.15); }
-
-@media (max-width: 480px) {
-  .tl-card { display: flex; padding-bottom: 3rem; }
-  .tl-image { aspect-ratio: 16/10; width:100%; }
-  .tl-card > .tl-image { border-top-left-radius: var(--tl-radius); border-top-right-radius: var(--tl-radius); }
-  .tl-content { text-align: center; padding: 1rem 1rem; }
-  .tl-more { font-size: .7rem; }
-}
-
-@media (max-width: 360px) {
-  .tl-days { font-size: 2.2rem; }
-  .tl-content h3 { font-size: .95rem; }
-}
-/* ---- End overrides ---- */
-</style>
-  bottom: 0;
-  background: var(--tl-bg-light);
-  border-radius: var(--tl-radius);
-  z-index: -1;
   border: 1px solid var(--tl-border-light);
+  height: 100%;
+  min-height: 420px; /* 固定最小高度確保一致性 */
 }
 
-body.dark .tl-card::before {
-  background: var(--tl-bg-dark);
+body.dark .tl-card {
+  background-color: var(--tl-bg-dark);
+  box-shadow: var(--tl-shadow-dark);
   border-color: var(--tl-border-dark);
 }
 
 .tl-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-6px);
+  box-shadow: var(--tl-shadow-hover);
 }
 
-/* 卡片圖片 - 完全覆蓋頂部，無邊緣 */
+body.dark .tl-card:hover {
+  box-shadow: var(--tl-shadow-dark-hover);
+}
+
+/* 圖片容器 */
 .tl-image {
   width: 100%;
-  height: 200px;
+  height: 0;
+  padding-bottom: 56%; /* 16:9 比例 */
   position: relative;
   overflow: hidden;
-  background-color: #f0f0f0;
-  flex-shrink: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
-  margin: 0;  /* 確保無邊距 */
-  padding: 0;  /* 確保無內邊距 */
+  background-color: #f5f5f5;
 }
 
 body.dark .tl-image {
-  background-color: #333;
+  background-color: #363636;
 }
 
+/* 圖片完美居中覆蓋 */
 .tl-image img {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;  /* 簡化為center，避免偏移 */
-  transition: transform 0.3s ease;
-  display: block;  /* 移除img默認間距 */
+  transform: translate(-50%, -50%);
+  transition: transform var(--tl-transition);
 }
 
 .tl-card:hover .tl-image img {
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
-/* 卡片內容 */
+/* 卡片內容區 */
 .tl-content {
-  padding: 1.2rem 1.4rem;
-  text-align: center;
+  padding: 1.2rem 1.5rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
 .tl-content h3 {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.8rem;
   color: var(--tl-accent);
 }
 
-/* 計時器樣式 */
+/* 計數器 */
 .tl-counter {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 }
 
 .tl-days {
@@ -388,7 +357,7 @@ body.dark .tl-image {
 
 .tl-time {
   font-size: 0.85rem;
-  font-family: monospace;
+  font-family: 'SFMono-Regular', Consolas, monospace;
   letter-spacing: 0.03rem;
   opacity: 0.8;
   font-weight: 600;
@@ -397,9 +366,10 @@ body.dark .tl-image {
 .tl-meta {
   font-size: 0.7rem;
   opacity: 0.7;
+  margin-top: 0.5rem;
 }
 
-/* 更多按鈕 */
+/* 了解更多按鈕 */
 .tl-more {
   position: absolute;
   bottom: 0;
@@ -408,11 +378,12 @@ body.dark .tl-image {
   background: #f5f5f7;
   color: #333;
   border: none;
-  padding: 0.7rem;
+  padding: 0.8rem;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.25s;
+  border-top: 1px solid rgba(0,0,0,0.04);
 }
 
 .tl-more:hover {
@@ -421,8 +392,9 @@ body.dark .tl-image {
 }
 
 body.dark .tl-more {
-  background: #3a3c42;
+  background: #32333a;
   color: #ddd;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 body.dark .tl-more:hover {
@@ -430,31 +402,29 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 頁腳與時區備註 */
+/* 時間備註 */
 .tl-footer {
-  text-align: left;
-  padding: 0;
-  overflow: hidden;
+  margin-top: 1rem;
 }
 
 .tl-note {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  padding-left: 0.8rem;
-  border-left: 4px solid var(--tl-accent);
-  margin: 0;
-  font-weight: 500;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  padding-left: 1rem;
+  position: relative;
   line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-family: 'SFMono-Regular', Consolas, monospace;
 }
 
-@media (max-width: 480px) {
-  .tl-note {
-    white-space: normal;
-    font-size: 0.65rem;
-  }
+.tl-note::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--tl-accent);
+  border-radius: 3px;
 }
 
 /* 模態框樣式 */
@@ -468,12 +438,12 @@ body.dark .tl-more:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.5rem;
   z-index: 9999;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.25s;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 .tl-modal-backdrop.active {
@@ -485,24 +455,29 @@ body.dark .tl-more:hover {
   background: #fff;
   width: 100%;
   max-width: 540px;
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 18px;
+  padding: 1.8rem;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
+  transform: scale(0.95);
+  transition: transform 0.3s;
   color: rgba(0, 0, 0, 0.85);
 }
 
+.tl-modal-backdrop.active .tl-modal {
+  transform: scale(1);
+}
+
 body.dark .tl-modal {
-  background: #2a2b2f;
+  background: #26272c;
   color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
 }
 
-/* 模態框標題 */
 .tl-modal-title {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--tl-accent);
   margin-bottom: 0.3rem;
@@ -513,14 +488,14 @@ body.dark .tl-modal-title {
 }
 
 .tl-modal-subtitle {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   opacity: 0.7;
+  margin-bottom: 1.5rem;
 }
 
-/* 模態框內容 */
 .tl-modal-body {
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 1.5rem;
 }
 
@@ -528,7 +503,6 @@ body.dark .tl-modal-title {
   margin-bottom: 1rem;
 }
 
-/* 強調可點擊連結 */
 .tl-highlight-link {
   color: var(--tl-accent);
   text-decoration: none;
@@ -555,19 +529,18 @@ body.dark .tl-modal-title {
   border-color: var(--tl-accent);
 }
 
-/* 模態框按鈕 */
 .tl-modal-footer {
   display: flex;
   justify-content: space-between;
 }
 
 .tl-btn {
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
+  padding: 0.7rem 1.3rem;
+  border-radius: 10px;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.25s;
 }
 
 .tl-about-link {
@@ -577,6 +550,16 @@ body.dark .tl-modal-title {
 }
 
 .tl-about-link:hover {
+  background: var(--tl-accent);
+  color: white;
+}
+
+body.dark .tl-about-link {
+  background: #32333a;
+  color: #ddd;
+}
+
+body.dark .tl-about-link:hover {
   background: var(--tl-accent);
   color: white;
 }
@@ -597,13 +580,18 @@ body.dark .tl-close-btn-alt {
   color: #ddd;
 }
 
+body.dark .tl-close-btn-alt:hover {
+  background: #f44336;
+  color: white;
+}
+
 .tl-close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.2rem;
+  right: 1.2rem;
   width: 32px;
   height: 32px;
-  background: transparent;
+  background: rgba(0,0,0,0.05);
   border: none;
   border-radius: 50%;
   font-size: 1.2rem;
@@ -612,86 +600,75 @@ body.dark .tl-close-btn-alt {
   justify-content: center;
   cursor: pointer;
   color: #666;
-  transition: background 0.2s;
+  transition: all 0.25s;
 }
 
 .tl-close-btn:hover {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0,0,0,0.15);
+  color: #333;
 }
 
 body.dark .tl-close-btn {
+  background: rgba(255,255,255,0.1);
   color: #bbb;
 }
 
 body.dark .tl-close-btn:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.2);
+  color: white;
 }
 
-/* 手機適配 - 修復小螢幕圖片邊緣問題 */
-@media (max-width: 480px) {
+/* 載入提示 */
+#timelineContainer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* 平板響應式設計 */
+@media (max-width: 1080px) {
   .tl-grid {
-    gap: 1rem;
-    padding: 0;
-    margin-top: 0;  /* 手機版也移除頂部間距 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* 手機響應式設計 - 從上到下排列卡片 */
+@media (max-width: 640px) {
+  .tl-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
   }
   
   .tl-card {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    padding-bottom: 0;
-    max-height: none;
+    min-height: auto;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: row;  /* 手機上橫向排列 */
     height: auto;
-    border-radius: var(--tl-radius);
   }
   
   .tl-image {
-    width: 120px;
-    height: 120px;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
-    margin: 0;
-    padding: 0;
-  }
-  
-  .tl-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
-    display: block;
-  }
-  
-  .tl-card:hover .tl-image img {
-    transform: scale(1.03);
+    width: 40%;  /* 圖片佔40%寬度 */
+    height: auto;
+    padding-bottom: 0;
+    min-height: 130px;
   }
   
   .tl-content {
-    width: auto;
-    padding: 0.8rem 0.5rem 2.5rem 0.8rem;
+    width: 60%;  /* 內容佔60%寬度 */
     text-align: left;
-    position: relative;
-  }
-  
-  .tl-counter {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 0.3rem;
-    gap: 0.5rem;
+    padding: 0.8rem 1rem;
   }
   
   .tl-days {
-    font-size: 1.8rem;
-    margin-bottom: 0;
-    line-height: 1;
+    font-size: 2rem;
   }
   
   .tl-time {
-    font-size: 0.65rem;
-    line-height: 1.2;
-    padding-bottom: 0.15rem;
+    font-size: 0.7rem;
   }
   
   .tl-meta {
@@ -699,30 +676,53 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-more {
-    padding: 0.5rem;
+    width: 60%;
+    left: 40%;
     font-size: 0.7rem;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    border-radius: 0;
+    padding: 0.6rem;
   }
   
-  .tl-content h3 {
+  .tl-modal {
+    padding: 1.5rem;
+    border-radius: 15px;
+  }
+  
+  .tl-modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .tl-modal-body {
     font-size: 0.9rem;
-    margin-bottom: 0.4rem;
+  }
+  
+  .tl-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
   }
 }
 
-@media (max-width: 400px) {
+/* 超小屏幕適配 */
+@media (max-width: 380px) {
   .tl-card {
-    grid-template-columns: 100px 1fr;
+    flex-direction: column;
   }
   
   .tl-image {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    padding-bottom: 56%;
+  }
+  
+  .tl-content {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .tl-more {
+    width: 100%;
+    left: 0;
+  }
+}
+</style>
   }
 }
 
