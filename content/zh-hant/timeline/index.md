@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `).join('')}
     </div>
     <div class="tl-footer">
-      <p class="tl-note" id="timeInfo">墨爾本時間 UTC+10 (AEST) ❄️</p>
+      <p class="tl-note" id="timeInfo">雪梨時間 UTC+10 (AEST) ❄️</p>
     </div>
   </div>
   
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
     const info = document.getElementById('timeInfo');
     if(info){
-      info.textContent = `Melbourne time：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+      info.textContent = `雪梨時間：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
     }
   };
   

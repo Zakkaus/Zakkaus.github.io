@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `).join('')}
     </div>
     <div class="tl-footer">
-      <p class="tl-note" id="timeInfo">Melbourne time UTC+10 (AEST) ❄️</p>
+      <p class="tl-note" id="timeInfo">Sydney time UTC+10 (AEST) ❄️</p>
     </div>
   </div>
   
@@ -217,9 +217,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 更新時間資訊，使用指定格式
     const now = getMelbourneTime();
-    const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
-    const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
-    document.getElementById('timeInfo').textContent = `Melbourne time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+    const dateStr = `${String(now.getUTCDate()).padStart(2,'0')}/${String(now.getUTCMonth()+1).padStart(2,'0')}/${now.getUTCFullYear()}`;
+    const timeStr = `${String(now.getUTCHours()).padStart(2,'0')}:${String(now.getUTCMinutes()).padStart(2,'0')}:${String(now.getUTCSeconds()).padStart(2,'0')}`;
+    const info = document.getElementById('timeInfo');
+    if(info){
+      info.textContent = `Sydney time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
+    }
   };
   
   // 立即更新一次
