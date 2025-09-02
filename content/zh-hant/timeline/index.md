@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "關係",
       modalSubtitle: "開始於 2025 年 8 月 7 日 11:38am",
       modalContent: `
-        <p>我們生活在不同的國家/地區（澳洲墨爾本和台灣台北），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
+        <p>我們生活在不同的國家/地區（澳大利亞 / 台灣），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
         <p>雖然相隔兩地，我們仍保持每天的交流與聯繫，分享彼此的生活、工作與興趣愛好。我們彼此支持、尊重對方的獨立空間，同時也計劃定期見面。</p>
         <p>想了解更多我們的日常點滴，歡迎關注我的 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
