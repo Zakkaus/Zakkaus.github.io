@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* 基本樣式 */
+/* 基本樣式 - 大幅減少標題間距 */
 .tl-container {
   --tl-accent: var(--hb-active, #e1306c);
   --tl-radius: 22px;
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0.5rem 0 3rem;  /* 大幅減少頂部間距 */
+  padding: 0 0 3rem;  /* 完全移除頂部間距 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: rgba(0, 0, 0, 0.85);
 }
@@ -251,14 +251,14 @@ body.dark .tl-container {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* 網格布局 - 大幅減少間距 */
+/* 網格布局 - 最小間距 */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
   margin-bottom: 1.5rem;
   justify-content: center;
-  margin-top: 0.5rem;  /* 大幅減少與標題的間距 */
+  margin-top: 0;  /* 完全移除頂部間距 */
 }
 
 @media (max-width: 1080px) {
@@ -282,15 +282,15 @@ body.dark .tl-container {
   }
 }
 
-/* 卡片樣式 - 完全重新設計，消除薄膜效果 */
+/* 卡片樣式 - 徹底解決薄膜問題 */
 .tl-card {
   position: relative;
-  background: var(--tl-bg-light) !important;  /* 強制應用背景色 */
-  border: 1px solid var(--tl-border-light);
+  background: transparent;  /* 先設為透明 */
+  border: none;  /* 移除邊框避免薄膜 */
   border-radius: var(--tl-radius);
   overflow: hidden;
   padding-bottom: 3rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* 簡化陰影，避免薄膜效果 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);  /* 極簡陰影 */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
@@ -300,22 +300,30 @@ body.dark .tl-container {
   width: 100%;
 }
 
-body.dark .tl-card {
-  background: var(--tl-bg-dark) !important;  /* 強制應用暗色背景 */
+.tl-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--tl-bg-light);
+  border-radius: var(--tl-radius);
+  z-index: -1;
+  border: 1px solid var(--tl-border-light);
+}
+
+body.dark .tl-card::before {
+  background: var(--tl-bg-dark);
   border-color: var(--tl-border-dark);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
 .tl-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
-body.dark .tl-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-/* 卡片圖片 - 完全重新設計，修復圓角和裁切問題 */
+/* 卡片圖片 - 完全覆蓋頂部，無邊緣 */
 .tl-image {
   width: 100%;
   height: 200px;
@@ -323,7 +331,9 @@ body.dark .tl-card:hover {
   overflow: hidden;
   background-color: #f0f0f0;
   flex-shrink: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0;  /* 只給頂部圓角 */
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
+  margin: 0;  /* 確保無邊距 */
+  padding: 0;  /* 確保無內邊距 */
 }
 
 body.dark .tl-image {
@@ -332,17 +342,18 @@ body.dark .tl-image {
 
 .tl-image img {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);  /* 精確居中，避免偏移 */
+  object-position: center;  /* 簡化為center，避免偏移 */
   transition: transform 0.3s ease;
+  display: block;  /* 移除img默認間距 */
 }
 
 .tl-card:hover .tl-image img {
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: scale(1.05);
 }
 
 /* 卡片內容 */
@@ -616,11 +627,12 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 修復小螢幕問題 */
+/* 手機適配 - 修復小螢幕圖片邊緣問題 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
     padding: 0;
+    margin-top: 0;  /* 手機版也移除頂部間距 */
   }
   
   .tl-card {
@@ -635,22 +647,25 @@ body.dark .tl-close-btn:hover {
   .tl-image {
     width: 120px;
     height: 120px;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);  /* 手機版左側圓角 */
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
+    margin: 0;
+    padding: 0;
   }
   
   .tl-image img {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translate(-50%, -50%);  /* 手機版也保持居中 */
+    object-position: center;
     transition: transform 0.3s ease;
+    display: block;
   }
   
   .tl-card:hover .tl-image img {
-    transform: translate(-50%, -50%) scale(1.03);
+    transform: scale(1.03);
   }
   
   .tl-content {
