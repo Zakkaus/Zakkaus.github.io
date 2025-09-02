@@ -1013,3 +1013,37 @@ html[lang="en"] .about-page .about-contacts li::before {
 }
 
 /* === End EN About Contact 對齊調整 === */
+
+/* === EN About Contact 對齊最終覆寫：使用 label span 控制，統一與中文列表起始列 === */
+html[lang="en"] .about-page .about-contacts li {
+  padding-left:0 !important;          /* 取消之前的縮排 */
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  position:relative;
+}
+html[lang="en"] .about-page .about-contacts li::before{
+  display:none !important;            /* 移除佔位 pseudo */
+}
+html[lang="en"] .about-page .about-contacts li .contact-label{
+  display:inline-block;
+  padding-left:1.1rem;                /* 保留與中文粉色圓點後文字相同起點 */
+  min-width:6.2rem;                   /* 固定欄寬，讓右側膠囊整齊對齊 */
+  font-weight:600;
+  letter-spacing:.3px;
+  line-height:1.1;
+  position:relative;
+}
+@media (max-width:640px){
+  html[lang="en"] .about-page .about-contacts li .contact-label{
+    min-width:5.6rem;
+    padding-left:1.0rem;
+  }
+}
+
+/* 若瀏覽器支援 :where，降低權重衝突保險；不影響其他語系 */
+html[lang="en"] .about-page .about-contacts li .contact-label:before{
+  content:""; /* 不顯示點，只保留空間語義 */
+}
+
+/* === End EN About Contact 對齊最終覆寫 === */

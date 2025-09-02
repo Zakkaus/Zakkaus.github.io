@@ -263,10 +263,10 @@ body.dark html[lang="en"] .about-page .about-contacts a:hover{
 
 ### 🔗 Contact
 <ul class="about-contacts">
-  <li>Instagram: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
-  <li>GitHub: <a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
-  <li>X: <a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
-  <li>Email: <a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
+  <li><span class="contact-label">Instagram：</span><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
+  <li><span class="contact-label">GitHub：</span><a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
+  <li><span class="contact-label">X：</span><a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
+  <li><span class="contact-label">Email：</span><a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
 </ul>
 </div>
 
