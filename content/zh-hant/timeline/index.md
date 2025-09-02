@@ -295,13 +295,12 @@ body.dark .tl-card {
   position: relative;
   width: 100%;
   aspect-ratio: 1/1;              /* 1:1 正方形 */
-  padding: 0;                     /* 移除 padding-top 技巧改用 aspect-ratio */
+  padding: 0;                     /* 刪除 padding-top hack */
   margin: 0;                      /* 移除負邊距 */
   background: #f0f0f0;
-  border-radius: inherit;         /* 直接繼承卡片上圓角 (因 overflow 裁切) */
-  border: 0;                      /* 去掉底線避免色差 */
+  border-radius: inherit;         /* 從父層（.tl-card）繼承圓角 */
+  border: 0;                      /* 移除預設邊框 */
   overflow: hidden;
-  /* 移除 z-index 以避免層級造成陰影或交互問題 */
 }
 body.dark .tl-image {
   background: #333;
@@ -314,9 +313,8 @@ body.dark .tl-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
   display: block;
-  transform: none;
   transition: transform 0.35s;
 }
 
@@ -780,7 +778,6 @@ body.dark .tl-image{background:#333;}
   object-fit:cover;
   object-position:center;
   display:block;
-  transform:none;
   transition:transform .35s;
 }
 
@@ -818,6 +815,9 @@ body.dark .tl-image{background:#333;}
     width:90px;
     height:90px;
   }
+}
+
+/* --- 修復覆寫結束 --- */
 }
 
 /* --- 修復覆寫結束 --- */
