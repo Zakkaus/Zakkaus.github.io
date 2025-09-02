@@ -6,68 +6,289 @@ date: 2025-09-01
 lastmod: 2025-09-01
 ---
 
-<div class="timeline-container">
-  <div class="timeline-grid">
-    <!-- 女友關係卡片 -->
-    <div class="tl-card" data-key="couple">
-      <div class="tl-media">
-        <img src="/images/timeline/f-avatar.webp" alt="女友頭像" loading="lazy">
-      </div>
-      <div class="tl-content">
-        <h3>我們在一起</h3>
-        <div class="tl-counter" id="togetherCounter">
-          <p class="tl-days">0</p>
-          <p class="tl-time">00:00:00</p>
-        </div>
-        <p class="tl-date">自 07/08/2025 起</p>
-      </div>
-      <button class="tl-more" aria-label="查看詳情">了解更多</button>
-    </div>
-    
-    <!-- 薯餅卡片 -->
-    <div class="tl-card" data-key="hash">
-      <div class="tl-media">
-        <img src="/images/timeline/hashbrown.webp" alt="薯餅" loading="lazy">
-      </div>
-      <div class="tl-content">
-        <h3>薯餅年齡</h3>
-        <div class="tl-counter" id="hashCounter">
-          <p class="tl-days">0</p>
-          <p class="tl-time">00:00:00</p>
-        </div>
-        <p class="tl-date">生日：24/06/2025</p>
-      </div>
-      <button class="tl-more" aria-label="查看詳情">了解更多</button>
-    </div>
-    
-    <!-- 馬鈴薯卡片 -->
-    <div class="tl-card" data-key="potato">
-      <div class="tl-media">
-        <img src="/images/timeline/potato.webp" alt="馬鈴薯" loading="lazy">
-      </div>
-      <div class="tl-content">
-        <h3>馬鈴薯年齡</h3>
-        <div class="tl-counter" id="potatoCounter">
-          <p class="tl-days">0</p>
-          <p class="tl-time">00:00:00</p>
-        </div>
-        <p class="tl-date">生日：27/07/2025</p>
-      </div>
-      <button class="tl-more" aria-label="查看詳情">了解更多</button>
-    </div>
-  </div>
-  
-  <p class="tl-note">墨爾本時間 UTC+10 (AEST) ❄️</p>
+<div id="timelineApp">
+  <!-- 页面内容会由JavaScript动态生成 -->
+  <div class="loading-msg">加載中...</div>
 </div>
 
-<style>
-/* 重置與基本設置 */
-.timeline-container * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 定义数据
+  const timelineData = [
+    {
+      id: "couple",
+      title: "我們在一起",
+      date: "07/08/2025",
+      image: "/images/timeline/f-avatar.webp",
+      alt: "女友頭像",
+      modalTitle: "關係",
+      modalSubtitle: "開始於 2025 年 8 月 7 日",
+      modalContent: `
+        <p>我們生活在不同的國家/地區（澳洲墨爾本和台灣台北），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
+        <p>雖然相隔兩地，我們仍保持每天的交流與聯繫，分享彼此的生活、工作與興趣愛好。我們彼此支持、尊重對方的獨立空間，同時也計劃定期見面。</p>
+        <p>想了解更多我們的日常點滴，歡迎關注我的 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+      `,
+      linkUrl: "/zh-hant/about/#relationship"
+    },
+    {
+      id: "hash",
+      title: "薯餅年齡",
+      date: "24/06/2025",
+      image: "/images/timeline/hashbrown.webp",
+      alt: "薯餅",
+      modalTitle: "薯餅 (Hash Brown)",
+      modalSubtitle: "生日：2025 年 6 月 24 日",
+      modalContent: `
+        <p>薯餅是一隻純種泰迪天竺鼠，毛色淺咖啡。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
+        <p>最愛的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔（超級喜歡）。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
+        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+      `,
+      linkUrl: "/zh-hant/about/#pets"
+    },
+    {
+      id: "potato",
+      title: "馬鈴薯年齡",
+      date: "27/07/2025",
+      image: "/images/timeline/potato.webp",
+      alt: "馬鈴薯",
+      modalTitle: "馬鈴薯 (Potato)",
+      modalSubtitle: "生日：2025 年 7 月 27 日",
+      modalContent: `
+        <p>馬鈴薯是一隻純種泰迪天竺鼠，毛色深巧克力色，性格較為貪吃且膽子比較大。牠常常一邊吃一邊玩，有時候會邊吃邊拉，偶爾會在糧盆裡面拉出糞便。</p>
+        <p>喜歡的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔。牠也喜歡在草堆裡面睡覺，醒來後會繼續吃，是個貪吃又勇敢的小家伙。</p>
+        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
+      `,
+      linkUrl: "/zh-hant/about/#pets"
+    }
+  ];
 
+  // 创建页面内容
+  const app = document.getElementById('timelineApp');
+  
+  // 创建容器
+  const container = document.createElement('div');
+  container.className = 'timeline-container';
+  
+  // 创建卡片网格
+  const grid = document.createElement('div');
+  grid.className = 'timeline-grid';
+  
+  // 生成卡片
+  timelineData.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'tl-card';
+    card.dataset.key = item.id;
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    
+    // 媒体区
+    const media = document.createElement('div');
+    media.className = 'tl-media';
+    const img = document.createElement('img');
+    img.src = item.image;
+    img.alt = item.alt;
+    img.loading = 'lazy';
+    media.appendChild(img);
+    
+    // 内容区
+    const content = document.createElement('div');
+    content.className = 'tl-content';
+    
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+    
+    const counter = document.createElement('div');
+    counter.className = 'tl-counter';
+    counter.id = `${item.id}Counter`;
+    
+    const days = document.createElement('p');
+    days.className = 'tl-days';
+    days.textContent = '0';
+    
+    const time = document.createElement('p');
+    time.className = 'tl-time';
+    time.textContent = '00:00:00';
+    
+    counter.appendChild(days);
+    counter.appendChild(time);
+    
+    const dateText = document.createElement('p');
+    dateText.className = 'tl-date';
+    dateText.textContent = item.id === 'couple' ? `自 ${item.date} 起` : `生日：${item.date}`;
+    
+    content.appendChild(title);
+    content.appendChild(counter);
+    content.appendChild(dateText);
+    
+    // 按钮
+    const btn = document.createElement('button');
+    btn.className = 'tl-more';
+    btn.textContent = '了解更多';
+    btn.setAttribute('aria-label', '查看詳情');
+    
+    card.appendChild(media);
+    card.appendChild(content);
+    card.appendChild(btn);
+    
+    grid.appendChild(card);
+  });
+  
+  // 添加时区备注
+  const note = document.createElement('p');
+  note.className = 'tl-note';
+  note.textContent = '墨爾本時間 UTC+10 (AEST) ❄️';
+  
+  container.appendChild(grid);
+  container.appendChild(note);
+  
+  // 替换加载信息
+  app.innerHTML = '';
+  app.appendChild(container);
+
+  // 创建Modal
+  const modalBackdrop = document.createElement('div');
+  modalBackdrop.className = 'tl-modal-backdrop';
+  modalBackdrop.innerHTML = `
+    <div class="tl-modal">
+      <button class="tl-close-btn" aria-label="關閉">✕</button>
+      <div class="tl-modal-header">
+        <h3 class="tl-modal-title"></h3>
+        <p class="tl-modal-subtitle"></p>
+      </div>
+      <div class="tl-modal-body"></div>
+      <div class="tl-modal-footer">
+        <a href="#" class="tl-modal-btn tl-modal-link" target="_self">查看詳情</a>
+        <button class="tl-modal-btn tl-modal-close">關閉</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modalBackdrop);
+  
+  const modal = modalBackdrop.querySelector('.tl-modal');
+  
+  // 处理模态框关闭
+  const closeModal = () => {
+    modalBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+    if (window._lastFocusedElement && typeof window._lastFocusedElement.focus === 'function') {
+      setTimeout(() => window._lastFocusedElement.focus(), 10);
+    }
+  };
+  
+  // 绑定关闭事件
+  modalBackdrop.querySelector('.tl-close-btn').addEventListener('click', closeModal);
+  modalBackdrop.querySelector('.tl-modal-close').addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', e => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+  
+  // ESC键关闭
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
+      closeModal();
+    }
+  });
+  
+  // 打开模态框
+  const openModal = (key) => {
+    const data = timelineData.find(item => item.id === key);
+    if (!data) return;
+    
+    window._lastFocusedElement = document.activeElement;
+    
+    modal.querySelector('.tl-modal-title').textContent = data.modalTitle;
+    modal.querySelector('.tl-modal-subtitle').textContent = data.modalSubtitle;
+    modal.querySelector('.tl-modal-body').innerHTML = data.modalContent;
+    modal.querySelector('.tl-modal-link').href = data.linkUrl;
+    
+    modalBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    setTimeout(() => modalBackdrop.querySelector('.tl-close-btn').focus(), 50);
+  };
+  
+  // 绑定卡片点击
+  document.querySelectorAll('.tl-card').forEach(card => {
+    const key = card.getAttribute('data-key');
+    const btn = card.querySelector('.tl-more');
+    
+    card.addEventListener('click', e => {
+      if (e.target !== btn && !btn.contains(e.target)) {
+        openModal(key);
+      }
+    });
+    
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      openModal(key);
+    });
+    
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(key);
+      }
+    });
+  });
+  
+  // 计算时间
+  const MEL_TIMEZONE = 10; // UTC+10
+  const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
+  
+  const getMelbourneTime = () => {
+    return new Date(Date.now() + MEL_MS);
+  };
+  
+  const parseDate = (dateStr) => {
+    // 格式: DD/MM/YYYY
+    const [day, month, year] = dateStr.split('/').map(n => parseInt(n));
+    return new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+  };
+  
+  const timeSince = (dateStr) => {
+    const startDate = parseDate(dateStr);
+    const now = getMelbourneTime();
+    
+    // 计算毫秒差
+    const diff = now - startDate;
+    
+    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // 未来日期
+    
+    // 计算天数与剩余时间
+    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
+    
+    return { days, hours, minutes, seconds };
+  };
+  
+  // 更新计数器
+  const updateCounters = () => {
+    timelineData.forEach(item => {
+      const time = timeSince(item.date);
+      const counter = document.getElementById(`${item.id}Counter`);
+      if (counter) {
+        const daysEl = counter.querySelector('.tl-days');
+        const timeEl = counter.querySelector('.tl-time');
+        
+        if (daysEl) daysEl.textContent = time.days;
+        if (timeEl) timeEl.textContent = 
+          `${String(time.hours).padStart(2, '0')}:${String(time.minutes).padStart(2, '0')}:${String(time.seconds).padStart(2, '0')}`;
+      }
+    });
+  };
+  
+  // 立即更新一次
+  updateCounters();
+  
+  // 每秒更新
+  setInterval(updateCounters, 1000);
+});
+</script>
+
+<style>
+/* 基础样式 */
 .timeline-container {
   --tl-accent: var(--hb-active, #e1306c);
   --tl-radius: 22px;
@@ -84,7 +305,7 @@ lastmod: 2025-09-01
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* 網格布局 */
+/* 网格布局 */
 .timeline-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -105,7 +326,7 @@ lastmod: 2025-09-01
   }
 }
 
-/* 卡片樣式 */
+/* 卡片样式 */
 .tl-card {
   position: relative;
   background: var(--tl-bg-light);
@@ -132,7 +353,7 @@ body.dark .tl-card:hover {
   box-shadow: 0 16px 45px -10px rgba(0,0,0,0.45);
 }
 
-/* 卡片媒體區 */
+/* 卡片媒体区 */
 .tl-media {
   height: 180px;
   overflow: hidden;
@@ -149,7 +370,7 @@ body.dark .tl-card:hover {
   transform: scale(1.05);
 }
 
-/* 卡片內容區 */
+/* 卡片内容区 */
 .tl-content {
   padding: 1.2rem 1.4rem;
   text-align: center;
@@ -166,7 +387,7 @@ body.dark .tl-content h3 {
   color: #ff8fb7;
 }
 
-/* 計時器樣式 */
+/* 计时器样式 */
 .tl-counter {
   margin-bottom: 0.6rem;
 }
@@ -196,7 +417,7 @@ body.dark .tl-days {
   opacity: 0.7;
 }
 
-/* 更多按鈕 */
+/* 更多按钮 */
 .tl-more {
   position: absolute;
   bottom: 0;
@@ -222,7 +443,7 @@ body.dark .tl-more {
   color: white;
 }
 
-/* 時區備註 */
+/* 时区备注 */
 .tl-note {
   font-size: 0.7rem;
   opacity: 0.7;
@@ -231,7 +452,7 @@ body.dark .tl-more {
   margin-top: 1rem;
 }
 
-/* 彈窗樣式 */
+/* 模态框样式 */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
@@ -390,7 +611,7 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 動畫偏好 */
+/* 动画偏好 */
 @media (prefers-reduced-motion: reduce) {
   .tl-card,
   .tl-media img,
@@ -403,7 +624,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機適配 */
+/* 手机适配 */
 @media (max-width: 640px) {
   .tl-media {
     height: 160px;
@@ -425,218 +646,14 @@ body.dark .tl-close-btn:hover {
     font-size: 1.25rem;
   }
 }
-</style>
 
-<script>
-(function() {
-  // 防止重複初始化
-  if (window.__TIMELINE_INITIALIZED__) return;
-  window.__TIMELINE_INITIALIZED__ = true;
-  
-  // ===== 1. 墨爾本時間計算 =====
-  const MEL_TIMEZONE = 10; // UTC+10
-  const MEL_MS = MEL_TIMEZONE * 60 * 60 * 1000;
-  
-  const getMelbourneTime = () => {
-    return new Date(Date.now() + MEL_MS);
-  };
-  
-  const formatTime = (date) => {
-    const h = String(date.getUTCHours()).padStart(2, '0');
-    const m = String(date.getUTCMinutes()).padStart(2, '0');
-    const s = String(date.getUTCSeconds()).padStart(2, '0');
-    return `${h}:${m}:${s}`;
-  };
-  
-  const formatDate = (date) => {
-    const y = date.getUTCFullYear();
-    const m = String(date.getUTCMonth() + 1).padStart(2, '0');
-    const d = String(date.getUTCDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-  };
-  
-  // ===== 2. 時間差計算 =====
-  const parseDate = (dateStr) => {
-    // 格式: DD/MM/YYYY
-    const [day, month, year] = dateStr.split('/').map(n => parseInt(n));
-    return new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
-  };
-  
-  const timeSince = (dateStr) => {
-    const startDate = parseDate(dateStr);
-    const now = getMelbourneTime();
-    
-    // 計算毫秒差
-    const diff = now - startDate;
-    
-    if (diff < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // 未來日期
-    
-    // 計算天數與剩餘時間
-    const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((diff % (60 * 1000)) / 1000);
-    
-    return { days, hours, minutes, seconds };
-  };
-  
-  // ===== 3. 更新顯示 =====
-  const updateCounters = () => {
-    const coupleSince = timeSince('07/08/2025');
-    const hashSince = timeSince('24/06/2025');
-    const potatoSince = timeSince('27/07/2025');
-    
-    // 更新日期
-    document.querySelector('#togetherCounter .tl-days').textContent = coupleSince.days;
-    document.querySelector('#hashCounter .tl-days').textContent = hashSince.days;
-    document.querySelector('#potatoCounter .tl-days').textContent = potatoSince.days;
-    
-    // 更新時間
-    document.querySelector('#togetherCounter .tl-time').textContent = 
-      `${String(coupleSince.hours).padStart(2, '0')}:${String(coupleSince.minutes).padStart(2, '0')}:${String(coupleSince.seconds).padStart(2, '0')}`;
-    document.querySelector('#hashCounter .tl-time').textContent = 
-      `${String(hashSince.hours).padStart(2, '0')}:${String(hashSince.minutes).padStart(2, '0')}:${String(hashSince.seconds).padStart(2, '0')}`;
-    document.querySelector('#potatoCounter .tl-time').textContent = 
-      `${String(potatoSince.hours).padStart(2, '0')}:${String(potatoSince.minutes).padStart(2, '0')}:${String(potatoSince.seconds).padStart(2, '0')}`;
-  };
-  
-  // 初始更新並設定定時器每秒更新
-  updateCounters();
-  setInterval(updateCounters, 1000);
-  
-  // ===== 4. 卡片資料 =====
-  const cardData = {
-    couple: {
-      title: '我們的關係',
-      subtitle: '開始於 2025 年 8 月 7 日',
-      content: `
-        <p>我們生活在不同的國家/地區（澳洲墨爾本和台灣台北），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
-        <p>雖然相隔兩地，我們仍保持每天的交流與聯繫，分享彼此的生活、工作與興趣愛好。我們彼此支持、尊重對方的獨立空間，同時也計劃定期見面。</p>
-        <p>想了解更多我們的日常點滴，歡迎關注我的 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
-      `,
-      link: '/zh-hant/about/#relationship'
-    },
-    hash: {
-      title: '薯餅 (Hash Brown)',
-      subtitle: '生日：2025 年 6 月 24 日',
-      content: `
-        <p>薯餅是一隻純種泰迪天竺鼠，有著漂亮的淺咖啡色短毛。性格活潑好奇，喜歡探索新環境，特別喜歡在飼養箱裡四處奔跑和躲藏。</p>
-        <p>名字的靈感來自麥當勞的早餐菜單——那塊金黃酥脆的薯餅（Hash Brown）。不僅因為顏色相似，也因為牠總是充滿活力，像剛出爐的薯餅一樣熱情。</p>
-        <p>薯餅最愛的食物是新鮮胡蘿蔔和歐芹，特別喜歡在傍晚時分吱吱叫著討零食。</p>
-        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
-      `,
-      link: '/zh-hant/about/#pets'
-    },
-    potato: {
-      title: '馬鈴薯 (Potato)',
-      subtitle: '生日：2025 年 7 月 27 日',
-      content: `
-        <p>馬鈴薯是一隻純種泰迪天竺鼠，有著深巧克力色的柔軟毛髮。性格相對內向溫和，喜歡被輕輕撫摸，通常會安靜地待在飼養箱的角落享受食物。</p>
-        <p>名字「馬鈴薯」完美呼應牠圓滾滾的身形和棕色的外表，就像一顆小小的馬鈴薯。牠和薯餅一起成長，兩隻天竺鼠相處融洽，經常一起依偎睡覺。</p>
-        <p>馬鈴薯特別喜歡小黃瓜和羅勒葉，每當聽到塑料袋聲音時就會興奮地嘰嘰叫。</p>
-        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener">@zakk.au</a></p>
-      `,
-      link: '/zh-hant/about/#pets'
-    }
-  };
-  
-  // ===== 5. 創建彈窗 =====
-  const createModal = () => {
-    const modalBackdrop = document.createElement('div');
-    modalBackdrop.className = 'tl-modal-backdrop';
-    modalBackdrop.innerHTML = `
-      <div class="tl-modal">
-        <button class="tl-close-btn" aria-label="關閉">✕</button>
-        <div class="tl-modal-header">
-          <h3 class="tl-modal-title"></h3>
-          <p class="tl-modal-subtitle"></p>
-        </div>
-        <div class="tl-modal-body"></div>
-        <div class="tl-modal-footer">
-          <a href="#" class="tl-modal-btn tl-modal-link" target="_self">查看詳情</a>
-          <button class="tl-modal-btn tl-modal-close">關閉</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modalBackdrop);
-    
-    // 關閉彈窗功能
-    const closeModal = () => {
-      modalBackdrop.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-    
-    // 綁定關閉事件
-    modalBackdrop.querySelector('.tl-close-btn').addEventListener('click', closeModal);
-    modalBackdrop.querySelector('.tl-modal-close').addEventListener('click', closeModal);
-    modalBackdrop.addEventListener('click', (e) => {
-      if (e.target === modalBackdrop) closeModal();
-    });
-    
-    // 鍵盤 ESC 關閉
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalBackdrop.classList.contains('active')) {
-        closeModal();
-      }
-    });
-    
-    return {
-      backdrop: modalBackdrop,
-      title: modalBackdrop.querySelector('.tl-modal-title'),
-      subtitle: modalBackdrop.querySelector('.tl-modal-subtitle'),
-      body: modalBackdrop.querySelector('.tl-modal-body'),
-      link: modalBackdrop.querySelector('.tl-modal-link'),
-      show: (key) => {
-        const data = cardData[key];
-        if (!data) return;
-        
-        // 填充內容
-        modalBackdrop.querySelector('.tl-modal-title').textContent = data.title;
-        modalBackdrop.querySelector('.tl-modal-subtitle').textContent = data.subtitle;
-        modalBackdrop.querySelector('.tl-modal-body').innerHTML = data.content;
-        modalBackdrop.querySelector('.tl-modal-link').href = data.link;
-        
-        // 顯示彈窗
-        modalBackdrop.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        
-        // 設置焦點
-        setTimeout(() => modalBackdrop.querySelector('.tl-close-btn').focus(), 50);
-      }
-    };
-  };
-  
-  // 初始化彈窗
-  const modal = createModal();
-  
-  // ===== 6. 綁定卡片點擊事件 =====
-  document.querySelectorAll('.tl-card').forEach(card => {
-    const key = card.getAttribute('data-key');
-    const btn = card.querySelector('.tl-more');
-    
-    // 整個卡片可點擊
-    card.addEventListener('click', (e) => {
-      // 避免按鈕點擊時重複觸發
-      if (e.target !== btn && !btn.contains(e.target)) {
-        modal.show(key);
-      }
-    });
-    
-    // 按鈕點擊
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation(); // 防止冒泡到卡片
-      modal.show(key);
-    });
-    
-    // 鍵盤無障礙
-    card.setAttribute('tabindex', '0');
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        modal.show(key);
-      }
-    });
-  });
-})();
-</script>
-<!-- 確保圖檔存在: /static/images/timeline/f-avatar.webp hashbrown.webp potato.webp -->
+/* 加载信息 */
+.loading-msg {
+  text-align: center;
+  padding: 3rem 0;
+  font-style: italic;
+  opacity: 0.7;
+}
+</style>
+}
+</style>
