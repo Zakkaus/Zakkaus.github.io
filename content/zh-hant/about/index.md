@@ -854,12 +854,13 @@ body.dark .about-modal a:hover {
   color:#1d6fff!important;
   padding:0 .2rem!important;
   margin:0 .15rem 0 0!important;
-  border-radius:4px!important;
+  border-radius:4px!important;          /* 由原膠囊改為 4px */
   line-height:1.25!important;
   letter-spacing:.25px!important;
+  font-weight:600!important;
   box-shadow:none!important;
   transform:none!important;
-  font-weight:600!important;
+  text-decoration:none!important;
 }
 body.dark .about-page .about-hero a.blue-highlight{
   background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
@@ -868,6 +869,7 @@ body.dark .about-page .about-hero a.blue-highlight{
 .about-page .about-hero a.blue-highlight:hover{
   background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
   color:#fff!important;
+  border-radius:4px!important;
   box-shadow:none!important;
   transform:none!important;
   text-decoration:none!important;
