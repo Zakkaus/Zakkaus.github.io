@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `).join('')}
     </div>
     <div class="tl-footer">
-      <p class="tl-note">Melbourne time UTC+10 (AEST) ❄️</p>
+      <p class="tl-note" id="timeInfo">Melbourne time UTC+10 (AEST) ❄️</p>
     </div>
   </div>
   
@@ -215,6 +215,12 @@ document.addEventListener('DOMContentLoaded', function() {
           `${String(time.hours).padStart(2, '0')}:${String(time.minutes).padStart(2, '0')}:${String(time.seconds).padStart(2, '0')}`;
       }
     });
+    
+    // Update time information
+    const now = getMelbourneTime();
+    const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
+    const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}`;
+    document.getElementById('timeInfo').textContent = `Melbourne time: ${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
   };
   
   // Update immediately once
@@ -264,6 +270,37 @@ body.dark .tl-container {
   .tl-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+  
+  .tl-card {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .tl-image {
+    height: 160px;
+  }
+  
+  .tl-days {
+    font-size: 2.2rem;
+  }
+  
+  .tl-counter {
+    margin-bottom: 0.4rem;
+  }
+  
+  .tl-content {
+    padding: 0.8rem 1rem;
+  }
+  
+  .tl-card {
+    padding-bottom: 2.5rem;
+  }
+  
+  .tl-more {
+    padding: 0.6rem;
   }
 }
 
@@ -400,6 +437,16 @@ body.dark .tl-more:hover {
   margin: 0;
   font-weight: 500;
   line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+  .tl-note {
+    white-space: normal;
+    font-size: 0.65rem;
+  }
 }
 
 /* 模態框樣式 - 修復白色薄膜問題 */
