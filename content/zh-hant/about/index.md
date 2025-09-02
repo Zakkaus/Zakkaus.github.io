@@ -689,13 +689,124 @@ body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible {
   color:inherit!important;
   font-weight:700;
 }
+
+/* === 新增：About 模態框樣式（精簡版） === */
+.about-modal-backdrop{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  z-index:9999;
+  opacity:0;visibility:hidden;
+  transition:opacity .25s,visibility .25s;
+}
+.about-modal-backdrop.active{opacity:1;visibility:visible;}
+.about-modal{
+  background:#fff;
+  color:#222;
+  width:100%;max-width:560px;
+  border-radius:18px;
+  padding:1.6rem 1.55rem 1.9rem;
+  position:relative;
+  box-shadow:0 25px 55px -15px rgba(0,0,0,.55);
+  transform:translateY(12px);
+  transition:transform .28s;
+  max-height:85vh;overflow-y:auto;
+  font-size:.9rem;line-height:1.65;
+}
+.about-modal-backdrop.active .about-modal{transform:translateY(0);}
+body.dark .about-modal{
+  background:#26272c;
+  color:#ddd;
+  box-shadow:0 30px 65px -18px rgba(0,0,0,.75);
+}
+.about-modal h4{
+  margin:0 0 .55rem;
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--about-accent);
+  letter-spacing:.5px;
+}
+body.dark .about-modal h4{color:#ff8fb7;}
+.about-modal .am-sub{
+  font-size:.7rem;
+  opacity:.65;
+  letter-spacing:.6px;
+  margin:-.25rem 0 1.1rem;
+  font-weight:600;
+}
+.about-modal-close{
+  position:absolute;
+  top:.8rem;right:.8rem;
+  width:34px;height:34px;
+  border:none;
+  border-radius:50%;
+  background:rgba(0,0,0,.06);
+  cursor:pointer;
+  font-size:1.05rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .22s,transform .22s;
+}
+.about-modal-close:hover{background:rgba(0,0,0,.15);transform:rotate(8deg);}
+body.dark .about-modal-close{background:rgba(255,255,255,.12);color:#ddd;}
+body.dark .about-modal-close:hover{background:rgba(255,255,255,.22);}
+
+.about-modal a{
+  color:var(--about-accent);
+  font-weight:700;
+  text-decoration:none;
+  border-bottom:2px solid var(--about-accent);
+  padding-bottom:1px;
+  transition:color .2s,background .2s,border-color .2s;
+}
+.about-modal a:hover{
+  background:var(--about-accent);
+  color:#fff;
+  border-color:transparent;
+}
+
+.about-inline-link{
+  font-weight:700;
+  color:var(--about-accent);
+  text-decoration:none;
+  position:relative;
+  display:inline-block;
+  padding:.08rem .4rem .12rem;
+  background:rgba(225,48,108,.12);
+  border-radius:8px;
+  line-height:1.15;
+  margin:.05rem .35rem .05rem 0;
+  transition:background .22s,color .22s;
+}
+body.dark .about-inline-link{background:rgba(225,48,108,.28);color:#ff8fb7;}
+.about-inline-link:hover{
+  background:var(--about-accent);
+  color:#fff;
+  text-decoration:none;
+}
+
+.about-modal .am-section{margin:0 0 1.05rem;}
+.about-modal .am-section:last-child{margin-bottom:.3rem;}
+.about-modal .am-tagline{
+  font-size:.68rem;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  opacity:.55;
+  font-weight:600;
+  margin:.2rem 0 .6rem;
+}
+
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 <span class="pet-info"><strong class="blue-highlight">馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：27/07/2025</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span> 與 <span class="pet-info"><strong class="blue-highlight">薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：24/06/2025</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a class="pet-origin" href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
-    <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a class="blue-highlight" href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
+    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 
+      <a href="#" class="about-inline-link" data-am-open="potato">馬鈴薯</a> 與
+      <a href="#" class="about-inline-link" data-am-open="hash">薯餅</a>。
+      我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
+    <p>我與女朋友 <a href="#" class="about-inline-link" data-am-open="couple">Paper</a> 目前分隔於澳洲與台灣，是遠距關係。我們都是 <strong>泛性戀 🩷💛🩵</strong>，每天分享生活、學習與工作。我們有很多相同的愛好與想法，磨合自然，是彼此的<strong> 靈魂伴侶</strong>。我們在 <a class="about-inline-link" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組首次認識 —— <a href="/zh-hant/timeline/#couple" class="about-inline-link">在這裡可以看到我們在一起的時間</a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
 
@@ -727,6 +838,14 @@ body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible {
 </ul>
 </div>
 
+<!-- === 新增：三個模態框容器（共用 Backdrop，多內容切換） === -->
+<div class="about-modal-backdrop" id="aboutModalBackdrop">
+  <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <button class="about-modal-close" type="button" aria-label="關閉" id="aboutModalClose">✕</button>
+    <div id="aboutModalContent"><!-- 動態填入 --></div>
+  </div>
+</div>
+
 <script>
 /* 寵物 tooltip 點擊支援（行動裝置） */
 (()=> {
@@ -749,5 +868,93 @@ body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible {
     });
   });
   document.addEventListener('click',closeAll);
+})();
+
+/* === 新增：About 模態框資料與邏輯 === */
+(()=>{
+  const data = {
+    couple: {
+      title: "我們的關係",
+      sub: "自 2025/08/07 11:38 起",
+      html: `
+        <div class="am-section">
+          <p>我 (Zakk) 與女朋友 (Paper) 目前分隔於 <strong>澳洲 / 台灣</strong>，是遠距關係，我們都是 <strong>泛性戀 🩷💛🩵</strong>，對多元與尊重保持開放。</p>
+        </div>
+        <div class="am-section">
+          <p>每天我們都分享生活、學習與工作進度，也交換想法、音樂與靈感。我們在價值觀、節奏與興趣上高度契合，磨合自然，是彼此認同的 <strong>靈魂伴侶</strong>。</p>
+        </div>
+        <div class="am-section">
+          <p>我們最初在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組認識，從閒聊到陪伴，連結逐步加深；目前每隔幾個月會見面，Paper 計畫高中畢業後來澳洲留學。</p>
+        </div>
+        <div class="am-section">
+          <p><a href="/zh-hant/timeline/#couple" class="about-inline-link">在這裡可以看到我們在一起的時間</a>，也歡迎追蹤 Paper 的 IG：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener">@abyss_74.5</a></p>
+        </div>
+      `
+    },
+    hash: {
+      title: "薯餅 (Hash Brown)",
+      sub: "生日：2025/06/24",
+      html: `
+        <div class="am-section">
+          <p>薯餅是一隻 <strong>純種泰迪天竺鼠</strong>，毛色淺咖啡，個性活潑好動，常在籠子裡高速跑圈並把小屋推著走。</p>
+        </div>
+        <div class="am-section">
+          <p>最愛 <strong>紅 / 綠甜椒、玉米鬚、胡蘿蔔</strong>。傍晚最活躍，會發出吱吱聲討零食。</p>
+        </div>
+        <div class="am-section">
+          <p><a href="/zh-hant/timeline/#hash" class="about-inline-link">在這裡可以看到牠的天數</a>，也可到 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a> 看更多照片。</p>
+        </div>
+      `
+    },
+    potato: {
+      title: "馬鈴薯 (Potato)",
+      sub: "生日：2025/07/27",
+      html: `
+        <div class="am-section">
+          <p>馬鈴薯是 <strong>純種泰迪天竺鼠</strong>，毛色深巧克力，勇敢又偏貪吃，常邊吃邊玩甚至「吃到一半順便排泄」。</p>
+        </div>
+        <div class="am-section">
+          <p>喜歡 <strong>甜椒、玉米鬚、胡蘿蔔</strong>，也常埋在草堆裡睡覺醒來續吃，是個樂天的小傢伙。</p>
+        </div>
+        <div class="am-section">
+          <p><a href="/zh-hant/timeline/#potato" class="about-inline-link">在這裡可以看到牠的天數</a>，更多日常見 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a>。</p>
+        </div>
+      `
+    }
+  };
+
+  const backdrop = document.getElementById('aboutModalBackdrop');
+  const contentWrap = document.getElementById('aboutModalContent');
+  const closeBtn = document.getElementById('aboutModalClose');
+
+  function openModal(key){
+    const d = data[key];
+    if(!d) return;
+    contentWrap.innerHTML = `
+      <h4 id="aboutModalTitle">${d.title}</h4>
+      <div class="am-sub">${d.sub}</div>
+      ${d.html}
+    `;
+    backdrop.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){
+    backdrop.classList.remove('active');
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-am-open]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      openModal(a.getAttribute('data-am-open'));
+    });
+  });
+  backdrop.addEventListener('click',e=>{
+    if(e.target===backdrop) closeModal();
+  });
+  closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape' && backdrop.classList.contains('active')) closeModal();
+  });
 })();
 </script>
