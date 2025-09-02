@@ -274,6 +274,7 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   flex-direction: column;
   border: 1px solid var(--tl-border-light);
   height: 100%;
+  position: relative;
 }
 
 body.dark .tl-card {
@@ -286,21 +287,23 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 解決圓角裁切問題 */
+/* 圖片容器 - 完全覆蓋卡片頂部 */
 .tl-image {
   position: relative;
   width: 100%;
   padding-top: 100%; /* 1:1 正方形比例 */
   background-color: #f0f0f0;
+  overflow: hidden;
+  margin: -1px;
+  margin-bottom: 0;
   border-radius: var(--tl-radius) var(--tl-radius) 0 0;
-  margin-top: -1px; /* 解決圓角露出問題 */
-  margin-left: -1px;
-  margin-right: -1px;
-  width: calc(100% + 2px); /* 稍微放大避免邊緣問題 */
+  border-bottom: 1px solid var(--tl-border-light);
+  z-index: 1;
 }
 
 body.dark .tl-image {
   background-color: #333;
+  border-bottom: 1px solid var(--tl-border-dark);
 }
 
 /* 圖片居中裁切 */
@@ -327,6 +330,7 @@ body.dark .tl-image {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  background: inherit;
 }
 
 .tl-content h3 {
@@ -627,7 +631,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機響應式設計 */
+/* 手機響應式設計 - 修復手機版按鈕問題 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -639,21 +643,33 @@ body.dark .tl-close-btn:hover {
     display: grid;
     grid-template-columns: 110px 1fr;
     height: auto;
+    min-height: 110px; /* 確保足夠高度 */
+    grid-template-rows: auto;
+    grid-template-areas: "image content";
   }
   
   .tl-image {
     width: 110px;
     height: 110px;
     padding-top: 0;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     margin: 0;
+    grid-area: image;
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
+    border-bottom: none;
+    border-right: 1px solid var(--tl-border-light);
+  }
+  
+  body.dark .tl-image {
+    border-right: 1px solid var(--tl-border-dark);
   }
   
   .tl-content {
     width: auto;
     text-align: left;
     padding: 0.7rem 0.8rem;
+    padding-bottom: 2.5rem; /* 為按鈕留出空間 */
     position: relative;
+    grid-area: content;
   }
   
   .tl-counter {
@@ -678,21 +694,25 @@ body.dark .tl-close-btn:hover {
     margin-top: 0.2rem;
   }
   
+  /* 修復手機版按鈕 */
   .tl-more {
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
+    left: auto; /* 取消左側對齊 */
     width: auto;
     padding: 0.4rem 0.7rem;
     font-size: 0.65rem;
     border-radius: 6px;
     border: none;
+    margin: 0; /* 重置外邊距 */
     background: rgba(0,0,0,0.05);
+    border-top: none; /* 移除頂部邊框 */
+    z-index: 2;
   }
   
   body.dark .tl-more {
     background: rgba(255,255,255,0.08);
-    border: none;
   }
 }
 
@@ -712,7 +732,7 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    padding: 0.6rem 0.7rem;
+    padding: 0.6rem 0.7rem 2.5rem 0.7rem;
   }
   
   .tl-content h3 {
@@ -723,31 +743,11 @@ body.dark .tl-close-btn:hover {
   .tl-more {
     padding: 0.3rem 0.6rem;
     font-size: 0.6rem;
+    right: 0.4rem;
+    bottom: 0.4rem;
   }
 }
 </style>
-  .tl-content h3 {
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-  
-  .tl-more {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.6rem;
-  }
-}
-</style>
-    font-size: 1.5rem;
-  }
-  
-  .tl-content {
-    padding: 0.5rem 0.5rem 2.5rem 0.8rem;
-  }
-  
-  .tl-content h3 {
-    font-size: 0.85rem;
-    margin-bottom: 0.3rem;
-  }
 }
 
 /* 載入提示 */
