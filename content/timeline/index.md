@@ -231,9 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== 時間線設計 ===== */
+/* ===== Timeline Design ===== */
 
-/* 基本變量與容器 */
+/* Basic Variables & Container */
 .tl-container {
   --tl-accent: var(--hb-active, #e1306c);
   --tl-radius: 18px;
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
 
-/* 卡片網格 - 桌面三列 */
+/* Card Grid - Desktop 3 columns */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -262,7 +262,7 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   margin-bottom: 1.25rem;
 }
 
-/* 卡片基本樣式 */
+/* Card Base Style */
 .tl-card {
   background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
@@ -287,26 +287,28 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 完全覆蓋卡片頂部 */
+/* Image Container - Complete Card Top Coverage */
 .tl-image {
   position: relative;
-  width: 100%;
-  padding-top: 100%; /* 1:1 正方形比例 */
+  width: calc(100% + 2px); /* Ensure complete border coverage */
+  height: 0;
+  padding-top: 100%; /* 1:1 square ratio */
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: 0;
   background-color: #f0f0f0;
   overflow: hidden;
-  margin: -1px;
-  margin-bottom: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
-  border-bottom: 1px solid var(--tl-border-light);
-  z-index: 1;
+  border-top-left-radius: var(--tl-radius);
+  border-top-right-radius: var(--tl-radius);
+  z-index: 2; /* Higher priority */
 }
 
 body.dark .tl-image {
   background-color: #333;
-  border-bottom: 1px solid var(--tl-border-dark);
 }
 
-/* 圖片居中裁切 */
+/* Image Centered Cropping */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -314,15 +316,16 @@ body.dark .tl-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   transition: transform 0.35s;
+  display: block; /* Avoid image bottom gap */
 }
 
 .tl-card:hover .tl-image img {
   transform: scale(1.05);
 }
 
-/* 卡片內容區 */
+/* Card Content Area */
 .tl-content {
   padding: 1rem 1.2rem;
   flex-grow: 1;
@@ -331,6 +334,8 @@ body.dark .tl-image {
   justify-content: center;
   text-align: center;
   background: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 .tl-content h3 {
@@ -340,7 +345,7 @@ body.dark .tl-image {
   color: var(--tl-accent);
 }
 
-/* 計數器 */
+/* Counter Styles */
 .tl-counter {
   margin-bottom: 0.6rem;
 }
@@ -367,7 +372,7 @@ body.dark .tl-image {
   margin-top: 0.4rem;
 }
 
-/* 了解更多按鈕 */
+/* Learn More Button */
 .tl-more {
   margin-top: auto;
   background: #f5f5f7;
@@ -397,7 +402,7 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 時間備註 - 左對齊與紅線 */
+/* Time Note - Left Aligned with Pink Line */
 .tl-footer {
   margin-top: 0.8rem;
   text-align: left;
@@ -424,7 +429,7 @@ body.dark .tl-more:hover {
   border-radius: 3px;
 }
 
-/* 模態框樣式 */
+/* Modal Styles */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
@@ -615,7 +620,7 @@ body.dark .tl-close-btn:hover {
   color: white;
 }
 
-/* 載入提示 */
+/* Loading Hint */
 #timelineContainer {
   text-align: center;
   padding: 1rem 0;
@@ -623,7 +628,7 @@ body.dark .tl-close-btn:hover {
   opacity: 0.7;
 }
 
-/* 平板響應式設計 */
+/* Tablet Responsive Design */
 @media (max-width: 1080px) {
   .tl-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -631,7 +636,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機響應式設計 - 修復手機版按鈕問題 */
+/* Mobile Responsive Design - Fix Mobile Button Issues */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -643,7 +648,7 @@ body.dark .tl-close-btn:hover {
     display: grid;
     grid-template-columns: 110px 1fr;
     height: auto;
-    min-height: 110px; /* 確保足夠高度 */
+    min-height: 110px;
     grid-template-rows: auto;
     grid-template-areas: "image content";
   }
@@ -667,7 +672,7 @@ body.dark .tl-close-btn:hover {
     width: auto;
     text-align: left;
     padding: 0.7rem 0.8rem;
-    padding-bottom: 2.5rem; /* 為按鈕留出空間 */
+    padding-bottom: 2.5rem; /* Space for button */
     position: relative;
     grid-area: content;
   }
@@ -694,20 +699,20 @@ body.dark .tl-close-btn:hover {
     margin-top: 0.2rem;
   }
   
-  /* 修復手機版按鈕 */
+  /* Fix mobile button */
   .tl-more {
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
-    left: auto; /* 取消左側對齊 */
+    left: auto;
     width: auto;
     padding: 0.4rem 0.7rem;
     font-size: 0.65rem;
     border-radius: 6px;
     border: none;
-    margin: 0; /* 重置外邊距 */
+    margin: 0;
     background: rgba(0,0,0,0.05);
-    border-top: none; /* 移除頂部邊框 */
+    border-top: none;
     z-index: 2;
   }
   
@@ -716,7 +721,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 超小屏幕適配 */
+/* Extra Small Screen Adaptations */
 @media (max-width: 380px) {
   .tl-card {
     grid-template-columns: 90px 1fr;
@@ -748,11 +753,6 @@ body.dark .tl-close-btn:hover {
   }
 }
 </style>
-}
-
-/* 載入提示 */
-#timelineContainer {
-  text-align: center;
   padding: 3rem 0;
   font-weight: 500;
   opacity: 0.7;

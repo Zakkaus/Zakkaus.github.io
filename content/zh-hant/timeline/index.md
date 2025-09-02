@@ -290,20 +290,22 @@ body.dark .tl-card {
 /* 圖片容器 - 完全覆蓋卡片頂部 */
 .tl-image {
   position: relative;
-  width: 100%;
+  width: calc(100% + 2px); /* 確保完全覆蓋邊框 */
+  height: 0;
   padding-top: 100%; /* 1:1 正方形比例 */
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: 0;
   background-color: #f0f0f0;
   overflow: hidden;
-  margin: -1px;
-  margin-bottom: 0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0;
-  border-bottom: 1px solid var(--tl-border-light);
-  z-index: 1;
+  border-top-left-radius: var(--tl-radius);
+  border-top-right-radius: var(--tl-radius);
+  z-index: 2; /* 提高優先級 */
 }
 
 body.dark .tl-image {
   background-color: #333;
-  border-bottom: 1px solid var(--tl-border-dark);
 }
 
 /* 圖片居中裁切 */
@@ -314,8 +316,9 @@ body.dark .tl-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   transition: transform 0.35s;
+  display: block; /* 避免圖片底部間隙 */
 }
 
 .tl-card:hover .tl-image img {
@@ -331,6 +334,8 @@ body.dark .tl-image {
   justify-content: center;
   text-align: center;
   background: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 .tl-content h3 {
