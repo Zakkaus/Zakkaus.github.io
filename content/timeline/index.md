@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return { days, hours, minutes, seconds };
   };
   
-  // 更新計數器
+  // 更新計數器 - 雪梨時間
   const updateCounters = () => {
     timelineData.forEach(item => {
       const time = timeSince(item.date);
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== Timeline Design - Fixed Image Issues ===== */
+/* ===== Timeline Design - Complete Image Fix ===== */
 
 /* Base container / variables */
 .tl-container{
@@ -264,47 +264,46 @@ body.dark .tl-container{color:rgba(255,255,255,.85);}
 }
 
 /* Card */
-.tl-card{
-  background:var(--tl-bg-light)!important;
-  border-radius:var(--tl-radius);
-  box-shadow:var(--tl-shadow);
-  overflow:hidden; /* Important: ensure radius cropping */
-  cursor:pointer;
-  transition:transform .3s,box-shadow .3s;
-  display:flex;
-  flex-direction:column;
+.tl-card {
+  background: var(--tl-bg-light) !important;
+  border-radius: var(--tl-radius);
+  box-shadow: var(--tl-shadow);
+  overflow: hidden; /* Critical: ensure all content is clipped */
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--tl-border-light);
   height: 100%;
   position: relative;
 }
-body.dark .tl-card{
-  background:var(--tl-bg-dark)!important;
-  border-color:var(--tl-border-dark);
-}
-.tl-card:hover{
-  transform:translateY(-5px);
-  box-shadow:var(--tl-shadow-hover);
+
+body.dark .tl-card {
+  background: var(--tl-bg-dark) !important;
+  border-color: var(--tl-border-dark);
 }
 
-/* Image container - Fixed radius coverage and drift */
+.tl-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--tl-shadow-hover);
+}
+
+/* Image container - Complete rebuild to avoid drift and radius issues */
 .tl-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
-  padding: 0;
-  margin: 0;
+  height: 0;
+  padding-bottom: 100%; /* Use padding-bottom to create 1:1 square */
   background: #f0f0f0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Explicit top radius */
-  border: 0;
-  overflow: hidden;
-  flex-shrink: 0; /* Prevent shrinking causing image distortion */
+  flex-shrink: 0;
+  /* Remove all margin and border-radius settings, let parent handle clipping */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* Image centered cropping - Complete container fill */
+/* Image absolute positioning to fill container */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -315,7 +314,7 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Ensure image has radius too */
+  /* Remove image's own radius settings, let parent overflow handle */
 }
 
 .tl-card:hover .tl-image img {
@@ -588,19 +587,20 @@ body.dark .tl-close-btn:hover{
     min-height: 110px;
     grid-template-rows: auto;
     grid-template-areas: "image content";
-    overflow: hidden; /* Ensure mobile also has radius cropping */
+    overflow: hidden; /* Ensure mobile radius clipping */
   }
   
   .tl-image {
     width: 110px;
     height: 110px;
-    aspect-ratio: auto;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Mobile left radius */
+    padding-bottom: 0; /* Remove padding-bottom for mobile */
     grid-area: image;
+    flex-shrink: 0;
+    /* Remove mobile radius settings, let parent handle */
   }
   
   .tl-image img {
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Image also needs left radius */
+    /* Remove mobile image radius, let parent overflow handle */
   }
   
   .tl-content{

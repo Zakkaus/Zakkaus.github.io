@@ -265,12 +265,12 @@ body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
   margin-bottom: 1.25rem;
 }
 
-/* 卡片基本樣式 */
+/* 卡片基本樣式 - 確保overflow和圓角 */
 .tl-card {
   background: var(--tl-bg-light) !important;
   border-radius: var(--tl-radius);
   box-shadow: var(--tl-shadow);
-  overflow: hidden; /* 重要：確保圓角裁切 */
+  overflow: hidden; /* 關鍵：確保所有內容被裁切 */
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
@@ -290,25 +290,22 @@ body.dark .tl-card {
   box-shadow: var(--tl-shadow-hover);
 }
 
-/* 圖片容器 - 修復圓角覆蓋和漂移 */
+/* 圖片容器 - 完全重構避免漂移和圓角問題 */
 .tl-image {
   position: relative;
   width: 100%;
-  aspect-ratio: 1/1;
-  padding: 0;
-  margin: 0;
+  height: 0;
+  padding-bottom: 100%; /* 使用padding-bottom創建1:1正方形 */
   background: #f0f0f0;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 明確設定上圓角 */
-  border: 0;
-  overflow: hidden;
-  flex-shrink: 0; /* 防止收縮導致圖片變形 */
+  flex-shrink: 0;
+  /* 移除所有邊距和邊框半徑設定，讓父容器處理裁切 */
 }
 
 body.dark .tl-image {
   background: #333;
 }
 
-/* 圖片居中裁切 - 完全填充容器 */
+/* 圖片絕對定位填滿容器 */
 .tl-image img {
   position: absolute;
   top: 0;
@@ -319,7 +316,7 @@ body.dark .tl-image {
   object-position: center;
   display: block;
   transition: transform 0.35s;
-  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 確保圖片也有圓角 */
+  /* 移除圖片自身的圓角設定，讓父容器overflow處理 */
 }
 
 .tl-card:hover .tl-image img {
@@ -637,7 +634,7 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 手機響應式設計 - 修復手機版圖片圓角 */
+/* 手機響應式設計 - 重構側邊圖片布局 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
@@ -652,19 +649,20 @@ body.dark .tl-close-btn:hover {
     min-height: 110px;
     grid-template-rows: auto;
     grid-template-areas: "image content";
-    overflow: hidden; /* 確保手機版也有圓角裁切 */
+    overflow: hidden; /* 確保手機版圓角裁切 */
   }
   
   .tl-image {
     width: 110px;
     height: 110px;
-    aspect-ratio: auto;
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* 手機版左側圓角 */
+    padding-bottom: 0; /* 手機版取消padding-bottom */
     grid-area: image;
+    flex-shrink: 0;
+    /* 移除手機版圓角設定，讓父容器處理 */
   }
   
   .tl-image img {
-    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* 圖片也要有左側圓角 */
+    /* 移除手機版圖片圓角，讓父容器overflow處理 */
   }
   
   .tl-content {
