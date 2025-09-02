@@ -411,6 +411,23 @@ body.dark .about-page .pet-info .pet-tip a:hover{
 /* Remove legacy ::after if present */
 .about-page .pet-info::after{content:none!important;}
 
+/* === 與中文同步：寵物名稱字級與 blue-highlight 微調 === */
+.about-page .pet-info > strong{
+  font-size:inherit!important; /* 和周圍文字同大小 */
+}
+.about-page .pet-info > strong.blue-highlight{
+  margin:.12rem .25rem .12rem 0!important;
+  padding:.18rem .55rem .22rem!important;
+  line-height:1.25!important;
+}
+
+/* 若需要，確保 blue-highlight 連結也有相同間距 */
+.about-page .about-hero a.blue-highlight{
+  margin:.12rem .25rem .12rem 0!important;
+  padding:.18rem .55rem .22rem!important;
+  line-height:1.25!important;
+}
+
 @media (max-width:640px){
   .about-page .pet-info > strong{
     padding:.26rem .6rem .32rem;
@@ -483,7 +500,7 @@ body.dark .about-page .about-hero a.blue-highlight{
   <div class="about-hero">
     <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
     <p>I have two <strong>🐹 guinea pigs</strong>: <span class="pet-info"><strong class="blue-highlight">Potato🥔</strong><span class="pet-tip"><span class="tip-title">Potato</span><span class="tip-line">Birthday: 27 Jul 2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span></span></span> and <span class="pet-info"><strong class="blue-highlight">Hash&nbsp;Brown</strong><span class="pet-tip"><span class="tip-title">Hash Brown</span><span class="tip-line">Birthday: 24 Jun</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span><span class="tip-line">Name idea: <a class="blue-highlight" href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></span></span></span>. I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see them and my daily life on <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
-    <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
+    <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a class="blue-highlight" href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
   </div>
 
