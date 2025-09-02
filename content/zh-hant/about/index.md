@@ -853,11 +853,12 @@ body.dark .about-modal a:hover {
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
     <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，
-      <a href="#" class="blue-highlight" data-am-open="potato">馬鈴薯</a>
+      <a href="#" class="blue-highlight" data-am-open="potato">馬鈴薯</a> 與
       <a href="#" class="blue-highlight" data-am-open="hash">薯餅</a>。
       我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在
       <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>
-      可以看到日常。</p>
+      可以看到日常。薯餅的名字來源於麥當勞早餐的
+      <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="blue-highlight">薯餅</a>。</p>
     <p>我與女朋友 <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> 目前分隔於澳洲與台灣，是遠距關係；我們都是 <strong>泛性戀 🩷💛🩵</strong>，每天分享生活、學習與工作，也常交流音樂與想法。我們有很多相同的愛好與價值觀，磨合自然，是彼此的 <strong>靈魂伴侶</strong>。我們在
       <a class="blue-highlight" href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener">錫蘭 Ceylan</a> 的 Discord 群組第一次認識並開始聊天建立連結 — <a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
@@ -956,10 +957,12 @@ body.dark .about-modal a:hover {
           <p>最愛 <strong>紅 / 綠甜椒、玉米鬚、胡蘿蔔</strong>。傍晚最活躍，會發出吱吱聲討零食。</p>
         </div>
         <div class="am-section">
+          <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="blue-highlight">薯餅</a>，因為我們很喜歡那種香脆的口感。</p>
+        </div>
+        <div class="am-section">
           <p><a href="/zh-hant/timeline/#hash" class="blue-highlight">在這裡可以看到牠的天數</a>｜更多：
              <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p>
-        </div>
-      `
+        </div>`
     },
     potato: {
       title: "馬鈴薯 (Potato)",

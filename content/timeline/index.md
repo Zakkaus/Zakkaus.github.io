@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>Hash Brown is a purebred Teddy guinea pig with light brown fur. She's quite active and playful, loves running laps in her cage, often pushing her house around, and is very energetic during playtime.</p>
         <p>Favorite foods: Red and green bell peppers (absolutely loves them), corn silk, and carrots. She likes to be active in the evening and makes squeaking sounds when asking for treats.</p>
+        <p>Name origin: Named after the McDonald's breakfast <a href="https://mcdonalds.com.au/menu/hash-brown" target="_blank" rel="noopener" class="tl-highlight-link">hash brown</a> because the crispy feel matches her lively personality.</p>
         <p>More cute photos of Hash Brown on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
