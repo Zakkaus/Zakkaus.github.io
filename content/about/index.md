@@ -180,20 +180,32 @@ body.dark .about-page .about-hero a.blue-highlight:hover{
     </p>
   </div>
 
-  <h3>Gear</h3>
-  <ul>
-    <li>Desktop: Ryzen 9 7950X3D / RTX 4080 SUPER / 64GB DDR5</li>
-    <li>Laptops: MacBook Air M2 / ROG Zephyrus G16 Air</li>
-    <li>Phones: Z Fold 7 / Pixel 7 Pro / iPhone 14 / iPhone 16 Pro</li>
-  </ul>
+### 💻 Desktop
+- Motherboard: ASUS ROG STRIX X670E-A GAMING WIFI  
+- CPU: AMD Ryzen 9 7950X3D (16C / 32T)  
+- GPU: NVIDIA GeForce RTX 4080 SUPER  
+- Memory: 64 GB DDR5 6400 MHz  
+- Network: Static public IP (Aussie Telecom, 1000/50 Mbps)  
+- Router: BE9300 Tri-band Wi‑Fi 7  
+- OS: Windows 11 Pro 64-bit + Gentoo Linux (KDE Plasma)
 
-  <h3>Contact</h3>
-  <ul class="about-contacts">
-    <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></li>
-    <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener" class="blue-highlight">GitHub</a></li>
-    <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener" class="blue-highlight">X / Twitter</a></li>
-    <li><a href="mailto:admin@zakk.au" class="blue-highlight">admin@zakk.au</a></li>
-  </ul>
+### 💼 Laptops
+- Apple MacBook Air M2 (16GB / 512GB)  
+- ASUS ROG Zephyrus G16 Air  
+
+### 📱 Phones
+- Samsung Galaxy Z Fold 7  
+- Google Pixel 7 Pro  
+- iPhone 14  
+- iPhone 16 Pro  
+
+### 🔗 Contact
+<ul class="about-contacts">
+  <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></li>
+  <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener" class="blue-highlight">GitHub</a></li>
+  <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener" class="blue-highlight">X / Twitter</a></li>
+  <li><a href="mailto:admin@zakk.au" class="blue-highlight">admin@zakk.au</a></li>
+</ul>
 </div>
 
 <!-- Shared Modal -->
