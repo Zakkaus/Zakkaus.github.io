@@ -541,21 +541,25 @@ body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
 .about-page .pet-info .pet-tip a{
   color:#1d6fff;
   font-weight:600;
-  text-decoration:none;
-  border-bottom:1px dotted rgba(29,111,255,.55);
-  padding-bottom:1px;
+  text-decoration:underline;
+  border-bottom:none!important; /* 移除原本 dotted 底線樣式 */
+  padding-bottom:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  transition:color .16s ease-in-out;
 }
-.about-page .pet-info .pet-tip a:hover{
+.about-page .pet-info .pet-tip a:hover,
+.about-page .pet-info .pet-tip a:focus{
   color:#0b3dff;
-  border-color:#0b3dff;
+  text-decoration:underline;
+  box-shadow:none;
 }
 body.dark .about-page .pet-info .pet-tip a{
-  color:#75b8ff;
-  border-color:rgba(117,184,255,.55);
+  color:#7fc8ff;
 }
-body.dark .about-page .pet-info .pet-tip a:hover{
-  color:#a8d5ff;
-  border-color:#a8d5ff;
+body.dark .about-page .pet-info .pet-tip a:hover,
+body.dark .about-page .pet_info .pet-tip a:focus{
+  color:#bfe9ff;
 }
 
 /* 移除舊 ::after 方案（若殘留） */
