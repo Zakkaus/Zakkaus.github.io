@@ -579,12 +579,72 @@ body.dark .about-page .pet-info .pet-tip a:hover{
   .about-page .pet-info > strong,
   .about-page .pet-info .pet-tip{transition:none!important;transform:none!important;}
 }
+
+/* === 藍色高亮（與粉色 strong 同造型，只換色） === */
+.about-page .about-hero .blue-highlight,
+.about-page .about-hero a.blue-highlight,
+.about-page .about-hero .blue-highlight strong{
+  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%)!important;
+  color:#1d6fff!important;
+  padding:.18rem .55rem .22rem!important;
+  margin:.12rem .25rem .12rem 0!important;
+  border-radius:999px!important;
+  line-height:1.15;
+  letter-spacing:.3px;
+  display:inline-block;
+  font-weight:600;
+  text-decoration:none;
+  position:relative;
+  transition:color .25s,background .25s,box-shadow .25s;
+}
+body.dark .about-page .about-hero .blue-highlight,
+body.dark .about-page .about-hero a.blue-highlight,
+body.dark .about-page .about-hero .blue-highlight strong{
+  background:linear-gradient(to top,rgba(29,111,255,.45),rgba(29,111,255,0) 65%)!important;
+  color:#79b6ff!important;
+}
+.about-page .about-hero a.blue-highlight:hover{
+  box-shadow:0 0 0 2px rgba(29,111,255,.25);
+  text-decoration:none;
+}
+
+/* 移除先前 hero a 藍色膠囊按鈕樣式（若存在） */
+.about-page .about-hero a{
+  background:none;
+  border:none;
+  padding:0;
+  margin:0;
+  box-shadow:none;
+  color:var(--about-accent);
+  display:inline;
+}
+.about-page .about-hero a:hover{text-decoration:underline;}
+/* 只對標記為 blue-highlight 的連結再套上藍色造型 */
+.about-page .about-hero a.blue-highlight{padding:0!important;margin:.12rem .25rem .12rem 0!important;}
+
+/* 寵物名稱：撤銷 pill，改用藍色高亮；保留 tooltip 內容容器 */
+.about-page .pet-info > strong{
+  background:none!important;
+  padding:0!important;
+  margin:0!important;
+  border:none!important;
+}
+.about-page .pet-info > strong.blue-highlight{ /* 由 blue-highlight 控制外觀 */ }
+
+/* Tooltip 位置微調因為膠囊高度稍降 */
+.about-page .pet-info .pet-tip{top:100%;}
+
+/* 若有舊的 pet-info pill 陰影/邊框移除 */
+.about-page .pet-info,
+.about-page .pet-info > strong{
+  box-shadow:none!important;
+}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了 <strong>🐹 天竺鼠</strong>（名字：<span class="pet-info"><strong>馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span>、<span class="pet-info"><strong>薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>）。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常會聽偏憂鬱氛圍的音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到我的天竺鼠與日常。</p>
+    <p>我養了兩隻 <strong>🐹 天竺鼠</strong>，他們分別是 <span class="pet-info"><strong class="blue-highlight">馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span> 與 <span class="pet-info"><strong class="blue-highlight">薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a class="blue-highlight" href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常聽偏憂鬱氛圍音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到他們與我的日常。</p>
     <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>

@@ -426,12 +426,63 @@ body.dark .about-page .pet-info .pet-tip a:hover{
   .about-page .pet-info > strong,
   .about-page .pet-info .pet-tip{transition:none!important;transform:none!important;}
 }
+
+/* === Blue highlight (same capsule style as pink strong) === */
+.about-page .about-hero .blue-highlight,
+.about-page .about-hero a.blue-highlight,
+.about-page .about-hero .blue-highlight strong{
+  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%)!important;
+  color:#1d6fff!important;
+  padding:.18rem .55rem .22rem!important;
+  margin:.12rem .25rem .12rem 0!important;
+  border-radius:999px!important;
+  line-height:1.15;
+  letter-spacing:.3px;
+  display:inline-block;
+  font-weight:600;
+  text-decoration:none;
+  transition:color .25s,background .25s,box-shadow .25s;
+}
+body.dark .about-page .about-hero .blue-highlight,
+body.dark .about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.45),rgba(29,111,255,0) 65%)!important;
+  color:#79b6ff!important;
+}
+.about-page .about-hero a.blue-highlight:hover{
+  box-shadow:0 0 0 2px rgba(29,111,255,.25);
+  text-decoration:none;
+}
+
+/* Reset previous hero link pill style */
+.about-page .about-hero a{
+  background:none;
+  border:none;
+  padding:0;
+  margin:0;
+  box-shadow:none;
+  color:var(--about-accent);
+  display:inline;
+}
+.about-page .about-hero a:hover{text-decoration:underline;}
+.about-page .about-hero a.blue-highlight{padding:0!important;margin:.12rem .25rem .12rem 0!important;}
+
+/* Pet name revert to blue highlight (remove pill) */
+.about-page .pet-info > strong{
+  background:none!important;
+  padding:0!important;
+  margin:0!important;
+  border:none!important;
+}
+.about-page .pet-info > strong.blue-highlight{}
+
+/* Tooltip adjust (keep) */
+.about-page .pet-info .pet-tip{top:100%;}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
-    <p>I keep <strong>🐹 guinea pigs</strong> (names: <span class="pet-info"><strong>Hash&nbsp;Brown🥔</strong><span class="pet-tip"><span class="tip-title">Hash Brown</span><span class="tip-line">Birthday: 27 Jul 2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span></span></span> and <span class="pet-info"><strong>Potato</strong><span class="pet-tip"><span class="tip-title">Potato</span><span class="tip-line">Birthday: 24 Jun</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span><span class="tip-line">Name idea: <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></span></span></span>). I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see my guinea pigs and daily life on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
+    <p>I have two <strong>🐹 guinea pigs</strong>: <span class="pet-info"><strong class="blue-highlight">Hash&nbsp;Brown🥔</strong><span class="pet-tip"><span class="tip-title">Hash Brown</span><span class="tip-line">Birthday: 27 Jul 2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span></span></span> and <span class="pet-info"><strong class="blue-highlight">Potato</strong><span class="pet-tip"><span class="tip-title">Potato</span><span class="tip-line">Birthday: 24 Jun</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span><span class="tip-line">Name idea: <a class="blue-highlight" href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></span></span></span>. I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see them and my daily life on <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
   </div>
