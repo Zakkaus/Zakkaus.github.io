@@ -648,12 +648,12 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 110px;
-    height: 110px;
+    height: 125px; /* Increase from 110px to 125px, extend downward */
     padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin-top: -15px; /* Increase from -10px to -15px, move further up */
-    margin-left: -5px; /* Change from -10px to -5px, move slightly right */
+    margin-top: -15px;
+    margin-left: -5px;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     overflow: hidden;
   }
@@ -720,9 +720,9 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 90px;
-    height: 90px;
-    margin-top: -15px; /* Increase from -10px to -15px, move further up */
-    margin-left: -5px; /* Change from -10px to -5px, move slightly right */
+    height: 105px; /* Increase from 90px to 105px, extend downward */
+    margin-top: -15px;
+    margin-left: -5px;
   }
   
   .tl-days {

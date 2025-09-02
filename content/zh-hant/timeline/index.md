@@ -657,12 +657,12 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 110px;
-    height: 110px;
+    height: 125px; /* 從 110px 增加到 125px，向下延伸 */
     padding-bottom: 0;
     grid-area: image;
     flex-shrink: 0;
-    margin-top: -15px; /* 從 -10px 增加到 -15px，進一步向上移動 */
-    margin-left: -5px; /* 從 -10px 改為 -5px，向右移動一點 */
+    margin-top: -15px;
+    margin-left: -5px;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
     overflow: hidden;
   }
@@ -730,9 +730,9 @@ body.dark .tl-close-btn:hover {
   
   .tl-image {
     width: 90px;
-    height: 90px;
-    margin-top: -15px; /* 從 -10px 增加到 -15px，進一步向上移動 */
-    margin-left: -5px; /* 從 -10px 改為 -5px，向右移動一點 */
+    height: 105px; /* 從 90px 增加到 105px，向下延伸 */
+    margin-top: -15px;
+    margin-left: -5px;
   }
   
   .tl-content {
