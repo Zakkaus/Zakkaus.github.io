@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== Timeline (EN) - Synced with zh-hant cleaned version ===== */
+/* ===== Timeline Design - Fixed Image Issues ===== */
 
 /* Base container / variables */
 .tl-container{
@@ -266,16 +266,16 @@ body.dark .tl-container{color:rgba(255,255,255,.85);}
 /* Card */
 .tl-card{
   background:var(--tl-bg-light)!important;
-  border:1px solid var(--tl-border-light);
   border-radius:var(--tl-radius);
   box-shadow:var(--tl-shadow);
-  display:flex;
-  flex-direction:column;
-  position:relative;
-  height:100%;
-  overflow:hidden; /* 關鍵：裁切圖片圓角 */
+  overflow:hidden; /* Important: ensure radius cropping */
   cursor:pointer;
   transition:transform .3s,box-shadow .3s;
+  display:flex;
+  flex-direction:column;
+  border: 1px solid var(--tl-border-light);
+  height: 100%;
+  position: relative;
 }
 body.dark .tl-card{
   background:var(--tl-bg-dark)!important;
@@ -286,29 +286,41 @@ body.dark .tl-card{
   box-shadow:var(--tl-shadow-hover);
 }
 
-/* Image wrapper (square, no drift) */
-.tl-image{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;
-  margin:0;
-  background:#f0f0f0;
-  border:0;
-  border-radius:inherit; /* 繼承上圓角 */
-  overflow:hidden;
+/* Image container - Fixed radius coverage and drift */
+.tl-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  padding: 0;
+  margin: 0;
+  background: #f0f0f0;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Explicit top radius */
+  border: 0;
+  overflow: hidden;
+  flex-shrink: 0; /* Prevent shrinking causing image distortion */
 }
-body.dark .tl-image{background:#333;}
-.tl-image img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-  transition:transform .35s;
+
+body.dark .tl-image {
+  background: #333;
 }
-.tl-card:hover .tl-image img{transform:scale(1.05);}
+
+/* Image centered cropping - Complete container fill */
+.tl-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.35s;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* Ensure image has radius too */
+}
+
+.tl-card:hover .tl-image img {
+  transform: scale(1.05);
+}
 
 /* Content */
 .tl-content{
@@ -566,20 +578,31 @@ body.dark .tl-close-btn:hover{
   .tl-grid{
     grid-template-columns:1fr;
     gap:1rem;
-    padding:0 .5rem;
+    padding:0 0.5rem;
   }
-  .tl-card{
-    display:grid;
-    grid-template-columns:110px 1fr;
-    min-height:110px;
-    grid-template-areas:"image content";
+  
+  .tl-card {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    height: auto;
+    min-height: 110px;
+    grid-template-rows: auto;
+    grid-template-areas: "image content";
+    overflow: hidden; /* Ensure mobile also has radius cropping */
   }
-  .tl-image{
-    width:110px;
-    height:110px;
-    aspect-ratio:auto;
-    border-radius:var(--tl-radius) 0 0 var(--tl-radius);
+  
+  .tl-image {
+    width: 110px;
+    height: 110px;
+    aspect-ratio: auto;
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Mobile left radius */
+    grid-area: image;
   }
+  
+  .tl-image img {
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius); /* Image also needs left radius */
+  }
+  
   .tl-content{
     text-align:left;
     padding:.7rem .8rem 2.5rem;
