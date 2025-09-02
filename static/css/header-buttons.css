@@ -980,3 +980,36 @@ html[lang="zh-hant"] .about-page .about-contacts a {
   .about-page .about-contacts a{transition:none!important;box-shadow:none!important;}
 }
 /* === End About 聯絡方式膠囊統一 === */
+
+/* === EN About Contact 對齊調整：保留與有圓點版本相同縮排，但不顯示點 === */
+html[lang="en"] .about-page .about-contacts {
+  --about-contact-indent: 1.1rem; /* 與先前有圓點列表 padding-left 相同 */
+}
+html[lang="en"] .about-page .about-contacts li {
+  padding-left: var(--about-contact-indent) !important;
+  position: relative;
+}
+html[lang="en"] .about-page .about-contacts li::before {
+  content: "";               /* 佔位，不顯示 */
+  position: absolute;
+  left: 0;
+  top: .95rem;                /* 與中文粉點垂直位置一致 */
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;    /* 不上色，達成「留空」效果 */
+}
+
+/* 行動端微調保持縮排一致 */
+@media (max-width:640px){
+  html[lang="en"] .about-page .about-contacts li {
+    padding-left: var(--about-contact-indent) !important;
+  }
+}
+
+/* 若使用 prefers-reduced-motion 不影響此縮排 */
+@media (prefers-reduced-motion:reduce){
+  html[lang="en"] .about-page .about-contacts li::before { transition:none; }
+}
+
+/* === End EN About Contact 對齊調整 === */
