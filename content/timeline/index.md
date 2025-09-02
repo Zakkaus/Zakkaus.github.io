@@ -339,7 +339,7 @@ body.dark .tl-image {
 
 /* Counter */
 .tl-counter {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.3rem; /* 從 0.6rem 減少到 0.3rem */
 }
 
 .tl-days {
@@ -678,12 +678,12 @@ body.dark .tl-close-btn:hover {
     display: flex;
     align-items: flex-end;
     gap: 0.5rem;
-    margin-bottom: 0.2rem; /* Increase from 0.1rem to 0.2rem */
+    margin-bottom: 0.1rem; /* 保持較小間距 */
   }
   
   .tl-meta {
     font-size: 0.65rem;
-    margin-top: 0.15rem; /* Increase from 0.1rem to 0.15rem */
+    margin-top: 0.1rem; /* 從 0.15rem 減少到 0.1rem */
   }
   
   .tl-more {
