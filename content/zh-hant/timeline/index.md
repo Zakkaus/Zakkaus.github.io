@@ -5,12 +5,14 @@ toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
 ---
+<!-- 圖片來源：請確認 /static/images/timeline/ 內存在下列檔案 -->
+<!-- gf-avatar.jpg, hashbrown.jpg, potato.jpg -->
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
+      <!-- 女友頭像 -->
       <img class="avatar timeline-img" alt="女友頭像"
-           src="/images/timeline/gf-avatar.jpg"
-           data-fallback="/images/gf-avatar.jpg,/images/timeline/gf-avatar.webp,/images/gf-avatar.webp">
+           src="/images/timeline/gf-avatar.jpg">
       <div class="d-content">
         <h3 data-i18n="coupleTitle">我們在一起的天數</h3>
         <p class="d-num" id="togetherDays">--</p>
@@ -18,9 +20,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
+      <!-- 薯餅 -->
       <img class="pet-img timeline-img" alt="薯餅"
-           src="/images/timeline/hashbrown.jpg"
-           data-fallback="/images/hashbrown.jpg,/images/timeline/hashbrown.webp,/images/hashbrown.webp">
+           src="/images/timeline/hashbrown.jpg">
       <div class="d-content">
         <h3 data-i18n="hashTitle">薯餅天數歲數</h3>
         <p class="d-num" id="hashDays">--</p>
@@ -28,9 +30,9 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
+      <!-- 馬鈴薯 -->
       <img class="pet-img timeline-img" alt="馬鈴薯"
-           src="/images/timeline/potato.jpg"
-           data-fallback="/images/potato.jpg,/images/timeline/potato.webp,/images/potato.webp">
+           src="/images/timeline/potato.jpg">
       <div class="d-content">
         <h3 data-i18n="potatoTitle">馬鈴薯天數歲數</h3>
         <p class="d-num" id="potatoDays">--</p>
