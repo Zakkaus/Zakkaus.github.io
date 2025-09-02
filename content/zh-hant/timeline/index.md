@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>薯餅是一隻純種泰迪天竺鼠，毛色淺咖啡。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
         <p>最愛的食物：紅色和綠甜椒（超級喜歡）、玉米鬚和胡蘿蔔。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
-        <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="tl-highlight-link">薯餅</a>，因為那香脆的感覺與牠活潑的性格很像。</p>
+        <p>名字來源：取自麥當勞早餐 <a href="https://www.mcdonalds.com/tw/zh-tw/product/hash-browns.html" target="_blank" rel="noopener" class="tl-highlight-link"><strong>薯餅</strong></a>，因為那香脆的感覺與牠活潑的性格很像。</p>
         <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"

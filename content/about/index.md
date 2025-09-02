@@ -133,9 +133,8 @@ body.dark .about-modal a:hover{box-shadow:0 0 0 3px rgba(29,111,255,.35);}
     <p>I have two <strong>guinea pigs</strong>:
       <a href="#" class="blue-highlight" data-am-open="potato">Potato</a> and
       <a href="#" class="blue-highlight" data-am-open="hash">Hash&nbsp;Brown</a>.
-      I like <strong>gaming</strong>, <strong>Linux</strong>, <strong>finance</strong>; follow Apple / Samsung / Google ecosystems; listen to melancholic ambient music and sometimes <strong>draw</strong> & <strong>design</strong>. See more on
-      <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>. Hash Brown was named after the McDonald’s breakfast
-      <a href="https://mcdonalds.com.au/menu/hash-brown" target="_blank" rel="noopener" class="blue-highlight">hash brown</a>.
+      I like <strong>gaming</strong>, <strong>Linux</strong>, <strong>finance</strong>; follow Apple / Samsung / Google ecosystems; listen to melancholic ambient music and sometimes <strong>draw</strong> & <strong>design</strong>. See more of them on
+      <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.
     </p>
     <p>My girlfriend <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> and I are currently long‑distance (Australia / Taiwan); we are both <strong>pansexual 🩷💛🩵</strong> and share daily life, study, work, music and thoughts. We have many aligned interests and values, naturally compatible — true <strong>soulmates</strong>. We first met in
       <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord community — <a href="/timeline/#couple" class="blue-highlight">see how long we've been together here</a>.
@@ -185,7 +184,6 @@ body.dark .about-modal a:hover{box-shadow:0 0 0 3px rgba(29,111,255,.35);}
       html:`
         <div class="am-section"><p>Purebred Teddy guinea pig, light brown, energetic and loves running laps.</p></div>
         <div class="am-section"><p>Favorites: red/green bell peppers, corn silk, carrots; very vocal in evenings.</p></div>
-        <div class="am-section"><p>Name origin: Named after the McDonald’s <a href="https://mcdonalds.com.au/menu/hash-brown" target="_blank" rel="noopener" class="blue-highlight">hash brown</a> because we love that crispy snack.</p></div>
         <div class="am-section"><p><a href="/timeline/#hash" class="blue-highlight">See her day counter</a> | More: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p></div>
       `
     },
