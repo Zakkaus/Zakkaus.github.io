@@ -661,16 +661,16 @@ body.dark .tl-close-btn:hover {
   .tl-content {
     width: auto;
     text-align: left;
-    padding: 0.6rem 0.8rem; /* Adjust back from 0.5rem to 0.6rem */
+    padding: 0.6rem 0.8rem;
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    margin-top: -2px; /* Reduce from -5px to -2px, leave more gap */
-    margin-left: 0;
+    margin-top: 0px; /* Change from -2px to 0px, move down */
+    margin-left: 5px; /* Add right movement */
   }
   
   .tl-content h3 {
-    margin-top: -2px; /* Reduce from -5px to -2px */
+    margin-top: 0px; /* Change from -2px to 0px */
     margin-bottom: 0.4rem;
   }
   
@@ -725,13 +725,14 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    padding: 0.5rem 0.7rem 2.5rem 0.7rem; /* Adjust back from 0.4rem to 0.5rem */
-    margin-top: -2px; /* Reduce from -5px to -2px */
+    padding: 0.5rem 0.7rem 2.5rem 0.7rem;
+    margin-top: 0px; /* Change from -2px to 0px */
+    margin-left: 5px; /* Add right movement */
   }
   
   .tl-content h3 {
     font-size: 0.9rem;
-    margin-top: -2px; /* Reduce from -5px to -2px */
+    margin-top: 0px; /* Change from -2px to 0px */
     margin-bottom: 0.4rem;
   }
   
@@ -740,9 +741,6 @@ body.dark .tl-close-btn:hover {
     font-size: 0.6rem;
     right: 0.4rem;
     bottom: 0.4rem;
-  }
-}
-</style>
   }
 }
 </style>

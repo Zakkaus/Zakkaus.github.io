@@ -670,16 +670,16 @@ body.dark .tl-close-btn:hover {
   .tl-content {
     width: auto;
     text-align: left;
-    padding: 0.6rem 0.8rem; /* 從 0.5rem 調整回 0.6rem */
+    padding: 0.6rem 0.8rem;
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    margin-top: -2px; /* 從 -5px 減少到 -2px，留更多空隙 */
-    margin-left: 0;
+    margin-top: 0px; /* 從 -2px 改為 0px，向下移動 */
+    margin-left: 5px; /* 新增右移 */
   }
   
   .tl-content h3 {
-    margin-top: -2px; /* 從 -5px 減少到 -2px */
+    margin-top: 0px; /* 從 -2px 改為 0px */
     margin-bottom: 0.4rem;
   }
   
@@ -731,13 +731,14 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    padding: 0.5rem 0.7rem 2.5rem 0.7rem; /* 從 0.4rem 調整回 0.5rem */
-    margin-top: -2px; /* 從 -5px 減少到 -2px */
+    padding: 0.5rem 0.7rem 2.5rem 0.7rem;
+    margin-top: 0px; /* 從 -2px 改為 0px */
+    margin-left: 5px; /* 新增右移 */
   }
   
   .tl-content h3 {
     font-size: 0.9rem;
-    margin-top: -2px; /* 從 -5px 減少到 -2px */
+    margin-top: 0px; /* 從 -2px 改為 0px */
     margin-bottom: 0.4rem;
   }
   
