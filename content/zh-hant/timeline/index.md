@@ -215,10 +215,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    // 更新時間資訊
+    // 更新時間資訊，添加秒數顯示
     const now = getMelbourneTime();
     const dateStr = `${String(now.getUTCDate()).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(2, '0')}/${now.getUTCFullYear()}`;
-    const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}`;
+    const timeStr = `${String(now.getUTCHours()).padStart(2, '0')}:${String(now.getUTCMinutes()).padStart(2, '0')}:${String(now.getUTCSeconds()).padStart(2, '0')}`;
     document.getElementById('timeInfo').textContent = `墨爾本時間：${dateStr} ${timeStr} - UTC+10 (AEST) ❄️`;
   };
   
@@ -251,7 +251,7 @@ body.dark .tl-container {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* 網格布局 */
+/* 網格布局 - 優化手機顯示 */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -277,32 +277,6 @@ body.dark .tl-container {
   }
 }
 
-@media (max-width: 480px) {
-  .tl-image {
-    height: 160px;
-  }
-  
-  .tl-days {
-    font-size: 2.2rem;
-  }
-  
-  .tl-counter {
-    margin-bottom: 0.4rem;
-  }
-  
-  .tl-content {
-    padding: 0.8rem 1rem;
-  }
-  
-  .tl-card {
-    padding-bottom: 2.5rem;
-  }
-  
-  .tl-more {
-    padding: 0.6rem;
-  }
-}
-
 /* 卡片樣式 */
 .tl-card {
   position: relative;
@@ -314,6 +288,8 @@ body.dark .tl-container {
   box-shadow: 0 8px 25px -10px rgba(0,0,0,0.15);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 body.dark .tl-card {
@@ -335,6 +311,7 @@ body.dark .tl-card {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 body.dark .tl-image {
@@ -356,6 +333,10 @@ body.dark .tl-image {
 .tl-content {
   padding: 1.2rem 1.4rem;
   text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tl-content h3 {
@@ -426,6 +407,7 @@ body.dark .tl-more:hover {
 .tl-footer {
   text-align: left;
   padding: 0;
+  overflow: hidden;
 }
 
 .tl-note {
@@ -618,7 +600,7 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 */
+/* 手機適配 - 優化佈局 */
 @media (max-width: 640px) {
   .tl-image {
     height: 180px;
@@ -638,6 +620,64 @@ body.dark .tl-close-btn:hover {
   
   .tl-modal-title {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tl-grid {
+    gap: 1.2rem;
+  }
+  
+  .tl-card {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0;
+    max-height: 160px;
+  }
+  
+  .tl-image {
+    width: 40%;
+    height: 160px;
+  }
+  
+  .tl-content {
+    width: 60%;
+    padding: 0.8rem 0.5rem 0.8rem 1rem;
+    text-align: left;
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+  
+  .tl-days {
+    font-size: 2rem;
+    text-align: left;
+  }
+  
+  .tl-time {
+    font-size: 0.7rem;
+  }
+  
+  .tl-meta {
+    font-size: 0.65rem;
+  }
+  
+  .tl-more {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .tl-content h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .tl-note {
+    white-space: normal;
+    font-size: 0.65rem;
   }
 }
 
