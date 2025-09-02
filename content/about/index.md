@@ -503,34 +503,34 @@ body.dark .about-page .about-hero a.blue-highlight{
 .about-page .pet-info .pet-tip a.pet-origin{
   all:unset;
   cursor:pointer;
-  display:inline-block;
-  padding:.32rem .6rem .36rem;
-  font-size:.68rem;
-  line-height:1.1;
-  font-weight:600;
-  background:#1d6fff;
-  color:#fff;
-  border-radius:6px;
-  transition:background-color .18s ease-in-out;
+  font-weight:700;
+  color:#1d6fff;
+  font-size:.78rem;
+  line-height:1.18;
+  text-decoration:none;
+  border-radius:0;
+  transition:color .16s;
+  display:inline;
 }
 .about-page .pet-info .pet-tip a.pet-origin:hover,
 .about-page .pet-info .pet-tip a.pet-origin:focus-visible{
-  background:#0b55d4;
+  color:#0b3dff;
+  text-decoration:underline;
 }
 body.dark .about-page .pet-info .pet-tip a.pet-origin{
-  background:#2e7fff;
-  color:#fff;
+  color:#7fc8ff;
 }
 body.dark .about-page .pet-info .pet-tip a.pet-origin:hover,
 body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
-  background:#1b63e6;
+  color:#bfe9ff;
+  text-decoration:underline;
 }
 .about-page .pet-info .pet-tip a.pet-origin strong{
   background:none!important;
   padding:0!important;
   margin:0!important;
   color:inherit!important;
-  font-weight:600;
+  font-weight:700;
 }
 </style>
 
