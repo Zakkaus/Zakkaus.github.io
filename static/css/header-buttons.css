@@ -716,58 +716,87 @@ body.dark .about-block .about-intro mark{
   gap:.35rem;
   font-weight:700;
   letter-spacing:.4px;
-  line-height: 1; /* 確保基線對齊 */
+  line-height: 1;
+  vertical-align: baseline; /* 確保與其他按鈕基線對齊 */
 }
+
 .main-nav a.nav-timeline .tl-emoji{
   line-height:1;
   font-size:1.05em;
-  transform:translateY(-1.5px); /* 調整Y軸偏移，從-1px改為-1.5px */
+  transform:translateY(-0.5px); /* 減少偏移，從-1.5px改為-0.5px */
   opacity:.92;
-  transition:transform .25s;
+  transition:transform .25s, opacity .25s;
+  display: inline-block;
 }
+
 .main-nav a.nav-timeline:hover .tl-emoji{
-  transform:translateY(-2.5px) rotate(-8deg); /* 同步調整hover狀態 */
+  transform:translateY(-1.5px) rotate(-8deg); /* 調整hover狀態 */
+  opacity: 1;
 }
 
-/* 確保Days按鈕的激活狀態樣式正確應用 */
-.main-nav a.nav-timeline.active{
-  background:var(--hb-active,#e1306c) !important;
-  color:#fff !important;
-  border-color:var(--hb-active,#e1306c) !important;
-  box-shadow:0 2px 5px -2px rgba(225,48,108,.55) !important;
+/* 重要：確保Days按鈕的激活狀態樣式能正確覆蓋 */
+.main-nav a.nav-timeline.active,
+.main-nav a.active.nav-timeline {
+  background: var(--hb-active,#e1306c) !important;
+  color: #fff !important;
+  border-color: var(--hb-active,#e1306c) !important;
+  box-shadow: 0 2px 5px -2px rgba(225,48,108,.55) !important;
 }
 
-.main-nav a.nav-timeline.active .tl-emoji{
-  opacity: 1; /* 激活時圖標完全不透明 */
-  color: #fff; /* 確保激活時圖標也是白色 */
+.main-nav a.nav-timeline.active .tl-emoji,
+.main-nav a.active.nav-timeline .tl-emoji {
+  opacity: 1 !important;
+  color: #fff !important;
+  filter: brightness(1) !important; /* 確保emoji在激活狀態下可見 */
 }
 
-/* Mobile menu 內（cb-menu）沿用相同 class */
+/* 手機版樣式 */
 #mobileMenu a.nav-timeline{
   display:flex;
   align-items:center;
   gap:.45rem;
   font-weight:600;
-  line-height: 1; /* 手機版也確保基線對齊 */
+  line-height: 1;
+  vertical-align: baseline;
 }
 
-#mobileMenu a.nav-timeline.active{
-  background:var(--hb-active,#e1306c) !important;
-  color:#fff !important;
-  border-color:var(--hb-active,#e1306c) !important;
+#mobileMenu a.nav-timeline.active,
+#mobileMenu a.active.nav-timeline {
+  background: var(--hb-active,#e1306c) !important;
+  color: #fff !important;
+  border-color: var(--hb-active,#e1306c) !important;
 }
 
 #mobileMenu a.nav-timeline .tl-emoji{
-  transform:translateY(-1px); /* 手機版微調 */
+  transform: translateY(-0.5px);
+  transition: transform .25s, opacity .25s;
+}
+
+#mobileMenu a.nav-timeline.active .tl-emoji,
+#mobileMenu a.active.nav-timeline .tl-emoji {
+  opacity: 1 !important;
+  color: #fff !important;
+  filter: brightness(1) !important;
 }
 
 /* 暗色模式下確保激活狀態 */
-body.dark .main-nav a.nav-timeline.active{
-  color:#fff !important;
-  background:var(--hb-active,#e1306c) !important;
+body.dark .main-nav a.nav-timeline.active,
+body.dark .main-nav a.active.nav-timeline {
+  color: #fff !important;
+  background: var(--hb-active,#e1306c) !important;
 }
 
-body.dark #mobileMenu a.nav-timeline.active{
-  color:#fff !important;
-  background:var(--hb-active,#e1306c) !important;
+body.dark #mobileMenu a.nav-timeline.active,
+body.dark #mobileMenu a.active.nav-timeline {
+  color: #fff !important;
+  background: var(--hb-active,#e1306c) !important;
+}
+
+/* 增加樣式優先級以確保激活狀態正確顯示 */
+.main-nav li a.nav-timeline.active,
+.main-nav ul li a.nav-timeline.active {
+  background: var(--hb-active,#e1306c) !important;
+  color: #fff !important;
+  border-color: var(--hb-active,#e1306c) !important;
+  box-shadow: 0 2px 5px -2px rgba(225,48,108,.55) !important;
 }
