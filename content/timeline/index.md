@@ -9,38 +9,38 @@ lastmod: 2025-09-01
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
-      <img src="/images/timeline/gf-avatar.jpg" alt="Avatar" class="avatar">
+      <img src="/images/timeline/gf-avatar.jpg" alt="Avatar" class="avatar" loading="lazy">
       <div class="d-content">
-        <h3 data-i18n="coupleTitle">我們在一起的天數</h3>
+        <h3 data-i18n="coupleTitle">Days Together</h3>
         <p class="d-num" id="togetherDays">--</p>
-        <p class="d-start" data-i18n="since">自 07/08/2025 起</p>
+        <p class="d-start" data-i18n="since">Since 07/08/2025</p>
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/hashbrown.jpg" alt="Hash Brown" class="pet-img">
+      <img src="/images/timeline/hashbrown.jpg" alt="Hash Brown" class="pet-img" loading="lazy">
       <div class="d-content">
-        <h3 data-i18n="hashTitle">薯餅天數歲數</h3>
+        <h3 data-i18n="hashTitle">Hash Brown Age (days)</h3>
         <p class="d-num" id="hashDays">--</p>
-        <p class="d-start" data-i18n="hashSince">生日：24/06/2025</p>
+        <p class="d-start" data-i18n="hashSince">Birthday: 24/06/2025</p>
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/images/timeline/potato.jpg" alt="Potato" class="pet-img">
+      <img src="/images/timeline/potato.jpg" alt="Potato" class="pet-img" loading="lazy">
       <div class="d-content">
-        <h3 data-i18n="potatoTitle">馬鈴薯天數歲數</h3>
+        <h3 data-i18n="potatoTitle">Potato Age (days)</h3>
         <p class="d-num" id="potatoDays">--</p>
-        <p class="d-start" data-i18n="potatoSince">生日：27/07/2025</p>
+        <p class="d-start" data-i18n="potatoSince">Birthday: 27/07/2025</p>
       </div>
     </div>
   </div>
-  <blockquote class="tz-note" data-i18n="tzNote">根據澳洲時間 UTC+10 (AEST) ❄️</blockquote>
+  <blockquote class="tz-note" data-i18n="tzNote">Based on Australia time UTC+10 (AEST) ❄️</blockquote>
 </div>
 
 <style>
 .days-page{
   max-width:980px;
   margin:0 auto;
-  padding:1.2rem 0 2.5rem;
+  padding:1.2rem 0 2.3rem;
   font-size:1rem;
   line-height:1.55;
 }
@@ -90,6 +90,20 @@ body.dark .d-card img.avatar,
 body.dark .d-card img.pet-img{
   border-color:rgba(255,255,255,.25);
 }
+.img-fallback{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.55rem;
+  font-weight:600;
+  color:#666;
+  background:repeating-linear-gradient(45deg,#eee,#eee 6px,#e2e2e2 6px,#e2e2e2 12px);
+  border-radius:16px;
+}
+body.dark .img-fallback{
+  color:#aaa;
+  background:repeating-linear-gradient(45deg,#3e3e42,#3e3e42 6px,#46464a 6px,#46464a 12px);
+}
 .d-content h3{
   margin:.1rem 0 .4rem;
   font-size:.9rem;
@@ -120,18 +134,19 @@ body.dark .d-num{
   opacity:.65;
 }
 .tz-note{
-  margin:1.6rem 0 0;
-  font-size:.68rem;
+  margin:1.55rem 0 0;
+  padding:.35rem .75rem .4rem .9rem;
+  font-size:.66rem;
   letter-spacing:.45px;
-  opacity:.55;
+  line-height:1.3;
   border-left:3px solid var(--hb-active,#e1306c);
-  padding:.4rem .75rem;
-  background:rgba(225,48,108,.06);
-  border-radius:6px;
+  background:none!important;
+  border-radius:0;
+  color:inherit;
+  opacity:.7;
 }
 body.dark .tz-note{
-  background:rgba(225,48,108,.18);
-  opacity:.65;
+  opacity:.75;
 }
 @media (max-width:640px){
   .d-card{
@@ -179,32 +194,27 @@ body.dark .tz-note{
     if(dict[k]) el.textContent=dict[k];
   });
 
-  // AEST 計算（UTC+10，忽略夏令時間）
-  const AEST_OFFSET_HOURS = 10;
-  const MS_DAY = 86400000;
-  const parseDMY = (str)=> {
-    const [d,m,y]=str.split('/').map(Number);
-    return {d,m,y};
+  const AEST_OFFSET=10, MS_DAY=86400000;
+  const parseDMY=s=>{const [d,m,y]=s.split('/').map(Number);return {d,m,y};};
+  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0));
+  const inclusive=(str)=>{const {d,m,y}=parseDMY(str);const start=makeAEST(y,m,d);
+    const nowUTC=Date.now();const nowAEST=new Date(nowUTC+AEST_OFFSET*3600*1000);
+    const today=makeAEST(nowAEST.getUTCFullYear(),nowAEST.getUTCMonth()+1,nowAEST.getUTCDate());
+    return Math.floor((today-start)/MS_DAY)+1;
   };
-  const makeAESTDate = (y,m,d)=>{
-    // 以 UTC 基準 +10h，再取該 AEST 日的 UTC 中午避免時差邊界
-    return new Date(Date.UTC(y,m-1,d,10,0,0));
-  };
-  const inclusiveDays = (startStr)=>{
-    const {d,m,y}=parseDMY(startStr);
-    const start = makeAESTDate(y,m,d);
-    const nowUTC = Date.now();
-    const nowAEST = new Date(nowUTC + AEST_OFFSET_HOURS*3600*1000);
-    const todayAEST = makeAESTDate(nowAEST.getUTCFullYear(), nowAEST.getUTCMonth()+1, nowAEST.getUTCDate());
-    return Math.floor((todayAEST - start)/MS_DAY)+1;
-  };
-  const setNum=(id,dateStr)=>{
-    const el=document.getElementById(id);
-    if(el) el.textContent=inclusiveDays(dateStr).toLocaleString();
-  };
-  setNum('togetherDays','07/08/2025');
-  setNum('hashDays','24/06/2025');
-  setNum('potatoDays','27/07/2025');
+  const set=(id,date)=>{const el=document.getElementById(id); if(el) el.textContent=inclusive(date).toLocaleString();};
+  set('togetherDays','07/08/2025'); set('hashDays','24/06/2025'); set('potatoDays','27/07/2025');
+
+  // 圖片載入失敗 fallback
+  document.querySelectorAll('.d-card img').forEach(img=>{
+    img.addEventListener('error',()=>{
+      const wrap=document.createElement('div');
+      wrap.className='img-fallback';
+      wrap.textContent=img.alt||'IMG';
+      wrap.style.width=img.width+'px';wrap.style.height=img.height+'px';
+      img.replaceWith(wrap);
+    },{once:true});
+  });
 })();
 </script>
 
