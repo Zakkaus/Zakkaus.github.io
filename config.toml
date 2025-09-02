@@ -1,0 +1,16 @@
+# 這是您的 config.toml 檔案內容
+
+[params]
+  # 站點圖示（SVG 優先）
+  favicon_svg = "/favicon.svg"
+  favicon = "/favicon.svg"
+
+  # 兼容其他常見鍵名（部分主題會檢測）
+  icon = "/favicon.svg"
+  logo = "/favicon.svg"
+
+# 可選：若主題支援 assets 變體，可再補 PNG
+# [params.favicons]
+#   svg  = "/favicon.svg"
+#   png16 = "/favicon-16x16.png"
+#   png32 = "/favicon-32x32.png"

@@ -710,3 +710,17 @@ body.dark .about-block .about-intro mark{
 .about-block *::after{
   border-right-color:transparent !important;
 }
+
+/* === Logo 垂直置中修正（與文字完全平行） === */
+:root{
+  --brand-logo-size:1em; /* 相對字體，隨字級縮放 */
+}
+.site-brand a{
+  display:inline-flex;
+  align-items:center;
+  line-height:1; /* 確保容器高度貼合字體本體 */
+}
+.site-brand a::before{
+  top:0 !important;          /* 移除之前的位移 */
+  transform:translateY(-0.5px); /* 視覺微調 (可改 0 或 -1px 視需求) */
+}
