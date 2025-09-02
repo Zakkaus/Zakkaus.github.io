@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   max-width: 1080px;
   margin: 0 auto;
-  padding: 2rem 0 3rem;
+  padding: 1rem 0 3rem;  /* 減少頂部內邊距 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: rgba(0, 0, 0, 0.85);
 }
@@ -257,7 +257,8 @@ body.dark .tl-container {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.8rem;
   margin-bottom: 1.5rem;
-  justify-content: center;  /* 確保桌面版卡片居中 */
+  justify-content: center;
+  margin-top: 1rem;  /* 減少與標題的間距 */
 }
 
 @media (max-width: 1080px) {
@@ -271,19 +272,20 @@ body.dark .tl-container {
   .tl-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    padding: 0 0.5rem;  /* 減少邊距，讓卡片更寬 */
+    padding: 0 0.5rem;
+    margin-top: 0.8rem;  /* 手機版進一步減少間距 */
   }
   
   .tl-card {
-    max-width: none;  /* 移除最大寬度限制 */
-    width: 100%;      /* 確保卡片填滿容器 */
+    max-width: none;
+    width: 100%;
   }
 }
 
-/* 卡片樣式 - 修復黑暗模式問題 */
+/* 卡片樣式 - 重新設計 */
 .tl-card {
   position: relative;
-  background-color: var(--tl-bg-light);  /* 使用 background-color 而非 background */
+  background-color: var(--tl-bg-light);
   border: 1px solid var(--tl-border-light);
   border-radius: var(--tl-radius);
   overflow: hidden;
@@ -299,7 +301,7 @@ body.dark .tl-container {
 }
 
 body.dark .tl-card {
-  background-color: var(--tl-bg-dark);  /* 確保黑暗模式背景色正確應用 */
+  background-color: var(--tl-bg-dark);
   border-color: var(--tl-border-dark);
   box-shadow: 0 10px 35px -8px rgba(0,0,0,0.35);
 }
@@ -309,10 +311,10 @@ body.dark .tl-card {
   box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
-/* 卡片圖片 - 完全修復圖片裁切飄移問題 */
+/* 卡片圖片 - 重新設計圖片裁切 */
 .tl-image {
-  height: 0;
-  padding-bottom: 75%;  /* 保持 4:3 比例 */
+  width: 100%;
+  height: 200px;  /* 固定高度 */
   position: relative;
   overflow: hidden;
   background-color: #f0f0f0;
@@ -325,17 +327,17 @@ body.dark .tl-image {
 
 .tl-image img {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);  /* 完美居中，避免飄移 */
-  transition: transform 0.5s;
+  object-position: center center;  /* 完全居中 */
+  transition: transform 0.5s ease;
 }
 
 .tl-card:hover .tl-image img {
-  transform: translate(-50%, -50%) scale(1.05);  /* 保持居中的同時縮放 */
+  transform: scale(1.05);
 }
 
 /* 卡片內容 */
@@ -609,16 +611,16 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 修復小螢幕圖片問題 */
+/* 手機適配 - 重新設計小螢幕佈局 */
 @media (max-width: 480px) {
   .tl-grid {
     gap: 1rem;
-    padding: 0;  /* 去掉邊距，讓卡片能夠填滿更多空間 */
+    padding: 0;
   }
   
   .tl-card {
     display: grid;
-    grid-template-columns: 130px 1fr;  /* 增加圖片區域寬度 */
+    grid-template-columns: 120px 1fr;  /* 調整比例 */
     padding-bottom: 0;
     max-height: none;
     height: auto;
@@ -626,25 +628,24 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-image {
-    width: 130px;
-    height: 130px;
-    padding-bottom: 0;
+    width: 120px;
+    height: 120px;
     border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
   .tl-image img {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: translate(-50%, -50%);  /* 手機版也保持完美居中 */
-    transition: transform 0.3s;
+    object-position: center center;  /* 手機版也完全居中 */
+    transition: transform 0.3s ease;
   }
   
   .tl-card:hover .tl-image img {
-    transform: translate(-50%, -50%) scale(1.05);  /* 手機版縮放效果 */
+    transform: scale(1.03);  /* 手機版較小的縮放 */
   }
   
   .tl-content {
@@ -662,7 +663,7 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-days {
-    font-size: 2rem;  /* 增加字體大小 */
+    font-size: 1.8rem;
     margin-bottom: 0;
     line-height: 1;
   }
@@ -696,7 +697,7 @@ body.dark .tl-close-btn:hover {
 
 @media (max-width: 400px) {
   .tl-card {
-    grid-template-columns: 100px 1fr;  /* 小螢幕下稍微縮小圖片區域 */
+    grid-template-columns: 100px 1fr;
   }
   
   .tl-image {
@@ -705,7 +706,6 @@ body.dark .tl-close-btn:hover {
   }
 }
 
-/* 超小螢幕優化 */
 @media (max-width: 360px) {
   .tl-card {
     grid-template-columns: 90px 1fr;
