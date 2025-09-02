@@ -196,6 +196,7 @@ html[lang="en"] .about-page h3::after{
     <p>My girlfriend <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> and I are currently long‑distance (Australia / Taiwan); we are both <strong>pansexual 🩷💛🩵</strong> and share daily life, study, work, music and thoughts. We have many aligned interests and values, naturally compatible — true <strong>soulmates</strong>. We first met in
       <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord community — <a href="/timeline/#couple" class="blue-highlight">see how long we've been together here</a>.
     </p>
+    <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main setup and contact links — feel free to connect.</p>
   </div>
 
 ### 💻 Desktop
