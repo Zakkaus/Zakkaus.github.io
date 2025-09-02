@@ -22,10 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "關係",
       modalSubtitle: "開始於 2025 年 8 月 7 日 11:38am",
       modalContent: `
-        <p>我 (Zakk) 與女朋友 (Paper) 生活在不同的國家 / 地區（澳大利亞 / 台灣），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，雖然相隔兩地，仍保持每天的交流與聯繫，分享生活、學習與工作，也擁有很多相同的愛好與想法。</p>
-        <p>我們彼此支持，並且每隔幾個月就會見面一次。Paper 計畫在高三畢業後來澳洲留學，未來也會有更多一起生活與成長的篇章。</p>
-        <p>我們是在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">錫蘭 Ceylan</a> 的 Discord 群組中第一次認識的，從聊天開始建立連結，慢慢走向現在的關係。</p>
-        <p>想了解更多我們的日常點滴，歡迎關注 Paper 的 Instagram：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
+        <p>我 (Zakk) 與女朋友 (Paper) 目前分隔於澳大利亞與台灣，以遠距方式維繫感情；我們都是泛性戀 🩷💛🩵，對多元性別與情感形式抱持開放與尊重。</p>
+        <p>雖然不在同一個城市，我們每天都會分享生活、學習與工作進度，還有彼此的心情。最特別的是，我們有非常多相同的愛好、價值觀與想法，彼此的節奏很好磨合，也很自然地成為了對方的<span style="font-weight:700;">靈魂伴侶</span>。</p>
+        <p>我們是在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">錫蘭 Ceylan</a> 的 Discord 群組裡第一次認識並開始聊天，從遊戲、分享與陪伴逐漸靠近，最後順理成章地在一起。</p>
+        <p>目前我們每隔幾個月就會安排見面；Paper 計畫在高中（三年級）畢業後到澳洲留學，也期待未來能有更多面對面的日常與共同成長的旅程。</p>
+        <p>想追蹤更多我們的互動與日常側寫，歡迎關注 Paper 的 Instagram：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
       `,
       linkUrl: "/zh-hant/about/#relationship"
     },
