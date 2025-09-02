@@ -442,7 +442,7 @@ body.dark .about-page .about-hero a:focus-visible{
   .about-page .about-hero a{padding:.14rem .5rem .18rem;margin:.06rem .15rem .06rem 0;}
 }
 
-/* === 寵物資訊 Tooltip === */
+/* === 重構寵物 Tooltip（由 ::after 改成內嵌元素 .pet-tip） === */
 .about-page .pet-info{
   position:relative;
   cursor:help;
@@ -450,68 +450,141 @@ body.dark .about-page .about-hero a:focus-visible{
   line-height:1;
 }
 .about-page .pet-info > strong{
-  position:relative;
-  z-index:2;
-  border-bottom:1px dotted rgba(225,48,108,.65);
-  padding-bottom:1px;
+  /* 名稱 pill 樣式（與 hero 連結一致風格藍色系） */
+  --pet-pill:#1d6fff;
+  display:inline-block;
+  background:rgba(29,111,255,.10);
+  color:#0b3d91;
+  padding:.28rem .65rem .34rem;
+  margin:.08rem .28rem .08rem 0;
+  font-weight:600;
+  font-size:.78rem;
+  line-height:1.05;
+  border:1px solid rgba(29,111,255,.28);
+  border-radius:11px;
+  text-decoration:none;
+  transition:background .22s,color .22s,border-color .22s,box-shadow .22s,transform .18s;
 }
 body.dark .about-page .pet-info > strong{
-  border-bottom-color:rgba(225,48,108,.85);
+  background:rgba(29,111,255,.18);
+  color:#9fd1ff;
+  border-color:rgba(29,111,255,.38);
 }
-.about-page .pet-info::after{
-  content:attr(data-tip);
+.about-page .pet-info:hover > strong,
+.about-page .pet-info:focus-visible > strong,
+.about-page .pet-info.tip-open > strong{
+  background:var(--pet-pill);
+  color:#fff;
+  border-color:var(--pet-pill);
+  box-shadow:0 0 0 3px rgba(29,111,255,.20);
+  transform:translateY(-2px);
+}
+body.dark .about-page .pet-info:hover > strong,
+body.dark .about-page .pet-info:focus-visible > strong,
+body.dark .about-page .pet-info.tip-open > strong{
+  box-shadow:0 0 0 4px rgba(29,111,255,.28);
+}
+
+.about-page .pet-info .pet-tip{
   position:absolute;
   left:50%;
   top:100%;
-  transform:translate(-50%,8px) scale(.92);
+  transform:translate(-50%,10px) scale(.94);
   transform-origin:top center;
   background:#fff;
   color:#222;
-  font-weight:500;
-  font-size:.68rem;
-  line-height:1.25;
-  letter-spacing:.5px;
-  padding:.55rem .65rem .58rem;
   border:1px solid rgba(0,0,0,.12);
-  border-radius:10px;
-  box-shadow:0 6px 22px -8px rgba(0,0,0,.28);
+  border-radius:12px;
+  padding:.65rem .75rem .7rem;
+  min-width:180px;
+  max-width:240px;
   width:max-content;
-  max-width:220px;
-  white-space:normal;
+  font-size:.7rem;
+  line-height:1.35;
+  letter-spacing:.35px;
+  box-shadow:0 10px 30px -10px rgba(0,0,0,.35);
   opacity:0;
   pointer-events:none;
   transition:opacity .22s,transform .22s;
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
   text-align:left;
+  z-index:30;
+  white-space:normal;
 }
-body.dark .about-page .pet-info::after{
-  background:rgba(40,40,40,.95);
+body.dark .about-page .pet-info .pet-tip{
+  background:rgba(38,38,42,.92);
   color:#eee;
   border-color:rgba(255,255,255,.18);
-  box-shadow:0 8px 26px -10px rgba(0,0,0,.6);
+  box-shadow:0 12px 34px -12px rgba(0,0,0,.65);
 }
-.about-page .pet-info:hover::after,
-.about-page .pet-info:focus-visible::after,
-.about-page .pet-info.tip-open::after{
+
+.about-page .pet-info:hover .pet-tip,
+.about-page .pet-info:focus-visible .pet-tip,
+.about-page .pet-info.tip-open .pet-tip{
   opacity:1;
   transform:translate(-50%,6px) scale(1);
   pointer-events:auto;
 }
+
+.about-page .pet-info .pet-tip .tip-title{
+  font-weight:600;
+  margin:0 0 .3rem;
+  font-size:.72rem;
+  letter-spacing:.4px;
+  color:#c81352;
+}
+body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
+.about-page .pet-info .pet-tip .tip-line{
+  margin:.18rem 0;
+  display:block;
+}
+.about-page .pet-info .pet-tip a{
+  color:#1d6fff;
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px dotted rgba(29,111,255,.55);
+  padding-bottom:1px;
+}
+.about-page .pet-info .pet-tip a:hover{
+  color:#0b3dff;
+  border-color:#0b3dff;
+}
+body.dark .about-page .pet-info .pet-tip a{
+  color:#75b8ff;
+  border-color:rgba(117,184,255,.55);
+}
+body.dark .about-page .pet-info .pet-tip a:hover{
+  color:#a8d5ff;
+  border-color:#a8d5ff;
+}
+
+/* 移除舊 ::after 方案（若殘留） */
+.about-page .pet-info::after{content:none!important;}
+
+/* 行動調整 */
 @media (max-width:640px){
-  .about-page .pet-info::after{
+  .about-page .pet-info > strong{
+    padding:.26rem .6rem .32rem;
+    font-size:.75rem;
+    margin:.06rem .22rem .06rem 0;
+  }
+  .about-page .pet-info .pet-tip{
     font-size:.66rem;
-    max-width:180px;
+    max-width:200px;
   }
 }
+
+/* 動畫偏好 */
 @media (prefers-reduced-motion:reduce){
-  .about-page .pet-info::after{transition:none;}
+  .about-page .pet-info > strong,
+  .about-page .pet-info .pet-tip{transition:none!important;transform:none!important;}
 }
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了 <strong>🐹 天竺鼠</strong>（名字：<span class="pet-info" data-tip="馬鈴薯｜生日：2025年7月27日｜品種：純種泰迪荷蘭豬"><strong>馬鈴薯🥔</strong></span>、<span class="pet-info" data-tip="薯餅｜生日：6月24日｜品種：純種泰迪荷蘭豬"><strong>薯餅</strong></span><small style="opacity:.6;margin-left:.35rem;">靈感來源：<a href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></small>）。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常會聽偏憂鬱氛圍的音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到我的天竺鼠與日常。</p>
+    <p>我養了 <strong>🐹 天竺鼠</strong>（名字：<span class="pet-info"><strong>馬鈴薯🥔</strong><span class="pet-tip"><span class="tip-title">馬鈴薯</span><span class="tip-line">生日：2025 年 7 月 27 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span></span></span>、<span class="pet-info"><strong>薯餅</strong><span class="pet-tip"><span class="tip-title">薯餅</span><span class="tip-line">生日：6 月 24 日</span><span class="tip-line">品種：純種泰迪荷蘭豬</span><span class="tip-line">名字靈感：<a href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></span></span></span>）。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常會聽偏憂鬱氛圍的音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到我的天竺鼠與日常。</p>
     <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>

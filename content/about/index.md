@@ -299,7 +299,7 @@ body.dark .about-page .about-hero a:focus-visible{
   .about-page .about-hero *{transition:none!important;}
 }
 
-/* === Pet info tooltip (EN) === */
+/* === Pet tooltip restructure (HTML container + pill names) === */
 .about-page .pet-info{
   position:relative;
   cursor:help;
@@ -307,65 +307,131 @@ body.dark .about-page .about-hero a:focus-visible{
   line-height:1;
 }
 .about-page .pet-info > strong{
-  position:relative;
-  z-index:2;
-  border-bottom:1px dotted rgba(225,48,108,.65);
-  padding-bottom:1px;
+  --pet-pill:#1d6fff;
+  display:inline-block;
+  background:rgba(29,111,255,.10);
+  color:#0b3d91;
+  padding:.28rem .65rem .34rem;
+  margin:.08rem .28rem .08rem 0;
+  font-weight:600;
+  font-size:.78rem;
+  line-height:1.05;
+  border:1px solid rgba(29,111,255,.28);
+  border-radius:11px;
+  transition:background .22s,color .22s,border-color .22s,box-shadow .22s,transform .18s;
 }
 body.dark .about-page .pet-info > strong{
-  border-bottom-color:rgba(225,48,108,.85);
+  background:rgba(29,111,255,.18);
+  color:#9fd1ff;
+  border-color:rgba(29,111,255,.38);
 }
-.about-page .pet-info::after{
-  content:attr(data-tip);
+.about-page .pet-info:hover > strong,
+.about-page .pet-info:focus-visible > strong,
+.about-page .pet-info.tip-open > strong{
+  background:var(--pet-pill);
+  color:#fff;
+  border-color:var(--pet-pill);
+  box-shadow:0 0 0 3px rgba(29,111,255,.20);
+  transform:translateY(-2px);
+}
+body.dark .about-page .pet-info:hover > strong,
+body.dark .about-page .pet-info:focus-visible > strong,
+body.dark .about-page .pet-info.tip-open > strong{
+  box-shadow:0 0 0 4px rgba(29,111,255,.28);
+}
+.about-page .pet-info .pet-tip{
   position:absolute;
-  left:50%;
-  top:100%;
-  transform:translate(-50%,8px) scale(.92);
+  left:50%;top:100%;
+  transform:translate(-50%,10px) scale(.94);
   transform-origin:top center;
   background:#fff;
   color:#222;
-  font-weight:500;
-  font-size:.68rem;
-  line-height:1.25;
-  letter-spacing:.45px;
-  padding:.55rem .65rem .58rem;
   border:1px solid rgba(0,0,0,.12);
-  border-radius:10px;
-  box-shadow:0 6px 22px -8px rgba(0,0,0,.28);
-  width:max-content;
-  max-width:240px;
-  white-space:normal;
+  border-radius:12px;
+  padding:.65rem .75rem .7rem;
+  min-width:190px;
+  max-width:250px;
+  font-size:.7rem;
+  line-height:1.35;
+  letter-spacing:.35px;
+  box-shadow:0 10px 30px -10px rgba(0,0,0,.35);
   opacity:0;
   pointer-events:none;
   transition:opacity .22s,transform .22s;
-  backdrop-filter:blur(6px);
+  backdrop-filter:blur(8px);
   text-align:left;
+  white-space:normal;
+  z-index:30;
 }
-body.dark .about-page .pet-info::after{
-  background:rgba(40,40,40,.95);
+body.dark .about-page .pet-info .pet-tip{
+  background:rgba(38,38,42,.92);
   color:#eee;
   border-color:rgba(255,255,255,.18);
-  box-shadow:0 8px 26px -10px rgba(0,0,0,.6);
+  box-shadow:0 12px 34px -12px rgba(0,0,0,.65);
 }
-.about-page .pet-info:hover::after,
-.about-page .pet-info:focus-visible::after,
-.about-page .pet-info.tip-open::after{
+.about-page .pet-info:hover .pet-tip,
+.about-page .pet-info:focus-visible .pet-tip,
+.about-page .pet-info.tip-open .pet-tip{
   opacity:1;
   transform:translate(-50%,6px) scale(1);
   pointer-events:auto;
 }
+.about-page .pet-info .pet-tip .tip-title{
+  font-weight:600;
+  margin:0 0 .3rem;
+  font-size:.72rem;
+  letter-spacing:.4px;
+  color:#c81352;
+}
+body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
+.about-page .pet-info .pet-tip .tip-line{
+  margin:.18rem 0;
+  display:block;
+}
+.about-page .pet-info .pet-tip a{
+  color:#1d6fff;
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px dotted rgba(29,111,255,.55);
+  padding-bottom:1px;
+}
+.about-page .pet-info .pet-tip a:hover{
+  color:#0b3dff;
+  border-color:#0b3dff;
+}
+body.dark .about-page .pet-info .pet-tip a{
+  color:#75b8ff;
+  border-color:rgba(117,184,255,.55);
+}
+body.dark .about-page .pet-info .pet-tip a:hover{
+  color:#a8d5ff;
+  border-color:#a8d5ff;
+}
+
+/* Remove legacy ::after if present */
+.about-page .pet-info::after{content:none!important;}
+
 @media (max-width:640px){
-  .about-page .pet-info::after{font-size:.66rem;max-width:190px;}
+  .about-page .pet-info > strong{
+    padding:.26rem .6rem .32rem;
+    font-size:.75rem;
+    margin:.06rem .22rem .06rem 0;
+  }
+  .about-page .pet-info .pet-tip{
+    font-size:.66rem;
+    max-width:210px;
+  }
 }
 @media (prefers-reduced-motion:reduce){
-  .about-page .pet-info::after{transition:none;}
+  .about-page .pet-info > strong,
+  .about-page .pet-info .pet-tip{transition:none!important;transform:none!important;}
 }
 </style>
 
 <div class="about-page">
   <div class="about-hero">
     <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
-    <p>I keep <strong>🐹 guinea pigs</strong> (names: <span class="pet-info" data-tip="Hash Brown • Birthday: 27 Jul 2025 • Breed: Purebred Teddy Guinea Pig"><strong>Hash&nbsp;Brown🥔</strong></span> and <span class="pet-info" data-tip="Potato • Birthday: 24 Jun • Breed: Purebred Teddy Guinea Pig"><strong>Potato</strong></span><small style="opacity:.6;margin-left:.35rem;">name idea from <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></small>). I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see my guinea pigs and daily life on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
+    <p>I keep <strong>🐹 guinea pigs</strong> (names: <span class="pet-info"><strong>Hash&nbsp;Brown🥔</strong><span class="pet-tip"><span class="tip-title">Hash Brown</span><span class="tip-line">Birthday: 27 Jul 2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span></span></span> and <span class="pet-info"><strong>Potato</strong><span class="pet-tip"><span class="tip-title">Potato</span><span class="tip-line">Birthday: 24 Jun</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span><span class="tip-line">Name idea: <a href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></span></span></span>). I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see my guinea pigs and daily life on <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
   </div>
