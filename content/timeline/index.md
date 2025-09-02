@@ -1,5 +1,5 @@
 ---
-title: "Days"
+title: "Timeline"
 slug: "timeline"
 toc: false
 date: 2025-09-01
@@ -9,7 +9,7 @@ lastmod: 2025-09-01
 <div class="days-page">
   <div class="days-cards">
     <div class="d-card couple">
-      <img src="/girlfriend-avatar.jpg" alt="Avatar" class="avatar">
+      <img src="/images/timeline/gf-avatar.jpg" alt="Avatar" class="avatar">
       <div class="d-content">
         <h3 data-i18n="coupleTitle">我們在一起的天數</h3>
         <p class="d-num" id="togetherDays">--</p>
@@ -17,7 +17,7 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/hashbrown.jpg" alt="薯餅" class="pet-img">
+      <img src="/images/timeline/hashbrown.jpg" alt="Hash Brown" class="pet-img">
       <div class="d-content">
         <h3 data-i18n="hashTitle">薯餅天數歲數</h3>
         <p class="d-num" id="hashDays">--</p>
@@ -25,7 +25,7 @@ lastmod: 2025-09-01
       </div>
     </div>
     <div class="d-card pet">
-      <img src="/potato.jpg" alt="馬鈴薯" class="pet-img">
+      <img src="/images/timeline/potato.jpg" alt="Potato" class="pet-img">
       <div class="d-content">
         <h3 data-i18n="potatoTitle">馬鈴薯天數歲數</h3>
         <p class="d-num" id="potatoDays">--</p>
@@ -33,6 +33,7 @@ lastmod: 2025-09-01
       </div>
     </div>
   </div>
+  <blockquote class="tz-note" data-i18n="tzNote">根據澳洲時間 UTC+10 (AEST) ❄️</blockquote>
 </div>
 
 <style>
@@ -118,6 +119,20 @@ body.dark .d-num{
   letter-spacing:.4px;
   opacity:.65;
 }
+.tz-note{
+  margin:1.6rem 0 0;
+  font-size:.68rem;
+  letter-spacing:.45px;
+  opacity:.55;
+  border-left:3px solid var(--hb-active,#e1306c);
+  padding:.4rem .75rem;
+  background:rgba(225,48,108,.06);
+  border-radius:6px;
+}
+body.dark .tz-note{
+  background:rgba(225,48,108,.18);
+  opacity:.65;
+}
 @media (max-width:640px){
   .d-card{
     padding:.95rem .9rem 1rem;
@@ -145,7 +160,8 @@ body.dark .d-num{
       hashTitle:'薯餅天數歲數',
       hashSince:'生日：24/06/2025',
       potatoTitle:'馬鈴薯天數歲數',
-      potatoSince:'生日：27/07/2025'
+      potatoSince:'生日：27/07/2025',
+      tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'
     },
     en:{
       coupleTitle:'Days Together',
@@ -153,7 +169,8 @@ body.dark .d-num{
       hashTitle:'Hash Brown Age (days)',
       hashSince:'Birthday: 24/06/2025',
       potatoTitle:'Potato Age (days)',
-      potatoSince:'Birthday: 27/07/2025'
+      potatoSince:'Birthday: 27/07/2025',
+      tzNote:'Based on Australia time UTC+10 (AEST) ❄️'
     }
   };
   const dict=lang.startsWith('zh')?t.zh:t.en;
@@ -161,24 +178,35 @@ body.dark .d-num{
     const k=el.getAttribute('data-i18n');
     if(dict[k]) el.textContent=dict[k];
   });
-  const oneDay=86400000;
-  const inclusiveDays=(startStr)=>{
-    const [d,m,y]=startStr.split('/').map(Number);
-    const start=new Date(y,m-1,d);
-    const today=new Date();
-    // 只比較日期，不受時間影響
-    const utcStart=Date.UTC(start.getFullYear(),start.getMonth(),start.getDate());
-    const utcToday=Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
-    return Math.floor((utcToday-utcStart)/oneDay)+1;
+
+  // AEST 計算（UTC+10，忽略夏令時間）
+  const AEST_OFFSET_HOURS = 10;
+  const MS_DAY = 86400000;
+  const parseDMY = (str)=> {
+    const [d,m,y]=str.split('/').map(Number);
+    return {d,m,y};
   };
-  const set=(id,start)=> {
+  const makeAESTDate = (y,m,d)=>{
+    // 以 UTC 基準 +10h，再取該 AEST 日的 UTC 中午避免時差邊界
+    return new Date(Date.UTC(y,m-1,d,10,0,0));
+  };
+  const inclusiveDays = (startStr)=>{
+    const {d,m,y}=parseDMY(startStr);
+    const start = makeAESTDate(y,m,d);
+    const nowUTC = Date.now();
+    const nowAEST = new Date(nowUTC + AEST_OFFSET_HOURS*3600*1000);
+    const todayAEST = makeAESTDate(nowAEST.getUTCFullYear(), nowAEST.getUTCMonth()+1, nowAEST.getUTCDate());
+    return Math.floor((todayAEST - start)/MS_DAY)+1;
+  };
+  const setNum=(id,dateStr)=>{
     const el=document.getElementById(id);
-    if(el) el.textContent=inclusiveDays(start).toLocaleString();
+    if(el) el.textContent=inclusiveDays(dateStr).toLocaleString();
   };
-  set('togetherDays','07/08/2025');
-  set('hashDays','24/06/2025');
-  set('potatoDays','27/07/2025');
+  setNum('togetherDays','07/08/2025');
+  setNum('hashDays','24/06/2025');
+  setNum('potatoDays','27/07/2025');
 })();
 </script>
 
-> 備註：請將 /girlfriend-avatar.jpg、/hashbrown.jpg、/potato.jpg 換成實際檔案名稱。
+<!-- 圖片請放到 /static/images/timeline/：
+     gf-avatar.jpg, hashbrown.jpg, potato.jpg -->
