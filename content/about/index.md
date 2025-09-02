@@ -38,559 +38,116 @@ body.dark .about-page .blue-highlight:hover{
 
 .about-modal-backdrop{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:9999;opacity:0;visibility:hidden;transition:.25s;}
 .about-modal-backdrop.active{opacity:1;visibility:visible;}
-  border-radius:0!important;
-  font-weight:600;
-}
-.about-page .about-hero strong{
-  background:linear-gradient(to top,rgba(225,48,108,.32),rgba(225,48,108,0) 65%)!important;
-  color:var(--about-accent)!important;
-  padding:.18rem .55rem .22rem!important;
-  margin:.12rem .25rem .12rem 0!important;
-  border-radius:999px!important;
-  line-height:1.15;
-  letter-spacing:.3px;
-  display:inline-block;
-}
-body.dark .about-page .about-hero strong{
-  background:linear-gradient(to top,rgba(225,48,108,.45),rgba(225,48,108,0) 65%)!important;
-  color:#ff8fb7!important;
-}
-
-/* Unified h3 heading effect (same as zh-hant) */
-.about-page h3{
-  margin:1.9rem 0 .55rem;
-  font-size:1.02rem;
-  line-height:1.28;
-  font-weight:600;
-  padding:0 .2rem .15rem .85rem;
-  border-bottom:none!important;
-  position:relative;
-  background:linear-gradient(to right,rgba(225,48,108,.10),rgba(225,48,108,0) 72%) !important;
-  border-radius:6px !important;
-}
-body.dark .about-page h3{
-  background:linear-gradient(to right,rgba(225,48,108,.22),rgba(225,48,108,0) 72%) !important;
-}
-.about-page h3::after{
-  content:"";
-  position:absolute;
-  left:.75rem;
-  bottom:0;
-  height:2px;
-  width:64px;
-  background:var(--about-accent);
-  border-radius:2px;
-  opacity:.78;
-}
-body.dark .about-page h3::after{opacity:.9;}
-
-/* First heading after hero */
-.about-page .about-hero + h3{
-  margin-top:1.35rem !important;
-}
-
-/* List compact */
-.about-page h3 + ul{
-  margin:.15rem 0 .2rem !important;
-}
-.about-page h3 + ul li{
-  padding:.4rem 0 .4rem 1.15rem !important;
-}
-
-/* Contacts vertical style already applied earlier (leave) */
-/* Override contact link pills to soft tone */
-.about-page .about-contacts a{
-  background:rgba(225,48,108,.14)!important;
-  color:var(--about-accent)!important;
-  font-weight:600;
-  transition:background .2s,color .2s;
-}
-body.dark .about-page .about-contacts a{
-  background:rgba(225,48,108,.30)!important;
-  color:#ff8fb7!important;
-}
-.about-page .about-contacts a:hover{
-  background:var(--about-accent)!important;
-  color:#fff!important;
-}
-
-/* Top spacing from page title/meta */
-.about-page{
-  padding-top:1.2rem !important;
-}
-
-/* Hero bottom spacing reduced */
-.about-page .about-hero{
-  margin:0 0 1.6rem !important;
-}
-
-/* Section heading spacing */
-.about-page h3{
-  margin:1.9rem 0 .55rem !important;
-}
-
-/* First heading after hero */
-.about-page .about-hero + h3{
-  margin-top:1.35rem !important;
-}
-
-/* List compact */
-.about-page h3 + ul{
-  margin:.15rem 0 .2rem !important;
-}
-.about-page h3 + ul li{
-  padding:.4rem 0 .4rem 1.15rem !important;
-}
-
-/* Contacts block spacing */
-.about-page h3:has(+ .about-contacts){
-  margin-top:1.6rem !important;
-}
-.about-page .about-contacts{
-  margin:.2rem 0 0 !important;
-}
-
-/* === Unified equipment & contacts list styling (mirrors zh-hant) === */
-.about-page{
-  --about-list-font:.9rem;
-  --about-list-gap:.42rem;
-  --about-bullet-size:6px;
-  --about-link-pill:0;
-}
-.about-page h3 + ul,
-.about-page .about-contacts{
-  list-style:none!important;
-  margin:.35rem 0 .3rem!important;
-  padding:0!important;
-  display:block!important;
-}
-.about-page h3 + ul li,
-.about-page .about-contacts li{
-  position:relative;
-  padding:var(--about-list-gap) 0 var(--about-list-gap) 1.1rem!important;
-  margin:0!important;
-  font-size:var(--about-list-font);
-  line-height:1.45;
-}
-.about-page h3 + ul li::before,
-.about-page .about-contacts li::before{
-  content:"";
-  position:absolute;
-  left:0;top:.95rem;
-  width:var(--about-bullet-size);height:var(--about-bullet-size);
-  background:var(--about-accent);
-  border-radius:50%;
-  opacity:.55;
-}
-body.dark .about-page h3 + ul li::before,
-body.dark .about-page .about-contacts li::before{opacity:.75;}
-.about-page .about-contacts a,
-.about-page h3 + ul li a{
-  color:var(--about-accent);
-  font-weight:600;
-  text-decoration:none;
-  padding:.05rem .1rem;
-  border-radius:4px;
-  transition:color .18s,background-color .18s;
-}
-.about-page .about-contacts a:hover,
-.about-page h3 + ul li a:hover{text-decoration:underline;}
-/* Optional pill mode (enable via inline style: style="--about-link-pill:1") */
-.about-page[style*="--about-link-pill:1"] .about-contacts a,
-.about-page[style*="--about-link-pill:1"] h3 + ul li a{
-  padding:.38rem .65rem;
-  background:rgba(225,48,108,.12);
-  border-radius:8px;
-  font-size:.68rem;
-  letter-spacing:.4px;
-  line-height:1;
-  text-decoration:none;
-}
-body.dark .about-page[style*="--about-link-pill:1"] .about-contacts a,
-body.dark .about-page[style*="--about-link-pill:1"] h3 + ul li a{
-  background:rgba(225,48,108,.28);
-  color:#ff8fb7;
-}
-.about-page[style*="--about-link-pill:1"] .about-contacts a:hover,
-.about-page[style*="--about-link-pill:1"] h3 + ul li a:hover{
-  background:var(--about-accent);
-  color:#fff;
-}
-
-/* === Section heading effect: left red bar + bottom accent line === */
-.about-page h3{
-  background:none!important;
-  border-radius:0!important;
-  position:relative;
-}
-.about-page h3::before{
-  width:3px!important;
-}
-.about-page h3::after{
-  content:"";
-  position:absolute;
-  left:.75rem;
-  bottom:-2px;
-  width:64px;
-  height:2px;
-  background:var(--about-accent);
-  border-radius:2px;
-  opacity:.82;
-}
-
-/* === Hero link styling (distinct from non-link highlights) === */
-/* Changed to blue for clearer contrast vs regular accent */
-.about-page .about-hero a{
-  --hero-link-accent:#1d6fff;
-  position:relative;
-  display:inline-block;
-  padding:.16rem .55rem .20rem;
-  margin:.08rem .18rem .08rem 0;
-  color:#0b3d91;
-  background:rgba(29,111,255,.08);
-  border:1px solid rgba(29,111,255,.20);
-  border-radius:9px;
-  font-weight:600;
-  text-decoration:none;
-  line-height:1.18;
-  transition:background .22s,color .22s,box-shadow .22s,border-color .22s,transform .08s;
-}
-body.dark .about-page .about-hero a{
-  color:#9fd1ff;
-  background:rgba(29,111,255,.12);
-  border-color:rgba(29,111,255,.28);
-}
-.about-page .about-hero a:hover,
-.about-page .about-hero a:focus-visible{
-  background:var(--hero-link-accent);
-  color:#fff;
-  border-color:var(--hero-link-accent);
-  box-shadow:0 0 0 4px rgba(29,111,255,.12);
-  text-decoration:none;
-  transform:translateY(-1px);
-}
-body.dark .about-page .about-hero a:hover,
-body.dark .about-page .about-hero a:focus-visible{
-  box-shadow:0 0 0 4px rgba(29,111,255,.18);
-}
-.about-page .about-hero a:active{transform:translateY(0);}
-.about-page .about-hero a strong{
-  background:none!important;
-  padding:0!important;
-  margin:0!important;
-  border-radius:0!important;
-  color:inherit!important;
-  line-height:inherit!important;
-}
-@media (max-width:640px){
-  .about-page .about-hero{font-size:1.07rem;padding:.9rem 1rem 1rem;border-radius:16px;}
-  .about-page h3{font-size:.95rem;margin:2rem 0 .65rem;}
-  .about-page h3 + ul li,
-  .about-page .about-contacts li{
-    padding:.38rem 0 .38rem 1rem!important;
-  }
-  .about-page h3 + ul li::before,
-  .about-page .about-contacts li::before{
-    top:.85rem;
-  }
-  .about-page .about-hero a{padding:.14rem .5rem .18rem;margin:.06rem .15rem .06rem 0;}
-}
-@media (prefers-reduced-motion:reduce){
-  .about-page .about-hero *{transition:none!important;}
-}
-
-/* === Pet tooltip restructure (HTML container + pill names) === */
-.about-page .pet-info{
-  position:relative;
-  cursor:help;
-  display:inline-block;
-  line-height:1;
-}
-.about-page .pet-info > strong{
-  --pet-pill:#1d6fff;
-  display:inline-block;
-  background:rgba(29,111,255,.10);
-  color:#0b3d91;
-  padding:.28rem .65rem .34rem;
-  margin:.08rem .28rem .08rem 0;
-  font-weight:600;
-  font-size:.78rem;
-  line-height:1.05;
-  border:1px solid rgba(29,111,255,.28);
-  border-radius:11px;
-  transition:background .22s,color .22s,border-color .22s,box-shadow .22s,transform .18s;
-}
-body.dark .about-page .pet-info > strong{
-  background:rgba(29,111,255,.18);
-  color:#9fd1ff;
-  border-color:rgba(29,111,255,.38);
-}
-.about-page .pet-info:hover > strong,
-.about-page .pet-info:focus-visible > strong,
-.about-page .pet-info.tip-open > strong{
-  background:var(--pet-pill);
-  color:#fff;
-  border-color:var(--pet-pill);
-  box-shadow:0 0 0 3px rgba(29,111,255,.20);
-  transform:translateY(-2px);
-}
-body.dark .about-page .pet-info:hover > strong,
-body.dark .about-page .pet-info:focus-visible > strong,
-body.dark .about-page .pet-info.tip-open > strong{
-  box-shadow:0 0 0 4px rgba(29,111,255,.28);
-}
-.about-page .pet-info .pet-tip{
-  position:absolute;
-  left:50%;top:100%;
-  transform:translate(-50%,10px) scale(.94);
-  transform-origin:top center;
-  background:#fff;
-  color:#222;
-  border:1px solid rgba(0,0,0,.12);
-  border-radius:12px;
-  padding:.65rem .75rem .7rem;
-  min-width:190px;
-  max-width:250px;
-  font-size:.7rem;
-  line-height:1.35;
-  letter-spacing:.35px;
-  box-shadow:0 10px 30px -10px rgba(0,0,0,.35);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .22s,transform .22s;
-  backdrop-filter:blur(8px);
-  text-align:left;
-  white-space:normal;
-  z-index:30;
-}
-body.dark .about-page .pet-info .pet-tip{
-  background:rgba(38,38,42,.92);
-  color:#eee;
-  border-color:rgba(255,255,255,.18);
-  box-shadow:0 12px 34px -12px rgba(0,0,0,.65);
-}
-.about-page .pet-info:hover .pet-tip,
-.about-page .pet-info:focus-visible .pet-tip,
-.about-page .pet-info.tip-open .pet-tip{
-  opacity:1;
-  transform:translate(-50%,6px) scale(1);
-  pointer-events:auto;
-}
-.about-page .pet-info .pet-tip .tip-title{
-  font-weight:600;
-  margin:0 0 .3rem;
-  font-size:.72rem;
-  letter-spacing:.4px;
-  color:#c81352;
-}
-body.dark .about-page .pet-info .pet-tip .tip-title{color:#ff7faa;}
-.about-page .pet-info .pet-tip .tip-line{
-  margin:.18rem 0;
-  display:block;
-}
-.about-page .pet-info .pet-tip a{
-  color:#1d6fff;
-  font-weight:600;
-  text-decoration:underline;
-  border-bottom:none!important;
-  padding-bottom:0!important;
-  background:none!important;
-  box-shadow:none!important;
-  transition:color .16s ease-in-out;
-}
-.about-page .pet-info .pet-tip a:hover,
-.about-page .pet-info .pet-tip a:focus{
-  color:#0b3dff;
-  text-decoration:underline;
-  box-shadow:none;
-}
-body.dark .about-page .pet-info .pet-tip a{
-  color:#7fc8ff;
-}
-body.dark .about-page .pet_info .pet-tip a:hover,
-body.dark .about-page .pet_info .pet-tip a:focus{
-  color:#bfe9ff;
-}
-
-/* Remove legacy ::after if present */
-.about-page .pet-info::after{content:none!important;}
-
-/* === 與中文同步：寵物名稱字級與 blue-highlight 微調 === */
-.about-page .pet-info > strong{
-  font-size:inherit!important; /* 和周圍文字同大小 */
-}
-.about-page .pet-info > strong.blue-highlight{
-  margin:.12rem .25rem .12rem 0!important;
-  padding:.18rem .55rem .22rem!important;
-  line-height:1.25!important;
-}
-
-/* 若需要，確保 blue-highlight 連結也有相同間距 */
-.about-page .about-hero a.blue-highlight{
-  margin:.12rem .25rem .12rem 0!important;
-  padding:.18rem .55rem .22rem!important;
-  line-height:1.25!important;
-}
-
-@media (max-width:640px){
-  .about-page .pet-info > strong{
-    padding:.26rem .6rem .32rem;
-    font-size:.75rem;
-    margin:.06rem .22rem .06rem 0;
-  }
-  .about-page .pet-info .pet-tip{
-    font-size:.66rem;
-    max-width:210px;
-  }
-}
-@media (prefers-reduced-motion:reduce){
-  .about-page .pet-info > strong,
-  .about-page .pet-info .pet-tip{transition:none!important;transform:none!important;}
-}
-
-/* === Blue highlight (same capsule style as pink strong) === */
-.about-page .about-hero .blue-highlight,
-.about-page .about-hero a.blue-highlight,
-.about-page .about-hero .blue-highlight strong{
-  background:linear-gradient(to top,rgba(29,111,255,.32),rgba(29,111,255,0) 65%)!important;
-  color:#1d6fff!important;
-  padding:.18rem .55rem .22rem!important;
-  margin:.12rem .25rem .12rem 0!important;
-  border-radius:999px!important;
-  line-height:1.15;
-  letter-spacing:.3px;
-  display:inline-block;
-  font-weight:600;
-  text-decoration:none;
-  transition:color .25s,background .25s,box-shadow .25s;
-}
-body.dark .about-page .about-hero .blue-highlight,
-body.dark .about-page .about-hero a.blue-highlight{
-  background:linear-gradient(to top,rgba(29,111,255,.45),rgba(29,111,255,0) 65%)!important;
-  color:#79b6ff!important;
-}
-.about-page .about-hero a.blue-highlight:hover{
-  box-shadow:0 0 0 2px rgba(29,111,255,.25);
-  text-decoration:none;
-}
-
-/* Reset previous hero link pill style */
-.about-page .about-hero a{
-  background:none;
-  border:none;
-  padding:0;
-  margin:0;
-  box-shadow:none;
-  color:var(--about-accent);
-  display:inline;
-}
-.about-page .about-hero a:hover{text-decoration:underline;}
-.about-page .about-hero a.blue-highlight{padding:0!important;margin:.12rem .25rem .12rem 0!important;}
-
-/* Pet name revert to blue highlight (remove pill) */
-.about-page .pet-info > strong{
-  background:none!important;
-  padding:0!important;
-  margin:0!important;
-  border:none!important;
-}
-.about-page .pet-info > strong.blue-highlight{}
-
-/* Tooltip adjust (keep) */
-.about-page .pet-info .pet-tip{top:100%;}
-
-/* === Tooltip naming origin link (modern minimal style) === */
-.about-page .pet-info .pet-tip a.pet-origin{
-  all:unset;
-  cursor:pointer;
-  font-weight:700;
-  color:#1d6fff;
-  font-size:.78rem;
-  line-height:1.18;
-  text-decoration:none;
-  border-radius:0;
-  transition:color .16s;
-  display:inline;
-}
-.about-page .pet-info .pet-tip a.pet-origin:hover,
-.about-page .pet-info .pet-tip a.pet-origin:focus-visible{
-  color:#0b3dff;
-  text-decoration:underline;
-}
-body.dark .about-page .pet-info .pet-tip a.pet-origin{
-  color:#7fc8ff;
-}
-body.dark .about-page .pet-info .pet-tip a.pet-origin:hover,
-body.dark .about-page .pet_info .pet-tip a.pet-origin:focus-visible{
-  color:#bfe9ff;
-  text-decoration:underline;
-}
-.about-page .pet-info .pet-tip a.pet-origin strong{
-  background:none!important;
-  padding:0!important;
-  margin:0!important;
-  color:inherit!important;
-  font-weight:700;
-}
+.about-modal{background:#fff;color:#222;border-radius:18px;max-width:560px;width:100%;padding:1.6rem 1.55rem 1.9rem;max-height:85vh;overflow-y:auto;position:relative;font-size:.9rem;line-height:1.65;transform:translateY(12px);transition:.28s;}
+.about-modal-backdrop.active .about-modal{transform:translateY(0);}
+.about-modal h4{margin:0 0 .55rem;font-size:1.15rem;font-weight:700;color:#1d6fff;}
+.about-modal .am-sub{font-size:.7rem;opacity:.65;margin:-.25rem 0 1.1rem;font-weight:600;}
+.about-modal-close{position:absolute;top:.8rem;right:.8rem;width:34px;height:34px;border:none;border-radius:50%;background:rgba(0,0,0,.08);cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.22s;}
+.about-modal-close:hover{background:rgba(0,0,0,.18);}
+.about-modal a{ @supports (background: color(display-p3 1 1 1)){ } color:#1d6fff;font-weight:700;text-decoration:none;border:none;padding:0;background:none;transition:.2s;}
+.about-modal a:hover{color:#0b54ff;text-decoration:underline;}
+body.dark .about-modal{background:#26272c;color:#ddd;}
+body.dark .about-modal h4{color:#8bc4ff;}
+body.dark .about-modal a{color:#8bc4ff;}
+body.dark .about-modal a:hover{color:#bfe2ff;}
+.about-modal .am-section{margin:0 0 1.05rem;}
 </style>
 
 <div class="about-page">
   <div class="about-hero">
-    <p>Hi, I'm <strong>Zakk</strong>, based in <strong>Melbourne</strong> and studying <strong>Business</strong>.</p>
-    <p>I have two <strong>🐹 guinea pigs</strong>: <span class="pet-info"><strong class="blue-highlight">Potato🥔</strong><span class="pet-tip"><span class="tip-title">Potato</span><span class="tip-line">Birthday: 27/07/2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span></span></span> and <span class="pet-info"><strong class="blue-highlight">Hash&nbsp;Brown</strong><span class="pet-tip"><span class="tip-title">Hash Brown</span><span class="tip-line">Birthday: 24/06/2025</span><span class="tip-line">Breed: Purebred Teddy Guinea Pig</span><span class="tip-line">Name idea: <a class="pet-origin" href="https://mcdonalds.com.hk/en/product/hash-browns/" target="_blank" rel="noopener"><strong>McDonald's Hash Browns</strong></a></span></span></span>. I enjoy <strong>gaming</strong>, <strong>Linux</strong> and <strong>finance</strong>, and follow the Apple, Samsung and Google ecosystems. I listen to melancholic music and occasionally do <strong>drawing</strong> and <strong>design</strong>. You can see them and my daily life on <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
-    <p>My girlfriend lives in <strong>Taiwan</strong>; we are both <strong>pansexual 🩷💛🩵</strong>. You can see her on <a class="blue-highlight" href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.</p>
-    <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">Below are my main hardware, devices, and ways to reach me.</p>
+    <p>Hi, I'm <strong>Zakk</strong>, living in <strong>Australia</strong> and studying <strong>Business</strong>.</p>
+    <p>I have two <strong>guinea pigs</strong>:
+      <a href="#" class="blue-highlight" data-am-open="potato">Potato</a>
+      <a href="#" class="blue-highlight" data-am-open="hash">Hash&nbsp;Brown</a>.
+      I enjoy <strong>gaming</strong>, <strong>Linux</strong>, and <strong>finance</strong>; also follow Apple / Samsung / Google ecosystems, sometimes <strong>draw</strong> & <strong>design</strong>. See more on
+      <a class="blue-highlight" href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a>.
+    </p>
+    <p>My girlfriend <a href="#" class="blue-highlight" data-am-open="couple">Paper</a> and I are in a long‑distance relationship (Australia / Taiwan). We are <strong>pansexual 🩷💛🩵</strong>, share daily life, study and work. We have many aligned interests & viewpoints, fit naturally — truly <strong>soulmates</strong>. We first met in
+      <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord — 
+      <a href="/timeline/#couple" class="blue-highlight">see how long we've been together here</a>.
+    </p>
   </div>
 
-### 💻 Desktop PC
-- Motherboard: ASUS ROG STRIX X670E-A GAMING WIFI  
-- CPU: AMD Ryzen 9 7950X3D (16C/32T)  
-- GPU: NVIDIA GeForce RTX 4080 SUPER  
-- RAM: 64 GB DDR5 6400 MHz  
-- Network: Static public IP (Aussie Telecom, 1000/50 Mbps)  
-- Router: BE9300 Tri-Band Wi-Fi 7  
-- OS: Windows 11 Pro 64-bit + Gentoo Linux (KDE Plasma)  
+  <h3>Gear (Brief)</h3>
+  <ul>
+    <li>Desktop: Ryzen 9 7950X3D / RTX 4080 SUPER / 64GB DDR5</li>
+    <li>Laptops: MacBook Air M2 / ROG Zephyrus G16 Air</li>
+    <li>Phones: Z Fold 7, Pixel 7 Pro, iPhone 14, iPhone 16 Pro</li>
+  </ul>
 
-### 💼 Laptops
-- Apple MacBook Air M2 (16GB / 512GB)  
-- ASUS ROG Zephyrus G16 Air  
+  <h3>Contact</h3>
+  <ul>
+    <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></li>
+    <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener" class="blue-highlight">GitHub</a></li>
+    <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener" class="blue-highlight">X / Twitter</a></li>
+    <li><a href="mailto:admin@zakk.au" class="blue-highlight">admin@zakk.au</a></li>
+  </ul>
+</div>
 
-### 📱 Phones
-- Samsung Galaxy Z Fold 7  
-- Google Pixel 7 Pro  
-- iPhone 14  
-- iPhone 16 Pro  
-
-### 🔗 Contacts
-<ul class="about-contacts">
-  <li>Instagram: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
-  <li>GitHub: <a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
-  <li>X: <a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
-  <li>Email: <a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
-</ul>
+<!-- Shared Modal -->
+<div class="about-modal-backdrop" id="aboutModalBackdrop">
+  <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <button class="about-modal-close" type="button" aria-label="Close" id="aboutModalClose">✕</button>
+    <div id="aboutModalContent"></div>
+  </div>
 </div>
 
 <script>
-/* Pet tooltip click support (mobile) */
 (()=> {
-  const pets=document.querySelectorAll('.about-page .pet-info');
-  const closeAll=()=>pets.forEach(p=>p.classList.remove('tip-open'));
-  pets.forEach(p=>{
-    p.setAttribute('tabindex','0');
-    p.addEventListener('click',e=>{
-      e.stopPropagation();
-      const on=p.classList.contains('tip-open');
-      closeAll();
-      if(!on) p.classList.add('tip-open');
-    });
-    p.addEventListener('keydown',e=>{
-      if(e.key==='Enter'||e.key===' '){
-        e.preventDefault();
-        p.click();
-      }
-      if(e.key==='Escape'){closeAll();}
+  const data = {
+    couple: {
+      title: "Our Relationship",
+      sub: "Since 2025/08/07 11:38",
+      html: `
+        <div class="am-section"><p>I (Zakk) and Paper live apart (Australia / Taiwan), long‑distance & both <strong>pansexual 🩷💛🩵</strong>.</p></div>
+        <div class="am-section"><p>We share daily life, study, work, ideas & music; values and rhythm align — we feel like genuine <strong>soulmates</strong>.</p></div>
+        <div class="am-section"><p>Met inside <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord. We meet every few months; Paper plans to study in Australia after high school.</p></div>
+        <div class="am-section"><p><a href="/timeline/#couple" class="blue-highlight">See how long we've been together</a> | Paper IG: <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.5</a></p></div>
+      `
+    },
+    hash: {
+      title: "Hash Brown",
+      sub: "Birthday: 2025/06/24",
+      html: `
+        <div class="am-section"><p>Purebred Teddy guinea pig, light brown, energetic and cage runner.</p></div>
+        <div class="am-section"><p>Loves red/green bell peppers, corn silk, carrots; very vocal evenings.</p></div>
+        <div class="am-section"><p><a href="/timeline/#hash" class="blue-highlight">See her days counter</a> | More: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p></div>
+      `
+    },
+    potato: {
+      title: "Potato",
+      sub: "Birthday: 2025/07/27",
+      html: `
+        <div class="am-section"><p>Dark chocolate Teddy; bold & food‑driven; sometimes eats & poops simultaneously.</p></div>
+        <div class="am-section"><p>Enjoys bell peppers, corn silk, carrots; naps buried in hay then resumes eating.</p></div>
+        <div class="am-section"><p><a href="/timeline/#potato" class="blue-highlight">See her days counter</a> | More: <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></p></div>
+      `
+    }
+  };
+
+  const backdrop = document.getElementById('aboutModalBackdrop');
+  const wrap = document.getElementById('aboutModalContent');
+  const closeBtn = document.getElementById('aboutModalClose');
+
+  function openModal(k){
+    const d = data[k];
+    if(!d) return;
+    wrap.innerHTML = `<h4 id="aboutModalTitle">${d.title}</h4><div class="am-sub">${d.sub}</div>${d.html}`;
+    backdrop.classList.add('active');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){
+    backdrop.classList.remove('active');
+    document.body.style.overflow='';
+  }
+  document.querySelectorAll('[data-am-open]').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.preventDefault();
+      openModal(el.getAttribute('data-am-open'));
     });
   });
-  document.addEventListener('click',closeAll);
+  backdrop.addEventListener('click',e=>{ if(e.target===backdrop) closeModal(); });
+  closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && backdrop.classList.contains('active')) closeModal(); });
 })();
 </script>
