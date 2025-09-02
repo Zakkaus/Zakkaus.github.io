@@ -163,7 +163,25 @@ body.dark .about-page .about-hero a.blue-highlight:hover{
   letter-spacing:inherit!important;
 }
 
-/* (保留其他 blue-highlight 規則不變) */
+/* === English About: headings simple underline (no left bar / bg) === */
+html[lang="en"] .about-page h3{
+  background:none!important;
+  padding:0 0 .35rem 0!important;
+  margin:1.9rem 0 .65rem!important;
+  border-radius:0!important;
+}
+html[lang="en"] .about-page h3::before{content:none!important;}
+html[lang="en"] .about-page h3::after{
+  left:0!important;
+  bottom:-2px!important;
+  width:64px!important;
+  height:2px!important;
+  background:var(--about-accent)!important;
+  opacity:.85!important;
+  border-radius:2px!important;
+}
+
+/* 保持中文版樣式，不影響 zh-hant */
 </style>
 
 <div class="about-page">
@@ -201,10 +219,10 @@ body.dark .about-page .about-hero a.blue-highlight:hover{
 
 ### 🔗 Contact
 <ul class="about-contacts">
-  <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener" class="blue-highlight">@zakk.au</a></li>
-  <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener" class="blue-highlight">GitHub</a></li>
-  <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener" class="blue-highlight">X / Twitter</a></li>
-  <li><a href="mailto:admin@zakk.au" class="blue-highlight">admin@zakk.au</a></li>
+  <li><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
+  <li><a href="https://github.com/Zakkaus" target="_blank" rel="noopener">GitHub</a></li>
+  <li><a href="https://x.com/zakkauu" target="_blank" rel="noopener">X / Twitter</a></li>
+  <li><a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
 </ul>
 </div>
 
