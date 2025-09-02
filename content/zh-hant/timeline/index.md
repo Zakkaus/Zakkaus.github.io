@@ -670,34 +670,29 @@ body.dark .tl-close-btn:hover {
   .tl-content {
     width: auto;
     text-align: left;
-    padding: 0.7rem 0.8rem;
+    padding: 0.5rem 0.8rem; /* 從 0.7rem 減少到 0.5rem，向上移動 */
     padding-bottom: 2.5rem;
     position: relative;
     grid-area: content;
-    margin-top: 0; /* 手機版不需要margin-top */
+    margin-top: -5px; /* 新增負邊距，進一步向上移動 */
     margin-left: 0;
+  }
+  
+  .tl-content h3 {
+    margin-top: -5px; /* 標題向上移動 */
+    margin-bottom: 0.4rem;
   }
   
   .tl-counter {
     display: flex;
     align-items: flex-end;
     gap: 0.5rem;
-    margin-bottom: 0.3rem;
-  }
-  
-  .tl-days {
-    font-size: 1.8rem;
-    margin-bottom: 0;
-  }
-  
-  .tl-time {
-    font-size: 0.65rem;
-    padding-bottom: 0.1rem;
+    margin-bottom: 0.1rem; /* 從 0.3rem 減少到 0.1rem */
   }
   
   .tl-meta {
     font-size: 0.65rem;
-    margin-top: 0.2rem;
+    margin-top: 0.1rem; /* 從 0.2rem 減少到 0.1rem */
   }
   
   /* 修復手機版按鈕 */
@@ -736,19 +731,13 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-content {
-    margin-left: 0; /* 調整為0 */
-  }
-  
-  .tl-days {
-    font-size: 1.6rem;
-  }
-  
-  .tl-content {
-    padding: 0.6rem 0.7rem 2.5rem 0.7rem;
+    padding: 0.4rem 0.7rem 2.5rem 0.7rem; /* 從 0.6rem 減少到 0.4rem */
+    margin-top: -5px; /* 新增負邊距 */
   }
   
   .tl-content h3 {
     font-size: 0.9rem;
+    margin-top: -5px; /* 標題向上移動 */
     margin-bottom: 0.4rem;
   }
   
