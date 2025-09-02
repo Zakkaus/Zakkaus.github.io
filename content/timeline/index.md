@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
       modalSubtitle: "Birthday: June 24, 2025",
       modalContent: `
         <p>Hash Brown is a purebred Teddy guinea pig with light brown fur. He's very active and energetic, loves doing parkour in his cage, and often pushes his hideout around while playing with boundless energy.</p>
-        <p>Favorite foods: red and green bell peppers, corn silk, and carrots (especially loves these). He's usually active in the evening and makes squeaking sounds when asking for treats.</p>
-        <p>See more adorable photos of Hash Brown on Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>Favorite foods: red and green bell peppers (loves these the most), corn silk and carrots. He's usually active in the evening and makes squeaking sounds when asking for treats.</p>
+        <p>See more adorable photos of Hash Brown on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
     },
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
       modalSubtitle: "Birthday: July 27, 2025",
       modalContent: `
         <p>Potato is a purebred Teddy guinea pig with dark chocolate fur. He has a greedy personality and is quite brave. He often eats and plays simultaneously, sometimes pooping while eating, and occasionally even in his food bowl.</p>
-        <p>Favorite foods: red and green bell peppers, corn silk, and carrots. He also enjoys sleeping in hay piles and continues eating right after waking up - a brave little glutton.</p>
-        <p>For more daily updates about Potato, check Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>Favorite foods: red and green bell peppers, corn silk and carrots. He also enjoys sleeping in hay piles and continues eating right after waking up - a brave little glutton.</p>
+        <p>For more daily updates about Potato, check Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
     }
@@ -234,6 +234,11 @@ document.addEventListener('DOMContentLoaded', function() {
   margin: 0 auto;
   padding: 2rem 0 3rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .tl-container {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* 網格布局 */
@@ -265,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: var(--tl-radius);
   overflow: hidden;
   padding-bottom: 3rem;
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px -10px rgba(0,0,0,0.15);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
@@ -278,7 +283,7 @@ body.dark .tl-card {
 
 .tl-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.2);
+  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
 /* 卡片圖片 - 調整裁切效果 */
@@ -399,7 +404,7 @@ body.dark .tl-more:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -426,11 +431,12 @@ body.dark .tl-more:hover {
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
   max-height: 80vh;
   overflow-y: auto;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 body.dark .tl-modal {
   background: #2a2b2f;
-  color: #e1e1e1;
+  color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
 }
 

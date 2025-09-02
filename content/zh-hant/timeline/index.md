@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
       modalSubtitle: "生日：2025 年 6 月 24 日",
       modalContent: `
         <p>薯餅是一隻純種泰迪天竺鼠，毛色淺咖啡。比較活潑好動，喜歡在籠子裡轉圈跑酷，常常推著自己的窩到處跑，玩耍時精力充沛。</p>
-        <p>最愛的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔（超級喜歡）。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
-        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>最愛的食物：紅色和綠甜椒（超級喜歡）、玉米鬚和胡蘿蔔。牠喜歡在傍晚活躍，會發出吱吱聲討零食。</p>
+        <p>更多薯餅的可愛照片請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"
     },
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalContent: `
         <p>馬鈴薯是一隻純種泰迪天竺鼠，毛色深巧克力色，性格較為貪吃且膽子比較大。牠常常一邊吃一邊玩，有時候會邊吃邊拉，偶爾會在糧盆裡面拉出糞便。</p>
         <p>喜歡的食物：紅色和綠甜椒、玉米鬚和胡蘿蔔。牠也喜歡在草堆裡面睡覺，醒來後會繼續吃，是個貪吃又勇敢的小家伙。</p>
-        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
+        <p>更多馬鈴薯的日常分享請見 Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/zh-hant/about/#pets"
     }
@@ -233,6 +233,11 @@ document.addEventListener('DOMContentLoaded', function() {
   margin: 0 auto;
   padding: 2rem 0 3rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark .tl-container {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* 網格布局 */
@@ -264,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
   border-radius: var(--tl-radius);
   overflow: hidden;
   padding-bottom: 3rem;
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px -10px rgba(0,0,0,0.15);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
@@ -277,7 +282,7 @@ body.dark .tl-card {
 
 .tl-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.2);
+  box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
 /* 卡片圖片 - 調整裁切效果 */
@@ -398,7 +403,7 @@ body.dark .tl-more:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -425,11 +430,12 @@ body.dark .tl-more:hover {
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4);
   max-height: 80vh;
   overflow-y: auto;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 body.dark .tl-modal {
   background: #2a2b2f;
-  color: #e1e1e1;
+  color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
 }
 
