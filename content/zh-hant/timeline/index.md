@@ -290,6 +290,7 @@ body.dark .tl-container {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  height: 100%;  /* 確保所有卡片高度一致 */
 }
 
 body.dark .tl-card {
@@ -303,14 +304,13 @@ body.dark .tl-card {
   box-shadow: 0 14px 40px -12px rgba(0,0,0,0.25);
 }
 
-/* 卡片圖片 - 調整裁切效果 */
+/* 卡片圖片 - 強制統一裁切比例 */
 .tl-image {
-  height: 200px;
+  height: 0;
+  padding-bottom: 56.25%;  /* 16:9 比例 */
+  position: relative;
   overflow: hidden;
   background-color: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
 }
 
@@ -319,9 +319,13 @@ body.dark .tl-image {
 }
 
 .tl-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   transition: transform 0.5s;
 }
 
@@ -600,61 +604,51 @@ body.dark .tl-close-btn:hover {
   background: rgba(255,255,255,0.1);
 }
 
-/* 手機適配 - 優化佈局 */
-@media (max-width: 640px) {
-  .tl-image {
-    height: 180px;
-  }
-  
-  .tl-content {
-    padding: 1rem 1.2rem;
-  }
-  
-  .tl-days {
-    font-size: 2.4rem;
-  }
-  
-  .tl-modal {
-    padding: 1.2rem;
-  }
-  
-  .tl-modal-title {
-    font-size: 1.25rem;
-  }
-}
-
+/* 手機適配 - 完全重新設計 */
 @media (max-width: 480px) {
   .tl-grid {
-    gap: 1.2rem;
+    gap: 1rem;
   }
   
   .tl-card {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 110px 1fr;
     padding-bottom: 0;
-    max-height: 160px;
+    max-height: none;
+    height: auto;
   }
   
   .tl-image {
-    width: 40%;
-    height: 160px;
+    width: 110px;
+    height: 110px;
+    padding-bottom: 0;
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
   .tl-content {
-    width: 60%;
-    padding: 0.8rem 0.5rem 0.8rem 1rem;
+    width: auto;
+    padding: 0.7rem 0.5rem 2.5rem 0.8rem;
     text-align: left;
     position: relative;
-    padding-bottom: 2.5rem;
+  }
+  
+  .tl-counter {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0.3rem;
+    gap: 0.5rem;
   }
   
   .tl-days {
-    font-size: 2rem;
-    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    line-height: 1;
   }
   
   .tl-time {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    padding-bottom: 0.15rem;
   }
   
   .tl-meta {
@@ -662,22 +656,44 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-more {
-    width: 100%;
     padding: 0.5rem;
     font-size: 0.7rem;
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
+    text-align: center;
+    border-radius: 0;
   }
   
   .tl-content h3 {
-    font-size: 0.95rem;
-    margin-bottom: 0.6rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* 超小螢幕優化 */
+@media (max-width: 360px) {
+  .tl-card {
+    grid-template-columns: 90px 1fr;
   }
   
-  .tl-note {
-    white-space: normal;
-    font-size: 0.65rem;
+  .tl-image {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .tl-days {
+    font-size: 1.5rem;
+  }
+  
+  .tl-content {
+    padding: 0.5rem 0.5rem 2.5rem 0.8rem;
+  }
+  
+  .tl-content h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
   }
 }
 
