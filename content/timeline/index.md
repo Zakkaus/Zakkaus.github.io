@@ -5,46 +5,42 @@ toc: false
 date: 2025-09-01
 lastmod: 2025-09-01
 ---
-<div class="days-page">
-  <div class="days-grid">
-    <div class="d-card d-couple tl-openable" data-key="couple" role="button" tabindex="0" aria-haspopup="dialog">
-      <div class="d-media">
-        <img class="avatar timeline-img" alt="Avatar" src="/images/timeline/f-avatar.webp">
+
+<!-- 英文版結構與 zh-hant 相同，語言自動判斷；只差初始靜態文字 -->
+<div class="tl-scope">
+  <div class="tl-grid">
+    <div class="tl-card tl-open" data-key="couple" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="tl-media">
+        <img loading="lazy" src="/images/timeline/f-avatar.webp" alt="Avatar">
       </div>
-      <div class="d-body">
-        <h3 data-i18n="coupleTitle">Days Together</h3>
-        <p class="d-num" id="togetherDays">--</p>
-        <p class="d-meta" data-i18n="since">Since 07/08/2025</p>
-      </div>
+      <h3 data-i18n="coupleTitle">Days Together</h3>
+      <p class="tl-num" id="togetherDays">0</p>
+      <p class="tl-meta" data-i18n="since">Since 07/08/2025</p>
     </div>
-    <div class="d-card d-pet tl-openable" data-key="hash" role="button" tabindex="0" aria-haspopup="dialog">
-      <div class="d-media">
-        <img class="pet-img timeline-img" alt="Hash Brown" src="/images/timeline/hashbrown.webp">
+    <div class="tl-card tl-open" data-key="hash" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="tl-media">
+        <img loading="lazy" src="/images/timeline/hashbrown.webp" alt="Hash Brown">
       </div>
-      <div class="d-body">
-        <h3 data-i18n="hashTitle">Hash Brown Age (days)</h3>
-        <p class="d-num" id="hashDays">--</p>
-        <p class="d-meta" data-i18n="hashSince">Birthday: 24/06/2025</p>
-      </div>
+      <h3 data-i18n="hashTitle">Hash Brown Age (days)</h3>
+      <p class="tl-num" id="hashDays">0</p>
+      <p class="tl-meta" data-i18n="hashSince">Birthday: 24/06/2025</p>
     </div>
-    <div class="d-card d-pet tl-openable" data-key="potato" role="button" tabindex="0" aria-haspopup="dialog">
-      <div class="d-media">
-        <img class="pet-img timeline-img" alt="Potato" src="/images/timeline/potato.webp">
+    <div class="tl-card tl-open" data-key="potato" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="tl-media">
+        <img loading="lazy" src="/images/timeline/potato.webp" alt="Potato">
       </div>
-      <div class="d-body">
-        <h3 data-i18n="potatoTitle">Potato Age (days)</h3>
-        <p class="d-num" id="potatoDays">--</p>
-        <p class="d-meta" data-i18n="potatoSince">Birthday: 27/07/2025</p>
-      </div>
+      <h3 data-i18n="potatoTitle">Potato Age (days)</h3>
+      <p class="tl-num" id="potatoDays">0</p>
+      <p class="tl-meta" data-i18n="potatoSince">Birthday: 27/07/2025</p>
     </div>
   </div>
-  <div class="tz-line">
-    <span class="tz-note" data-i18n="tzNote">Based on Australia time UTC+10 (AEST) ❄️</span>
-  </div>
+  <p class="tl-tz" data-i18n="tzNote">Based on Australia time UTC+10 (AEST) ❄️</p>
 </div>
 
-<!-- 直接複製 zh-hant 已清理好的 style / script（語系自動判斷） -->
-<!-- 為避免重複，這裡不再貼出；請從 zh-hant 版本複製同一段 <style> 與 <script> 到此檔案 -->
+<noscript><p style="font-size:12px;opacity:.7">(JavaScript disabled – counters & modal unavailable)</p></noscript>
+
+<!-- 直接複製 zh-hant 版本的 <style> 與 <script> 內容放在此下方，以免重複貼長碼 -->
+<!-- 為方便合併，下方完整複製（與中文完全相同） -->
 <style>
 /* 與 zh-hant 完全一致的版面與裁切設定 */
 :root{
@@ -257,6 +253,10 @@ body.dark .tz-note{opacity:.75;background:none!important;}
     if(el) el.textContent=inclusiveDays(dateStr).toLocaleString();
   };
   setNum('togetherDays','07/08/2025');
+  setNum('hashDays','24/06/2025');
+  setNum('potatoDays','27/07/2025');
+})();
+</script>
   setNum('hashDays','24/06/2025');
   setNum('potatoDays','27/07/2025');
 })();
