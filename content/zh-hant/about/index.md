@@ -446,7 +446,7 @@ body.dark .about-page .about-hero a:focus-visible{
 <div class="about-page">
   <div class="about-hero">
     <p>嗨，我是 <strong>Zakk</strong>，在 <strong>澳大利亞</strong> 生活並就讀 <strong>Business</strong>。</p>
-    <p>我養了 <strong>🐹 天竺鼠</strong>（名字：<strong>馬鈴薯🥔</strong>、<strong>薯餅</strong><small style="opacity:.6;margin-left:.35rem;">靈感來源：<a href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></small>）。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常會聽偏憂鬱氛圍的音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到我的天竺鼠與日常。</p>
+    <p>我養了 <strong>🐹 天竺鼠</strong>（名字：<strong>馬鈴薯🥔</strong>、<strong>薯餅</strong>，牠們都是 <strong>泰迪</strong><small style="opacity:.6;margin-left:.35rem;">靈感來源：<a href="https://mcdonalds.com.hk/product/hash-browns/" target="_blank" rel="noopener"><strong>麥當勞脆薯餅</strong></a></small>）。我喜歡 <strong>遊戲</strong>、<strong>Linux</strong> 與 <strong>金融</strong>，也關注 Apple、Samsung、Google 生態；平常會聽偏憂鬱氛圍的音樂，偶爾 <strong>畫畫</strong> 與 <strong>設計</strong>。在 <a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener"><strong>Instagram</strong></a> 可以看到我的天竺鼠與日常。</p>
     <p>我的女朋友在 <strong>台灣</strong> 生活；我們都是 <strong>泛性戀 🩷💛🩵</strong>，這裡可以看到她的 <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener"><strong>Instagram</strong></a>。</p>
     <p style="margin-top:.8rem;font-size:.82rem;opacity:.75;">下面是我的主要裝備配置與聯絡方式，歡迎認識或交流。</p>
   </div>
