@@ -225,6 +225,32 @@ body.dark html[lang="en"] .about-page .about-contacts a:hover{
 }
 
 /* 保留其他語系樣式不變 */
+
+/* === Hero clickable highlight reshape (match strong style, only blue) === */
+.about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.35),rgba(29,111,255,0) 65%)!important;
+  color:#1d6fff!important;
+  padding:0 .2rem!important;
+  margin:0 .15rem 0 0!important;
+  border-radius:4px!important;
+  line-height:1.25!important;
+  letter-spacing:.25px!important;
+  box-shadow:none!important;
+  transform:none!important;
+  font-weight:600!important;
+}
+body.dark .about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
+  color:#8bc4ff!important;
+}
+.about-page .about-hero a.blue-highlight:hover{
+  background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  transform:none!important;
+  text-decoration:none!important;
+}
+/* 保留其他 .blue-highlight（hero 外）仍為原膠囊 */
 </style>
 
 <div class="about-page">

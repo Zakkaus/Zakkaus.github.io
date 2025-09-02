@@ -847,6 +847,32 @@ body.dark .about-modal a:hover {
 .about-modal a { border-bottom:none!important; padding-bottom:.22rem!important; }
 
 /* 內文普通超連結仍保留粉色主題（若要全部改藍，可再覆寫） */
+
+/* === Hero 可點擊高亮調整：與 strong 同形狀（4px），僅顏色改藍 === */
+.about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.35),rgba(29,111,255,0) 65%)!important;
+  color:#1d6fff!important;
+  padding:0 .2rem!important;
+  margin:0 .15rem 0 0!important;
+  border-radius:4px!important;
+  line-height:1.25!important;
+  letter-spacing:.25px!important;
+  box-shadow:none!important;
+  transform:none!important;
+  font-weight:600!important;
+}
+body.dark .about-page .about-hero a.blue-highlight{
+  background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
+  color:#8bc4ff!important;
+}
+.about-page .about-hero a.blue-highlight:hover{
+  background:linear-gradient(to top,rgba(29,111,255,.55),rgba(29,111,255,0) 65%)!important;
+  color:#fff!important;
+  box-shadow:none!important;
+  transform:none!important;
+  text-decoration:none!important;
+}
+/* Hero 外其他 .blue-highlight 保持既有膠囊樣式 */
 </style>
 
 <div class="about-page">
