@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
       modalTitle: "Hash Brown",
       modalSubtitle: "Birthday: June 24, 2025",
       modalContent: `
-        <p>Hash Brown is a purebred Teddy guinea pig with light brown (slightly yellowish) fur. Very active, loves lap running and pushing her little house around.</p>
-        <p>Favorite foods: Red & green bell peppers, corn silk, carrots. When she sees people she makes a distinctive <strong>"515151"</strong> sound to ask for treats.</p>
-        <p>Name origin: Named after the McDonald's breakfast <a href="https://mcdonalds.com.au/menu/hash-brown" target="_blank" rel="noopener" class="tl-highlight-link">hash brown</a> because the crispy feel matches her lively personality.</p>
+        <p>Hash Brown is a purebred Teddy guinea pig with light brown (slightly yellowish) fur. Very active, loves running laps and pushing her hideout around.</p>
+        <p>Favorite foods: Red & green bell peppers, corn silk, carrots. She makes a distinctive <strong>"515151"</strong> (Chinese) sound when she sees people or when I open the fridge for treats. She is a girl.</p>
+        <p>Name origin: Named after the McDonald's breakfast <a href="https://mcdonalds.com.au/menu/hash-brown" target="_blank" rel="noopener" class="tl-highlight-link">hash brown</a>.</p>
         <p>More photos on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
       modalSubtitle: "Birthday: July 27, 2025",
       modalContent: `
         <p>Potato is a purebred Teddy guinea pig with dark brown fur; bold and food‑driven, sometimes eating and pooping at the same time.</p>
-        <p>Loves bell peppers, corn silk and carrots; also uses a playful <strong>"515151"</strong> pattern when seeing people for snacks; often naps buried in hay then resumes eating.</p>
+        <p>Loves bell peppers, corn silk and carrots; often naps buried in hay then keeps eating. She is a girl.</p>
         <p>More photos on Instagram: <a href="https://instagram.com/zakk.au" target="_blank" rel="noopener" class="tl-highlight-link">@zakk.au</a></p>
       `,
       linkUrl: "/about/#pets"
