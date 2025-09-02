@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       id: "couple",
       title: "我們在一起",
-      date: "07/08/2025",
+      date: "07/08/2025 11:38",
       image: "/images/timeline/f-avatar.webp",
       alt: "女友頭像",
       modalTitle: "關係",
-      modalSubtitle: "開始於 2025 年 8 月 7 日",
+      modalSubtitle: "開始於 2025 年 8 月 7 日 11:38am",
       modalContent: `
         <p>我們生活在不同的國家/地區（澳洲墨爾本和台灣台北），透過遠距方式經營關係。我們都是泛性戀 🩷💛🩵，擁抱多元性別與關係形式。</p>
         <p>雖然相隔兩地，我們仍保持每天的交流與聯繫，分享彼此的生活、工作與興趣愛好。我們彼此支持、尊重對方的獨立空間，同時也計劃定期見面。</p>
@@ -173,8 +173,13 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   const parseDate = (dateStr) => {
-    const [day, month, year] = dateStr.split('/').map(n => parseInt(n));
-    return new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+    // 處理日期時間格式: DD/MM/YYYY HH:MM
+    const [datePart, timePart = "00:00"] = dateStr.split(" ");
+    const [day, month, year] = datePart.split('/').map(n => parseInt(n));
+    const [hours, minutes] = timePart.split(':').map(n => parseInt(n));
+    
+    // 使用澳洲時間 UTC+10
+    return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
   };
   
   const timeSince = (dateStr) => {

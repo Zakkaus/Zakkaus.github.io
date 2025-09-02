@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       id: "couple",
       title: "Days Together",
-      date: "07/08/2025",
+      date: "07/08/2025 11:38",
       image: "/images/timeline/f-avatar.webp",
       alt: "Avatar",
       modalTitle: "Our Relationship",
-      modalSubtitle: "Started on August 7, 2025",
+      modalSubtitle: "Started on August 7, 2025 11:38am",
       modalContent: `
         <p>We live in different countries/regions (Melbourne, Australia and Taipei, Taiwan) and maintain a long-distance relationship. We both identify as pansexual 🩷💛🩵, embracing diverse gender identities and relationship forms.</p>
         <p>Despite the distance, we stay connected through daily communication, sharing our lives, work, and interests. We respect each other's independence while planning regular visits.</p>
@@ -174,8 +174,13 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   const parseDate = (dateStr) => {
-    const [day, month, year] = dateStr.split('/').map(n => parseInt(n));
-    return new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+    // Handle date time format: DD/MM/YYYY HH:MM
+    const [datePart, timePart = "00:00"] = dateStr.split(" ");
+    const [day, month, year] = datePart.split('/').map(n => parseInt(n));
+    const [hours, minutes] = timePart.split(':').map(n => parseInt(n));
+    
+    // Using Australian time UTC+10
+    return new Date(Date.UTC(year, month - 1, day, hours - 10, minutes, 0));
   };
   
   const timeSince = (dateStr) => {
