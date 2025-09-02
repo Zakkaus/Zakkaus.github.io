@@ -707,3 +707,36 @@ body.dark .about-block .about-intro mark{
 .about-block *::after{
   border-right-color:transparent !important;
 }
+
+/* === About 導覽後加入時間點 Emoji === */
+.main-nav a[href$="/about/"]{
+  position:relative;
+  padding-right:1.9rem; /* 預留給 emoji */
+}
+.main-nav a[href$="/about/"]::after{
+  content:"🕒";
+  position:absolute;
+  right:.55rem;
+  top:50%;
+  transform:translateY(-54%);
+  font-size:.9rem;
+  opacity:.78;
+  transition:opacity .25s,transform .25s;
+  pointer-events:none;
+}
+.main-nav a[href$="/about/"]:hover::after,
+.main-nav a[href$="/about/"]:focus-visible::after{
+  opacity:1;
+  transform:translateY(-54%) scale(1.1);
+}
+body.dark .main-nav a[href$="/about/"]::after{opacity:.85;}
+
+/* 手機版（如隱藏主選單則不影響；若顯示仍對齊） */
+@media (max-width:900px){
+  .main-nav a[href$="/about/"]{
+    padding-right:1.7rem;
+  }
+  .main-nav a[href$="/about/"]::after{
+    right:.45rem;
+  }
+}
