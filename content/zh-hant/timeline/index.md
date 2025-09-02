@@ -44,174 +44,153 @@ lastmod: 2025-09-01
 </div>
 
 <style>
-/* === Timeline 新版單欄設計（覆蓋舊樣式） === */
+/* === 簡潔縱向版 Timeline 樣式（取代舊樣式） === */
+:root{
+  --tl-card-radius:22px;
+  --tl-img-size:170px;
+  --tl-img-radius:26px;
+  --tl-gap:1.6rem;
+  --tl-accent:var(--hb-active,#e1306c);
+}
 .days-page{
-  max-width:880px;
+  max-width:720px;
   margin:0 auto;
-  padding:1.4rem 0 3rem;
+  padding:1.25rem 0 2.8rem;
   font-size:1rem;
-  line-height:1.6;
+  line-height:1.55;
 }
 .days-stack{
   display:flex;
   flex-direction:column;
-  gap:1.65rem;
+  gap:var(--tl-gap);
+  margin:0;
+  padding:0;
+  list-style:none;
 }
 .d-card{
-  position:relative;
   display:flex;
-  gap:1.25rem;
-  padding:1.35rem 1.55rem 1.45rem;
-  border:1px solid rgba(0,0,0,.08);
-  background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.82));
-  backdrop-filter:blur(8px);
-  border-radius:26px;
+  flex-direction:column;
   align-items:center;
-  overflow:hidden;
-  box-shadow:0 4px 14px -6px rgba(0,0,0,.15);
-  transition:box-shadow .35s,border-color .35s,transform .3s,background .35s;
+  text-align:center;
+  padding:1.35rem 1.25rem 1.55rem;
+  border:1px solid rgba(0,0,0,.08);
+  background:#fff;
+  border-radius:var(--tl-card-radius);
+  box-shadow:0 2px 4px -2px rgba(0,0,0,.05);
+  transition:border-color .25s,box-shadow .25s,transform .28s,background .25s;
 }
 body.dark .d-card{
-  border-color:rgba(255,255,255,.14);
-  background:linear-gradient(145deg,rgba(50,50,54,.92),rgba(42,42,46,.86));
-  box-shadow:0 6px 22px -10px rgba(0,0,0,.55);
-}
-.d-card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 85% 18%,rgba(225,48,108,.12),transparent 60%);
-  opacity:.85;
-  pointer-events:none;
-}
-body.dark .d-card::after{
-  background:radial-gradient(circle at 82% 20%,rgba(225,48,108,.25),transparent 60%);
-  opacity:.55;
+  background:#26272b;
+  border-color:rgba(255,255,255,.12);
+  box-shadow:0 4px 10px -6px rgba(0,0,0,.55);
 }
 .d-card:hover{
-  transform:translateY(-6px);
-  border-color:var(--hb-active,#e1306c);
-  box-shadow:0 12px 34px -12px rgba(0,0,0,.38);
+  border-color:var(--tl-accent);
+  box-shadow:0 6px 18px -8px rgba(0,0,0,.18);
+  transform:translateY(-4px);
 }
 body.dark .d-card:hover{
-  box-shadow:0 18px 42px -18px rgba(0,0,0,.75);
+  box-shadow:0 10px 28px -14px rgba(0,0,0,.65);
 }
 .d-media{
-  flex:0 0 auto;
-  width:140px;
-  height:140px;
-  border-radius:28px;
+  width:var(--tl-img-size);
+  height:var(--tl-img-size);
+  border-radius:var(--tl-img-radius);
   overflow:hidden;
-  position:relative;
-  box-shadow:0 6px 18px -8px rgba(0,0,0,.45);
-  background:#f5f5f7;
+  background:#f2f3f5;
   display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:0 0 1rem;
+  position:relative;
 }
-body.dark .d-media{background:#2b2d31;box-shadow:0 8px 24px -10px rgba(0,0,0,.7);}
+body.dark .d-media{background:#34363b;}
 .d-media img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
-  filter:saturate(1.05) contrast(1.03);
   transition:transform .55s;
 }
-.d-card:hover .d-media img{
-  transform:scale(1.06);
-}
+.d-card:hover .d-media img{transform:scale(1.04);}
 .d-body{
-  flex:1 1 auto;
-  min-width:0;
-  position:relative;
-  z-index:2;
+  width:100%;
+  max-width:420px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .d-body h3{
-  margin:.15rem 0 .55rem;
-  font-size:1rem;
+  margin:0 0 .7rem;
+  font-size:1.02rem;
+  line-height:1.25;
   font-weight:600;
-  letter-spacing:.6px;
-  color:var(--hb-active,#e1306c);
+  letter-spacing:.5px;
+  color:var(--tl-accent);
 }
-body.dark .d-body h3{color:#ff86b3;}
+body.dark .d-body h3{color:#ff90ba;}
 .d-num{
-  margin:0 0 .5rem;
-  font-size:3.15rem;
+  margin:0 0 .55rem;
+  font-size:3rem;
   line-height:1.05;
-  letter-spacing:1.5px;
   font-weight:800;
-  background:linear-gradient(90deg,var(--hb-active,#e1306c),#ff8ab4);
-  -webkit-background-clip:text;
-  color:transparent;
-  text-shadow:0 2px 10px rgba(225,48,108,.25);
+  letter-spacing:1.2px;
+  color:var(--tl-accent);
 }
-body.dark .d-num{
-  background:linear-gradient(90deg,#ff84b0,#ffa3c7);
-  -webkit-background-clip:text;
-  text-shadow:0 4px 18px rgba(225,48,108,.35);
-}
+body.dark .d-num{color:#ff8ab4;}
 .d-meta{
   margin:0;
   font-size:.72rem;
-  letter-spacing:.5px;
+  letter-spacing:.45px;
   opacity:.68;
   font-weight:500;
 }
 body.dark .d-meta{opacity:.75;}
-/* 特殊類型差異（可後續擴充） */
-.d-couple .d-media{border:2px solid rgba(225,48,108,.25);}
-.d-pet .d-media{border:2px solid rgba(225,48,108,.18);}
-body.dark .d-couple .d-media{border-color:rgba(225,48,108,.45);}
-body.dark .d-pet .d-media{border-color:rgba(225,48,108,.35);}
-
-/* 時區標註 */
+/* 卡片細部差異（目前僅色調邊框可調整） */
+.d-couple{ }
+.d-pet{ }
 .tz-line{
-  margin:2.2rem 0 0;
+  margin:2rem 0 0;
   display:flex;
   justify-content:flex-start;
 }
 .tz-note{
   font-size:.7rem;
-  letter-spacing:.55px;
-  padding:.25rem 0 .25rem .75rem;
-  border-left:4px solid var(--hb-active,#e1306c);
-  opacity:.75;
+  letter-spacing:.5px;
+  padding:.2rem 0 .2rem .75rem;
+  border-left:4px solid var(--tl-accent);
+  opacity:.72;
   background:none!important;
   font-weight:600;
-  line-height:1.25;
+  line-height:1.2;
 }
-body.dark .tz-note{opacity:.85;}
-
+body.dark .tz-note{opacity:.8;}
 /* 行動裝置調整 */
-@media (max-width:820px){
+@media (max-width:680px){
+  :root{
+    --tl-img-size:150px;
+    --tl-img-radius:24px;
+  }
   .d-card{
-    flex-direction:row;
-    padding:1.15rem 1.25rem 1.25rem;
+    padding:1.15rem 1rem 1.35rem;
   }
-  .d-media{
-    width:120px;
-    height:120px;
-    border-radius:22px;
-  }
+  .d-body h3{font-size:.98rem;margin-bottom:.6rem;}
   .d-num{font-size:2.55rem;}
+  .days-stack{gap:1.35rem;}
 }
-@media (max-width:560px){
+@media (max-width:460px){
+  :root{
+    --tl-img-size:125px;
+    --tl-img-radius:22px;
+  }
   .d-card{
-    flex-direction:column;
-    align-items:flex-start;
-    padding:1.05rem 1.05rem 1.2rem;
+    padding:1rem .9rem 1.2rem;
   }
-  .d-media{
-    width:110px;
-    height:110px;
-    border-radius:20px;
-  }
-  .d-body h3{font-size:.95rem;margin-top:.35rem;}
+  .d-body h3{font-size:.95rem;}
   .d-num{font-size:2.2rem;}
   .d-meta{font-size:.66rem;}
-  .days-stack{gap:1.25rem;}
 }
-
-/* 動畫減弱 */
+/* 動畫偏好 */
 @media (prefers-reduced-motion:reduce){
   .d-card,.d-media img{transition:none!important;transform:none!important;}
 }
@@ -225,6 +204,27 @@ body.dark .tz-note{opacity:.85;}
     zh:{coupleTitle:'我們在一起的天數',since:'自 07/08/2025 起',hashTitle:'薯餅天數歲數',hashSince:'生日：24/06/2025',potatoTitle:'馬鈴薯天數歲數',potatoSince:'生日：27/07/2025',tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️'},
     en:{coupleTitle:'Days Together',since:'Since 07/08/2025',hashTitle:'Hash Brown Age (days)',hashSince:'Birthday: 24/06/2025',potatoTitle:'Potato Age (days)',potatoSince:'Birthday: 27/07/2025',tzNote:'Based on Australia time UTC+10 (AEST) ❄️'}
   };
+  const dict=lang.startsWith('zh')?t.zh:t.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent=dict[k];
+  });
+  const TZ_OFFSET_H=10, MS_DAY=86400000;
+  const parseDMY=s=>{const[a,b,c]=s.split('/').map(Number);return{d:a,m:b,y:c};};
+  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0));
+  const inclusiveDays=start=>{
+    const {d,m,y}=parseDMY(start);
+    const startDate=makeAEST(y,m,d);
+    const nowAEST=new Date(Date.now()+TZ_OFFSET_H*3600*1000);
+    const todayAEST=makeAEST(nowAEST.getUTCFullYear(),nowAEST.getUTCMonth()+1,nowAEST.getUTCDate());
+    return Math.floor((todayAEST-startDate)/MS_DAY)+1;
+  };
+  const set=(id,date)=>{const el=document.getElementById(id); if(el) el.textContent=inclusiveDays(date).toLocaleString();};
+  set('togetherDays','07/08/2025');
+  set('hashDays','24/06/2025');
+  set('potatoDays','27/07/2025');
+})();
+</script>
+<!-- 圖片需位於 /static/images/timeline/ : f-avatar.webp, hashbrown.webp, potato.webp -->
   const dict=lang.startsWith('zh')?t.zh:t.en;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent=dict[k];
