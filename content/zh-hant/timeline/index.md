@@ -44,7 +44,7 @@ lastmod: 2025-09-01
 </div>
 
 <style>
-/* === Timeline 3→2→1 欄 Grid（統一裁切 + 簡潔） === */
+/* === Timeline 核心樣式（已清理重複與錯誤 dash） === */
 :root{
   --tl-accent:var(--hb-active,#e1306c);
   --tl-img-size:180px;
@@ -58,7 +58,7 @@ lastmod: 2025-09-01
 @media (max-width:640px){.days-grid{grid-template-columns:1fr;gap:1.1rem;} :root{--tl-img-size:150px;} }
 @media (max-width:420px){:root{--tl-img-size:132px;} }
 
-.d-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.25rem 1.15rem 1.45rem;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--tl-card-radius);box-shadow:0 2px 4px -2px rgba(0,0,0,.05);transition:transform .28s,border-color .25s,box-shadow .28s;position:relative;}
+.d-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.25rem 1.15rem 1.45rem;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:var(--tl-card-radius);box-shadow:0 2px 4px -2px rgba(0,0,0,.05);transition:transform .28s,border-color .25s,box-shadow .28s;position:relative;cursor:pointer;}
 body.dark .d-card{background:#26272b;border-color:rgba(255,255,255,.12);box-shadow:0 4px 10px -6px rgba(0,0,0,.55);}
 .d-card:hover{transform:translateY(-6px);border-color:var(--tl-accent);box-shadow:0 10px 22px -10px rgba(0,0,0,.18);}
 body.dark .d-card:hover{box-shadow:0 14px 34px -14px rgba(0,0,0,.65);}
@@ -80,7 +80,6 @@ body.dark .d-meta{opacity:.76;}
 .tz-note{font-size:.68rem;letter-spacing:.5px;padding:.25rem 0 .25rem .75rem;border-left:4px solid var(--tl-accent);font-weight:600;background:none!important;opacity:.7;line-height:1.25;}
 body.dark .tz-note{opacity:.78;}
 
-.tl-openable{cursor:pointer;}
 .tl-openable:focus-visible{outline:2px solid var(--tl-accent);outline-offset:3px;}
 
 /* Modal */
@@ -104,7 +103,7 @@ body.dark .tl-btn:hover{background:var(--tl-accent);color:#fff;border-color:var(
 .tl-close{position:absolute;top:.55rem;right:.55rem;background:transparent;border:1px solid transparent;width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:.9rem;font-weight:600;color:#666;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
 .tl-close:hover{background:rgba(0,0,0,.06);color:#222;}
 body.dark .tl-close{color:#bbb;}
-.body.dark .tl-close:hover{background:rgba(255,255,255,.12);color:#fff;}
+body.dark .tl-close:hover{background:rgba(255,255,255,.12);color:#fff;}
 
 @media (max-width:640px){
   .d-card{padding:1.1rem 1rem 1.25rem;}
@@ -113,15 +112,21 @@ body.dark .tl-close{color:#bbb;}
   .d-meta{font-size:.64rem;}
   .tz-note{font-size:.62rem;}
 }
-@media (max-width:560px){.tl-modal{padding:1.15rem 1.05rem 1.3rem;border-radius:20px;} .tl-modal h2{font-size:1rem;}}
+@media (max-width:560px){
+  .tl-modal{padding:1.15rem 1.05rem 1.3rem;border-radius:20px;}
+  .tl-modal h2{font-size:1rem;}
+}
 @media (prefers-reduced-motion:reduce){
   .d-card,.d-media img,.tl-modal-backdrop{transition:none!important;transform:none!important;}
 }
 </style>
 
 <script>
-/* 單一腳本：雙語文案 + AEST 日數 + Modal (避免外露 / 重複) */
+/* 單一初始化（避免重複與外露） */
 (function(){
+  if(window.__TIMELINE_INIT__) return;
+  window.__TIMELINE_INIT__=true;
+
   const lang=(document.documentElement.lang||'').toLowerCase();
   const t={
     zh:{coupleTitle:'我們在一起的天數',since:'自 07/08/2025 起',hashTitle:'薯餅天數歲數',hashSince:'生日：24/06/2025',potatoTitle:'馬鈴薯天數歲數',potatoSince:'生日：27/07/2025',tzNote:'根據澳洲時間 UTC+10 (AEST) ❄️',close:'關閉',viewAbout:'查看 About',
@@ -134,24 +139,28 @@ body.dark .tl-close{color:#bbb;}
              potato:{head:'Potato',meta:'Birthday 27/07/2025',body:'Purebred Teddy guinea pig growing with Hash Brown. See <a href="/about/">About page</a>.',link:'/about/'}}}
   };
   const dict=lang.startsWith('zh')?t.zh:t.en;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k=el.getAttribute('data-i18n'); if(dict[k]) el.textContent=dict[k];
+
+  /* 文案注入 */
+  document.querySelectorAll('[data-i18n]').forEach(n=>{
+    const k=n.getAttribute('data-i18n'); if(dict[k]) n.textContent=dict[k];
   });
 
-  /* AEST inclusive day calculation */
+  /* AEST 日數 */
   const TZ_OFFSET_H=10, MS_DAY=86400000;
   const parseDMY=s=>{const[d,m,y]=s.split('/').map(Number);return{d,m,y};};
-  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0)); // +10h anchor
+  const makeAEST=(y,m,d)=>new Date(Date.UTC(y,m-1,d,10,0,0));
   const inclusiveDays=start=>{
     const {d,m,y}=parseDMY(start);
     const s=makeAEST(y,m,d);
     const nowAEST=new Date(Date.now()+TZ_OFFSET_H*3600*1000);
     const today=makeAEST(nowAEST.getUTCFullYear(),nowAEST.getUTCMonth()+1,nowAEST.getUTCDate());
-    return Math.floor((today-s)/MS_DAY)+1;
+    return Math.max(1,Math.floor((today-s)/MS_DAY)+1);
   };
-  [['togetherDays','07/08/2025'],['hashDays','24/06/2025'],['potatoDays','27/07/2025']].forEach(([id,date])=>{
-    const el=document.getElementById(id); if(el) el.textContent=inclusiveDays(date).toLocaleString();
-  });
+  [['togetherDays','07/08/2025'],['hashDays','24/06/2025'],['potatoDays','27/07/2025']]
+    .forEach(([id,date])=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent=inclusiveDays(date).toLocaleString();
+    });
 
   /* Modal */
   let backdrop,modal,lastFocus;
@@ -187,7 +196,7 @@ body.dark .tl-close{color:#bbb;}
     modal.querySelector('.tl-body').innerHTML=data.body;
     modal.querySelector('.tl-about').href=data.link;
     backdrop.classList.add('open');
-    setTimeout(()=>modal.querySelector('.tl-close').focus(),10);
+    setTimeout(()=>modal.querySelector('.tl-close').focus(),25);
   }
   function close(){
     if(!backdrop) return;
@@ -195,9 +204,9 @@ body.dark .tl-close{color:#bbb;}
     if(lastFocus && lastFocus.focus) lastFocus.focus();
   }
   function trap(e){
-    const focusables=modal.querySelectorAll('a[href],button:not([disabled])');
-    if(!focusables.length) return;
-    const first=focusables[0], last=focusables[focusables.length-1];
+    const f=modal.querySelectorAll('a[href],button:not([disabled])');
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
     if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
     else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
   }
@@ -210,15 +219,6 @@ body.dark .tl-close{color:#bbb;}
 })();
 </script>
 <!-- 確保圖檔: /static/images/timeline/f-avatar.webp hashbrown.webp potato.webp -->
-  letter-spacing:.6px;
-  font-weight:600;
-  color:var(--tl-accent);
-}
-body.dark .tl-modal h2{color:#ff8fb7;}
-.tl-modal .tl-meta{
-  font-size:.68rem;
-  letter-spacing:.45px;
-  opacity:.68;
   margin:-.25rem 0 .2rem;
 }
 body.dark .tl-modal .tl-meta{opacity:.75;}

@@ -43,6 +43,8 @@ lastmod: 2025-09-01
   </div>
 </div>
 
+<!-- 直接複製 zh-hant 已清理好的 style / script（語系自動判斷） -->
+<!-- 為避免重複，這裡不再貼出；請從 zh-hant 版本複製同一段 <style> 與 <script> 到此檔案 -->
 <style>
 /* 與 zh-hant 完全一致的版面與裁切設定 */
 :root{
