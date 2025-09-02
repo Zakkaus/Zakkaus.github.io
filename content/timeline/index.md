@@ -231,53 +231,52 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* ===== 全新時間線設計 - 2023 ===== */
+/* ===== 完整重構時間線設計 ===== */
 
-/* 基本變量與容器 */
+/* 1. 基本變量與容器 */
 .tl-container {
   --tl-accent: var(--hb-active, #e1306c);
-  --tl-radius: 22px;
+  --tl-radius: 18px;
   --tl-bg-light: #fff;
   --tl-bg-dark: #2a2b2f;
-  --tl-border-light: rgba(0,0,0,0.08);
-  --tl-border-dark: rgba(255,255,255,0.15);
-  --tl-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-  --tl-shadow-hover: 0 15px 35px -10px rgba(0,0,0,0.2);
-  --tl-shadow-dark: 0 10px 30px -5px rgba(0,0,0,0.3);
-  --tl-shadow-dark-hover: 0 20px 40px -10px rgba(0,0,0,0.5);
-  --tl-transition: .3s cubic-bezier(0.22, 1, 0.36, 1);
+  --tl-border-light: rgba(0,0,0,0.06);
+  --tl-border-dark: rgba(255,255,255,0.1);
+  --tl-shadow: 0 8px 16px rgba(0,0,0,0.08);
+  --tl-shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
+  --tl-shadow-dark: 0 8px 20px rgba(0,0,0,0.25);
+  --tl-shadow-dark-hover: 0 12px 28px rgba(0,0,0,0.35);
   
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 0 3rem;
+  padding: 0 0 2rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: rgba(0, 0, 0, 0.85);
 }
 
 body.dark .tl-container { color: rgba(255, 255, 255, 0.85); }
 
-/* 卡片網格 - 桌面三列 */
+/* 2. 卡片網格 - 桌面三列 */
 .tl-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.8rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
 }
 
-/* 卡片基本樣式 */
+/* 3. 卡片基本樣式 - 解決白色薄膜問題 */
 .tl-card {
   background-color: var(--tl-bg-light);
   border-radius: var(--tl-radius);
   box-shadow: var(--tl-shadow);
   overflow: hidden;
-  cursor: pointer;
-  transition: transform var(--tl-transition), box-shadow var(--tl-transition);
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--tl-border-light);
   height: 100%;
-  min-height: 420px; /* 固定最小高度確保一致性 */
+  cursor: pointer;
 }
 
 body.dark .tl-card {
@@ -287,7 +286,7 @@ body.dark .tl-card {
 }
 
 .tl-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: var(--tl-shadow-hover);
 }
 
@@ -295,39 +294,39 @@ body.dark .tl-card:hover {
   box-shadow: var(--tl-shadow-dark-hover);
 }
 
-/* 圖片容器 */
+/* 4. 圖片容器 - 完美裁切與包裹圓角 */
 .tl-image {
-  width: 100%;
-  height: 0;
-  padding-bottom: 56%; /* 16:9 比例 */
   position: relative;
   overflow: hidden;
-  background-color: #f5f5f5;
+  width: 100%;
+  padding-top: 100%; /* 1:1 正方形比例 */
+  background-color: #f0f0f0;
+  border-radius: var(--tl-radius) var(--tl-radius) 0 0; /* 上部圓角 */
 }
 
 body.dark .tl-image {
-  background-color: #363636;
+  background-color: #333;
 }
 
-/* 圖片完美居中覆蓋 */
+/* 5. 圖片居中裁切 - 避免黑邊 */
 .tl-image img {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: translate(-50%, -50%);
-  transition: transform var(--tl-transition);
+  object-position: center;
+  transition: transform 0.35s;
 }
 
 .tl-card:hover .tl-image img {
-  transform: translate(-50%, -50%) scale(1.05);
+  transform: scale(1.05);
 }
 
-/* 卡片內容區 */
+/* 6. 卡片內容區 */
 .tl-content {
-  padding: 1.2rem 1.5rem;
+  padding: 1rem 1.2rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -336,29 +335,29 @@ body.dark .tl-image {
 }
 
 .tl-content h3 {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
   color: var(--tl-accent);
 }
 
-/* 計數器 */
+/* 7. 計數器 */
 .tl-counter {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
 
 .tl-days {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   font-weight: 800;
   line-height: 1;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   color: var(--tl-accent);
 }
 
 .tl-time {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-family: 'SFMono-Regular', Consolas, monospace;
-  letter-spacing: 0.03rem;
+  letter-spacing: 0.02rem;
   opacity: 0.8;
   font-weight: 600;
 }
@@ -366,19 +365,16 @@ body.dark .tl-image {
 .tl-meta {
   font-size: 0.7rem;
   opacity: 0.7;
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 }
 
-/* 了解更多按鈕 */
+/* 8. 了解更多按鈕 */
 .tl-more {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-top: auto;
   background: #f5f5f7;
   color: #333;
   border: none;
-  padding: 0.8rem;
+  padding: 0.7rem;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
@@ -402,18 +398,21 @@ body.dark .tl-more:hover {
   color: white;
 }
 
-/* 時間備註 */
+/* 9. 時間備註 - 左對齊與紅線 */
 .tl-footer {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
+  text-align: left;
 }
 
 .tl-note {
   font-size: 0.75rem;
   opacity: 0.8;
-  padding-left: 1rem;
+  padding-left: 0.8rem;
   position: relative;
   line-height: 1.5;
   font-family: 'SFMono-Regular', Consolas, monospace;
+  display: inline-block;
+  text-align: left;
 }
 
 .tl-note::before {
@@ -427,7 +426,7 @@ body.dark .tl-more:hover {
   border-radius: 3px;
 }
 
-/* 模態框樣式 */
+/* 10. 模態框樣式 */
 .tl-modal-backdrop {
   position: fixed;
   top: 0;
@@ -618,115 +617,98 @@ body.dark .tl-close-btn:hover {
   color: white;
 }
 
-/* 載入提示 */
+/* 11. 載入提示 */
 #timelineContainer {
   text-align: center;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   font-weight: 500;
   opacity: 0.7;
 }
 
-/* 平板響應式設計 */
+/* 12. 平板響應式設計 */
 @media (max-width: 1080px) {
   .tl-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 }
 
-/* 手機響應式設計 - 從上到下排列卡片 */
+/* 13. 手機響應式設計 - 簡潔扁平化卡片 */
 @media (max-width: 640px) {
   .tl-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 0 0.5rem;
   }
   
   .tl-card {
-    min-height: auto;
-    padding-bottom: 3rem;
-    display: flex;
-    flex-direction: row;  /* 手機上橫向排列 */
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    grid-template-rows: auto;
+    min-height: 110px;
     height: auto;
   }
   
   .tl-image {
-    width: 40%;  /* 圖片佔40%寬度 */
-    height: auto;
-    padding-bottom: 0;
-    min-height: 130px;
+    width: 110px;
+    height: 110px;
+    padding-top: 0;
+    grid-row: 1;
+    border-radius: var(--tl-radius) 0 0 var(--tl-radius);
   }
   
   .tl-content {
-    width: 60%;  /* 內容佔60%寬度 */
+    width: auto;
     text-align: left;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 0.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .tl-counter {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
   }
   
   .tl-days {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 0;
   }
   
   .tl-time {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+    padding-bottom: 0.1rem;
   }
   
   .tl-meta {
     font-size: 0.65rem;
+    margin-top: 0.2rem;
   }
   
   .tl-more {
-    width: 60%;
-    left: 40%;
-    font-size: 0.7rem;
-    padding: 0.6rem;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    width: auto;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.65rem;
+    border-radius: 6px;
+    border: none;
+    background: rgba(0,0,0,0.05);
   }
   
-  .tl-modal {
-    padding: 1.5rem;
-    border-radius: 15px;
-  }
-  
-  .tl-modal-title {
-    font-size: 1.3rem;
-  }
-  
-  .tl-modal-body {
-    font-size: 0.9rem;
-  }
-  
-  .tl-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.75rem;
+  body.dark .tl-more {
+    background: rgba(255,255,255,0.08);
+    border: none;
   }
 }
 
-/* 超小屏幕適配 */
+/* 14. 超小屏幕適配 */
 @media (max-width: 380px) {
-  .tl-card {
-    flex-direction: column;
-  }
-  
-  .tl-image {
-    width: 100%;
-    padding-bottom: 56%;
-  }
-  
-  .tl-content {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .tl-more {
-    width: 100%;
-    left: 0;
-  }
-}
-</style>
-  }
-}
-
-@media (max-width: 360px) {
   .tl-card {
     grid-template-columns: 90px 1fr;
   }
@@ -737,6 +719,24 @@ body.dark .tl-close-btn:hover {
   }
   
   .tl-days {
+    font-size: 1.6rem;
+  }
+  
+  .tl-content {
+    padding: 0.6rem 0.7rem;
+  }
+  
+  .tl-content h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .tl-more {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+  }
+}
+</style>
     font-size: 1.5rem;
   }
   
