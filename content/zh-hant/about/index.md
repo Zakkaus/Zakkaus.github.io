@@ -898,17 +898,22 @@ body.dark .about-page .about-hero a.blue-highlight{
 - 記憶體：64 GB DDR5 6400 MHz
 - 網路：固定公网 IP（Aussie Telecom，1000/50 Mbps）  
 - 路由器：BE9300 三頻 Wi-Fi 7  
+- 螢幕：Samsung Odyssey G9 49"（5120×1440）透過 HDMI 2.1（Belkin 傳輸線）  
 - 作業系統：Windows 11 Pro 64-bit + Gentoo Linux（KDE Plasma）
 
 ### 💼 筆電
 - Apple MacBook Air M2（16GB / 512GB）  
-- ASUS ROG Zephyrus G16 Air  
+- ASUS ROG Zephyrus G16 Air（Intel Core Ultra 9 185H・32GB LPDDR5X・1TB SSD・RTX 4060・Windows 11 Pro）  
 
 ### 📱 手機
 - Samsung Galaxy Z Fold 7  
+- Samsung Galaxy S25 Ultra  
 - Google Pixel 7 Pro  
-- iPhone 14  
 - iPhone 16 Pro  
+- iPhone 15 Pro  
+- iPhone 15 Pro Max  
+- iPhone 14 Pro  
+- iPhone 14  
 
 ### 🔗 聯絡方式
 <ul class="about-contacts">

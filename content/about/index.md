@@ -275,24 +275,29 @@ body.dark .about-page .about-hero a.blue-highlight{
 - Memory: 64 GB DDR5 6400 MHz  
 - Network: Static public IP (Aussie Telecom, 1000/50 Mbps)  
 - Router: BE9300 Tri-band Wi‑Fi 7  
+- Monitor: Samsung Odyssey G9 49" (5120×1440) via HDMI 2.1 (Belkin cable)  
 - OS: Windows 11 Pro 64-bit + Gentoo Linux (KDE Plasma)
 
 ### 💼 Laptops
 - Apple MacBook Air M2 (16GB / 512GB)  
-- ASUS ROG Zephyrus G16 Air  
+- ASUS ROG Zephyrus G16 Air (Intel Core Ultra 9 185H / 32GB LPDDR5X / 1TB SSD / RTX 4060 / Windows 11 Pro)
 
 ### 📱 Phones
 - Samsung Galaxy Z Fold 7  
+- Samsung Galaxy S25 Ultra  
 - Google Pixel 7 Pro  
-- iPhone 14  
 - iPhone 16 Pro  
+- iPhone 15 Pro  
+- iPhone 15 Pro Max  
+- iPhone 14 Pro  
+- iPhone 14  
 
 ### 🔗 Contact
 <ul class="about-contacts">
-  <li><span class="contact-label">Instagram：</span><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
-  <li><span class="contact-label">GitHub：</span><a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
-  <li><span class="contact-label">X：</span><a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
-  <li><span class="contact-label">Email：</span><a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
+  <li><span class="contact-label">Instagram:</span><a href="https://www.instagram.com/zakk.au/" target="_blank" rel="noopener">@zakk.au</a></li>
+  <li><span class="contact-label">GitHub:</span><a href="https://github.com/Zakkaus" target="_blank" rel="noopener">Zakkaus</a></li>
+  <li><span class="contact-label">X:</span><a href="https://x.com/zakkauu" target="_blank" rel="noopener">@zakkauu</a></li>
+  <li><span class="contact-label">Email:</span><a href="mailto:admin@zakk.au">admin@zakk.au</a></li>
 </ul>
 </div>
 
