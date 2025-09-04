@@ -905,7 +905,7 @@ body.dark .about-page .about-hero a.blue-highlight{
 - Apple MacBook Air M2（16GB / 512GB）  
 - ASUS ROG Zephyrus G16 Air（Intel Core Ultra 9 185H・32GB LPDDR5X・1TB SSD・RTX 4060・Windows 11 Pro）  
 
-### 📱 手機
+### 📱 手機（部分已贈送給親友）
 - Samsung Galaxy Z Fold 7  
 - Samsung Galaxy S25 Ultra  
 - Google Pixel 7 Pro  
