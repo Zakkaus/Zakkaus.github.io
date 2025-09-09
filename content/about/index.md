@@ -320,7 +320,7 @@ body.dark .about-page .about-hero a.blue-highlight{
         <div class="am-section"><p>We share daily life, study, work, music and ideas; aligned values & rhythm — genuine <strong>soulmates</strong>.</p></div>
         <div class="am-section"><p>We first met inside <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="blue-highlight">Ceylan</a>'s Discord; we meet every few months; Paper plans to study in Australia after high school.</p></div>
         <div class="am-section"><p>We both love sleeping, being cozy at home, and we share many aligned thoughts, past experiences, and niche interests.</p></div>
-        <div class="am-section"><p><a href="/timeline/#couple" class="blue-highlight">See how long we've been together</a> | Paper IG: <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.5</a></p></div>
+        <div class="am-section"><p><a href="/timeline/#couple" class="blue-highlight">See how long we've been together</a> | Paper IG: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.50</a></p></div>
       `
     },
     hash:{

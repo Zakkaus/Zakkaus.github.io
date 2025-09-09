@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p>We first met inside <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">Ceylan</a>'s Discord community. Casual chat turned into companionship, and over time the bond grew until being together felt effortless and obvious.</p>
         <p>We meet in person every few months. Paper plans to study in Australia after finishing senior high (Year 12), and we look forward to building more chapters side by side.</p>
         <p>We both love sleeping, being cozy at home, and we share many aligned thoughts, past experiences, and niche interests.</p>
-        <p>For more of our moments, you can follow Paper’s Instagram: <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
+        <p>For more of our moments, you can follow Paper’s Instagram: <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl: "/about/#relationship"
     },

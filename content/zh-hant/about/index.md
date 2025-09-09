@@ -977,7 +977,7 @@ body.dark .about-page .about-hero a.blue-highlight{
         </div>
         <div class="am-section">
           <p><a href="/zh-hant/timeline/#couple" class="blue-highlight">在這裡可以看到我們在一起的時間</a>｜Paper IG：
-             <a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.5</a></p>
+             <a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="blue-highlight">@abyss_74.50</a></p>
         </div>
       `
     },

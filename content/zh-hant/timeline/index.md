@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <p>最初在 <a href="https://www.youtube.com/@xilanceylan" target="_blank" rel="noopener" class="tl-highlight-link">Ceylan</a> 的 Discord 認識，輕鬆聊天逐漸變成陪伴，直到「在一起」成為最自然的決定。</p>
         <p>我們每隔幾個月線下見面；Paper 高中畢業後計畫來澳洲求學，期待一起寫更多篇章。</p>
         <p>我們都很喜歡睡覺、喜歡宅在家，也分享了許多相同的想法、過去的經歷與各種小眾興趣。</p>
-        <p>更多片段（Paper IG）：<a href="https://www.instagram.com/abyss_74.5/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.5</a></p>
+        <p>更多片段（Paper IG）：<a href="https://www.instagram.com/abyss_74.50/" target="_blank" rel="noopener" class="tl-highlight-link">@abyss_74.50</a></p>
       `,
       linkUrl:"/zh-hant/about/#relationship"
     },
